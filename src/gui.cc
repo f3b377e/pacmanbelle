@@ -130,7 +130,7 @@ void draw_path()
 
     al_clear_to_color(al_map_rgb(0,0,0));
 
-    char *mapfilename = "data/map/map2.txt";
+    char mapfilename[] = "data/map/map2.txt";
     int mapx, mapy;
     std::ifstream f(mapfilename);
 
