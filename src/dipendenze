@@ -1,0 +1,4 @@
+hud.o: game.cc data_struct.h gui.h
+game.o: game.cc data_struct.h gui.h
+
+
