@@ -1,12 +1,18 @@
-/*
- * game.cc
+/**
+ * @mainpage Pac-Man
+ * Questo è un remake del classico gioco di Pac-Man, il quale deve fare più punti possibili mangiando i pallini e evitando di essere mangiato
+ * dai fantasmi.
  *
- *      Author: Belle & Bruce
+ * Il loop del gioco è gestito dalla funzione ::main.
+ * @author Francesco Bellei & Bruno Ghion
  */
 
+//C++ header
 #include <stdio.h>
 #include <iostream>
+#include <cassert>
 
+//Allegro header
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_ttf.h>
@@ -16,13 +22,27 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 
+//header interni
+#include "logic.h"
+#include "io.h"
 #include "data_struct.h"
 #include "gui.h"
+
+using namespace std;
+
+#ifdef DEBUG_MODE
+	#include "debug.h"
+#endif
 
 //Prototipi
 void init_pacman (PLAYER_t& pacman);
 
-
+/** Funzione principale.
+ *
+ * Si occupa di inizializzare le strutture dati del gioco e gestisce il ciclo
+ * principale.
+ *
+ */
 int main(int argc, char *argv[]){
 
 // Inizializzazione degli addons di Allegro 5.
@@ -117,6 +137,11 @@ int main(int argc, char *argv[]){
 			}
 			if (events.type == ALLEGRO_EVENT_KEY_DOWN)
 			{
+			   #ifdef DEBUG_MODE
+			   	if(events.keyboard.keycode == ALLEGRO_KEY_D) {
+					DEBUG_CONSOLE;
+			  	 }
+			   #endif
 			   switch (events.keyboard.keycode){
 				   case ALLEGRO_KEY_UP:
 					pacman.dir = SU;
@@ -130,24 +155,23 @@ int main(int argc, char *argv[]){
 				   case ALLEGRO_KEY_RIGHT:
 					pacman.dir = DX;
 				   break;
-                   case ALLEGRO_KEY_ESCAPE:
-                    return 0;
+                   		   case ALLEGRO_KEY_ESCAPE:
+                    			return 0;
 				   break;
-                   case ALLEGRO_KEY_SPACE:
-                    pause = true;
-                    while(pause)
-                    {
-                        al_wait_for_event(event_queue, &events);
-                        draw_pause();
-                        if (events.type == ALLEGRO_EVENT_KEY_DOWN)
-                        {
-                            if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
-                                pause = false;
-                        }
-                    }
-
-				   break;
-				}
+                   		   case ALLEGRO_KEY_SPACE:
+                    			pause = true;
+                    			while(pause)
+                   			{
+                        			al_wait_for_event(event_queue, &events);
+                        			draw_pause();
+                        			if (events.type == ALLEGRO_EVENT_KEY_DOWN)
+                        			{
+                            				if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
+                                			pause = false;
+                        			}
+                    			}
+				   	break;
+			   }
 			}
 			if(events.type == ALLEGRO_EVENT_TIMER)
 			{
