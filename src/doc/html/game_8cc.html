@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-man: Riferimenti per il file game.cc</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Pac-man
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Tipi enumerati (enum)</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Valori del tipo enumerato</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Definizioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funzioni</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file game.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;iostream&gt;</code><br/>
+<code>#include &lt;cassert&gt;</code><br/>
+<code>#include &lt;allegro5/allegro.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_native_dialog.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_ttf.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_font.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_color.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_image.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_primitives.h&gt;</code><br/>
+<code>#include &quot;logic&quot;</code><br/>
+<code>#include &quot;<a class="el" href="io_8h_source.html">io.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="data__struct_8h_source.html">data_struct.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:acfe91385c77007d8f990e6b397878a63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#acfe91385c77007d8f990e6b397878a63">init_pacman</a> (<a class="el" href="structPLAYER__t.html">PLAYER_t</a> &amp;pacman)</td></tr>
+<tr class="separator:acfe91385c77007d8f990e6b397878a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione principale.  <a href="#a0ddf1224851353fc92bfbff6f499fa97">Continua...</a><br/></td></tr>
+<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentazione delle funzioni</h2>
+<a class="anchor" id="acfe91385c77007d8f990e6b397878a63"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_pacman </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structPLAYER__t.html">PLAYER_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>pacman</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                                   {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a> = <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a4303eb08a6089d7c223aa1f76fa56a30">FERMO</a>;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    pacman.<a class="code" href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b">movespeed</a> = 3;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    pacman.<a class="code" href="structPLAYER__t.html#aade4415d08e695ee02427da46073bb2b">sourcex</a> = 6 , pacman.<a class="code" href="structPLAYER__t.html#a4b8fca3349d778b421c46b5b98b165fe">sourcey</a> = 6;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    pacman.<a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">x</a> = 10, pacman.<a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">y</a>=10;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    pacman.<a class="code" href="structPLAYER__t.html#ad339478f88505a90cc394aa36d50bbca">stato</a> = 1;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+<div class="ttc" id="structPLAYER__t_html_ad339478f88505a90cc394aa36d50bbca"><div class="ttname"><a href="structPLAYER__t.html#ad339478f88505a90cc394aa36d50bbca">PLAYER_t::stato</a></div><div class="ttdeci">int stato</div><div class="ttdoc">da 1 a tre </div><div class="ttdef"><b>Definition:</b> data_struct.h:42</div></div>
+<div class="ttc" id="structPLAYER__t_html_aade4415d08e695ee02427da46073bb2b"><div class="ttname"><a href="structPLAYER__t.html#aade4415d08e695ee02427da46073bb2b">PLAYER_t::sourcex</a></div><div class="ttdeci">int sourcex</div><div class="ttdoc">Coordinata x per regione dello sheet di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:38</div></div>
+<div class="ttc" id="structPLAYER__t_html_a4b8fca3349d778b421c46b5b98b165fe"><div class="ttname"><a href="structPLAYER__t.html#a4b8fca3349d778b421c46b5b98b165fe">PLAYER_t::sourcey</a></div><div class="ttdeci">int sourcey</div><div class="ttdoc">Coordinata y per regione dello sheet di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:39</div></div>
+<div class="ttc" id="structPLAYER__t_html_aa6bfc54bd6064533300002983d91b824"><div class="ttname"><a href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">PLAYER_t::x</a></div><div class="ttdeci">float x</div><div class="ttdoc">Coordinata x schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:40</div></div>
+<div class="ttc" id="data__struct_8h_html_a31c6f3fb507a4edd8e1f355b0e772903a4303eb08a6089d7c223aa1f76fa56a30"><div class="ttname"><a href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a4303eb08a6089d7c223aa1f76fa56a30">FERMO</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:26</div></div>
+<div class="ttc" id="structPLAYER__t_html_a8be89f53b4e130501b728955315bcc2b"><div class="ttname"><a href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b">PLAYER_t::movespeed</a></div><div class="ttdeci">float movespeed</div><div class="ttdoc">Velocità del pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:37</div></div>
+<div class="ttc" id="structPLAYER__t_html_afb6bd811c5d4e65c62cb6435b7df42e8"><div class="ttname"><a href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">PLAYER_t::dir</a></div><div class="ttdeci">DIREZ dir</div><div class="ttdoc">Stato attuale della direzione di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:36</div></div>
+<div class="ttc" id="structPLAYER__t_html_ab81f7ae3799b19f183ae25e433f6637e"><div class="ttname"><a href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">PLAYER_t::y</a></div><div class="ttdeci">float y</div><div class="ttdoc">Coordinata y schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:41</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione principale. </p>
+<p>Si occupa di inizializzare le strutture dati del gioco e gestisce il ciclo principale. </p>
+<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// Inizializzazione degli addons di Allegro 5.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    al_init();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    al_init_image_addon();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    al_init_primitives_addon();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    al_init_font_addon();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    al_init_ttf_addon();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    al_install_mouse();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    al_install_keyboard();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">if</span>(!al_init())</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//Variabili Allegro</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;   al_set_new_display_flags(ALLEGRO_OPENGL);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;   al_set_new_window_position(200,40);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;   ALLEGRO_DISPLAY *display = al_create_display(<a class="code" href="data__struct_8h.html#a65b4c91571a26ac7ef519beacdc19bbf">ScreenWidth</a>, <a class="code" href="data__struct_8h.html#a6786cde6bb9174ef46de3845f4301327">ScreenHeight</a>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;   al_set_window_title(display, <span class="stringliteral">&quot;Pacman Project&quot;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;   al_hide_mouse_cursor(display);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   ALLEGRO_EVENT_QUEUE *event_queue  = al_create_event_queue();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   ALLEGRO_EVENT events;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;   ALLEGRO_TIMER *timer = al_create_timer(1.0 / <a class="code" href="data__struct_8h.html#ac5090a6568797128b0a5545228bb8b75">FPS</a>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">//Player</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span>   <a class="code" href="structPLAYER__t.html">PLAYER_t</a> pacman;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   <a class="code" href="game_8cc.html#acfe91385c77007d8f990e6b397878a63">init_pacman</a>(pacman);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">//Menu</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;   <span class="keywordtype">bool</span> selected = <span class="keyword">false</span>, done = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;   <span class="keywordtype">int</span> menu = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;   <a class="code" href="gui_8cc.html#a11bd43d763e2427ca80d5bdf12cd97e3">draw_screen_menu</a>(menu);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">//Game</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">bool</span> pause = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">//Event Queue registries</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   al_register_event_source(event_queue, al_get_keyboard_event_source());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;   al_register_event_source(event_queue, al_get_timer_event_source(timer));</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;   al_register_event_source(event_queue, al_get_display_event_source(display));</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;   al_register_event_source(event_queue, al_get_mouse_event_source());</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">//Menu Screen</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;   <span class="keywordflow">while</span>(!selected){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    al_wait_for_event(event_queue, &amp;events);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_KEY_DOWN){</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">switch</span>(events.keyboard.keycode){</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">case</span> ALLEGRO_KEY_DOWN:</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                menu = menu + 1;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keywordflow">if</span> (menu &gt; 3)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    menu = 3;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="keywordflow">if</span> (menu &lt; 1)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    menu = 1;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                              <a class="code" href="gui_8cc.html#a11bd43d763e2427ca80d5bdf12cd97e3">draw_screen_menu</a>(menu);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">case</span> ALLEGRO_KEY_UP:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                menu = menu - 1;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="keywordflow">if</span> (menu &gt; 3)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    menu = 3;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">if</span> (menu &lt; 1)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    menu = 1;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                              <a class="code" href="gui_8cc.html#a11bd43d763e2427ca80d5bdf12cd97e3">draw_screen_menu</a>(menu);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">case</span> ALLEGRO_KEY_ENTER:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                selected = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">return</span> 0 ;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;   }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">//Menu Option</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/*  Funzione</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"> *  Da dei problemi con la pausa del gioco</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;   <span class="keywordflow">switch</span> (menu){</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">case</span> 1 :</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        al_start_timer(timer);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">while</span>(!done){</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        al_wait_for_event(event_queue, &amp;events);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;               <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_KEY_DOWN)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            {</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;               <span class="keywordflow">switch</span> (events.keyboard.keycode){</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_UP:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                    pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a> = <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a7911229e7fd613f96aeaf9413c8251bc">SU</a>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_DOWN:</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a> = <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a5387bb29e78bfce7c11164018e81ab7b">GIU</a>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_LEFT:</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a> = <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a898fd7abd6aae10a03fc8f61543e1ab6">SX</a>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_RIGHT:</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a> = <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a22dc95a35fbd833d9908928812979156">DX</a>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_ESCAPE:</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                   <span class="keywordflow">case</span> ALLEGRO_KEY_SPACE:</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    pause = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                    <span class="keywordflow">while</span>(pause)</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                        al_wait_for_event(event_queue, &amp;events);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                        <a class="code" href="gui_8cc.html#a91fbb4c4f500ee2b1f21b05a6674b1d3">draw_pause</a>();</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_KEY_DOWN)</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                            <span class="keywordflow">if</span> (events.keyboard.keycode == ALLEGRO_KEY_SPACE)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                pause = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">if</span>(events.type == ALLEGRO_EVENT_TIMER)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">                #ifdef DEBUG_MODE</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor"></span>                    <span class="keywordflow">if</span>(tasto[P]) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                        <a class="code" href="debug_8h.html#ac788b8a34bf25c2b3eb6b4a12df14102">DEBUG_CONSOLE</a>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">                #endif</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor"></span>               <a class="code" href="gui_8cc.html#a96c7f485f675a27502eb3d51d7afcd78">move_pacman</a>(pacman);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        done = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        al_start_timer(timer);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">while</span> (!done){</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            al_wait_for_event(event_queue, &amp;events);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                done = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordflow">if</span> (events.type == ALLEGRO_EVENT_KEY_DOWN){</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">if</span>(events.keyboard.keycode == ALLEGRO_KEY_ENTER){</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    <a class="code" href="gui_8cc.html#a56c5666c2ebae6ca17cdb0307059d375">draw_path</a>();</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    al_flip_display();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                <span class="keywordflow">if</span>(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    done = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        al_clear_to_color(al_map_rgb(0,0,0));</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        al_flip_display();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        al_rest(2.0);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;   }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;   al_destroy_timer(timer);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;   al_destroy_event_queue(event_queue);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;   al_destroy_display(display);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
+<div class="ttc" id="data__struct_8h_html_a65b4c91571a26ac7ef519beacdc19bbf"><div class="ttname"><a href="data__struct_8h.html#a65b4c91571a26ac7ef519beacdc19bbf">ScreenWidth</a></div><div class="ttdeci">const int ScreenWidth</div><div class="ttdoc">Larghezza dello schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:17</div></div>
+<div class="ttc" id="data__struct_8h_html_ac5090a6568797128b0a5545228bb8b75"><div class="ttname"><a href="data__struct_8h.html#ac5090a6568797128b0a5545228bb8b75">FPS</a></div><div class="ttdeci">const int FPS</div><div class="ttdoc">Frame del gioco. </div><div class="ttdef"><b>Definition:</b> data_struct.h:22</div></div>
+<div class="ttc" id="data__struct_8h_html_a6786cde6bb9174ef46de3845f4301327"><div class="ttname"><a href="data__struct_8h.html#a6786cde6bb9174ef46de3845f4301327">ScreenHeight</a></div><div class="ttdeci">const int ScreenHeight</div><div class="ttdoc">Altezza dello schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:18</div></div>
+<div class="ttc" id="data__struct_8h_html_a31c6f3fb507a4edd8e1f355b0e772903a7911229e7fd613f96aeaf9413c8251bc"><div class="ttname"><a href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a7911229e7fd613f96aeaf9413c8251bc">SU</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:26</div></div>
+<div class="ttc" id="debug_8h_html_ac788b8a34bf25c2b3eb6b4a12df14102"><div class="ttname"><a href="debug_8h.html#ac788b8a34bf25c2b3eb6b4a12df14102">DEBUG_CONSOLE</a></div><div class="ttdeci">#define DEBUG_CONSOLE</div><div class="ttdoc">Questo file contiene la debug console, un&#39;interfaccia che viene usata solo in modalità di debug che c...</div><div class="ttdef"><b>Definition:</b> debug.h:10</div></div>
+<div class="ttc" id="gui_8cc_html_a56c5666c2ebae6ca17cdb0307059d375"><div class="ttname"><a href="gui_8cc.html#a56c5666c2ebae6ca17cdb0307059d375">draw_path</a></div><div class="ttdeci">void draw_path()</div><div class="ttdef"><b>Definition:</b> gui.cc:127</div></div>
+<div class="ttc" id="structPLAYER__t_html"><div class="ttname"><a href="structPLAYER__t.html">PLAYER_t</a></div><div class="ttdoc">Struttura contenente i dati del giocatore. </div><div class="ttdef"><b>Definition:</b> data_struct.h:35</div></div>
+<div class="ttc" id="gui_8cc_html_a96c7f485f675a27502eb3d51d7afcd78"><div class="ttname"><a href="gui_8cc.html#a96c7f485f675a27502eb3d51d7afcd78">move_pacman</a></div><div class="ttdeci">void move_pacman(PLAYER_t &amp;pg)</div><div class="ttdef"><b>Definition:</b> gui.cc:202</div></div>
+<div class="ttc" id="data__struct_8h_html_a31c6f3fb507a4edd8e1f355b0e772903a5387bb29e78bfce7c11164018e81ab7b"><div class="ttname"><a href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a5387bb29e78bfce7c11164018e81ab7b">GIU</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:26</div></div>
+<div class="ttc" id="data__struct_8h_html_a31c6f3fb507a4edd8e1f355b0e772903a22dc95a35fbd833d9908928812979156"><div class="ttname"><a href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a22dc95a35fbd833d9908928812979156">DX</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:26</div></div>
+<div class="ttc" id="gui_8cc_html_a91fbb4c4f500ee2b1f21b05a6674b1d3"><div class="ttname"><a href="gui_8cc.html#a91fbb4c4f500ee2b1f21b05a6674b1d3">draw_pause</a></div><div class="ttdeci">void draw_pause()</div><div class="ttdef"><b>Definition:</b> gui.cc:91</div></div>
+<div class="ttc" id="data__struct_8h_html_a31c6f3fb507a4edd8e1f355b0e772903a898fd7abd6aae10a03fc8f61543e1ab6"><div class="ttname"><a href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a898fd7abd6aae10a03fc8f61543e1ab6">SX</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:26</div></div>
+<div class="ttc" id="game_8cc_html_acfe91385c77007d8f990e6b397878a63"><div class="ttname"><a href="game_8cc.html#acfe91385c77007d8f990e6b397878a63">init_pacman</a></div><div class="ttdeci">void init_pacman(PLAYER_t &amp;pacman)</div><div class="ttdef"><b>Definition:</b> game.cc:231</div></div>
+<div class="ttc" id="structPLAYER__t_html_afb6bd811c5d4e65c62cb6435b7df42e8"><div class="ttname"><a href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">PLAYER_t::dir</a></div><div class="ttdeci">DIREZ dir</div><div class="ttdoc">Stato attuale della direzione di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:36</div></div>
+<div class="ttc" id="gui_8cc_html_a11bd43d763e2427ca80d5bdf12cd97e3"><div class="ttname"><a href="gui_8cc.html#a11bd43d763e2427ca80d5bdf12cd97e3">draw_screen_menu</a></div><div class="ttdeci">void draw_screen_menu(int menu)</div><div class="ttdef"><b>Definition:</b> gui.cc:24</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Mar 19 Ago 2014 02:00:29 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>
