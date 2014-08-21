@@ -1,3 +1,9 @@
+/*
+ * debug.h
+ *
+ *      Author: Belle & Bruce
+ */
+
 /**
  * Questo file contiene la debug console, un'interfaccia che viene usata solo in modalità
  * di debug che consente di ricevere in tempo reale le informazioni riguardanti il pacman
@@ -6,7 +12,7 @@
  * Per attivare questa modalità, bisogna compilare il progetto con il "make debug" e una volta in gioco
  * basta premere il tasto "d".
  */
-
+#ifdef DEBUG_MODE_
 #define DEBUG_CONSOLE								    		\
 	al_stop_timer(timer);							 		\
 	cout<<"*******DEBUG_CONSOLE********"<<endl;	  			 		\
@@ -44,3 +50,4 @@
         		break;                                                                  \
     		}                                                                               \
     }
+#endif  // DEBUG_MODE_

@@ -1,3 +1,9 @@
+/*
+ * io.cc
+ *
+ *      Author: Belle & Bruce
+ */
+
 //C++ header
 #include <iostream>
 #include <fstream>
@@ -7,6 +13,4 @@
 
 //header interni
 #include "data_struct.h"
-
-using namespace std;
-
+#include "logic.h"

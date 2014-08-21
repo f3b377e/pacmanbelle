@@ -27,15 +27,12 @@
 #include "io.h"
 #include "data_struct.h"
 #include "gui.h"
-
-using namespace std;
-
 #ifdef DEBUG_MODE
 	#include "debug.h"
 #endif
 
+using namespace std;
 //Prototipi
-void init_pacman (PLAYER_t& pacman);
 
 /** Funzione principale.
  *
@@ -60,9 +57,9 @@ int main(int argc, char *argv[]){
 //Variabili Allegro
 
    ////Display
-   al_set_new_display_flags(ALLEGRO_OPENGL);
+   al_set_new_display_flags(0);
    al_set_new_window_position(200,40);
-   ALLEGRO_DISPLAY *display = al_create_display(ScreenWidth, ScreenHeight);
+   ALLEGRO_DISPLAY *display = al_create_display(SCREENWIDTH, SCREENHEIGHT);
    al_set_window_title(display, "Pacman Project");
    al_hide_mouse_cursor(display);
 
@@ -78,10 +75,22 @@ int main(int argc, char *argv[]){
    PLAYER_t pacman;
    init_pacman(pacman);
 
+//Font
+    FONT_t font;
+    init_font(font);
+
+//Bitmap
+    BITMAP_t bitmap;
+    init_bitmap(bitmap);
+
+//Audio
+    AUDIO_t audio;
+    init_audio(audio);
+
 //Menu
    bool selected = false, done = false;
    int menu = 0;
-   draw_screen_menu(menu);
+   draw_screen_menu(menu, font, bitmap);
 
 //Game
     bool pause = false;
@@ -103,7 +112,7 @@ int main(int argc, char *argv[]){
 					menu = 3;
 				if (menu < 1)
 					menu = 1;
-                              draw_screen_menu(menu);
+                              draw_screen_menu(menu,font,bitmap);
 			break;
 			case ALLEGRO_KEY_UP:
 				menu = menu - 1;
@@ -111,21 +120,19 @@ int main(int argc, char *argv[]){
 					menu = 3;
 				if (menu < 1)
 					menu = 1;
-                              draw_screen_menu(menu);
+                              draw_screen_menu(menu,font,bitmap);
 			break;
 			case ALLEGRO_KEY_ENTER:
 				selected = true;
 			break;
+			case ALLEGRO_KEY_ESCAPE:
+                return 0;
+            break;
         	}
 	}else if(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
 		return 0 ;
    	}
    }
-
-//Menu Option
-/*  Funzione
- *  Da dei problemi con la pausa del gioco
- */
    switch (menu){
 	case 1 :
 		al_start_timer(timer);
@@ -155,15 +162,16 @@ int main(int argc, char *argv[]){
 				   case ALLEGRO_KEY_RIGHT:
 					pacman.dir = DX;
 				   break;
-                   		   case ALLEGRO_KEY_ESCAPE:
-                    			return 0;
+                   case ALLEGRO_KEY_ESCAPE:
+                    done = true;
+                    return 0;
 				   break;
-                   		   case ALLEGRO_KEY_SPACE:
-                    			pause = true;
-                    			while(pause)
+                    case ALLEGRO_KEY_SPACE:
+                    	pause = true;
+                    while(pause)
                    			{
                         			al_wait_for_event(event_queue, &events);
-                        			draw_pause();
+                        			draw_pause(font);
                         			if (events.type == ALLEGRO_EVENT_KEY_DOWN)
                         			{
                             				if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
@@ -175,10 +183,9 @@ int main(int argc, char *argv[]){
 			}
 			if(events.type == ALLEGRO_EVENT_TIMER)
 			{
-			   move_pacman(pacman);
+                move_pacman(pacman,bitmap);
 			}
 		}
-
 	break;
 	case 2:
 	    done = false;
@@ -193,7 +200,7 @@ int main(int argc, char *argv[]){
 
             if (events.type == ALLEGRO_EVENT_KEY_DOWN){
                 if(events.keyboard.keycode == ALLEGRO_KEY_ENTER){
-                    draw_path();
+                    draw_path(bitmap);
                     al_flip_display();
                 }
                 if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
@@ -210,27 +217,10 @@ int main(int argc, char *argv[]){
 	break;
    }
 
-
+   dest_bitmap(bitmap);
+   dest_font(font);
    al_destroy_timer(timer);
-
    al_destroy_event_queue(event_queue);
-
    al_destroy_display(display);
-
 return 0;
-}
-
-
-// init_pacman
-/*  Parametri: pacman, oggetto di tipo Player
- *
- *  Funzioni:
- *  resetta impostazioni di Pac-Man o le inizializza.
- */
-void init_pacman (PLAYER_t& pacman){
-	pacman.dir = FERMO;
-	pacman.movespeed = 3;
-	pacman.sourcex = 6 , pacman.sourcey = 6;
-	pacman.x = 10, pacman.y=10;
-	pacman.stato = 1;
 }
