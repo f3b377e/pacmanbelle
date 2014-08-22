@@ -19,13 +19,14 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 //header interni
-#include "logic.h"
-#include "io.h"
 #include "data_struct.h"
+#include "io.h"
+#include "logic.h"
 #include "gui.h"
 #ifdef DEBUG_MODE
 	#include "debug.h"
@@ -45,10 +46,11 @@ int main(int argc, char *argv[]){
 // Inizializzazione degli addons di Allegro 5.
     al_init();
     al_init_image_addon();
-    al_init_primitives_addon();
     al_init_font_addon();
     al_init_ttf_addon();
+    al_init_acodec_addon();
     al_install_mouse();
+    al_install_audio();
     al_install_keyboard();
 
   if(!al_init())
@@ -60,6 +62,8 @@ int main(int argc, char *argv[]){
    al_set_new_display_flags(0);
    al_set_new_window_position(200,40);
    ALLEGRO_DISPLAY *display = al_create_display(SCREENWIDTH, SCREENHEIGHT);
+   if (display == NULL)
+        cout<<"Display Error!";
    al_set_window_title(display, "Pacman Project");
    al_hide_mouse_cursor(display);
 
@@ -87,8 +91,12 @@ int main(int argc, char *argv[]){
     AUDIO_t audio;
     init_audio(audio);
 
+//MAPPA
+    MAPPA_t mappa;
+    init_mappa(mappa);
+
 //Menu
-   bool selected = false, done = false, active = false, draw = true;
+   bool selected = false, done = false, active = false;
    int menu = 0;
    draw_screen_menu(menu, font, bitmap);
 
@@ -126,15 +134,17 @@ int main(int argc, char *argv[]){
 				selected = true;
 			break;
 			case ALLEGRO_KEY_ESCAPE:
-                		return 0;
-            		break;
-        	}
+                menu = 4;
+                selected = true;
+            break;
+            }
 	}else if(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
 		return 0 ;
    	}
    }
    switch (menu){
 	case 1 :
+        load_map(mappa, filenamelv1);
 		al_start_timer(timer);
 		while(!done){
 		al_wait_for_event(event_queue, &events);
@@ -182,13 +192,13 @@ int main(int argc, char *argv[]){
 			   }
 			}
 			if(events.type == ALLEGRO_EVENT_TIMER)
-			{	
+			{
 				active = true;
-                		if(move_pacman(pacman,bitmap,active))
+                if(move_pacman(pacman,bitmap,active))
 					draw_pacman(pacman,bitmap);
 				al_flip_display();
 				al_clear_to_color(al_map_rgb(0,0,0));
-				draw_path(bitmap);		
+				draw_path(bitmap, mappa);
 			}
 		}
 	break;
@@ -202,7 +212,7 @@ int main(int argc, char *argv[]){
 	            }
 	            if (events.type == ALLEGRO_EVENT_KEY_DOWN){
 	                if(events.keyboard.keycode == ALLEGRO_KEY_ENTER){
-	                    draw_path(bitmap);
+	                    draw_path(bitmap,mappa);
 	                    al_flip_display();
 	                }
 	                if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
@@ -213,12 +223,17 @@ int main(int argc, char *argv[]){
 
         break;
 	case 3:
+        al_clear_to_color(al_map_rgb(0,0,0));
+		al_flip_display();
+    break;
+	case 4:
 		al_clear_to_color(al_map_rgb(0,0,0));
 		al_flip_display();
-		al_rest(2.0);
-	break;
+    break;
    }
 
+   dest_bitmap(bitmap); // FUNZIONA???  non so come fare per scoprirlo Help pls!!! :(
+   dest_font(font);     // FUNZIONA???  non so come fare per scoprirlo Help pls!!! :(
    dest_bitmap(bitmap);
    dest_font(font);
    al_destroy_timer(timer);

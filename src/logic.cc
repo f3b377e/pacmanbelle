@@ -13,50 +13,95 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 //header interni
 #include "data_struct.h"
 #include "logic.h"
 #include "io.h"
 
+using namespace std;
+
 void init_audio(AUDIO_t& a)
 {
      a.id; /**< non so se va bene*/
 	 a.ghost_eaten = al_load_sample("data/sound/ghost_eaten.wav");
-	 a.ghosts_scared = al_load_sample("data/sound/ghosts_scared.wav");
-	 a.pacman_beginning = al_load_sample("data/sound/pacman_beginning.wav");
-	 a.pacman_eaten = al_load_sample("data/sound/pacman_eaten.wav");
-	 a.pacman_eatfruit = al_load_sample("data/sound/pacman_eatfruit.wav");
-	 a.pallet_eaten1 = al_load_sample("data/sound/pallet_eaten1.wav");
-	 a.pallet_eaten2 = al_load_sample("data/sound/pallet_eaten2.wav");
-	 a.siren = al_load_sample("data/sound/siren.wav");
+	 if (a.ghost_eaten == NULL)
+        cout<<"\n Audio Error, ghost_eaten.wav error!";
 
+	 a.ghosts_scared = al_load_sample("data/sound/ghosts_scared.wav");
+	 if (a.ghosts_scared == NULL)
+        cout<<"\n Audio Error, ghosts_scared.wav error!";
+
+	 a.pacman_beginning = al_load_sample("data/sound/pacman_beginning.wav");
+	 if (a.pacman_beginning == NULL)
+        cout<<"\n Audio Error, pacman_beginning.wav error!";
+
+	 a.pacman_eaten = al_load_sample("data/sound/pacman_eaten.wav");
+	 if (a.pacman_eaten == NULL)
+        cout<<"\n Audio Error, pacman_eaten.wav error!";
+
+	 a.pacman_eatfruit = al_load_sample("data/sound/pacman_eatfruit.wav");
+	 if (a.pacman_eatfruit == NULL)
+        cout<<"\n Audio Error, pacman_eatfruit.wav error!";
+
+	 a.pallet_eaten1 = al_load_sample("data/sound/pallet_eaten1.wav");
+	 if (a.pallet_eaten1 == NULL)
+        cout<<"\n Audio Error, pallet_eaten1.wav error!";
+
+	 a.pallet_eaten2 = al_load_sample("data/sound/pallet_eaten2.wav");
+	 if (a.pallet_eaten2 == NULL)
+        cout<<"\n Audio Error, pallet_eaten2.wav error!";
+
+	 a.siren = al_load_sample("data/sound/siren.wav");
+	 if (a.siren == NULL)
+        cout<<"\n Audio Error, siren.wav error!";
 }
 void init_bitmap(BITMAP_t& b)
 {
     b.header_image = al_load_bitmap("data/img/pacman_header.jpg");
+	 if (b.header_image == NULL)
+        cout<<"\n Bitmap Error, pacman_header.jpg error!";
+
     b.puntino = al_load_bitmap("data/img/puntino_bianco.png");
+	 if (b.puntino == NULL)
+        cout<<"\n Bitmap Error, puntino_bianco.jpg error!";
+
     b.autotile = al_load_bitmap("data/img/autotile.jpg");
+	 if (b.autotile == NULL)
+        cout<<"\n Bitmap Error, autotile.jpg error!";
+
     b.main_image = al_load_bitmap("data/img/pacman2.png");
+	 if (b.main_image == NULL)
+        cout<<"\n Bitmap Error, pacman2.jpg error!";
 }
 
 void init_font(FONT_t& f)
 {
     f.h1 = al_load_font("data/font/pac-font.ttf", 32, 0);
+	 if (f.h1 == NULL)
+        cout<<"\n Font Error, pac-font.ttf error!";
     f.h2 = al_load_font("data/font/pac-font.ttf", 18, 0);
     f.h3 = al_load_font("data/font/pac-font.ttf", 20, 0);
     f.h4 = al_load_font("data/font/orbitron-black.ttf", 10, 0);
 }
 
+void init_mappa(MAPPA_t& m)
+{
+    m.c = 0;
+    m.r = 0;
+    m.mappa = NULL;
+}
+
 void init_pacman (PLAYER_t& pacman){
 	pacman.dir = FERMO;
-	pacman.movespeed = 5;
+	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
-	pacman.x = 10;
-	pacman.y = 10;
+	pacman.x = 50;
+	pacman.y = 50;
 	pacman.stato = 1;   		/**< da 1 a 3 per la gestione della sprites di pacman*/
 	pacman.vita = 3;		/**< Vite di pacman che possono essere minimo 0 massimo 3*/
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/

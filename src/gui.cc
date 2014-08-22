@@ -14,12 +14,13 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 
 #include "data_struct.h"
 #include "gui.h"
+#include "io.h"
 
+using namespace std;
 
 void draw_screen_menu(int menu, FONT_t f, BITMAP_t b)
 {
@@ -57,21 +58,11 @@ void draw_pause(FONT_t f)
 	al_flip_display();
 }
 
-void draw_path(BITMAP_t b)
+void draw_path(BITMAP_t b, const MAPPA_t &m)
 {
-    al_clear_to_color(al_map_rgb(0,0,0));
-    int mapx, mapy;
-    std::ifstream f(filenamelv1);
-
-    f >> mapx >> mapy;
-    char maps[mapx][mapy];
-
-    for (int j = 0; j < mapy; j++){
-       // std::cout<<"\n";
-        for (int i=0; i < mapx; i++){
-            f >> maps[i][j];
-            //std::cout<<maps[i][j]<<" ";
-            switch (maps[i][j]){
+    for (int j = 0; j < m.r; j++){
+        for (int i=0; i < m.c; i++){
+            switch (m.mappa[i][j]){
                 case '0':
                     al_draw_bitmap_region(b.autotile, 32, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * i + OFFSETX, BLOCKSIZE * j + OFFSETY, 0);
                 break;
@@ -179,7 +170,7 @@ bool move_pacman(PLAYER_t& pg, BITMAP_t b, bool active)
 		pg.dir = DX;
 		pg.x += pg.movespeed;
 	   break;
-	}	
+	}
 	if(active)
 		pg.sourcex += al_get_bitmap_width(b.main_image)/3;
 	else

@@ -9,12 +9,8 @@
 
 //allegro header
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_native_dialog.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_audio.h>
 
@@ -26,7 +22,7 @@ const int SCREENWIDTH = 850;	/**< Larghezza dello schermo*/
 const int SCREENHEIGHT = 600;	/**< Altezza dello schermo*/
 const int OFFSETX = SCREENWIDTH * 0.02;	/**< Margine laterale della finestra */
 const int OFFSETY = SCREENHEIGHT * 0.04; /** < Margine Superiore della finestra */
-const int FPS = 25;		/**< Frame del gioco*/
+const int FPS = 50;		/**< Frame del gioco*/
 const int BLOCKSIZE = 16;	/**< Blocchi della mappa*/
 const char filenamelv1[] = "data/map/map1.txt";     /**< Mappa Livello 1 */
 const char filenamelv2[] = "data/map/map2.txt";     /**< Mappa Livello 2 */
@@ -39,6 +35,12 @@ enum DIREZ{GIU, SU, SX, DX, FERMO};
  *  operazioni a seconda della fase in cui si trova il gioco
  */
 enum STATO_GIOCO{MENU, PLAY, PAUSA, CONTROLS, HIGH_SCORE, GAME_OVER};
+
+struct MAPPA_t{
+    int r;          /**< Numero di Colonne*/
+    int c;          /**< Numero di Righe*/
+    char **mappa;   /**< Matrice che definisce la mappa */
+};
 
 /**Struttura contenente i dati del giocatore*/
 struct PLAYER_t{
