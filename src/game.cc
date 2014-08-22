@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
     init_audio(audio);
 
 //Menu
-   bool selected = false, done = false;
+   bool selected = false, done = false, active = false, draw = true;
    int menu = 0;
    draw_screen_menu(menu, font, bitmap);
 
@@ -126,8 +126,8 @@ int main(int argc, char *argv[]){
 				selected = true;
 			break;
 			case ALLEGRO_KEY_ESCAPE:
-                return 0;
-            break;
+                		return 0;
+            		break;
         	}
 	}else if(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
 		return 0 ;
@@ -162,13 +162,13 @@ int main(int argc, char *argv[]){
 				   case ALLEGRO_KEY_RIGHT:
 					pacman.dir = DX;
 				   break;
-                   case ALLEGRO_KEY_ESCAPE:
-                    done = true;
-                    return 0;
+                   		   case ALLEGRO_KEY_ESCAPE:
+                    			done = true;
+                    			return 0;
 				   break;
-                    case ALLEGRO_KEY_SPACE:
-                    	pause = true;
-                    while(pause)
+                   		   case ALLEGRO_KEY_SPACE:
+                    			pause = true;
+                    			while(pause)
                    			{
                         			al_wait_for_event(event_queue, &events);
                         			draw_pause(font);
@@ -182,31 +182,33 @@ int main(int argc, char *argv[]){
 			   }
 			}
 			if(events.type == ALLEGRO_EVENT_TIMER)
-			{
-                move_pacman(pacman,bitmap);
+			{	
+				active = true;
+                		if(move_pacman(pacman,bitmap,active))
+					draw_pacman(pacman,bitmap);
+				al_flip_display();
+				al_clear_to_color(al_map_rgb(0,0,0));
+				draw_path(bitmap);		
 			}
 		}
 	break;
 	case 2:
 	    done = false;
-        al_start_timer(timer);
-
+        	al_start_timer(timer);
 		while (!done){
-
-            al_wait_for_event(event_queue, &events);
-            if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-                done = true;
-            }
-
-            if (events.type == ALLEGRO_EVENT_KEY_DOWN){
-                if(events.keyboard.keycode == ALLEGRO_KEY_ENTER){
-                    draw_path(bitmap);
-                    al_flip_display();
-                }
-                if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
-                    done = true;
-                }
-            }
+	            al_wait_for_event(event_queue, &events);
+	            if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
+	                done = true;
+	            }
+	            if (events.type == ALLEGRO_EVENT_KEY_DOWN){
+	                if(events.keyboard.keycode == ALLEGRO_KEY_ENTER){
+	                    draw_path(bitmap);
+	                    al_flip_display();
+	                }
+	                if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
+	                    done = true;
+	                }
+	            }
 		}
 
         break;

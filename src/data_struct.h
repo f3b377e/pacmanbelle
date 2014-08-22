@@ -32,7 +32,7 @@ const char filenamelv1[] = "data/map/map1.txt";     /**< Mappa Livello 1 */
 const char filenamelv2[] = "data/map/map2.txt";     /**< Mappa Livello 2 */
 
 /**Stato di direzione per pacman e per i fantasmi*/
-enum DIREZ{FERMO, SU, GIU, DX, SX};
+enum DIREZ{GIU, SU, SX, DX, FERMO};
 
 /**
  *  Stato del gioco, serve per il loop della funzione ::main per eseguire diverse

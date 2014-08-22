@@ -39,7 +39,7 @@ void init_bitmap(BITMAP_t& b)
     b.header_image = al_load_bitmap("data/img/pacman_header.jpg");
     b.puntino = al_load_bitmap("data/img/puntino_bianco.png");
     b.autotile = al_load_bitmap("data/img/autotile.jpg");
-    b.main_image = al_load_bitmap("data/img/pacman_all_sprites2.png");
+    b.main_image = al_load_bitmap("data/img/pacman2.png");
 }
 
 void init_font(FONT_t& f)
@@ -52,16 +52,16 @@ void init_font(FONT_t& f)
 
 void init_pacman (PLAYER_t& pacman){
 	pacman.dir = FERMO;
-	pacman.movespeed = 3;
-	pacman.sourcex = 6;
-	pacman.sourcey = 6;
+	pacman.movespeed = 5;
+	pacman.sourcex = 0;
+	pacman.sourcey = 0;
 	pacman.x = 10;
 	pacman.y = 10;
-	pacman.stato = 1;   /**< da 1 a 3 per la gestione della sprites di pacman*/
+	pacman.stato = 1;   		/**< da 1 a 3 per la gestione della sprites di pacman*/
 	pacman.vita = 3;		/**< Vite di pacman che possono essere minimo 0 massimo 3*/
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
-	pacman.mangiato = false;		/**< se vera pacman è mangiato dai fantasmi */
+	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
 }
 
 void dest_font(FONT_t& f)

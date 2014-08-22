@@ -67,10 +67,10 @@ void draw_path(BITMAP_t b)
     char maps[mapx][mapy];
 
     for (int j = 0; j < mapy; j++){
-        std::cout<<"\n";
+       // std::cout<<"\n";
         for (int i=0; i < mapx; i++){
             f >> maps[i][j];
-            std::cout<<maps[i][j]<<" ";
+            //std::cout<<maps[i][j]<<" ";
             switch (maps[i][j]){
                 case '0':
                     al_draw_bitmap_region(b.autotile, 32, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * i + OFFSETX, BLOCKSIZE * j + OFFSETY, 0);
@@ -156,7 +156,7 @@ void draw_path(BITMAP_t b)
 }
 
 
-void move_pacman(PLAYER_t& pg, BITMAP_t b)
+bool move_pacman(PLAYER_t& pg, BITMAP_t b, bool active)
 {
 	switch (pg.dir)
 	{
@@ -165,42 +165,32 @@ void move_pacman(PLAYER_t& pg, BITMAP_t b)
 	   break;
 	   case SU:
 		pg.dir = SU;
-		pg.stato +=1;
-		pg.sourcey = 6*3 + 14*2 ;
 		pg.y -= pg.movespeed;
 	   break;
 	   case GIU:
 		pg.dir = GIU;
-		pg.stato +=1;
-		pg.sourcey = 6*4 + 14*3 ;
 		pg.y += pg.movespeed;
 	   break;
 	   case SX:
 		pg.dir = SX;
-		pg.stato +=1;
-		pg.sourcey = 6;
 		pg.x -= pg.movespeed;
 	   break;
 	   case DX:
 		pg.dir = DX;
-		pg.stato +=1;
-		pg.sourcey = 6*2 + 14*1 ;
 		pg.x += pg.movespeed;
 	   break;
-	}
+	}	
+	if(active)
+		pg.sourcex += al_get_bitmap_width(b.main_image)/3;
+	else
+		pg.sourcex = 21;
+	if(pg.sourcex >= al_get_bitmap_width(b.main_image))
+		pg.sourcex = 0;
+	pg.sourcey = pg.dir;
+	return true;
+}
 
-	al_clear_to_color(al_map_rgb(0,0,0));
-
-	if (pg.stato > 9)
-		pg.stato = 1;
-
-	if (pg.stato >3  && pg.stato <= 6)
-		al_draw_bitmap_region(b.main_image, 6, pg.sourcey, 14, 14, pg.x, pg.y, 0);
-
-	else if (pg.stato > 0 && pg.stato <= 3)
-		al_draw_bitmap_region(b.main_image, 6 * 2 + 14, pg.sourcey, 14, 14, pg.x, pg.y, 0);
-	else if (pg.stato > 6 && pg.stato <= 9)
-		al_draw_bitmap_region(b.main_image, 6 * 3 + 14 * 2, 6, 14, 14, pg.x, pg.y, 0);
-
-	al_flip_display();
+void draw_pacman(PLAYER_t& pg, BITMAP_t b)
+{
+	al_draw_bitmap_region(b.main_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.main_image)/4, 16, 15, pg.x, pg.y, NULL);
 }
