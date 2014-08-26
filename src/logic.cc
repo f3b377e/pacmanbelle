@@ -97,11 +97,12 @@ void init_mappa(MAPPA_t& m)
 
 void init_pacman (PLAYER_t& pacman){
 	pacman.dir = FERMO;
+	pacman.precdir = SX;
 	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
-	pacman.x = 50;
-	pacman.y = 50;
+	pacman.x = 12*BLOCKSIZE+OFFSETX;
+	pacman.y = 23*BLOCKSIZE+OFFSETY;
 	pacman.stato = 1;   		/**< da 1 a 3 per la gestione della sprites di pacman*/
 	pacman.vita = 3;		/**< Vite di pacman che possono essere minimo 0 massimo 3*/
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
@@ -124,3 +125,4 @@ void dest_bitmap(BITMAP_t& b)
     al_destroy_bitmap(b.main_image);
     al_destroy_bitmap(b.puntino);
 }
+

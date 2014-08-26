@@ -28,6 +28,8 @@
 #include "io.h"
 #include "logic.h"
 #include "gui.h"
+
+//debug mode
 #ifdef DEBUG_MODE
 	#include "debug.h"
 #endif
@@ -159,6 +161,7 @@ int main(int argc, char *argv[]){
 					DEBUG_CONSOLE;
 			  	 }
 			   #endif
+
 			   switch (events.keyboard.keycode){
 				   case ALLEGRO_KEY_UP:
 					pacman.dir = SU;
@@ -194,8 +197,8 @@ int main(int argc, char *argv[]){
 			if(events.type == ALLEGRO_EVENT_TIMER)
 			{
 				active = true;
-                if(move_pacman(pacman,bitmap,active))
-					draw_pacman(pacman,bitmap);
+                		move_pacman(pacman,bitmap,active,mappa);
+				draw_pacman(pacman,bitmap);
 				al_flip_display();
 				al_clear_to_color(al_map_rgb(0,0,0));
 				draw_path(bitmap, mappa);

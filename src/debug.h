@@ -12,7 +12,6 @@
  * Per attivare questa modalità, bisogna compilare il progetto con il "make debug" e una volta in gioco
  * basta premere il tasto "d".
  */
-#ifdef DEBUG_MODE_
 #define DEBUG_CONSOLE								    		\
 	al_stop_timer(timer);							 		\
 	cout<<"*******DEBUG_CONSOLE********"<<endl;	  			 		\
@@ -50,4 +49,4 @@
         		break;                                                                  \
     		}                                                                               \
     }
-#endif  // DEBUG_MODE_
+

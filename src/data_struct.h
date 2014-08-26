@@ -22,7 +22,7 @@ const int SCREENWIDTH = 850;	/**< Larghezza dello schermo*/
 const int SCREENHEIGHT = 600;	/**< Altezza dello schermo*/
 const int OFFSETX = SCREENWIDTH * 0.02;	/**< Margine laterale della finestra */
 const int OFFSETY = SCREENHEIGHT * 0.04; /** < Margine Superiore della finestra */
-const int FPS = 50;		/**< Frame del gioco*/
+const int FPS = 25;		/**< Frame del gioco*/
 const int BLOCKSIZE = 16;	/**< Blocchi della mappa*/
 const char filenamelv1[] = "data/map/map1.txt";     /**< Mappa Livello 1 */
 const char filenamelv2[] = "data/map/map2.txt";     /**< Mappa Livello 2 */
@@ -45,6 +45,7 @@ struct MAPPA_t{
 /**Struttura contenente i dati del giocatore*/
 struct PLAYER_t{
 	DIREZ dir;		/**< Stato attuale della direzione di pacman*/
+	DIREZ precdir;		/**< Stato della precedente direzione di pacman*/
 	float movespeed;	/**< Velocità del pacman*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/

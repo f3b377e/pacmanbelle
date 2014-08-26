@@ -146,8 +146,63 @@ void draw_path(BITMAP_t b, const MAPPA_t &m)
     }
 }
 
+/**Funzione che controlla lo spostamento del pacman e gli fa mangiare i pallini*/
+static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg)
+{
+	int mapx;
+	int mapy;
+	if(pg.x <= OFFSETX)
+		pg.x = 29*BLOCKSIZE;
+	switch (pg.dir){
+		case GIU:
+			mapx = (pg.x-OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y+BLOCKSIZE-OFFSETY)/BLOCKSIZE;
+			cout<<m.mappa[mapx][mapy]<<endl;
+			if(m.mappa[mapx][mapy]!='P'
+			   &&m.mappa[mapx][mapy]!='0'
+			   &&m.mappa[mapx][mapy]!='Q')
+				return false;
+		break;
+		case SU:
+			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - BLOCKSIZE - OFFSETY)/BLOCKSIZE;
+			cout<<m.mappa[mapx][mapy]<<endl;
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q')
+				return false;
+		break;
+		case SX:
+			mapx = (pg.x - BLOCKSIZE - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+			cout<<m.mappa[mapx][mapy]<<endl;
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q')
+				return false;
+		break;
+		case DX:
+			mapx = (pg.x + BLOCKSIZE - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+			cout<<m.mappa[mapx][mapy]<<endl;
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q')
+				return false;
+		break;
+	}
+	//questa parte mi fa un po' schifo, cercherò di migliorarla in qualche modo
+	mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+	if(m.mappa[mapx][mapy] == 'P'
+	   || m.mappa[mapx][mapy] == 'Q'){
+		m.mappa[mapx][mapy] = '0';
+	}
+	return true;
 
-bool move_pacman(PLAYER_t& pg, BITMAP_t b, bool active)
+}
+
+void move_pacman(PLAYER_t& pg, BITMAP_t b, bool active, MAPPA_t m)
 {
 	switch (pg.dir)
 	{
@@ -155,20 +210,44 @@ bool move_pacman(PLAYER_t& pg, BITMAP_t b, bool active)
 		pg.dir = FERMO;
 	   break;
 	   case SU:
-		pg.dir = SU;
-		pg.y -= pg.movespeed;
+		if(controllo_percorso(m,pg)){
+			pg.precdir = pg.dir;
+			pg.y -= pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
 	   break;
 	   case GIU:
-		pg.dir = GIU;
-		pg.y += pg.movespeed;
+		if(controllo_percorso(m, pg)){
+			pg.precdir = pg.dir;
+			pg.y += pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
 	   break;
 	   case SX:
-		pg.dir = SX;
-		pg.x -= pg.movespeed;
+		if(controllo_percorso(m,pg)){
+			pg.precdir = pg.dir;
+			pg.x -= pg.movespeed;
+		}		
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
 	   break;
 	   case DX:
-		pg.dir = DX;
-		pg.x += pg.movespeed;
+		if(controllo_percorso(m,pg)){
+			pg.precdir = pg.dir;
+			pg.x += pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
 	   break;
 	}
 	if(active)
@@ -178,10 +257,13 @@ bool move_pacman(PLAYER_t& pg, BITMAP_t b, bool active)
 	if(pg.sourcex >= al_get_bitmap_width(b.main_image))
 		pg.sourcex = 0;
 	pg.sourcey = pg.dir;
-	return true;
+	if(pg.dir == FERMO){
+		pg.sourcey = pg.precdir;
+		pg.sourcex = 0;
+	}
 }
 
 void draw_pacman(PLAYER_t& pg, BITMAP_t b)
 {
-	al_draw_bitmap_region(b.main_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.main_image)/4, 16, 15, pg.x, pg.y, NULL);
+	al_draw_bitmap_region(b.main_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.main_image)/4, 17, 16, pg.x, pg.y, NULL);
 }
