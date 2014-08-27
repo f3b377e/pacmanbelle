@@ -55,12 +55,9 @@ int main(int argc, char *argv[]){
     al_install_audio();
     al_install_keyboard();
 
-  if(!al_init())
-      return -1;
+/**Inizializzazioni: */
 
-//Variabili Allegro
-
-   ////Display
+//Display
    al_set_new_display_flags(0);
    al_set_new_window_position(200,40);
    ALLEGRO_DISPLAY *display = al_create_display(SCREENWIDTH, SCREENHEIGHT);
@@ -69,11 +66,11 @@ int main(int argc, char *argv[]){
    al_set_window_title(display, "Pacman Project");
    al_hide_mouse_cursor(display);
 
-   ////Eventi
+//Eventi
    ALLEGRO_EVENT_QUEUE *event_queue  = al_create_event_queue();
    ALLEGRO_EVENT events;
 
-   ////timer
+//Timer
    ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
 
 //Player
@@ -97,13 +94,9 @@ int main(int argc, char *argv[]){
     MAPPA_t mappa;
     init_mappa(mappa);
 
-//Menu
-   bool selected = false, done = false, active = false;
-   int menu = 0;
-   draw_screen_menu(menu, font, bitmap);
-
-//Game
-    bool pause = false;
+//Altre variabili
+   int menu = 1;
+   STATO_GIOCO stato_gioco = MENU;
 
 //Event Queue registries
    al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -112,12 +105,13 @@ int main(int argc, char *argv[]){
    al_register_event_source(event_queue, al_get_mouse_event_source());
 
 //Menu Screen
-   while(!selected){
-	al_wait_for_event(event_queue, &events);
+   draw_screen_menu(menu, font, bitmap);
+   while(stato_gioco == MENU){
+        al_wait_for_event(event_queue, &events);
 	if (events.type == ALLEGRO_EVENT_KEY_DOWN){
 		switch(events.keyboard.keycode){
 			case ALLEGRO_KEY_DOWN:
-				menu = menu + 1;
+				menu += 1;
 				if (menu > 3)
 					menu = 3;
 				if (menu < 1)
@@ -125,7 +119,7 @@ int main(int argc, char *argv[]){
                               draw_screen_menu(menu,font,bitmap);
 			break;
 			case ALLEGRO_KEY_UP:
-				menu = menu - 1;
+				menu -= 1;
 				if (menu > 3)
 					menu = 3;
 				if (menu < 1)
@@ -133,27 +127,40 @@ int main(int argc, char *argv[]){
                               draw_screen_menu(menu,font,bitmap);
 			break;
 			case ALLEGRO_KEY_ENTER:
-				selected = true;
-			break;
+                switch (menu){
+                case 1:
+                    stato_gioco = PLAY;
+                break;
+                case 2:
+                    stato_gioco = CONTROLS;
+                break;
+                case 3:
+                    stato_gioco = HIGH_SCORE;
+                break;
+                }
+            break;
 			case ALLEGRO_KEY_ESCAPE:
-                menu = 4;
-                selected = true;
+                stato_gioco = QUIT;
             break;
             }
 	}else if(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-		return 0 ;
-   	}
+        stato_gioco = QUIT;
+    }
    }
-   switch (menu){
-	case 1 :
+   switch (stato_gioco){
+	case PLAY :
         load_map(mappa, filenamelv1);
-		al_start_timer(timer);
-		while(!done){
-		al_wait_for_event(event_queue, &events);
+        draw_path(bitmap, mappa);
+        al_reserve_samples(1);
+        if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,audio.id))
+            cout<<"\n Audio Error! - non parte pacman_beginning";
+        draw_countdown(font, bitmap, mappa);
+        al_start_timer(timer);
 
-			if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-			   return 0;
-			}
+		while(stato_gioco == PLAY){
+            al_wait_for_event(event_queue, &events);
+			if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                stato_gioco = QUIT;
 			if (events.type == ALLEGRO_EVENT_KEY_DOWN)
 			{
 			   #ifdef DEBUG_MODE
@@ -175,68 +182,51 @@ int main(int argc, char *argv[]){
 				   case ALLEGRO_KEY_RIGHT:
 					pacman.dir = DX;
 				   break;
-                   		   case ALLEGRO_KEY_ESCAPE:
-                    			done = true;
-                    			return 0;
+                   case ALLEGRO_KEY_ESCAPE:
+                    stato_gioco = QUIT;
 				   break;
-                   		   case ALLEGRO_KEY_SPACE:
-                    			pause = true;
-                    			while(pause)
-                   			{
-                        			al_wait_for_event(event_queue, &events);
-                        			draw_pause(font);
-                        			if (events.type == ALLEGRO_EVENT_KEY_DOWN)
-                        			{
-                            				if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
-                                			pause = false;
-                        			}
-                    			}
-				   	break;
+                   case ALLEGRO_KEY_SPACE:
+                    stato_gioco = PAUSA;
+                    while(stato_gioco == PAUSA){
+                        al_wait_for_event(event_queue, &events);
+                        draw_pause(font);
+                        if (events.type == ALLEGRO_EVENT_KEY_DOWN){
+                            if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
+                                stato_gioco = PLAY;
+                            if (events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                                stato_gioco = QUIT;
+                        }
+                        if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            stato_gioco = QUIT;
+                    }
+                   break;
 			   }
 			}
-			if(events.type == ALLEGRO_EVENT_TIMER)
-			{
-				active = true;
-                		move_pacman(pacman,bitmap,active,mappa);
+			if(events.type == ALLEGRO_EVENT_TIMER){
+
+                move_pacman(pacman,bitmap,mappa);
 				draw_pacman(pacman,bitmap);
 				al_flip_display();
-				al_clear_to_color(al_map_rgb(0,0,0));
-				draw_path(bitmap, mappa);
+                al_clear_to_color(al_map_rgb(0,0,0));
+                draw_path(bitmap, mappa);
+
 			}
 		}
 	break;
-	case 2:
-	    done = false;
-        	al_start_timer(timer);
-		while (!done){
-	            al_wait_for_event(event_queue, &events);
-	            if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-	                done = true;
-	            }
-	            if (events.type == ALLEGRO_EVENT_KEY_DOWN){
-	                if(events.keyboard.keycode == ALLEGRO_KEY_ENTER){
-	                    draw_path(bitmap,mappa);
-	                    al_flip_display();
-	                }
-	                if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
-	                    done = true;
-	                }
-	            }
-		}
-
+	case CONTROLS:
+        al_clear_to_color(al_map_rgb(0,0,0));
+		al_flip_display();
         break;
-	case 3:
+	case HIGH_SCORE:
         al_clear_to_color(al_map_rgb(0,0,0));
 		al_flip_display();
     break;
-	case 4:
+	case QUIT:
 		al_clear_to_color(al_map_rgb(0,0,0));
 		al_flip_display();
     break;
    }
 
-   dest_bitmap(bitmap); // FUNZIONA???  non so come fare per scoprirlo Help pls!!! :(
-   dest_font(font);     // FUNZIONA???  non so come fare per scoprirlo Help pls!!! :(
    dest_bitmap(bitmap);
    dest_font(font);
    al_destroy_timer(timer);
