@@ -213,12 +213,12 @@ int main(int argc, char *argv[]){
 	  }
           if(events.type == ALLEGRO_EVENT_TIMER){
         	move_pacman(pacman,bitmap,mappa,audio);
-<<<<<<< .mine            draw_pacman(pacman,bitmap);
-=======		draw_pacman(pacman,bitmap);	
->>>>>>> .theirs            draw_blinky(blinky,bitmap);
+            draw_pacman(pacman,bitmap);
+            draw_blinky(blinky,bitmap);
             draw_clyde(clyde,bitmap);
             draw_pinky(pinky,bitmap);
-            draw_inky(inky,bitmap);            al_flip_display();
+            draw_inky(inky,bitmap);
+            al_flip_display();
 	        al_clear_to_color(al_map_rgb(0,0,0));
 	        draw_path(bitmap, mappa);
 	  }
@@ -231,7 +231,7 @@ int main(int argc, char *argv[]){
         break;
 	case HIGH_SCORE:
         	al_clear_to_color(al_map_rgb(0,0,0));
-		al_flip_display();
+        al_flip_display();
     	break;
 	case QUIT:
 		al_clear_to_color(al_map_rgb(0,0,0));
