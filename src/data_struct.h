@@ -28,7 +28,6 @@ const char filenamelv2[] = "data/map/map2.txt";     /**< Mappa Livello 2 */
 
 /**Stato di direzione per pacman e per i fantasmi*/
 enum DIREZ{GIU, SU, SX, DX, FERMO};
-
 /**
  *  Stato del gioco, serve per il loop della funzione ::main per eseguire diverse
  *  operazioni a seconda della fase in cui si trova il gioco
@@ -81,6 +80,7 @@ struct AUDIO_t{
 	ALLEGRO_SAMPLE *pallet_eaten1;
 	ALLEGRO_SAMPLE *pallet_eaten2;
 	ALLEGRO_SAMPLE *siren;
+	ALLEGRO_SAMPLE *pacman_intermission;
 };
 
 /**Struttura contenente le bitmap utilizzate*/
@@ -89,6 +89,11 @@ struct BITMAP_t{
     ALLEGRO_BITMAP *puntino;
     ALLEGRO_BITMAP *autotile;
     ALLEGRO_BITMAP *pacman_image;
+    ALLEGRO_BITMAP *blinky;
+    ALLEGRO_BITMAP *pinky;
+    ALLEGRO_BITMAP *inky;
+    ALLEGRO_BITMAP *clyde;
+    ALLEGRO_BITMAP *f_pericolo;
     ALLEGRO_BITMAP *fantasma1;
     ALLEGRO_BITMAP *fantasma2;
     ALLEGRO_BITMAP *fantasma3;

@@ -58,25 +58,49 @@ void init_audio(AUDIO_t& a)
 	 a.siren = al_load_sample("data/sound/siren.wav");
 	 if (a.siren == NULL)
         	cout<<"\n Audio Error, siren.wav error!";
+
+	 a.pacman_intermission = al_load_sample("data/sound/pacman_intermission.wav");
+	 if (a.pacman_intermission == NULL)
+        	cout<<"\n Audio Error, pacman_intermission.wav error!";
 }
 
 void init_bitmap(BITMAP_t& b)
 {
     b.header_image = al_load_bitmap("data/img/pacman_header.jpg");
 	 if (b.header_image == NULL)
-        cout<<"\n Bitmap Error, pacman_header.jpg error!";
+        cout<<"\n Bitmap Error, pacman_header error!";
 
     b.puntino = al_load_bitmap("data/img/puntino_bianco.png");
 	 if (b.puntino == NULL)
-        cout<<"\n Bitmap Error, puntino_bianco.jpg error!";
+        cout<<"\n Bitmap Error, puntino_bianco error!";
 
     b.autotile = al_load_bitmap("data/img/autotile.jpg");
 	 if (b.autotile == NULL)
-        cout<<"\n Bitmap Error, autotile.jpg error!";
+        cout<<"\n Bitmap Error, autotile error!";
 
     b.pacman_image = al_load_bitmap("data/img/pacman2.png");
 	 if (b.pacman_image == NULL)
-        cout<<"\n Bitmap Error, pacman2.jpg error!";
+        cout<<"\n Bitmap Error, pacman2 error!";
+
+    b.blinky = al_load_bitmap("data/img/fantasma1.png");
+	 if (b.blinky == NULL)
+        cout<<"\n Bitmap Error, blinky - fantasma1 error!";
+
+    b.pinky = al_load_bitmap("data/img/fantasma2.png");
+	 if (b.pinky == NULL)
+        cout<<"\n Bitmap Error, pinky - fantasma2 error!";
+
+    b.inky = al_load_bitmap("data/img/fantasma3.png");
+	 if (b.inky == NULL)
+        cout<<"\n Bitmap Error, inky - fantasma3 error!";
+
+    b.clyde = al_load_bitmap("data/img/fantasma4.png");
+	 if (b.clyde == NULL)
+        cout<<"\n Bitmap Error, clyde - fantasma4 error!";
+
+    b.f_pericolo = al_load_bitmap("data/img/fantasma_pericolo.png");
+	 if (b.f_pericolo == NULL)
+        cout<<"\n Bitmap Error, clyde - fantasma4 error!";
 
     b.fantasma1 = al_load_bitmap("data/img/fantasma1.png");
 	 if (b.fantasma1 == NULL)
@@ -114,7 +138,8 @@ void init_font(FONT_t& f)
 
 }
 
-void init_pacman (PLAYER_t& pacman){
+void init_pacman (PLAYER_t& pacman)
+{
 	pacman.dir = FERMO;
 	pacman.precdir = SX;
 	pacman.movespeed = 4;
@@ -184,12 +209,62 @@ bool collision (const PLAYER_t &pg, const float sx, const float sy,
 return false;
 }
 
+void init_blinky(FANTASMA_t &b)
+{
+    b.dir = FERMO;
+    b.sourcex = 0;
+    b.sourcey = 0;
+    b.movespeed = 4;
+    b.x = 13 * BLOCKSIZE + OFFSETX + 8;
+    b.y = 13 * BLOCKSIZE + OFFSETY;
+    b.debole = false;
+    b.mangiato = false;
+}
+
+void init_pinky(FANTASMA_t &p)
+{
+    p.dir = FERMO;
+    p.sourcex = 0;
+    p.sourcey = 0;
+    p.movespeed = 4;
+    p.x = 11 * BLOCKSIZE + OFFSETX + 8;
+    p.y = 15 * BLOCKSIZE + OFFSETY;
+    p.debole = false;
+    p.mangiato = false;
+
+}
+
+void init_inky(FANTASMA_t &i)
+{
+    i.dir = FERMO;
+    i.sourcex = 0;
+    i.sourcey = 0;
+    i.movespeed = 4;
+    i.x = 15 * BLOCKSIZE + OFFSETX + 8;
+    i.y = 15 * BLOCKSIZE + OFFSETY;
+    i.debole = false;
+    i.mangiato = false;
+}
+
+void init_clyde(FANTASMA_t &c)
+{
+    c.dir = FERMO;
+    c.sourcex = 0;
+    c.sourcey = 0;
+    c.movespeed = 4;
+    c.x = 13 * BLOCKSIZE + OFFSETX + 8;
+    c.y = 15 * BLOCKSIZE + OFFSETY;
+    c.debole = false;
+    c.mangiato = false;
+}
+
 void dest_font(FONT_t& f)
 {
     al_destroy_font(f.h1);
     al_destroy_font(f.h2);
     al_destroy_font(f.h3);
     al_destroy_font(f.h4);
+    al_destroy_font(f.h5);
 }
 
 void dest_bitmap(BITMAP_t& b)
@@ -198,5 +273,10 @@ void dest_bitmap(BITMAP_t& b)
     al_destroy_bitmap(b.header_image);
     al_destroy_bitmap(b.pacman_image);
     al_destroy_bitmap(b.puntino);
+    al_destroy_bitmap(b.blinky);
+    al_destroy_bitmap(b.pinky);
+    al_destroy_bitmap(b.clyde);
+    al_destroy_bitmap(b.inky);
+    al_destroy_bitmap(b.f_pericolo);
 }
 

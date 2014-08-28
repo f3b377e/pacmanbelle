@@ -74,14 +74,18 @@ int main(int argc, char *argv[]){
    ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
 
 //Player
-   ////Pac-Man
+   FANTASMA_t blinky, pinky, inky, clyde;
    PLAYER_t pacman;
-   init_pacman(pacman);
-
-//Fantasmi
-   FANTASMA_t fantasma1;
-   init_fantasma(fantasma1);
-
+   ///Pac-Man
+    init_pacman(pacman);
+   ///Blinky
+    init_blinky(blinky);
+   ///Pinky
+    init_pinky(pinky);
+   ///Inki
+    init_inky(inky);
+   ///Clyde
+    init_clyde(clyde);
 //Font
     FONT_t font;
     init_font(font);
@@ -159,7 +163,7 @@ int main(int argc, char *argv[]){
         if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
             cout<<"\n Audio Error! - non parte pacman_beginning";
         draw_countdown(font, bitmap, mappa);
-	al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+        al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
         al_start_timer(timer);
 	while(stato_gioco == PLAY){
       		al_wait_for_event(event_queue, &events);
@@ -209,15 +213,18 @@ int main(int argc, char *argv[]){
 	  }
           if(events.type == ALLEGRO_EVENT_TIMER){
         	move_pacman(pacman,bitmap,mappa,audio);
-		draw_pacman(pacman,bitmap);	
-		draw_fantasma(fantasma1, bitmap);
-		al_flip_display();
+<<<<<<< .mine            draw_pacman(pacman,bitmap);
+=======		draw_pacman(pacman,bitmap);	
+>>>>>>> .theirs            draw_blinky(blinky,bitmap);
+            draw_clyde(clyde,bitmap);
+            draw_pinky(pinky,bitmap);
+            draw_inky(inky,bitmap);            al_flip_display();
 	        al_clear_to_color(al_map_rgb(0,0,0));
 	        draw_path(bitmap, mappa);
 	  }
         }
 	break;
-	
+
 	case CONTROLS:
        		al_clear_to_color(al_map_rgb(0,0,0));
 		al_flip_display();
@@ -234,6 +241,7 @@ int main(int argc, char *argv[]){
 
    dest_bitmap(bitmap);
    dest_font(font);
+ //  dest_audio(audio);
    al_destroy_timer(timer);
    al_destroy_event_queue(event_queue);
    al_destroy_display(display);

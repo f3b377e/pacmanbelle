@@ -23,7 +23,7 @@ static void alloca_mappa(MAPPA_t &m)
 {
     m.mappa = new char*[m.r];
     for(int i=0; i<m.r; i++)
-        m.mappa[i] = new char[m.c];
+        m.mappa[i] = new char[m.c + 1];
 }
 
 /** Funzione che dealloca la matrice mappa in memoria*/
@@ -52,6 +52,9 @@ void load_map(MAPPA_t& m,const char filename[])
         for (int i=0; i < m.c; i++){
             f >> m.mappa[i][j];
         }
+    }
+    for (int i = 0; i < m.r ; i++){ //colonna aggiuntiva a destra per non leggere fuori matrice con la funzione controlla percorso
+        m.mappa[m.c][i] = '0';
     }
     cout<<"\nMap Loaded!";
 }

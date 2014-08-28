@@ -67,13 +67,13 @@ void draw_countdown(FONT_t &f, BITMAP_t &b,const MAPPA_t &m)
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "TRE");
     al_flip_display();
     al_rest(1.4);
-    
+
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "DUE");
     al_flip_display();
     al_rest(1.4);
-    
+
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "UNO");
@@ -177,8 +177,16 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 	int mapy;
 	static bool p_eaten = false; //uso questa variabile per controllare se usare pallet_eaten1 o pallet_eaten2
 
-	if (pg.x < OFFSETX + BLOCKSIZE - 14 && pg.dir == SX)
-        	pg.x = 27 * BLOCKSIZE + OFFSETX + BLOCKSIZE;
+	if (pg.x < OFFSETX + 1 && pg.dir == SX)
+        pg.x = 28 * BLOCKSIZE + OFFSETX;
+
+// Qui la funzione leggerebbe fuori dalla matrice 31 x 28
+// Quindi ho aggiunto una colonna a tutti 0 non da file ma dall'algortmo nel file io.cc (31 x 29)
+// in modo che il file rimanga una matrice 31 x 28 di conseguenza anche le proprietà della matrice rimangono invariate
+// Ovvero m.r = 31, m.c = 28 (e non 29!)
+
+    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
+        pg.x = OFFSETX;
 
 	switch (pg.dir){
         case FERMO:
@@ -233,8 +241,8 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
 	if(m.mappa[mapx][mapy] == 'P'
 	   || m.mappa[mapx][mapy] == 'Q'){
-		m.mappa[mapx][mapy] = '0';
-        	scrivi_mappa_su_file(m, "data/map/mappatest.txt");
+
+        //scrivi_mappa_su_file(m, "data/map/mappatest.txt");
 		if(!p_eaten){
 			al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
 			p_eaten = true;
@@ -243,9 +251,16 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 			al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
 			p_eaten = false;
 		}
+        if (m.mappa[mapx][mapy] == 'Q'){
+            al_stop_sample(&audio.id);
+            al_play_sample(audio.pacman_intermission,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+            //start_timer();
+        }
+
+        m.mappa[mapx][mapy] = '0';
+
 	}
 	return true;
-
 }
 
 void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m, AUDIO_t audio)
@@ -308,12 +323,111 @@ void draw_pacman(PLAYER_t& pg, BITMAP_t b)
 	if(pg.dir == FERMO){
 		pg.sourcey = pg.precdir;
 		pg.sourcex = 0;
-}
+    }
 
 	al_draw_bitmap_region(b.pacman_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.pacman_image)/4, 17, 16, pg.x, pg.y, 0);
 }
 
-void draw_fantasma(FANTASMA_t& f, BITMAP_t b)
+void draw_blinky(FANTASMA_t& pg, const BITMAP_t &b)
 {
-	al_draw_bitmap_region(b.fantasma1, f.sourcex, f.sourcey * al_get_bitmap_height(b.fantasma1)/4, 17, 16, f.x, f.y, 0);
+    pg.sourcex += al_get_bitmap_width(b.blinky)/2;
+	if(pg.sourcex >= al_get_bitmap_width(b.blinky))
+		pg.sourcex = 0;
+    switch (pg.dir){
+    case SU:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.blinky)/4;
+    break;
+    case GIU:
+    	pg.sourcey = 1 * al_get_bitmap_height(b.blinky)/4;
+    break;
+    case DX:
+    	pg.sourcey = 3 * al_get_bitmap_height(b.blinky)/4;
+    break;
+    case SX:
+    	pg.sourcey = 2 * al_get_bitmap_height(b.blinky)/4;
+    break;
+    default:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.blinky)/4;
+    break;
+    }
+
+	al_draw_bitmap_region(b.blinky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.blinky)/2, al_get_bitmap_height(b.blinky)/4, pg.x, pg.y, 0);
+}
+
+void draw_pinky(FANTASMA_t& pg, const BITMAP_t &b)
+{
+    pg.sourcex += al_get_bitmap_width(b.pinky)/2;
+	if(pg.sourcex >= al_get_bitmap_width(b.pinky))
+		pg.sourcex = 0;
+    switch (pg.dir){
+    case SU:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.pinky)/4;
+    break;
+    case GIU:
+    	pg.sourcey = 1 * al_get_bitmap_height(b.pinky)/4;
+    break;
+    case DX:
+    	pg.sourcey = 3 * al_get_bitmap_height(b.pinky)/4;
+    break;
+    case SX:
+    	pg.sourcey = 2 * al_get_bitmap_height(b.pinky)/4;
+    break;
+    default:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.pinky)/4;
+    break;
+    }
+
+	al_draw_bitmap_region(b.pinky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.pinky)/2, al_get_bitmap_height(b.pinky)/4, pg.x, pg.y, 0);
+}
+
+void draw_inky(FANTASMA_t& pg, const BITMAP_t &b)
+{
+    pg.sourcex += al_get_bitmap_width(b.inky)/2;
+	if(pg.sourcex >= al_get_bitmap_width(b.inky))
+		pg.sourcex = 0;
+    switch (pg.dir){
+    case SU:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.inky)/4;
+    break;
+    case GIU:
+    	pg.sourcey = 1 * al_get_bitmap_height(b.inky)/4;
+    break;
+    case DX:
+    	pg.sourcey = 3 * al_get_bitmap_height(b.inky)/4;
+    break;
+    case SX:
+    	pg.sourcey = 2 * al_get_bitmap_height(b.inky)/4;
+    break;
+    default:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.inky)/4;
+    break;
+    }
+
+	al_draw_bitmap_region(b.inky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.inky)/2, al_get_bitmap_height(b.inky)/4, pg.x, pg.y, 0);
+}
+
+void draw_clyde(FANTASMA_t& pg, const BITMAP_t &b)
+{
+    pg.sourcex += al_get_bitmap_width(b.clyde)/2;
+	if(pg.sourcex >= al_get_bitmap_width(b.clyde))
+		pg.sourcex = 0;
+    switch (pg.dir){
+    case SU:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.clyde)/4;
+    break;
+    case GIU:
+    	pg.sourcey = 1 * al_get_bitmap_height(b.clyde)/4;
+    break;
+    case DX:
+    	pg.sourcey = 3 * al_get_bitmap_height(b.clyde)/4;
+    break;
+    case SX:
+    	pg.sourcey = 2 * al_get_bitmap_height(b.clyde)/4;
+    break;
+    default:
+    	pg.sourcey = 0 * al_get_bitmap_height(b.clyde)/4;
+    break;
+    }
+
+	al_draw_bitmap_region(b.clyde, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.clyde)/2, al_get_bitmap_height(b.clyde)/4, pg.x, pg.y, 0);
 }
