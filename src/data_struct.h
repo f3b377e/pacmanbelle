@@ -71,7 +71,7 @@ struct FANTASMA_t{
 
 /**Struttura contenente i dati dell'audio*/
 struct AUDIO_t{
-	ALLEGRO_SAMPLE_ID *id; /**< Identificatore audio in riproduzione */
+	ALLEGRO_SAMPLE_ID id; /**< Identificatore audio in riproduzione */
 	ALLEGRO_SAMPLE *ghost_eaten;
 	ALLEGRO_SAMPLE *ghosts_scared;
 	ALLEGRO_SAMPLE *pacman_beginning;

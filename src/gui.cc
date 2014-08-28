@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
-#include <windows.h>
+//#include <windows.h>
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -65,18 +65,20 @@ void draw_countdown(FONT_t &f, BITMAP_t &b,const MAPPA_t &m)
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "TRE");
-	al_flip_display();
-	al_rest(1.4);
+    al_flip_display();
+    al_rest(1.4);
+    
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "DUE");
-	al_flip_display();
-	al_rest(1.4);
+    al_flip_display();
+    al_rest(1.4);
+    
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "UNO");
-	al_flip_display();
-	al_rest(1.4);
+    al_flip_display();
+    al_rest(1.4);
 }
 
 
@@ -169,13 +171,14 @@ void draw_path(BITMAP_t b, const MAPPA_t &m)
 }
 
 /**Funzione che controlla lo spostamento del pacman e gli fa mangiare i pallini*/
-static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg)
+static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 {
 	int mapx;
 	int mapy;
+	static bool p_eaten = false; //uso questa variabile per controllare se usare pallet_eaten1 o pallet_eaten2
 
-	if (pg.x < OFFSETX + BLOCKSIZE - 14)
-        pg.x = 27 * BLOCKSIZE + OFFSETX + BLOCKSIZE;
+	if (pg.x < OFFSETX + BLOCKSIZE - 14 && pg.dir == SX)
+        	pg.x = 27 * BLOCKSIZE + OFFSETX + BLOCKSIZE;
 
 	switch (pg.dir){
         case FERMO:
@@ -225,25 +228,34 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg)
 				return false;
 		break;
 	}
+
 	mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
 	if(m.mappa[mapx][mapy] == 'P'
 	   || m.mappa[mapx][mapy] == 'Q'){
 		m.mappa[mapx][mapy] = '0';
-        scrivi_mappa_su_file(m, "data/map/mappatest.txt");
+        	scrivi_mappa_su_file(m, "data/map/mappatest.txt");
+		if(!p_eaten){
+			al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+			p_eaten = true;
+		}
+		else{
+			al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+			p_eaten = false;
+		}
 	}
 	return true;
 
 }
 
-void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m)
+void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m, AUDIO_t audio)
 {
 		switch (pg.dir)
 	{
 	   case FERMO:
 	   break;
 	   case SU:
-		if(controllo_percorso(m,pg)){
+		if(controllo_percorso(m,pg,audio)){
 			pg.precdir = pg.dir;
             pg.y -= pg.movespeed;
 		}
@@ -253,7 +265,7 @@ void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m)
 			pg.dir = pg.precdir;
 	   break;
 	   case GIU:
-		if(controllo_percorso(m, pg)){
+		if(controllo_percorso(m, pg, audio)){
 			pg.precdir = pg.dir;
             pg.y += pg.movespeed;
 		}
@@ -263,7 +275,7 @@ void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m)
 			pg.dir = pg.precdir;
 	   break;
 	   case SX:
-		if(controllo_percorso(m,pg)){
+		if(controllo_percorso(m,pg, audio)){
 			pg.precdir = pg.dir;
             pg.x -= pg.movespeed;
 		}
@@ -273,7 +285,7 @@ void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m)
 			pg.dir = pg.precdir;
 	   break;
 	   case DX:
-		if(controllo_percorso(m,pg)){
+		if(controllo_percorso(m,pg,audio)){
 			pg.precdir = pg.dir;
             pg.x += pg.movespeed;
 		}

@@ -26,38 +26,38 @@ using namespace std;
 
 void init_audio(AUDIO_t& a)
 {
-     a.id = NULL;
+     //a.id = NULL;
      a.ghost_eaten = al_load_sample("data/sound/ghost_eaten.wav");
 	 if (a.ghost_eaten == NULL)
-        cout<<"\n Audio Error, ghost_eaten.wav error!";
+        	cout<<"\n Audio Error, ghost_eaten.wav error!";
 
 	 a.ghosts_scared = al_load_sample("data/sound/ghosts_scared.wav");
 	 if (a.ghosts_scared == NULL)
-        cout<<"\n Audio Error, ghosts_scared.wav error!";
+        	cout<<"\n Audio Error, ghosts_scared.wav error!";
 
 	 a.pacman_beginning = al_load_sample("data/sound/pacman_beginning.wav");
 	 if (a.pacman_beginning == NULL)
-        cout<<"\n Audio Error, pacman_beginning.wav error!";
+        	cout<<"\n Audio Error, pacman_beginning.wav error!";
 
 	 a.pacman_eaten = al_load_sample("data/sound/pacman_eaten.wav");
 	 if (a.pacman_eaten == NULL)
-        cout<<"\n Audio Error, pacman_eaten.wav error!";
+        	cout<<"\n Audio Error, pacman_eaten.wav error!";
 
 	 a.pacman_eatfruit = al_load_sample("data/sound/pacman_eatfruit.wav");
 	 if (a.pacman_eatfruit == NULL)
-        cout<<"\n Audio Error, pacman_eatfruit.wav error!";
+        	cout<<"\n Audio Error, pacman_eatfruit.wav error!";
 
 	 a.pallet_eaten1 = al_load_sample("data/sound/pallet_eaten1.wav");
 	 if (a.pallet_eaten1 == NULL)
-        cout<<"\n Audio Error, pallet_eaten1.wav error!";
+       		cout<<"\n Audio Error, pallet_eaten1.wav error!";
 
 	 a.pallet_eaten2 = al_load_sample("data/sound/pallet_eaten2.wav");
 	 if (a.pallet_eaten2 == NULL)
-        cout<<"\n Audio Error, pallet_eaten2.wav error!";
+        	cout<<"\n Audio Error, pallet_eaten2.wav error!";
 
 	 a.siren = al_load_sample("data/sound/siren.wav");
 	 if (a.siren == NULL)
-        cout<<"\n Audio Error, siren.wav error!";
+        	cout<<"\n Audio Error, siren.wav error!";
 }
 
 void init_bitmap(BITMAP_t& b)
