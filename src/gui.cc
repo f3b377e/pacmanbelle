@@ -312,3 +312,8 @@ void draw_pacman(PLAYER_t& pg, BITMAP_t b)
 
 	al_draw_bitmap_region(b.pacman_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.pacman_image)/4, 17, 16, pg.x, pg.y, 0);
 }
+
+void draw_fantasma(FANTASMA_t& f, BITMAP_t b)
+{
+	al_draw_bitmap_region(b.fantasma1, f.sourcex, f.sourcey * al_get_bitmap_height(b.fantasma1)/4, 17, 16, f.x, f.y, 0);
+}

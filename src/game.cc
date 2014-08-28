@@ -78,6 +78,10 @@ int main(int argc, char *argv[]){
    PLAYER_t pacman;
    init_pacman(pacman);
 
+//Fantasmi
+   FANTASMA_t fantasma1;
+   init_fantasma(fantasma1);
+
 //Font
     FONT_t font;
     init_font(font);
@@ -205,7 +209,8 @@ int main(int argc, char *argv[]){
 	  }
           if(events.type == ALLEGRO_EVENT_TIMER){
         	move_pacman(pacman,bitmap,mappa,audio);
-		draw_pacman(pacman,bitmap);
+		draw_pacman(pacman,bitmap);	
+		draw_fantasma(fantasma1, bitmap);
 		al_flip_display();
 	        al_clear_to_color(al_map_rgb(0,0,0));
 	        draw_path(bitmap, mappa);

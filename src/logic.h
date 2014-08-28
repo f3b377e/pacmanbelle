@@ -10,6 +10,7 @@
     void init_bitmap(BITMAP_t&);
     void init_font(FONT_t&);
     void init_pacman(PLAYER_t&);
+    void init_fantasma(FANTASMA_t&);
     void dest_bitmap(BITMAP_t& b);
     void dest_font(FONT_t& f);
     void init_mappa(MAPPA_t& m);

@@ -89,6 +89,10 @@ struct BITMAP_t{
     ALLEGRO_BITMAP *puntino;
     ALLEGRO_BITMAP *autotile;
     ALLEGRO_BITMAP *pacman_image;
+    ALLEGRO_BITMAP *fantasma1;
+    ALLEGRO_BITMAP *fantasma2;
+    ALLEGRO_BITMAP *fantasma3;
+    ALLEGRO_BITMAP *fantasma4;
 };
 
 /**Struttura contenente i font del gioco*/

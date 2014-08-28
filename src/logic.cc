@@ -77,6 +77,22 @@ void init_bitmap(BITMAP_t& b)
     b.pacman_image = al_load_bitmap("data/img/pacman2.png");
 	 if (b.pacman_image == NULL)
         cout<<"\n Bitmap Error, pacman2.jpg error!";
+
+    b.fantasma1 = al_load_bitmap("data/img/fantasma1.png");
+	 if (b.fantasma1 == NULL)
+        cout<<"\n Bitmap Error, fantasma1.jpg error!";
+
+    b.fantasma2 = al_load_bitmap("data/img/fantasma2.png");
+	 if (b.fantasma2 == NULL)
+        cout<<"\n Bitmap Error, fantasma2.jpg error!";
+
+    b.fantasma3 = al_load_bitmap("data/img/fantasma3.png");
+	 if (b.fantasma3 == NULL)
+        cout<<"\n Bitmap Error, fantasma3.jpg error!";
+
+    b.fantasma4 = al_load_bitmap("data/img/fantasma4.png");
+	 if (b.fantasma4 == NULL)
+        cout<<"\n Bitmap Error, fantasma4.jpg error!";
 }
 
 void init_mappa(MAPPA_t& m)
@@ -111,6 +127,17 @@ void init_pacman (PLAYER_t& pacman){
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
+}
+
+void init_fantasma (FANTASMA_t& fantasma){
+	fantasma.dir = FERMO;
+	fantasma.movespeed = 4;
+	fantasma.sourcex = 0;
+	fantasma.sourcey = 0;
+	fantasma.x = 14*BLOCKSIZE+OFFSETX;
+	fantasma.y = 13*BLOCKSIZE+OFFSETY;
+	fantasma.debole = false;
+	fantasma.mangiato = false;
 }
 /** Funzione di Collisione oggetti
   * pg: Struttura di pacman
