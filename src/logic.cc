@@ -280,3 +280,175 @@ void dest_bitmap(BITMAP_t& b)
     al_destroy_bitmap(b.f_pericolo);
 }
 
+void dest_audio(AUDIO_t& a)
+{
+
+    #ifdef _WIN32
+        al_free(a.ghost_eaten);
+        al_free(a.ghosts_scared);
+        al_free(a.pacman_beginning);
+        al_free(a.pacman_death);
+        al_free(a.pacman_eaten);
+        al_free(a.pacman_eatfruit);
+        al_free(a.pallet_eaten1);
+        al_free(a.pallet_eaten2);
+        al_free(a.siren);
+        al_free(a.pacman_intermission);
+    #else
+        al_destroy_sample(a.ghost_eaten);
+        al_destroy_sample(a.ghosts_scared);
+        al_destroy_sample(a.pacman_beginning);
+        al_destroy_sample(a.pacman_death);
+        al_destroy_sample(a.pacman_eaten);
+        al_destroy_sample(a.pacman_eatfruit);
+        al_destroy_sample(a.pallet_eaten1);
+        al_destroy_sample(a.pallet_eaten2);
+        al_destroy_sample(a.siren);
+        al_destroy_sample(a.pacman_intermission);
+    #endif
+}
+
+
+/**Funzione che controlla lo spostamento del pacman e gli fa mangiare i pallini*/
+static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
+{
+	int mapx;
+	int mapy;
+	static bool p_eaten = false; //uso questa variabile per controllare se usare pallet_eaten1 o pallet_eaten2
+
+	if (pg.x < OFFSETX + 1 && pg.dir == SX)
+        pg.x = 28 * BLOCKSIZE + OFFSETX;
+
+// Qui la funzione leggerebbe fuori dalla matrice 31 x 28
+// Quindi ho aggiunto una colonna a tutti 0 non da file ma dall'algortmo nel file io.cc (31 x 29)
+// in modo che il file rimanga una matrice 31 x 28 di conseguenza anche le proprietà della matrice rimangono invariate
+// Ovvero m.r = 31, m.c = 28 (e non 29!)
+
+    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
+        pg.x = OFFSETX;
+
+	switch (pg.dir){
+        case FERMO:
+        break;
+		case GIU:
+			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y + BLOCKSIZE - OFFSETY)/BLOCKSIZE;
+            cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
+			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q'
+               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+				return false;
+		break;
+		case SU:
+			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - BLOCKSIZE - OFFSETY)/BLOCKSIZE;
+			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
+			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
+            if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q'
+               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+				return false;
+		break;
+		case SX:
+			mapx = (pg.x - BLOCKSIZE - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
+			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q'
+               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+				return false;
+		break;
+		case DX:
+			mapx = (pg.x + BLOCKSIZE - OFFSETX)/BLOCKSIZE;
+			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
+			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
+			if(m.mappa[mapx][mapy]!='P'
+			   && m.mappa[mapx][mapy]!='0'
+			   && m.mappa[mapx][mapy]!='Q'
+               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+				return false;
+		break;
+	}
+
+	mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+	if(m.mappa[mapx][mapy] == 'P'
+	   || m.mappa[mapx][mapy] == 'Q'){
+
+        //scrivi_mappa_su_file(m, "data/map/mappatest.txt");
+		if(!p_eaten){
+			al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+			p_eaten = true;
+		}
+		else{
+			al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+			p_eaten = false;
+		}
+        if (m.mappa[mapx][mapy] == 'Q'){
+            al_stop_sample(&audio.id);
+            al_play_sample(audio.pacman_intermission,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+            //start_timer();
+        }
+
+        m.mappa[mapx][mapy] = '0';
+
+	}
+	return true;
+}
+
+void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m, AUDIO_t audio)
+{
+		switch (pg.dir)
+	{
+	   case FERMO:
+	   break;
+	   case SU:
+		if(controllo_percorso(m,pg,audio)){
+			pg.precdir = pg.dir;
+            pg.y -= pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
+	   break;
+	   case GIU:
+		if(controllo_percorso(m, pg, audio)){
+			pg.precdir = pg.dir;
+            pg.y += pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
+	   break;
+	   case SX:
+		if(controllo_percorso(m,pg, audio)){
+			pg.precdir = pg.dir;
+            pg.x -= pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
+	   break;
+	   case DX:
+		if(controllo_percorso(m,pg,audio)){
+			pg.precdir = pg.dir;
+            pg.x += pg.movespeed;
+		}
+		else if(pg.dir == pg.precdir)
+			pg.dir = FERMO;
+		else
+			pg.dir = pg.precdir;
+	   break;
+	}
+}
+
+
