@@ -62,6 +62,12 @@ void init_audio(AUDIO_t& a)
 	 a.pacman_intermission = al_load_sample("data/sound/pacman_intermission.wav");
 	 if (a.pacman_intermission == NULL)
         	cout<<"\n Audio Error, pacman_intermission.wav error!";
+
+     a.pacman_extrapac = al_load_sample("data/sound/pacman_extrapac.wav");
+	 if (a.pacman_extrapac == NULL)
+        	cout<<"\n Audio Error, pacman_extrapac.wav error!";
+
+
 }
 
 void init_bitmap(BITMAP_t& b)
@@ -282,30 +288,30 @@ void dest_bitmap(BITMAP_t& b)
 
 void dest_audio(AUDIO_t& a)
 {
-
-    #ifdef _WIN32
-        al_free(a.ghost_eaten);
-        al_free(a.ghosts_scared);
-        al_free(a.pacman_beginning);
-        al_free(a.pacman_death);
-        al_free(a.pacman_eaten);
-        al_free(a.pacman_eatfruit);
-        al_free(a.pallet_eaten1);
-        al_free(a.pallet_eaten2);
-        al_free(a.siren);
-        al_free(a.pacman_intermission);
-    #else
+    #if defined(unix) || defined(__unix__) || defined(__unix)
         al_destroy_sample(a.ghost_eaten);
         al_destroy_sample(a.ghosts_scared);
         al_destroy_sample(a.pacman_beginning);
-        al_destroy_sample(a.pacman_death);
+        al_destroy_sample(a.pacman_extrapac);
         al_destroy_sample(a.pacman_eaten);
         al_destroy_sample(a.pacman_eatfruit);
         al_destroy_sample(a.pallet_eaten1);
         al_destroy_sample(a.pallet_eaten2);
         al_destroy_sample(a.siren);
         al_destroy_sample(a.pacman_intermission);
-    #endif
+    #endif // defined unix
+    #if defined(_WIN32)
+        al_free(a.ghost_eaten);
+        al_free(a.ghosts_scared);
+        al_free(a.pacman_beginning);
+        al_free(a.pacman_eaten);
+        al_free(a.pacman_extrapac);
+        al_free(a.pacman_eatfruit);
+        al_free(a.pallet_eaten1);
+        al_free(a.pallet_eaten2);
+        al_free(a.siren);
+        al_free(a.pacman_intermission);
+    #endif // defined win32
 }
 
 
@@ -392,7 +398,7 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		}
         if (m.mappa[mapx][mapy] == 'Q'){
             al_stop_sample(&audio.id);
-            al_play_sample(audio.pacman_intermission,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+            al_play_sample(audio.ghosts_scared,1.0,0.0, 1, ALLEGRO_PLAYMODE_LOOP , 0);
             //start_timer();
         }
 

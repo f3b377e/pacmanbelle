@@ -53,7 +53,7 @@ void load_map(MAPPA_t& m,const char filename[])
             f >> m.mappa[i][j];
         }
     }
-    for (int i = 0; i < m.r ; i++){ //colonna aggiuntiva a destra per non leggere fuori matrice con la funzione controlla percorso
+    for (int i = 0; i < m.r ; i++){ //colonna aggiuntiva a destra
         m.mappa[m.c][i] = '0';
     }
     cout<<"\nMap Loaded!";

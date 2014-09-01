@@ -165,63 +165,63 @@ int main(int argc, char *argv[]){
         draw_countdown(font, bitmap, mappa);
         al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
         al_start_timer(timer);
-	while(stato_gioco == PLAY){
-      		al_wait_for_event(event_queue, &events);
-		if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-               		stato_gioco = QUIT;
-		if (events.type == ALLEGRO_EVENT_KEY_DOWN)
-		{
-		   #ifdef DEBUG_MODE
-		   	if(events.keyboard.keycode == ALLEGRO_KEY_D) {
-				DEBUG_CONSOLE;
-		  	 }
-		   #endif
-		   switch (events.keyboard.keycode){
-		   case ALLEGRO_KEY_UP:
-			pacman.dir = SU;
-		   break;
-		   case ALLEGRO_KEY_DOWN:
-			pacman.dir = GIU;
-		   break;
-		   case ALLEGRO_KEY_LEFT:
-			pacman.dir = SX;
-		   break;
-		   case ALLEGRO_KEY_RIGHT:
-			pacman.dir = DX;
-		   break;
-              	   case ALLEGRO_KEY_ESCAPE:
-               	   	stato_gioco = QUIT;
-		   break;
-               	   case ALLEGRO_KEY_SPACE:
-               		stato_gioco = PAUSA;
-               		while(stato_gioco == PAUSA){
-				al_stop_sample(&audio.id);
-                		al_wait_for_event(event_queue, &events);
-                		draw_pause(font);
-                		if (events.type == ALLEGRO_EVENT_KEY_DOWN){
-                			if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
-						stato_gioco = PLAY;
-						al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
-                			if (events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-                       				stato_gioco = QUIT;
-                		}
-                		if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-                			stato_gioco = QUIT;
-                    	}
-                   break;
-		  }
-	  }
-          if(events.type == ALLEGRO_EVENT_TIMER){
-        	move_pacman(pacman,bitmap,mappa,audio);
-            draw_pacman(pacman,bitmap);
-            draw_blinky(blinky,bitmap);
-            draw_clyde(clyde,bitmap);
-            draw_pinky(pinky,bitmap);
-            draw_inky(inky,bitmap);
-            al_flip_display();
-	        al_clear_to_color(al_map_rgb(0,0,0));
-	        draw_path(bitmap, mappa);
-	  }
+        while(stato_gioco == PLAY){
+                al_wait_for_event(event_queue, &events);
+            if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                stato_gioco = QUIT;
+            if (events.type == ALLEGRO_EVENT_KEY_DOWN)
+            {
+               #ifdef DEBUG_MODE
+                if(events.keyboard.keycode == ALLEGRO_KEY_D) {
+                    DEBUG_CONSOLE;
+                 }
+               #endif
+               switch (events.keyboard.keycode){
+               case ALLEGRO_KEY_UP:
+                pacman.dir = SU;
+               break;
+               case ALLEGRO_KEY_DOWN:
+                pacman.dir = GIU;
+               break;
+               case ALLEGRO_KEY_LEFT:
+                pacman.dir = SX;
+               break;
+               case ALLEGRO_KEY_RIGHT:
+                pacman.dir = DX;
+               break;
+               case ALLEGRO_KEY_ESCAPE:
+                stato_gioco = QUIT;
+               break;
+               case ALLEGRO_KEY_SPACE:
+                stato_gioco = PAUSA;
+               while(stato_gioco == PAUSA){
+                        al_stop_sample(&audio.id);
+                        al_wait_for_event(event_queue, &events);
+                        draw_pause(font);
+                        if (events.type == ALLEGRO_EVENT_KEY_DOWN){
+                            if (events.keyboard.keycode == ALLEGRO_KEY_SPACE)
+                                stato_gioco = PLAY;
+                                al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+                                if (events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                                        stato_gioco = QUIT;
+                            }
+                            if (events.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                                stato_gioco = QUIT;
+                            }
+                       break;
+              }
+              }
+              if(events.type == ALLEGRO_EVENT_TIMER){
+                move_pacman(pacman,bitmap,mappa,audio);
+                draw_pacman(pacman,bitmap);
+                draw_blinky(blinky,bitmap);
+                draw_clyde(clyde,bitmap);
+                draw_pinky(pinky,bitmap);
+                draw_inky(inky,bitmap);
+                al_flip_display();
+                al_clear_to_color(al_map_rgb(0,0,0));
+                draw_path(bitmap, mappa);
+                }
         }
 	break;
 

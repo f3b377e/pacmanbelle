@@ -74,7 +74,7 @@ struct AUDIO_t{
 	ALLEGRO_SAMPLE *ghost_eaten;
 	ALLEGRO_SAMPLE *ghosts_scared;
 	ALLEGRO_SAMPLE *pacman_beginning;
-	ALLEGRO_SAMPLE *pacman_death;
+	ALLEGRO_SAMPLE *pacman_extrapac;
 	ALLEGRO_SAMPLE *pacman_eaten;
 	ALLEGRO_SAMPLE *pacman_eatfruit;
 	ALLEGRO_SAMPLE *pallet_eaten1;
