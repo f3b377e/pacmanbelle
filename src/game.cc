@@ -104,6 +104,7 @@ int main(int argc, char *argv[]){
 
 //Altre variabili
    int menu = 1;
+   int livello = 1;
    STATO_GIOCO stato_gioco = MENU;
 
 //Event Queue registries
