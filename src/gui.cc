@@ -182,7 +182,11 @@ void draw_pacman(PLAYER_t& pg, BITMAP_t b)
 		pg.sourcex = 0;
     }
 
-	al_draw_bitmap_region(b.pacman_image, pg.sourcex, pg.sourcey * al_get_bitmap_height(b.pacman_image)/4, 17, 16, pg.x, pg.y, 0);
+	al_draw_bitmap_region(b.pacman_image, pg.sourcex
+                          , pg.sourcey * al_get_bitmap_height(b.pacman_image)/4
+                          , al_get_bitmap_width(b.pacman_image)/3
+                          , al_get_bitmap_height(b.pacman_image)/4
+                          , pg.x, pg.y, 0);
 }
 
 void draw_blinky(FANTASMA_t& pg, const BITMAP_t &b)

@@ -178,16 +178,16 @@ int main(int argc, char *argv[]){
                #endif
                switch (events.keyboard.keycode){
                case ALLEGRO_KEY_UP:
-                pacman.dir = SU;
+                pacman.succdir = SU;
                break;
                case ALLEGRO_KEY_DOWN:
-                pacman.dir = GIU;
+                pacman.succdir = GIU;
                break;
                case ALLEGRO_KEY_LEFT:
-                pacman.dir = SX;
+                pacman.succdir = SX;
                break;
                case ALLEGRO_KEY_RIGHT:
-                pacman.dir = DX;
+                pacman.succdir= DX;
                break;
                case ALLEGRO_KEY_ESCAPE:
                 stato_gioco = QUIT;
@@ -212,7 +212,7 @@ int main(int argc, char *argv[]){
               }
               }
               if(events.type == ALLEGRO_EVENT_TIMER){
-                move_pacman(pacman,bitmap,mappa,audio);
+                move_pacman(pacman,mappa,audio);
                 draw_pacman(pacman,bitmap);
                 draw_blinky(blinky,bitmap);
                 draw_clyde(clyde,bitmap);

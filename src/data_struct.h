@@ -40,10 +40,18 @@ struct MAPPA_t{
     char **mappa;   /**< Matrice che definisce la mappa */
 };
 
+/** Descrittore di ogni elemento in lista */
+struct ELEM_t{
+    ELEM_t *succ;   /**< Puntatore all'elemento sucessivo */
+    ELEM_t *prec;   /**< Puntatore all'elemento precedente */
+    int x,y;
+};
+
 /**Struttura contenente i dati del giocatore*/
 struct PLAYER_t{
 	DIREZ dir;		    /**< Stato attuale della direzione di pacman*/
 	DIREZ precdir;		/**< Stato della precedente direzione di pacman*/
+	DIREZ succdir;      /**< Stato della sucessiva direzione di pacman*/
 	float movespeed;	/**< Velocità del pacman*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/
@@ -58,12 +66,12 @@ struct PLAYER_t{
 
 /**Struttura contenente i dati del singolo fantasma*/
 struct FANTASMA_t{
-	DIREZ dir;		/**< Stato attuale della direzione del fantasma*/
+	DIREZ dir;		    /**< Stato attuale della direzione del fantasma*/
 	float movespeed;	/**< Velocità del fantasma*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/
-	float x;		/**< Coordinata x schermo*/
-	float y;		/**< Coordinata y schermo*/
+	float x;            /**< Coordinata x schermo*/
+	float y;		    /**< Coordinata y schermo*/
 	bool debole;		/**< Vera quando pacman mangia il pallino grande. Riduce la velocità dei fantasmi e possono essere mangiati*/
 	bool mangiato;		/**< Vera quando pacman mangia il fantasma*/
 };

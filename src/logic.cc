@@ -148,6 +148,7 @@ void init_pacman (PLAYER_t& pacman)
 {
 	pacman.dir = FERMO;
 	pacman.precdir = SX;
+	pacman.succdir = FERMO;
 	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
@@ -160,16 +161,6 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
 }
 
-void init_fantasma (FANTASMA_t& fantasma){
-	fantasma.dir = FERMO;
-	fantasma.movespeed = 4;
-	fantasma.sourcex = 0;
-	fantasma.sourcey = 0;
-	fantasma.x = 14*BLOCKSIZE+OFFSETX;
-	fantasma.y = 13*BLOCKSIZE+OFFSETY;
-	fantasma.debole = false;
-	fantasma.mangiato = false;
-}
 /** Funzione di Collisione oggetti
   * pg: Struttura di pacman
   * sx: sorgente x
@@ -408,12 +399,22 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 	return true;
 }
 
-void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m, AUDIO_t audio)
+void move_pacman(PLAYER_t& pg, MAPPA_t m, AUDIO_t audio)
 {
-		switch (pg.dir)
+	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+    int check_x = mapx * BLOCKSIZE + OFFSETX;
+    int check_y = mapy * BLOCKSIZE + OFFSETY;
+    DIREZ temporanea;
+
+    if (pg.x == check_x && pg.y == check_y){
+        temporanea = pg.dir;
+        pg.dir = pg.succdir;
+        if (controllo_percorso(m,pg,audio) == false)
+            pg.dir = temporanea;
+    }
+    switch (pg.dir)
 	{
-	   case FERMO:
-	   break;
 	   case SU:
 		if(controllo_percorso(m,pg,audio)){
 			pg.precdir = pg.dir;
@@ -457,4 +458,68 @@ void move_pacman(PLAYER_t& pg, BITMAP_t b, MAPPA_t m, AUDIO_t audio)
 	}
 }
 
+/** Restituisce la direzione in cui deve andare il nemico per arrivare a pacman
+  * posx e posy sono le coordinate di pacman sulla matrice
+  *
 
+static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int posx, int posy)
+{
+    DIREZ dir;
+    int **matt;
+    int mapx, mapy;
+    //alloco la matrice in memoria
+    matt = new int*[m.r];
+    for(int i=0; i<m.r; i++)
+        matt[i] = new int[m.c];
+
+    //inizializzo la mappa a infinito (-1)
+    for (int j = 0; j < m.r; j++)
+        for (int i=0; i < m.c; i++)
+            matt[i][j] = -1;
+
+    ELEM_t *testa = NULL;
+    ELEM_t *coda = NULL;
+
+    inject(testa, coda, posx, posy);
+    while (testa!= NULL){
+
+        eject()
+        mapx = (f.x - OFFSETX)/BLOCKSIZE;
+        mapy = (f.y - OFFSETY)/BLOCKSIZE;
+
+        inject(testa, coda);
+
+
+    }
+
+    return dir;
+}
+
+static void inject(ELEM_t & *testa, ELEM_t & *coda, int x, int y){
+
+    ELEM_t *temp = new ELEM_t;
+    temp.x = x;
+    temp.y = y;
+    if (testa != NULL)
+        testa.prec = temp;
+    temp.succ = testa;
+    temp.prec = NULL;
+
+    testa = temp;
+    if (temp.prec == NULL)
+        coda = temp;
+}
+
+static void enject(ELEM_t & *testa, ELEM_t & *coda, int x, int y){
+
+
+
+}
+
+
+void move_bliky(PLAYER_t)
+{
+
+}
+
+*/

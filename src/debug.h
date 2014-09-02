@@ -12,10 +12,10 @@
  * Per attivare questa modalità, bisogna compilare il progetto con il "make debug" e una volta in gioco
  * basta premere il tasto "d".
  */
-#define DEBUG_CONSOLE								    		\
-	al_stop_timer(timer);							 		\
-	cout<<"*******DEBUG_CONSOLE********"<<endl;	  			 		\
-	bool menu = true;                                               	    	        \
+#define DEBUG_CONSOLE								    		                            \
+	al_stop_timer(timer);	                                						 		\
+	cout<<"*******DEBUG_CONSOLE********"<<endl;	  			 		                        \
+	bool menu = true;                                               	    	            \
         while(menu) {                                         		            	        \
     		cout<<"\n>>MENU:\n";                                                	        \
     		cout<<"\t1) Informazioni Pac-Man\n";                                	        \
@@ -35,7 +35,7 @@
         		cout<<"\nMappa:\n"; 		                                        \
        			cout<<"\tda definire"<<endl;			                        \
         		break;                                                                  \
-   		case 3:                                                                         \
+            case 3:                                                                         \
         		cout<<"\nFantasmi:\n";                                                  \
        			cout<<"\tda definire"<<endl;			                        \
         		break;                                                                  \
