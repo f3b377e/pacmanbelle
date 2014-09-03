@@ -5,6 +5,7 @@
  */
 //C++ header
 #include <iostream>
+#include <fstream>
 
 //allegro header
 #include <allegro5/allegro.h>
@@ -330,44 +331,44 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		case GIU:
 			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y + BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-            cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
-			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
-			if(m.mappa[mapx][mapy]!='P'
-			   && m.mappa[mapx][mapy]!='0'
-			   && m.mappa[mapx][mapy]!='Q'
+            cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+			if(m.mappa[mapy][mapx]!='P'
+			   && m.mappa[mapy][mapx]!='0'
+			   && m.mappa[mapy][mapx]!='Q'
                && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
 				return false;
 		break;
 		case SU:
 			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
-			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
-            if(m.mappa[mapx][mapy]!='P'
-			   && m.mappa[mapx][mapy]!='0'
-			   && m.mappa[mapx][mapy]!='Q'
+			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+            if(m.mappa[mapy][mapx]!='P'
+			   && m.mappa[mapy][mapx]!='0'
+			   && m.mappa[mapy][mapx]!='Q'
                && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
 				return false;
 		break;
 		case SX:
 			mapx = (pg.x - BLOCKSIZE - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
-			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
-			if(m.mappa[mapx][mapy]!='P'
-			   && m.mappa[mapx][mapy]!='0'
-			   && m.mappa[mapx][mapy]!='Q'
+			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+			if(m.mappa[mapy][mapx]!='P'
+			   && m.mappa[mapy][mapx]!='0'
+			   && m.mappa[mapy][mapx]!='Q'
                && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
 				return false;
 		break;
 		case DX:
 			mapx = (pg.x + BLOCKSIZE - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.x<<","<<pg.y<<") ";
-			cout<<"\n ["<<mapx<<","<<mapy<<"] = "<<m.mappa[mapx][mapy];
-			if(m.mappa[mapx][mapy]!='P'
-			   && m.mappa[mapx][mapy]!='0'
-			   && m.mappa[mapx][mapy]!='Q'
+			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+			if(m.mappa[mapy][mapx]!='P'
+			   && m.mappa[mapy][mapx]!='0'
+			   && m.mappa[mapy][mapx]!='Q'
                && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
 				return false;
 		break;
@@ -375,10 +376,9 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 
 	mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-	if(m.mappa[mapx][mapy] == 'P'
-	   || m.mappa[mapx][mapy] == 'Q'){
+	if(m.mappa[mapy][mapx] == 'P'
+	   || m.mappa[mapy][mapx] == 'Q'){
 
-        //scrivi_mappa_su_file(m, "data/map/mappatest.txt");
 		if(!p_eaten){
 			al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
 			p_eaten = true;
@@ -387,13 +387,13 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 			al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
 			p_eaten = false;
 		}
-        if (m.mappa[mapx][mapy] == 'Q'){
+        if (m.mappa[mapy][mapx] == 'Q'){
             al_stop_sample(&audio.id);
             al_play_sample(audio.ghosts_scared,1.0,0.0, 1, ALLEGRO_PLAYMODE_LOOP , 0);
             //start_timer();
         }
 
-        m.mappa[mapx][mapy] = '0';
+        m.mappa[mapy][mapx] = '0';
 
 	}
 	return true;
@@ -458,68 +458,161 @@ void move_pacman(PLAYER_t& pg, MAPPA_t m, AUDIO_t audio)
 	}
 }
 
-/** Restituisce la direzione in cui deve andare il nemico per arrivare a pacman
-  * posx e posy sono le coordinate di pacman sulla matrice
-  *
+static void inserisci(lista &testa, lista &coda, int x, int y){
 
-static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int posx, int posy)
+    ELEM_t *temp = new ELEM_t;
+    temp->x = x;
+    temp->y = y;
+
+    temp->succ = NULL;
+    temp->prec = testa;
+    if (testa != NULL) //lista nn vuota
+        testa->succ = temp;
+    if (coda == NULL)
+        coda = temp;
+    testa = temp;
+
+}
+
+static ELEM_t estrai(lista &testa, lista &coda){
+
+    ELEM_t temp;
+    temp.x = coda->x;
+    temp.y = coda->y;
+    temp.prec = NULL;
+    temp.succ = NULL;
+    if (coda->succ == NULL){ //ultimo elemento in coda;
+        coda = NULL;
+        delete coda;
+    }else{
+        ELEM_t *p = coda->succ;
+        p->prec = NULL;
+        delete coda;
+        coda = p;
+    }
+    return temp;
+}
+
+
+/** Restituisce la direzione in cui deve andare il nemico per arrivare a pacman
+  * pgx e pgy sono le coordinate di pacman sulla matrice
+  * fx, fy sono le coordinate del fantasma sulla matrice
+  * l'algoritmo per calcolare la distanza migliore utilizza una coda dove inserisce i nodi adiacenti.
+  * inizialmente tutti i nodi sono posti a infinito
+  * l'inserimento avviene in testa e l'estrazione in coda.
+  * inizialmente viene inserito nella coda la sorgente con la posizione di pac-man con distanza 0
+  * ogni volta che un nodo viene estratto dalla coda, viene aggiunta una unità alla distanza del nodo padre.
+  */
+static DIREZ bfs(const MAPPA_t &m, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
     int **matt;
-    int mapx, mapy;
+
     //alloco la matrice in memoria
-    matt = new int*[m.r];
+    matt = new int*[m.c];
     for(int i=0; i<m.r; i++)
         matt[i] = new int[m.c];
 
     //inizializzo la mappa a infinito (-1)
-    for (int j = 0; j < m.r; j++)
-        for (int i=0; i < m.c; i++)
+    for (int j = 0; j < m.c; j++)
+        for (int i=0; i < m.r; i++)
             matt[i][j] = -1;
 
     ELEM_t *testa = NULL;
     ELEM_t *coda = NULL;
 
-    inject(testa, coda, posx, posy);
-    while (testa!= NULL){
-
-        eject()
-        mapx = (f.x - OFFSETX)/BLOCKSIZE;
-        mapy = (f.y - OFFSETY)/BLOCKSIZE;
-
-        inject(testa, coda);
+    matt[pgy][pgx] = 0;
+    inserisci(testa, coda, pgx, pgy);
 
 
+    while (coda!= NULL){
+        ELEM_t u = estrai(testa, coda);
+        for (int i = 0; i<4; i++){
+            switch (i){
+            case 0: //su
+            if ( matt[u.y -1][u.x] = -1
+               && m.mappa[u.y -1][u.x]!='P'
+			   && m.mappa[u.y -1][u.x]!='0'
+			   && m.mappa[u.y -1][u.x]!='Q'){
+                matt[u.y -1][u.x] = matt[u.y][u.x] +1;
+                inserisci(testa, coda, u.x, u.y -1);
+			   }
+            break;
+            case 1: //
+            if ( matt[u.y][u.x +1] = -1
+               && m.mappa[u.y][u.x +1]!='P'
+			   && m.mappa[u.y][u.x +1]!='0'
+			   && m.mappa[u.y][u.x +1]!='Q'){
+                matt[u.y][u.x +1] = matt[u.y][u.x] +1;
+                inserisci(testa, coda, u.x +1, u.y);
+			   }
+            break;
+            case 2:
+            if ( matt[u.y +1][u.x] = -1
+               && m.mappa[u.y +1][u.x]!='P'
+			   && m.mappa[u.y +1][u.x]!='0'
+			   && m.mappa[u.y +1][u.x]!='Q'){
+                matt[u.y +1][u.x] = matt[u.y][u.x] +1;
+                inserisci(testa, coda, u.x, u.y +1);
+			   }
+            break;
+            case 3:
+            if ( matt[u.y][u.x -1] = -1
+               && m.mappa[u.y][u.x -1]!='P'
+			   && m.mappa[u.y][u.x -1]!='0'
+			   && m.mappa[u.y][u.x -1]!='Q'){
+                matt[u.y][u.x -1] = matt[u.y][u.x] +1;
+                inserisci(testa, coda, u.x -1, u.y);
+			   }
+            break;
+            }
+        }
     }
+    #ifdef DEBUG_MODE
 
+    ofstream f("data/map/genmappa.txt");
+        for(int i=0; i < m.r; i++){
+            f<<endl;
+            for (int j=0; j < m.c; j++){
+                f<<matt[i][j]<<" ";
+            }
+        }
+    #endif
+int minore = matt[fy][fx];
+dir = SX;
+    //su
+    if (matt[fy -1][fx] > -1 && matt[fy -1][fx] < minore){
+        minore = matt[fy -1][fx];
+        dir = SU;
+    }
+    //dx
+    if (matt[fy][fx +1] > -1 && matt[fy][fx +1] < minore){
+        minore = matt[fy][fx +1];
+        dir = DX;
+    }
+    //giu
+    if (matt[fy +1][fx] > -1 &&  matt[fy +1][fx] < minore){
+        minore = matt[fy +1][fx];
+        dir = GIU;
+    }
+    //sx
+    if (matt[fy][fx -1] > -1 && matt[fy][fx -1] < minore){
+        minore = matt[fy][fx -1];
+        dir = SX;
+    }
     return dir;
 }
 
-static void inject(ELEM_t & *testa, ELEM_t & *coda, int x, int y){
-
-    ELEM_t *temp = new ELEM_t;
-    temp.x = x;
-    temp.y = y;
-    if (testa != NULL)
-        testa.prec = temp;
-    temp.succ = testa;
-    temp.prec = NULL;
-
-    testa = temp;
-    if (temp.prec == NULL)
-        coda = temp;
-}
-
-static void enject(ELEM_t & *testa, ELEM_t & *coda, int x, int y){
-
-
-
-}
-
-
-void move_bliky(PLAYER_t)
+void move_bliky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 {
+    int fx = (f.x - OFFSETX) /BLOCKSIZE;
+    int fy = (f.y - OFFSETY) /BLOCKSIZE;
+    int px = (pg.x - OFFSETX) /BLOCKSIZE;
+    int py = (pg.y - OFFSETY) /BLOCKSIZE;
+    int check_x = fx * BLOCKSIZE + OFFSETX;
+    int check_y = fy * BLOCKSIZE + OFFSETY;
+    DIREZ temporanea;
 
+   f.dir = bfs(m, fy, fx, px, py);
 }
 
-*/

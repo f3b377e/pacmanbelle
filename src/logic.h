@@ -23,5 +23,6 @@
                     const float, const float, const float);
     void dest_audio(AUDIO_t &);
     void move_pacman(PLAYER_t&, MAPPA_t, AUDIO_t);
+    void move_bliky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 
 #endif /* LOGIC_H_ */

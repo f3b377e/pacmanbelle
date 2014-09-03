@@ -47,6 +47,8 @@ struct ELEM_t{
     int x,y;
 };
 
+typedef ELEM_t * lista;
+
 /**Struttura contenente i dati del giocatore*/
 struct PLAYER_t{
 	DIREZ dir;		    /**< Stato attuale della direzione di pacman*/
@@ -67,6 +69,7 @@ struct PLAYER_t{
 /**Struttura contenente i dati del singolo fantasma*/
 struct FANTASMA_t{
 	DIREZ dir;		    /**< Stato attuale della direzione del fantasma*/
+	DIREZ succdir;      /**< Stato della sucessiva direzione di pacman*/
 	float movespeed;	/**< Velocità del fantasma*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/

@@ -159,6 +159,7 @@ int main(int argc, char *argv[]){
    switch (stato_gioco){
 	case PLAY :
         load_map(mappa, filenamelv1);
+        scrivi_mappa_su_file(mappa, "data/map/mappatest.txt");
         draw_path(bitmap, mappa);
         al_reserve_samples(2);
         if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
@@ -219,6 +220,7 @@ int main(int argc, char *argv[]){
                 draw_clyde(clyde,bitmap);
                 draw_pinky(pinky,bitmap);
                 draw_inky(inky,bitmap);
+                //move_bliky(mappa, pacman, blinky);
                 al_flip_display();
                 al_clear_to_color(al_map_rgb(0,0,0));
                 draw_path(bitmap, mappa);
@@ -243,7 +245,6 @@ int main(int argc, char *argv[]){
    dest_bitmap(bitmap);
    dest_font(font);
    dest_audio(audio);
-
    al_destroy_timer(timer);
    al_destroy_event_queue(event_queue);
    al_destroy_display(display);

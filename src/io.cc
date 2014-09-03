@@ -21,7 +21,7 @@ using namespace std;
 /** Funzione che alloca la memoria necessaria al caricamento della mappa da file*/
 static void alloca_mappa(MAPPA_t &m)
 {
-    m.mappa = new char*[m.r];
+    m.mappa = new char*[m.c +1];
     for(int i=0; i<m.r; i++)
         m.mappa[i] = new char[m.c + 1];
 }
@@ -48,13 +48,13 @@ void load_map(MAPPA_t& m,const char filename[])
 
     f>>m.r>>m.c;
     alloca_mappa(m);
-    for (int j = 0; j < m.r; j++){
-        for (int i=0; i < m.c; i++){
+    for (int i = 0; i < m.r; i++){
+        for (int j=0; j < m.c; j++){
             f >> m.mappa[i][j];
         }
     }
     for (int i = 0; i < m.r ; i++){ //colonna aggiuntiva a destra
-        m.mappa[m.c][i] = '0';
+        m.mappa[i][m.c] = '0';
     }
     cout<<"\nMap Loaded!";
 }
@@ -66,9 +66,9 @@ void scrivi_mappa_su_file(const MAPPA_t &m, const char filename[])
     if (m.mappa == NULL)
         cout<<"File Error (scrivi su file)!!";
 
-    for (int j = 0; j < m.r; j++){
+    for (int i = 0; i < m.r; i++){
         f<<"\n";
-        for (int i=0; i < m.c; i++){
+        for (int j=0; j < m.c +1; j++){
             f << m.mappa[i][j]<<" ";
         }
     }
