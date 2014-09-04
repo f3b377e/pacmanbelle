@@ -18,10 +18,10 @@
 //direttive
 using namespace std;
 
-/** Funzione che alloca la memoria necessaria al caricamento della mappa da file*/
+/** Funzione che alloca la memoria necessaria al caricamento della mappa da file */
 static void alloca_mappa(MAPPA_t &m)
 {
-    m.mappa = new char*[m.c +1];
+    m.mappa = new char*[m.r];
     for(int i=0; i<m.r; i++)
         m.mappa[i] = new char[m.c + 1];
 }

@@ -10,6 +10,7 @@
 //C++ header
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <cassert>
 
 //Allegro header
@@ -159,13 +160,14 @@ int main(int argc, char *argv[]){
    switch (stato_gioco){
 	case PLAY :
         load_map(mappa, filenamelv1);
-        scrivi_mappa_su_file(mappa, "data/map/mappatest.txt");
         draw_path(bitmap, mappa);
         al_reserve_samples(2);
         if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
             cout<<"\n Audio Error! - non parte pacman_beginning";
         draw_countdown(font, bitmap, mappa);
-        al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+
+        if (!al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id))
+            cout<<"\n Audio Error! - non parte pacman_beginning";
         al_start_timer(timer);
         while(stato_gioco == PLAY){
                 al_wait_for_event(event_queue, &events);
@@ -220,7 +222,7 @@ int main(int argc, char *argv[]){
                 draw_clyde(clyde,bitmap);
                 draw_pinky(pinky,bitmap);
                 draw_inky(inky,bitmap);
-                //move_bliky(mappa, pacman, blinky);
+                move_bliky(mappa, pacman, blinky);
                 al_flip_display();
                 al_clear_to_color(al_map_rgb(0,0,0));
                 draw_path(bitmap, mappa);
@@ -233,7 +235,7 @@ int main(int argc, char *argv[]){
 		al_flip_display();
         break;
 	case HIGH_SCORE:
-        	al_clear_to_color(al_map_rgb(0,0,0));
+        al_clear_to_color(al_map_rgb(0,0,0));
         al_flip_display();
     	break;
 	case QUIT:

@@ -209,7 +209,7 @@ return false;
 
 void init_blinky(FANTASMA_t &b)
 {
-    b.dir = FERMO;
+    b.dir = SU;
     b.sourcex = 0;
     b.sourcey = 0;
     b.movespeed = 4;
@@ -331,8 +331,8 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		case GIU:
 			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y + BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-            cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
-			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+          //  cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+		//	cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
 			if(m.mappa[mapy][mapx]!='P'
 			   && m.mappa[mapy][mapx]!='0'
 			   && m.mappa[mapy][mapx]!='Q'
@@ -342,8 +342,8 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		case SU:
 			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
-			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+		//	cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+		//	cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
             if(m.mappa[mapy][mapx]!='P'
 			   && m.mappa[mapy][mapx]!='0'
 			   && m.mappa[mapy][mapx]!='Q'
@@ -353,8 +353,8 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		case SX:
 			mapx = (pg.x - BLOCKSIZE - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
-			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+		//	cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+		//	cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
 			if(m.mappa[mapy][mapx]!='P'
 			   && m.mappa[mapy][mapx]!='0'
 			   && m.mappa[mapy][mapx]!='Q'
@@ -364,8 +364,8 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
 		case DX:
 			mapx = (pg.x + BLOCKSIZE - OFFSETX)/BLOCKSIZE;
 			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
-			cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
+		//	cout<<"\n ("<<pg.y<<","<<pg.x<<") ";
+		//	cout<<"\n ["<<mapy<<","<<mapx<<"] = "<<m.mappa[mapy][mapx];
 			if(m.mappa[mapy][mapx]!='P'
 			   && m.mappa[mapy][mapx]!='0'
 			   && m.mappa[mapy][mapx]!='Q'
@@ -459,13 +459,12 @@ void move_pacman(PLAYER_t& pg, MAPPA_t m, AUDIO_t audio)
 }
 
 static void inserisci(lista &testa, lista &coda, int x, int y){
-
     ELEM_t *temp = new ELEM_t;
     temp->x = x;
     temp->y = y;
-
     temp->succ = NULL;
     temp->prec = testa;
+
     if (testa != NULL) //lista nn vuota
         testa->succ = temp;
     if (coda == NULL)
@@ -477,17 +476,19 @@ static void inserisci(lista &testa, lista &coda, int x, int y){
 static ELEM_t estrai(lista &testa, lista &coda){
 
     ELEM_t temp;
+
     temp.x = coda->x;
     temp.y = coda->y;
     temp.prec = NULL;
     temp.succ = NULL;
     if (coda->succ == NULL){ //ultimo elemento in coda;
         coda = NULL;
-        delete coda;
+        testa = NULL;
+        delete [] coda;
     }else{
         ELEM_t *p = coda->succ;
         p->prec = NULL;
-        delete coda;
+        delete [] coda;
         coda = p;
     }
     return temp;
@@ -503,20 +504,15 @@ static ELEM_t estrai(lista &testa, lista &coda){
   * inizialmente viene inserito nella coda la sorgente con la posizione di pac-man con distanza 0
   * ogni volta che un nodo viene estratto dalla coda, viene aggiunta una unità alla distanza del nodo padre.
   */
-static DIREZ bfs(const MAPPA_t &m, int fx, int fy, int pgx, int pgy)
+static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
-    int **matt;
-
-    //alloco la matrice in memoria
-    matt = new int*[m.c];
-    for(int i=0; i<m.r; i++)
-        matt[i] = new int[m.c];
-
+    int matt[m.r][m.c];
+    int i = 0;
     //inizializzo la mappa a infinito (-1)
-    for (int j = 0; j < m.c; j++)
+    for (int j = 0; j < m.c +1; j++)
         for (int i=0; i < m.r; i++)
-            matt[i][j] = -1;
+            matt[i][j +1] = -1;
 
     ELEM_t *testa = NULL;
     ELEM_t *coda = NULL;
@@ -524,62 +520,62 @@ static DIREZ bfs(const MAPPA_t &m, int fx, int fy, int pgx, int pgy)
     matt[pgy][pgx] = 0;
     inserisci(testa, coda, pgx, pgy);
 
-
-    while (coda!= NULL){
+    while (testa!= NULL){
         ELEM_t u = estrai(testa, coda);
-        for (int i = 0; i<4; i++){
-            switch (i){
-            case 0: //su
-            if ( matt[u.y -1][u.x] = -1
-               && m.mappa[u.y -1][u.x]!='P'
-			   && m.mappa[u.y -1][u.x]!='0'
-			   && m.mappa[u.y -1][u.x]!='Q'){
+            if ( matt[u.y -1][u.x] == -1 &&
+               ( m.mappa[u.y -1][u.x]=='P'
+			   || m.mappa[u.y -1][u.x]=='0'
+			   || m.mappa[u.y -1][u.x]=='Q')){
+
                 matt[u.y -1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y -1);
 			   }
-            break;
-            case 1: //
-            if ( matt[u.y][u.x +1] = -1
-               && m.mappa[u.y][u.x +1]!='P'
-			   && m.mappa[u.y][u.x +1]!='0'
-			   && m.mappa[u.y][u.x +1]!='Q'){
+
+            if ( matt[u.y][u.x +1] == -1 &&
+               ( m.mappa[u.y][u.x +1]=='P'
+			   || m.mappa[u.y][u.x +1]=='0'
+			   || m.mappa[u.y][u.x +1]=='Q')){
+
                 matt[u.y][u.x +1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x +1, u.y);
 			   }
-            break;
-            case 2:
-            if ( matt[u.y +1][u.x] = -1
-               && m.mappa[u.y +1][u.x]!='P'
-			   && m.mappa[u.y +1][u.x]!='0'
-			   && m.mappa[u.y +1][u.x]!='Q'){
+
+            if ( matt[u.y +1][u.x] == -1 &&
+               ( m.mappa[u.y +1][u.x]=='P'
+			   || m.mappa[u.y +1][u.x]=='0'
+			   || m.mappa[u.y +1][u.x]=='Q')){
+
                 matt[u.y +1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y +1);
 			   }
-            break;
-            case 3:
-            if ( matt[u.y][u.x -1] = -1
-               && m.mappa[u.y][u.x -1]!='P'
-			   && m.mappa[u.y][u.x -1]!='0'
-			   && m.mappa[u.y][u.x -1]!='Q'){
+
+            if ( matt[u.y][u.x -1] == -1 &&
+               ( m.mappa[u.y][u.x -1]=='P'
+			   || m.mappa[u.y][u.x -1]=='0'
+			   || m.mappa[u.y][u.x -1]=='Q')){
+
                 matt[u.y][u.x -1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x -1, u.y);
 			   }
-            break;
-            }
+    }
+
+const char lol[] = "data/map/mah.txt";
+    ofstream s(lol);
+
+    for (int i = 0; i < m.r; i++){
+        s<<"\n";
+        for (int j=0; j < m.c +1; j++){
+            if (matt[i][j] < 10 && matt[i][j] >= 0)
+                s<<"0"<<matt[i][j]<<" ";
+            else
+                s<<matt[i][j]<<" ";
         }
     }
-    #ifdef DEBUG_MODE
+    cout<<"\n File Done!";
 
-    ofstream f("data/map/genmappa.txt");
-        for(int i=0; i < m.r; i++){
-            f<<endl;
-            for (int j=0; j < m.c; j++){
-                f<<matt[i][j]<<" ";
-            }
-        }
-    #endif
 int minore = matt[fy][fx];
 dir = SX;
+
     //su
     if (matt[fy -1][fx] > -1 && matt[fy -1][fx] < minore){
         minore = matt[fy -1][fx];
@@ -611,8 +607,27 @@ void move_bliky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int py = (pg.y - OFFSETY) /BLOCKSIZE;
     int check_x = fx * BLOCKSIZE + OFFSETX;
     int check_y = fy * BLOCKSIZE + OFFSETY;
-    DIREZ temporanea;
 
-   f.dir = bfs(m, fy, fx, px, py);
+    f.succdir = bfs(m, f, fx, fy, px, py);
+
+    f.dir = f.succdir;
+
+    switch (f.dir)
+	{
+	   case SU:
+	        f.y -= f.movespeed;
+	   break;
+	   case GIU:
+            f.y += f.movespeed;
+	   break;
+	   case SX:
+            f.x -= f.movespeed;
+	   break;
+	   case DX:
+            f.x += f.movespeed;
+	   break;
+	}
+
+
 }
 
