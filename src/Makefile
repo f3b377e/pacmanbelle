@@ -9,17 +9,15 @@ Pacman: $(OBJ)
 
 -include dipendenze
 
-.PHONY: depend clean cleanall Debug Release
+.PHONY: depend clean cleanall Debug
 
 depend:
 	g++ -MM *.cc > dipendenze
 clean:
 	rm *.o
 cleanall:
-	rm *.o *~ Pacman *~ Pacman_debug
+	rm *.o *~ Pacman
 
 Debug: 	
-	g++ -Wall -g -D DEBUG_MODE $(CC) $(allegrolib) -o bin/Debug/pacman
+	g++ -Wall -g -D DEBUG_MODE $(CC) $(allegrolib) -o Pacman_deb
 
-Release:
-	g++ -Wall -g $(CC) $(allegrolib) -o bin/Release/pacman

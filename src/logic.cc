@@ -111,19 +111,23 @@ void init_bitmap(BITMAP_t& b)
 
     b.fantasma1 = al_load_bitmap("data/img/fantasma1.png");
 	 if (b.fantasma1 == NULL)
-        cout<<"\n Bitmap Error, fantasma1.jpg error!";
+        cout<<"\n Bitmap Error, fantasma1.png error!";
 
     b.fantasma2 = al_load_bitmap("data/img/fantasma2.png");
 	 if (b.fantasma2 == NULL)
-        cout<<"\n Bitmap Error, fantasma2.jpg error!";
+        cout<<"\n Bitmap Error, fantasma2.png error!";
 
     b.fantasma3 = al_load_bitmap("data/img/fantasma3.png");
 	 if (b.fantasma3 == NULL)
-        cout<<"\n Bitmap Error, fantasma3.jpg error!";
+        cout<<"\n Bitmap Error, fantasma3.png error!";
 
     b.fantasma4 = al_load_bitmap("data/img/fantasma4.png");
 	 if (b.fantasma4 == NULL)
-        cout<<"\n Bitmap Error, fantasma4.jpg error!";
+        cout<<"\n Bitmap Error, fantasma4.png error!";
+
+    b.frutta= al_load_bitmap("data/img/frutta.png");
+	 if (b.frutta == NULL)
+        cout<<"\n Bitmap Error, frutta.png error!";
 }
 
 void init_mappa(MAPPA_t& m)
@@ -392,7 +396,7 @@ static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
             al_play_sample(audio.ghosts_scared,1.0,0.0, 1, ALLEGRO_PLAYMODE_LOOP , 0);
             //start_timer();
         }
-
+        pg.punteggio += 10;
         m.mappa[mapy][mapx] = '0';
 
 	}
@@ -522,44 +526,44 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
 
     while (testa!= NULL){
         ELEM_t u = estrai(testa, coda);
-            if ( matt[u.y -1][u.x] == -1 &&
-               ( m.mappa[u.y -1][u.x]=='P'
-			   || m.mappa[u.y -1][u.x]=='0'
-			   || m.mappa[u.y -1][u.x]=='Q')){
+        if ( matt[u.y -1][u.x] == -1 &&
+            ( m.mappa[u.y -1][u.x]=='P'
+            || m.mappa[u.y -1][u.x]=='0'
+            || m.mappa[u.y -1][u.x]=='Q')){
 
-                matt[u.y -1][u.x] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x, u.y -1);
-			   }
+            matt[u.y -1][u.x] = matt[u.y][u.x] +1;
+            inserisci(testa, coda, u.x, u.y -1);
+        }
 
-            if ( matt[u.y][u.x +1] == -1 &&
-               ( m.mappa[u.y][u.x +1]=='P'
-			   || m.mappa[u.y][u.x +1]=='0'
-			   || m.mappa[u.y][u.x +1]=='Q')){
+        if ( matt[u.y][u.x +1] == -1 &&
+            ( m.mappa[u.y][u.x +1]=='P'
+            || m.mappa[u.y][u.x +1]=='0'
+            || m.mappa[u.y][u.x +1]=='Q')){
 
-                matt[u.y][u.x +1] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x +1, u.y);
-			   }
+            matt[u.y][u.x +1] = matt[u.y][u.x] +1;
+            inserisci(testa, coda, u.x +1, u.y);
+        }
 
-            if ( matt[u.y +1][u.x] == -1 &&
-               ( m.mappa[u.y +1][u.x]=='P'
-			   || m.mappa[u.y +1][u.x]=='0'
-			   || m.mappa[u.y +1][u.x]=='Q')){
+        if ( matt[u.y +1][u.x] == -1 &&
+            ( m.mappa[u.y +1][u.x]=='P'
+            || m.mappa[u.y +1][u.x]=='0'
+            || m.mappa[u.y +1][u.x]=='Q')){
 
-                matt[u.y +1][u.x] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x, u.y +1);
-			   }
+            matt[u.y +1][u.x] = matt[u.y][u.x] +1;
+            inserisci(testa, coda, u.x, u.y +1);
+        }
 
-            if ( matt[u.y][u.x -1] == -1 &&
-               ( m.mappa[u.y][u.x -1]=='P'
-			   || m.mappa[u.y][u.x -1]=='0'
-			   || m.mappa[u.y][u.x -1]=='Q')){
+        if ( matt[u.y][u.x -1] == -1 &&
+            ( m.mappa[u.y][u.x -1]=='P'
+            || m.mappa[u.y][u.x -1]=='0'
+            || m.mappa[u.y][u.x -1]=='Q')){
 
-                matt[u.y][u.x -1] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x -1, u.y);
-			   }
+            matt[u.y][u.x -1] = matt[u.y][u.x] +1;
+            inserisci(testa, coda, u.x -1, u.y);
+        }
     }
 
-const char lol[] = "data/map/mah.txt";
+    const char lol[] = "data/map/mah.txt";
     ofstream s(lol);
 
     for (int i = 0; i < m.r; i++){
@@ -571,10 +575,11 @@ const char lol[] = "data/map/mah.txt";
                 s<<matt[i][j]<<" ";
         }
     }
-    cout<<"\n File Done!";
-
-int minore = matt[fy][fx];
-dir = SX;
+    #ifdef DEBUG_MODE
+        cout<<"\n File Done!";
+    #endif
+    int minore = matt[fy][fx];
+    dir = SX;
 
     //su
     if (matt[fy -1][fx] > -1 && matt[fy -1][fx] < minore){

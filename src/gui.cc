@@ -24,6 +24,37 @@
 
 using namespace std;
 
+void anima_menu(int &menu, bool tasto[],STATO_GIOCO &stato_gioco)
+{
+    //static int tempo = 0;
+    if(tasto[DOWN]){
+        menu ++;
+        if(menu > 3)
+            menu = 3;
+        tasto[DOWN] = false;
+    }
+   else if(tasto[UP]){
+        menu --;
+        if(menu < 1)
+            menu = 1;
+        tasto[UP] = false;
+    }
+    if(tasto[ENTER]){
+        tasto[ENTER] = false;
+        switch (menu){
+        case 1:
+           stato_gioco = CARICA;
+        break;
+        case 2:
+            stato_gioco = CONTROLS;
+        break;
+        case 3:
+            stato_gioco = HIGH_SCORE;
+        break;
+        }
+    }
+}
+
 void draw_screen_menu(const int menu, FONT_t f, BITMAP_t b)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
@@ -64,19 +95,19 @@ void draw_countdown(FONT_t &f, BITMAP_t &b,const MAPPA_t &m)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
-    al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "TRE");
+    al_draw_text(f.h5, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "TRE");
     al_flip_display();
     al_rest(1.4);
 
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
-    al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "DUE");
+    al_draw_text(f.h5, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "DUE");
     al_flip_display();
     al_rest(1.4);
 
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
-    al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "UNO");
+    al_draw_text(f.h5, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "UNO");
     al_flip_display();
     al_rest(1.4);
 }

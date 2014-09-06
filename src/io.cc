@@ -18,6 +18,36 @@
 //direttive
 using namespace std;
 
+void agg_tasti(ALLEGRO_EVENT &event, bool tasto[], bool setting)
+{
+    switch(event.keyboard.keycode)
+	{
+		case ALLEGRO_KEY_UP:
+			tasto[UP] = setting;
+			break;
+		case ALLEGRO_KEY_DOWN:
+			tasto[DOWN] = setting;
+			break;
+		case ALLEGRO_KEY_RIGHT:
+			tasto[RIGHT] = setting;
+			break;
+		case ALLEGRO_KEY_LEFT:
+			tasto[LEFT] = setting;
+			break;
+		case ALLEGRO_KEY_ENTER:
+			tasto[ENTER] = setting;
+			break;
+		case ALLEGRO_KEY_D:
+			tasto[D] = setting;
+			break;
+		case ALLEGRO_KEY_ESCAPE:
+			tasto[ESCAPE] = setting;
+            break;
+        case ALLEGRO_KEY_SPACE:
+            tasto[SPACE] = setting;
+			break;
+	}
+}
 /** Funzione che alloca la memoria necessaria al caricamento della mappa da file */
 static void alloca_mappa(MAPPA_t &m)
 {
@@ -36,7 +66,7 @@ static void dealloca_mappa(MAPPA_t &m)
 }
 
 
-/**Carica la mappa da file in Memoria*/
+
 void load_map(MAPPA_t& m,const char filename[])
 {
     ifstream f(filename);
@@ -72,6 +102,8 @@ void scrivi_mappa_su_file(const MAPPA_t &m, const char filename[])
             f << m.mappa[i][j]<<" ";
         }
     }
-    cout<<"\n File Done!";
+    #ifdef DEBUG_MODE
+       // cout<<"\n File Done!";
+    #endif // DEBUG_MODE
 
 }

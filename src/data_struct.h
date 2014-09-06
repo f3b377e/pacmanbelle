@@ -17,14 +17,14 @@
 #define DATA_STRUCT_
 
 //Variabili Globali
-const int SCREENWIDTH = 650;	/**< Larghezza dello schermo*/
-const int SCREENHEIGHT = 600;	/**< Altezza dello schermo*/
-const int OFFSETX = SCREENWIDTH *15/100;	/**< Margine laterale della finestra */
-const int OFFSETY = SCREENHEIGHT *4/100; /** < Margine Superiore della finestra */
-const int FPS = 25;		/**< Frame del gioco*/
-const int BLOCKSIZE = 16;	/**< Blocchi della mappa*/
-const char filenamelv1[] = "data/map/map1.txt";     /**< Mappa Livello 1 */
-const char filenamelv2[] = "data/map/map2.txt";     /**< Mappa Livello 2 */
+const int SCREENWIDTH = 650;	                /**< Larghezza dello schermo*/
+const int SCREENHEIGHT = 600;	                /**< Altezza dello schermo*/
+const int OFFSETX = SCREENWIDTH *15/100;	    /**< Margine laterale della finestra */
+const int OFFSETY = SCREENHEIGHT *4/100;        /** < Margine Superiore della finestra */
+const int FPS = 25;		                        /**< Frame del gioco*/
+const int BLOCKSIZE = 16;	                    /**< Blocchi della mappa*/
+const char filenamelv1[] = "data/map/map1.txt"; /**< Mappa Livello 1 */
+const char filenamelv2[] = "data/map/map2.txt"; /**< Mappa Livello 2 */
 
 /**Stato di direzione per pacman e per i fantasmi*/
 enum DIREZ{GIU, SU, SX, DX, FERMO};
@@ -32,7 +32,10 @@ enum DIREZ{GIU, SU, SX, DX, FERMO};
  *  Stato del gioco, serve per il loop della funzione ::main per eseguire diverse
  *  operazioni a seconda della fase in cui si trova il gioco
  */
-enum STATO_GIOCO{MENU, PLAY, PAUSA, CONTROLS, HIGH_SCORE, GAME_OVER, QUIT};
+enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, GAME_OVER, QUIT};
+
+/** Valori che verranno attribuiti all'array tasto del ::main*/
+enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE};
 
 struct MAPPA_t{
     int r;          /**< Numero di Colonne*/
@@ -109,6 +112,7 @@ struct BITMAP_t{
     ALLEGRO_BITMAP *fantasma2;
     ALLEGRO_BITMAP *fantasma3;
     ALLEGRO_BITMAP *fantasma4;
+    ALLEGRO_BITMAP *frutta;
 };
 
 /**Struttura contenente i font del gioco*/
