@@ -67,6 +67,8 @@ struct PLAYER_t{
 	bool potente;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	int punteggio;		/**< punteggio attuale*/
 	bool mangiato;		/**< se vera pacman è mangiato dai fantasmi */
+    ALLEGRO_BITMAP *img;   /**< L'immagine associata a Pacman */
+
 };
 
 /**Struttura contenente i dati del singolo fantasma*/
@@ -80,47 +82,40 @@ struct FANTASMA_t{
 	float y;		    /**< Coordinata y schermo*/
 	bool debole;		/**< Vera quando pacman mangia il pallino grande. Riduce la velocità dei fantasmi e possono essere mangiati*/
 	bool mangiato;		/**< Vera quando pacman mangia il fantasma*/
+    ALLEGRO_BITMAP *img;   /**< Immagine relativa al fantasma */
+
 };
 
 /**Struttura contenente i dati dell'audio*/
 struct AUDIO_t{
-	ALLEGRO_SAMPLE_ID id; /**< Identificatore audio in riproduzione */
-	ALLEGRO_SAMPLE *ghost_eaten;
-	ALLEGRO_SAMPLE *ghosts_scared;
-	ALLEGRO_SAMPLE *pacman_beginning;
-	ALLEGRO_SAMPLE *pacman_extrapac;
-	ALLEGRO_SAMPLE *pacman_eaten;
-	ALLEGRO_SAMPLE *pacman_eatfruit;
-	ALLEGRO_SAMPLE *pallet_eaten1;
-	ALLEGRO_SAMPLE *pallet_eaten2;
-	ALLEGRO_SAMPLE *siren;
-	ALLEGRO_SAMPLE *pacman_intermission;
+	ALLEGRO_SAMPLE_ID id;               /**< Identificatore audio in riproduzione */
+	ALLEGRO_SAMPLE *ghost_eaten;        /**< Quando i fantasmi muoiono*/
+	ALLEGRO_SAMPLE *ghosts_scared;      /**< Quando i fantasmi sono in in modalità spavento*/
+	ALLEGRO_SAMPLE *pacman_beginning;   /**< Quando inizia il gioco */
+	ALLEGRO_SAMPLE *pacman_extrapac;    /**< Quando pacman mangia i pallini speciali*/
+	ALLEGRO_SAMPLE *pacman_eaten;       /**< Quando pacman muore */
+	ALLEGRO_SAMPLE *pacman_eatfruit;    /**< Quando pacman mangia la frutta */
+	ALLEGRO_SAMPLE *pallet_eaten1;      /**< Quando pacman mangia i pallini */
+	ALLEGRO_SAMPLE *pallet_eaten2;      /**< Quando pacman mangia i pallini */
+	ALLEGRO_SAMPLE *siren;              /**< Quando pacman deve scappare dai fantasmi */
+	ALLEGRO_SAMPLE *pacman_intermission;    /**< Per gli intermezzi tra un livello e l'altro*/
 };
 
 /**Struttura contenente le bitmap utilizzate*/
 struct BITMAP_t{
-    ALLEGRO_BITMAP *header_image;
-    ALLEGRO_BITMAP *puntino;
-    ALLEGRO_BITMAP *autotile;
-    ALLEGRO_BITMAP *pacman_image;
-    ALLEGRO_BITMAP *blinky;
-    ALLEGRO_BITMAP *pinky;
-    ALLEGRO_BITMAP *inky;
-    ALLEGRO_BITMAP *clyde;
-    ALLEGRO_BITMAP *f_pericolo;
-    ALLEGRO_BITMAP *fantasma1;
-    ALLEGRO_BITMAP *fantasma2;
-    ALLEGRO_BITMAP *fantasma3;
-    ALLEGRO_BITMAP *fantasma4;
-    ALLEGRO_BITMAP *frutta;
+    ALLEGRO_BITMAP *header_image;   /** Immagine Principale del menu */
+    ALLEGRO_BITMAP *puntino;        /** Immagine per la comparsa del puntino nel menu */
+    ALLEGRO_BITMAP *autotile;       /** Immagine per la composizione della mappa */
+    ALLEGRO_BITMAP *f_pericolo;     /** Fantasmi spaventati e morti*/
+    ALLEGRO_BITMAP *frutta;         /** Immagine della frutta*/
 };
 
 /**Struttura contenente i font del gioco*/
 struct FONT_t{
-    ALLEGRO_FONT *h1;
-    ALLEGRO_FONT *h2;
-    ALLEGRO_FONT *h3;
-    ALLEGRO_FONT *h4;
-    ALLEGRO_FONT *h5;
+    ALLEGRO_FONT *h1;   /** Font H1*/
+    ALLEGRO_FONT *h2;   /** Font H2*/
+    ALLEGRO_FONT *h3;   /** Font H3*/
+    ALLEGRO_FONT *h4;   /** Font H4*/
+    ALLEGRO_FONT *h5;   /** Font H5*/
 };
 #endif // DATA_STRUCT_

@@ -1,28 +1,24 @@
 /*
  * logic.h
  *
- *      Author: Belle & BruceS
+ *      Author: Belle & Bruce
  */
 #ifndef LOGIC_H_
 #define LOGIC_H_
 
-    void init_audio(AUDIO_t&);
-    void init_bitmap(BITMAP_t&);
-    void init_font(FONT_t&);
-    void init_pacman(PLAYER_t&);
-    void init_fantasma(FANTASMA_t&);
-    void init_blinky(FANTASMA_t &);
-    void init_pinky(FANTASMA_t &);
-    void init_inky(FANTASMA_t &);
-    void init_clyde(FANTASMA_t &);
-    void dest_bitmap(BITMAP_t &);
-    void dest_font(FONT_t &);
-    void init_mappa(MAPPA_t &);
-    bool collision (const PLAYER_t &, const float, const float,
+
+
+    /** Funzione che si occupa del movimento di pacman*/
+    void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
+    /** Gestisce il Movimento di Blinky*/
+    void move_blinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+    /** Gestisce il Movimento di Pinky*/
+    void move_pinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+
+    /** Funzione di Collisione oggetti ritorna vero se pacman collide con l'oggetto */
+    static bool collision (const PLAYER_t &, const float, const float,
                     const float, const float, const float,
                     const float, const float, const float);
-    void dest_audio(AUDIO_t &);
-    void move_pacman(PLAYER_t&, MAPPA_t, AUDIO_t);
-    void move_bliky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+
 
 #endif /* LOGIC_H_ */

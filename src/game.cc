@@ -29,6 +29,7 @@
 #include "io.h"
 #include "logic.h"
 #include "gui.h"
+#include "init.h"
 
 //debug mode
 #ifdef DEBUG_MODE
@@ -36,20 +37,12 @@
 #endif
 
 using namespace std;
-//Prototipi
 
-/** Funzione principale.
- *
- * Si occupa di inizializzare le strutture dati del gioco e gestisce il ciclo
- * principale.
- *
- */
 int main(int argc, char *argv[]){
-
     int menu = 1;
     bool redraw = true;
     bool done = false;
-    bool tasto[8] = {false, false, false, false, false, false, false,false };
+    bool tasto[8] = {false, false, false, false, false, false, false, false};
     ALLEGRO_DISPLAY *display =  NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
@@ -114,7 +107,7 @@ int main(int argc, char *argv[]){
     init_audio(audio);
 
     //Stato iniziale del gioco
-    //int livello = 1;
+    int livello = 1;
     STATO_GIOCO stato_gioco = MENU;
 
     //MAPPA
@@ -168,33 +161,20 @@ int main(int argc, char *argv[]){
                     draw_countdown(font, bitmap, mappa);
                     al_start_timer(timer);
                     if (!al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id))
-                        cout<<"\n Audio Error! - non parte pacman_beginning";
+                        cout<<"\n Audio Error! - non parte audio siren";
                     stato_gioco = PLAY;
                 break;
 
                 case PLAY:
-                    if(tasto[UP])
-                        pacman.succdir = SU;
-
-                    else if(tasto[DOWN])
-                        pacman.succdir = GIU;
-
-                    else if(tasto[LEFT])
-                        pacman.succdir = SX;
-
-                    else if(tasto[RIGHT])
-                        pacman.succdir= DX;
-
-                    else if(tasto[SPACE]){
-                        stato_gioco = PAUSA;
-                        tasto[SPACE] = false;
-                    }
-                move_pacman(pacman,mappa,audio);
-                move_bliky(mappa, pacman, blinky);
+                if(tasto[SPACE]){
+                    stato_gioco = PAUSA;
+                    tasto[SPACE] = false;
+                }
+                move_pacman(pacman,mappa,audio, tasto);
+                move_blinky(mappa, pacman, blinky);
                 break;
 
                 case PAUSA:
-                    cout<<"PAUSA!!"<<endl;
                     al_stop_sample(&audio.id);
                     if (tasto[SPACE]){
                         stato_gioco = PLAY;
@@ -232,19 +212,19 @@ int main(int argc, char *argv[]){
                 break;
 
                 case PLAY:
-                    draw_pacman(pacman,bitmap);
-                    draw_blinky(blinky,bitmap);
-                    draw_clyde(clyde,bitmap);
-                    draw_pinky(pinky,bitmap);
-                    draw_inky(inky,bitmap);
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    draw_path(bitmap, mappa);
+                    draw_pacman(pacman);
+                    draw_fantasma(blinky);
+                    draw_fantasma(clyde);
+                    draw_fantasma(pinky);
+                    draw_fantasma(inky);
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
 									"SCORE: %d",pacman.punteggio);
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
 									"LIVES: ");
                     al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
                     al_flip_display();
-                    al_clear_to_color(al_map_rgb(0,0,0));
-                    draw_path(bitmap, mappa);
                 break;
 
                 case PAUSA:

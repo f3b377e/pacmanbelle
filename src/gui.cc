@@ -55,7 +55,7 @@ void anima_menu(int &menu, bool tasto[],STATO_GIOCO &stato_gioco)
     }
 }
 
-void draw_screen_menu(const int menu, FONT_t f, BITMAP_t b)
+void draw_screen_menu(const int menu, const FONT_t &f, const BITMAP_t &b)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *10/100, ALLEGRO_ALIGN_CENTER, "pACMAN gAME");
@@ -85,13 +85,13 @@ void draw_screen_menu(const int menu, FONT_t f, BITMAP_t b)
     al_flip_display();
 }
 
-void draw_pause(FONT_t f)
+void draw_pause(const FONT_t &f)
 {
-    al_draw_text(f.h2, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "gAME pAUSE");
+    al_draw_text(f.h2, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "gAME pAUSE");
 	al_flip_display();
 }
 
-void draw_countdown(FONT_t &f, BITMAP_t &b,const MAPPA_t &m)
+void draw_countdown(const FONT_t &f, const BITMAP_t &b, const MAPPA_t &m)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     draw_path(b,m);
@@ -113,7 +113,7 @@ void draw_countdown(FONT_t &f, BITMAP_t &b,const MAPPA_t &m)
 }
 
 
-void draw_path(BITMAP_t b, const MAPPA_t &m)
+void draw_path(const BITMAP_t &b, const MAPPA_t &m)
 {
 
     for (int i=0; i < m.r; i++){
@@ -202,10 +202,10 @@ void draw_path(BITMAP_t b, const MAPPA_t &m)
     }
 }
 
-void draw_pacman(PLAYER_t& pg, BITMAP_t b)
+void draw_pacman(PLAYER_t& pg)
 {
-    pg.sourcex += al_get_bitmap_width(b.pacman_image)/3;
-	if(pg.sourcex >= al_get_bitmap_width(b.pacman_image))
+    pg.sourcex += al_get_bitmap_width(pg.img)/3;
+	if(pg.sourcex >= al_get_bitmap_width(pg.img))
 		pg.sourcex = 0;
 
 	pg.sourcey = pg.dir;
@@ -214,113 +214,35 @@ void draw_pacman(PLAYER_t& pg, BITMAP_t b)
 		pg.sourcex = 0;
     }
 
-	al_draw_bitmap_region(b.pacman_image, pg.sourcex
-                          , pg.sourcey * al_get_bitmap_height(b.pacman_image)/4
-                          , al_get_bitmap_width(b.pacman_image)/3
-                          , al_get_bitmap_height(b.pacman_image)/4
+	al_draw_bitmap_region(pg.img, pg.sourcex
+                          , pg.sourcey * al_get_bitmap_height(pg.img)/4
+                          , al_get_bitmap_width(pg.img)/3
+                          , al_get_bitmap_height(pg.img)/4
                           , pg.x, pg.y, 0);
 }
 
-void draw_blinky(FANTASMA_t& pg, const BITMAP_t &b)
+void draw_fantasma(FANTASMA_t& pg)
 {
-    pg.sourcex += al_get_bitmap_width(b.blinky)/2;
-	if(pg.sourcex >= al_get_bitmap_width(b.blinky))
+    pg.sourcex += al_get_bitmap_width(pg.img)/2;
+	if(pg.sourcex >= al_get_bitmap_width(pg.img))
 		pg.sourcex = 0;
     switch (pg.dir){
     case SU:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.blinky)/4;
+    	pg.sourcey = 0 * al_get_bitmap_height(pg.img)/4;
     break;
     case GIU:
-    	pg.sourcey = 1 * al_get_bitmap_height(b.blinky)/4;
+    	pg.sourcey = 1 * al_get_bitmap_height(pg.img)/4;
     break;
     case DX:
-    	pg.sourcey = 3 * al_get_bitmap_height(b.blinky)/4;
+    	pg.sourcey = 3 * al_get_bitmap_height(pg.img)/4;
     break;
     case SX:
-    	pg.sourcey = 2 * al_get_bitmap_height(b.blinky)/4;
+    	pg.sourcey = 2 * al_get_bitmap_height(pg.img)/4;
     break;
     default:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.blinky)/4;
+    	pg.sourcey = 0 * al_get_bitmap_height(pg.img)/4;
     break;
     }
 
-	al_draw_bitmap_region(b.blinky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.blinky)/2, al_get_bitmap_height(b.blinky)/4, pg.x, pg.y, 0);
-}
-
-void draw_pinky(FANTASMA_t& pg, const BITMAP_t &b)
-{
-    pg.sourcex += al_get_bitmap_width(b.pinky)/2;
-	if(pg.sourcex >= al_get_bitmap_width(b.pinky))
-		pg.sourcex = 0;
-    switch (pg.dir){
-    case SU:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.pinky)/4;
-    break;
-    case GIU:
-    	pg.sourcey = 1 * al_get_bitmap_height(b.pinky)/4;
-    break;
-    case DX:
-    	pg.sourcey = 3 * al_get_bitmap_height(b.pinky)/4;
-    break;
-    case SX:
-    	pg.sourcey = 2 * al_get_bitmap_height(b.pinky)/4;
-    break;
-    default:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.pinky)/4;
-    break;
-    }
-
-	al_draw_bitmap_region(b.pinky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.pinky)/2, al_get_bitmap_height(b.pinky)/4, pg.x, pg.y, 0);
-}
-
-void draw_inky(FANTASMA_t& pg, const BITMAP_t &b)
-{
-    pg.sourcex += al_get_bitmap_width(b.inky)/2;
-	if(pg.sourcex >= al_get_bitmap_width(b.inky))
-		pg.sourcex = 0;
-    switch (pg.dir){
-    case SU:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.inky)/4;
-    break;
-    case GIU:
-    	pg.sourcey = 1 * al_get_bitmap_height(b.inky)/4;
-    break;
-    case DX:
-    	pg.sourcey = 3 * al_get_bitmap_height(b.inky)/4;
-    break;
-    case SX:
-    	pg.sourcey = 2 * al_get_bitmap_height(b.inky)/4;
-    break;
-    default:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.inky)/4;
-    break;
-    }
-
-	al_draw_bitmap_region(b.inky, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.inky)/2, al_get_bitmap_height(b.inky)/4, pg.x, pg.y, 0);
-}
-
-void draw_clyde(FANTASMA_t& pg, const BITMAP_t &b)
-{
-    pg.sourcex += al_get_bitmap_width(b.clyde)/2;
-	if(pg.sourcex >= al_get_bitmap_width(b.clyde))
-		pg.sourcex = 0;
-    switch (pg.dir){
-    case SU:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.clyde)/4;
-    break;
-    case GIU:
-    	pg.sourcey = 1 * al_get_bitmap_height(b.clyde)/4;
-    break;
-    case DX:
-    	pg.sourcey = 3 * al_get_bitmap_height(b.clyde)/4;
-    break;
-    case SX:
-    	pg.sourcey = 2 * al_get_bitmap_height(b.clyde)/4;
-    break;
-    default:
-    	pg.sourcey = 0 * al_get_bitmap_height(b.clyde)/4;
-    break;
-    }
-
-	al_draw_bitmap_region(b.clyde, pg.sourcex, pg.sourcey, al_get_bitmap_width(b.clyde)/2, al_get_bitmap_height(b.clyde)/4, pg.x, pg.y, 0);
+	al_draw_bitmap_region(pg.img, pg.sourcex, pg.sourcey, al_get_bitmap_width(pg.img)/2, al_get_bitmap_height(pg.img)/4, pg.x, pg.y, 0);
 }
