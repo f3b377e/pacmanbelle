@@ -102,8 +102,6 @@ void scrivi_mappa_su_file(const MAPPA_t &m, const char filename[])
             f << m.mappa[i][j]<<" ";
         }
     }
-    #ifdef DEBUG_MODE
-       // cout<<"\n File Done!";
-    #endif // DEBUG_MODE
-
 }
+
+

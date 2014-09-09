@@ -210,6 +210,7 @@ void dest_bitmap(BITMAP_t& b)
     al_destroy_bitmap(b.header_image);
     al_destroy_bitmap(b.puntino);
     al_destroy_bitmap(b.f_pericolo);
+    al_destroy_bitmap(b.frutta);
 }
 
 void dest_audio(AUDIO_t& a)

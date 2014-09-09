@@ -24,11 +24,16 @@
 #include "logic.h"
 #include "io.h"
 
-static bool collision (const PLAYER_t &pg, const float sx, const float sy,
+using namespace std;
+
+/** Funzione di Collisione oggetti ritorna vero se pacman collide con l'oggetto */
+static bool collision (const DIREZ &direzione, const float sx, const float sy,
                 const float sw, const float sh, const float dx,
                 const float dy, const float dw, const float dh)
 {
-    switch (pg.dir){
+    switch (direzione){
+    case FERMO:
+    break;
     case SX:
         if (sx <= dx + dw)
             return true;
@@ -49,96 +54,78 @@ static bool collision (const PLAYER_t &pg, const float sx, const float sy,
 return false;
 }
 
-static bool controllo_percorso(MAPPA_t m, PLAYER_t &pg, AUDIO_t audio)
+static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int posx, int posy)
 {
-	int mapx;
-	int mapy;
-	static bool p_eaten = false; //uso questa variabile per controllare se usare pallet_eaten1 o pallet_eaten2
 
-	if (pg.x < OFFSETX + 1 && pg.dir == SX)
-        pg.x = 28 * BLOCKSIZE + OFFSETX;
-
-// Qui la funzione leggerebbe fuori dalla matrice 31 x 28
-// Quindi ho aggiunto una colonna a tutti 0 non da file ma dall'algortmo nel file io.cc (31 x 29)
-// in modo che il file rimanga una matrice 31 x 28 di conseguenza anche le proprietà della matrice rimangono invariate
-// Ovvero m.r = 31, m.c = 28 (e non 29!)
-
-    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
-        pg.x = OFFSETX;
-
-	switch (pg.dir){
+    switch (direzione){
         case FERMO:
-        break;
+            return false;
+            break;
 		case GIU:
-			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
-			mapy = (pg.y + BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-			if(m.mappa[mapy][mapx]!='P'
-			   && m.mappa[mapy][mapx]!='0'
-			   && m.mappa[mapy][mapx]!='Q'
-               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
-				return false;
+			posy ++;
+			if(m.mappa[posy][posx]!='P'
+			   && m.mappa[posy][posx]!='0'
+			   && m.mappa[posy][posx]!='Q')
+                return false;
 		break;
 		case SU:
-			mapx = (pg.x - OFFSETX)/BLOCKSIZE;
-			mapy = (pg.y - BLOCKSIZE - OFFSETY)/BLOCKSIZE;
-            if(m.mappa[mapy][mapx]!='P'
-			   && m.mappa[mapy][mapx]!='0'
-			   && m.mappa[mapy][mapx]!='Q'
-               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+		    posy --;
+            if(m.mappa[posy][posx]!='P'
+			   && m.mappa[posy][posx]!='0'
+			   && m.mappa[posy][posx]!='Q')
 				return false;
 		break;
 		case SX:
-			mapx = (pg.x - BLOCKSIZE - OFFSETX)/BLOCKSIZE;
-			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			if(m.mappa[mapy][mapx]!='P'
-			   && m.mappa[mapy][mapx]!='0'
-			   && m.mappa[mapy][mapx]!='Q'
-               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+		    posx --;
+			if(m.mappa[posy][posx]!='P'
+			   && m.mappa[posy][posx]!='0'
+			   && m.mappa[posy][posx]!='Q')
 				return false;
 		break;
 		case DX:
-			mapx = (pg.x + BLOCKSIZE - OFFSETX)/BLOCKSIZE;
-			mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-			if(m.mappa[mapy][mapx]!='P'
-			   && m.mappa[mapy][mapx]!='0'
-			   && m.mappa[mapy][mapx]!='Q'
-               && collision(pg, pg.x, pg.y, 17, 16, mapx * BLOCKSIZE + OFFSETX, mapy * BLOCKSIZE + OFFSETY, BLOCKSIZE, BLOCKSIZE))
+		    posx ++;
+			if(m.mappa[posy][posx]!='P'
+			   && m.mappa[posy][posx]!='0'
+			   && m.mappa[posy][posx]!='Q')
 				return false;
 		break;
-	}
-
-	mapx = (pg.x - OFFSETX)/BLOCKSIZE;
-	mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-	if(m.mappa[mapy][mapx] == 'P'
-	   || m.mappa[mapy][mapx] == 'Q'){
-
-		if(!p_eaten){
-			al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
-			p_eaten = true;
-		}
-		else{
-			al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
-			p_eaten = false;
-		}
-        if (m.mappa[mapy][mapx] == 'Q'){
-            al_stop_sample(&audio.id);
-            al_play_sample(audio.ghosts_scared,1.0,0.0, 1, ALLEGRO_PLAYMODE_LOOP , 0);
-            //start_timer();
-        }
-        pg.punteggio += 10;
-        m.mappa[mapy][mapx] = '0';
-
-	}
-	return true;
+    }
+    return true;
 }
 
-void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &audio, bool tasto[])
+static void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
 {
 	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-    int check_x = mapx * BLOCKSIZE + OFFSETX;
-    int check_y = mapy * BLOCKSIZE + OFFSETY;
-    DIREZ temporanea;
+    static bool p_eaten = false;
+
+
+    if (m.mappa[mapy][mapx] == 'P')
+        pg.punteggio += 10;
+    if (m.mappa[mapy][mapx] == 'Q')
+        pg.punteggio += 100;
+
+    m.mappa[mapy][mapx] = '0';
+
+    if(!p_eaten){
+        al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        p_eaten = true;
+    }
+    else{
+        al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        p_eaten = false;
+    }
+}
+
+
+void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
+{
+	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+    int succx =  mapx * BLOCKSIZE + OFFSETX;
+    int succy =  mapy * BLOCKSIZE + OFFSETY;
+    float pgh = al_get_bitmap_height(pg.img)/4;
+    float pgw = al_get_bitmap_width(pg.img)/3;
 
     if(tasto[UP])
         pg.succdir = SU;
@@ -152,57 +139,53 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &audio, bool tasto[])
     else if(tasto[RIGHT])
         pg.succdir= DX;
 
-    if (pg.x == check_x && pg.y == check_y){
-        temporanea = pg.dir;
+    if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){
         pg.dir = pg.succdir;
-        if (controllo_percorso(m,pg,audio) == false)
-            pg.dir = temporanea;
+        pg.precdir = pg.dir;
     }
-    switch (pg.dir)
-	{
-	   case SU:
-		if(controllo_percorso(m,pg,audio)){
-			pg.precdir = pg.dir;
-            pg.y -= pg.movespeed;
-		}
-		else if(pg.dir == pg.precdir)
-			pg.dir = FERMO;
-		else
-			pg.dir = pg.precdir;
-	   break;
-	   case GIU:
-		if(controllo_percorso(m, pg, audio)){
-			pg.precdir = pg.dir;
-            pg.y += pg.movespeed;
-		}
-		else if(pg.dir == pg.precdir)
-			pg.dir = FERMO;
-		else
-			pg.dir = pg.precdir;
-	   break;
-	   case SX:
-		if(controllo_percorso(m,pg, audio)){
-			pg.precdir = pg.dir;
-            pg.x -= pg.movespeed;
-		}
-		else if(pg.dir == pg.precdir)
-			pg.dir = FERMO;
-		else
-			pg.dir = pg.precdir;
-	   break;
-	   case DX:
-		if(controllo_percorso(m,pg,audio)){
-			pg.precdir = pg.dir;
-            pg.x += pg.movespeed;
-		}
-		else if(pg.dir == pg.precdir)
-			pg.dir = FERMO;
-		else
-			pg.dir = pg.precdir;
-	   break;
-	}
+
+        switch (pg.dir){
+           case SU:
+            succy -= BLOCKSIZE;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh, succx, succy, BLOCKSIZE, BLOCKSIZE))
+                pg.y -= pg.movespeed;
+            else
+                pg.dir = FERMO;
+           break;
+           case GIU:
+            succy += BLOCKSIZE;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
+                pg.y += pg.movespeed;
+            else
+                pg.dir = FERMO;
+           break;
+           case SX:
+            succx -= BLOCKSIZE;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
+                pg.x -= pg.movespeed;
+            else
+                pg.dir = FERMO;
+           break;
+           case DX:
+            succx += BLOCKSIZE;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
+                pg.x += pg.movespeed;
+            else
+                pg.dir = FERMO;
+           break;
+    }
+
+    if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q')
+        pac_mangia(m,pg,a);
+
+    if (pg.x < OFFSETX + 1 && pg.dir == SX)
+        pg.x = 28 * BLOCKSIZE + OFFSETX;
+
+    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
+        pg.x = OFFSETX;
 }
 
+/** inserisce in testa alla lista, la lista serve per la bfs */
 static void inserisci(lista &testa, lista &coda, int x, int y){
     ELEM_t *temp = new ELEM_t;
     temp->x = x;
@@ -215,9 +198,9 @@ static void inserisci(lista &testa, lista &coda, int x, int y){
     if (coda == NULL)
         coda = temp;
     testa = temp;
-
 }
 
+/** estrae in coda alla lista, la lista serve per la bfs */
 static ELEM_t estrai(lista &testa, lista &coda){
 
     ELEM_t temp;
@@ -239,9 +222,9 @@ static ELEM_t estrai(lista &testa, lista &coda){
     return temp;
 }
 
-
 /** Restituisce la direzione in cui deve andare il nemico per arrivare a pacman
-  * pgx e pgy sono le coordinate di pacman sulla matrice
+  * pgx e pgy sono le coordinate di pacman sulla matrice, sono rese come parametri perché cosi
+  * possono essergli passati valori diversi per i diversi fantasmini.
   * fx, fy sono le coordinate del fantasma sulla matrice
   * l'algoritmo per calcolare la distanza migliore utilizza una coda dove inserisce i nodi adiacenti.
   * inizialmente tutti i nodi sono posti a infinito
@@ -253,11 +236,10 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
 {
     DIREZ dir;
     int matt[m.r][m.c];
-    int i = 0;
     //inizializzo la mappa a infinito (-1)
     for (int j = 0; j < m.c +1; j++)
         for (int i=0; i < m.r; i++)
-            matt[i][j +1] = -1;
+            matt[i][j] = -1;
 
     ELEM_t *testa = NULL;
     ELEM_t *coda = NULL;
@@ -267,58 +249,43 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
 
     while (testa!= NULL){
         ELEM_t u = estrai(testa, coda);
-            if ( matt[u.y -1][u.x] == -1 &&
-               ( m.mappa[u.y -1][u.x]=='P'
-			   || m.mappa[u.y -1][u.x]=='0'
-			   || m.mappa[u.y -1][u.x]=='Q')){
-
+            if ( matt[u.y -1][u.x] == -1 && controllo_percorso(m, SU, u.x, u.y)){
                 matt[u.y -1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y -1);
 			   }
 
-            if ( matt[u.y][u.x +1] == -1 &&
-               ( m.mappa[u.y][u.x +1]=='P'
-			   || m.mappa[u.y][u.x +1]=='0'
-			   || m.mappa[u.y][u.x +1]=='Q')){
-
+            if ( matt[u.y][u.x +1] == -1 && controllo_percorso(m, DX, u.x, u.y)){
                 matt[u.y][u.x +1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x +1, u.y);
 			   }
 
-            if ( matt[u.y +1][u.x] == -1 &&
-               ( m.mappa[u.y +1][u.x]=='P'
-			   || m.mappa[u.y +1][u.x]=='0'
-			   || m.mappa[u.y +1][u.x]=='Q')){
-
+            if ( matt[u.y +1][u.x] == -1 && controllo_percorso(m, GIU, u.x, u.y)){
                 matt[u.y +1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y +1);
 			   }
 
-            if ( matt[u.y][u.x -1] == -1 &&
-               ( m.mappa[u.y][u.x -1]=='P'
-			   || m.mappa[u.y][u.x -1]=='0'
-			   || m.mappa[u.y][u.x -1]=='Q')){
-
+            if ( matt[u.y][u.x -1] == -1  && controllo_percorso(m, SX, u.x, u.y)){
                 matt[u.y][u.x -1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x -1, u.y);
 			   }
     }
+
 /*
-    ofstream s("data/map/mah.txt");
+    ofstream file("data/map/bfs.txt");
 
     for (int i = 0; i < m.r; i++){
-        s<<"\n";
         for (int j=0; j < m.c +1; j++){
-            if (matt[i][j] < 10 && matt[i][j] >= 0)
-                s<<"0"<<matt[i][j]<<" ";
+            if (matt[i][j] >= 0 && matt[i][j] < 10)
+                file <<"0"<< matt[i][j]<<" ";
             else
-                s<<matt[i][j]<<" ";
+                file << matt[i][j]<<" ";
         }
+    file<<"\n";
     }
-    #ifdef DEBUG_MODE
-    cout<<"\n File Done!";
-	#endif
+
+    scrivi_mappa_su_file(m,"data/map/mappa.txt");
 */
+
     int minore = matt[fy][fx];
     dir = SX;
 
@@ -342,6 +309,7 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
         minore = matt[fy][fx -1];
         dir = SX;
     }
+
     return dir;
 }
 
@@ -361,6 +329,8 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     f.dir = f.succdir;
 
     switch (f.dir){
+        case FERMO:
+        break;
 	   case SU:
 	        f.y -= f.movespeed;
 	   break;
@@ -388,29 +358,14 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int check_y = fy * BLOCKSIZE + OFFSETY;
 
 
-    switch (pg.dir){
-        case FERMO:
-            f.succdir = bfs(m, f, fx, fy, px, py);
-        break;
-	   case SU:
-            f.succdir = bfs(m, f, fx, fy, px, (py+ BLOCKSIZE));
-	   break;
-	   case GIU:
-            f.succdir = bfs(m, f, fx, fy, px, (py - BLOCKSIZE));
-	   break;
-	   case SX:
-            f.succdir = bfs(m, f, fx, fy, (px - BLOCKSIZE), py);
-	   break;
-	   case DX:
-            f.succdir = bfs(m, f, fx, fy, (px + BLOCKSIZE), py);
-	   break;
-	}
-
     if(check_x == f.x && check_y == f.y)
-        f.dir = f.succdir;
+        f.succdir = bfs(m, f, fx, fy, px, py);
 
-    switch (f.dir)
-	{
+    f.dir = f.succdir;
+
+    switch (f.dir){
+        case FERMO:
+        break;
 	   case SU:
 	        f.y -= f.movespeed;
 	   break;

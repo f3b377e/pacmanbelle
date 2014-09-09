@@ -6,6 +6,7 @@
 
 #ifndef IO_H_
 #define IO_H_
+
 /** La funzione setta i valori booleani dell'array tasto inizializzato nel ::main, a seconda se
  *  il tasto è stato premuto o rilasciato;
  *  Parametri: event evento Allegro

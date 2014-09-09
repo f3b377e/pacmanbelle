@@ -57,7 +57,6 @@ int main(int argc, char *argv[]){
     al_init_font_addon();
     al_init_ttf_addon();
     al_init_acodec_addon();
-
     al_install_audio();
     al_reserve_samples(10);
     al_install_keyboard();
@@ -142,9 +141,8 @@ int main(int argc, char *argv[]){
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
             #ifdef DEBUG_MODE
-                if(tasto[D]){
-                    DEBUG_CONSOLE;
-                }
+                if(tasto[D])
+                    debug_console(timer,pacman,blinky,pinky,inky,clyde,mappa,audio);
             #endif // DEBUG_MODE
 
             //Update
@@ -156,7 +154,6 @@ int main(int argc, char *argv[]){
                     load_map(mappa, filenamelv1);
                     if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
                         cout<<"\n Audio Error! - non parte pacman_beginning";
-
                     al_stop_timer(timer);
                     draw_countdown(font, bitmap, mappa);
                     al_start_timer(timer);
@@ -170,8 +167,9 @@ int main(int argc, char *argv[]){
                     stato_gioco = PAUSA;
                     tasto[SPACE] = false;
                 }
-                move_pacman(pacman,mappa,audio, tasto);
+                move_pacman(pacman, mappa, audio, tasto);
                 move_blinky(mappa, pacman, blinky);
+                move_pinky(mappa, pacman, pinky);
                 break;
 
                 case PAUSA:
@@ -253,11 +251,11 @@ int main(int argc, char *argv[]){
     }
 
 
-   dest_bitmap(bitmap);
-   dest_font(font);
-   dest_audio(audio);
-   al_destroy_timer(timer);
-   al_destroy_event_queue(event_queue);
-   al_destroy_display(display);
+    dest_bitmap(bitmap);
+    dest_font(font);
+    dest_audio(audio);
+    al_destroy_timer(timer);
+    al_destroy_event_queue(event_queue);
+    al_destroy_display(display);
    return 0;
 }
