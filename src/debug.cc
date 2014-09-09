@@ -30,7 +30,7 @@ void debug_console(ALLEGRO_TIMER *timer
                    , MAPPA_t &mappa
                    , AUDIO_t &audio ){
 
-	bool menu = true;
+    bool menu = true;
     int scelta;
     int mapx, mapy;
 

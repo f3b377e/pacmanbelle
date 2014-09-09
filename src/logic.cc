@@ -56,13 +56,15 @@ return false;
 
 static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int posx, int posy)
 {
-
     switch (direzione){
         case FERMO:
             return false;
             break;
 		case GIU:
 			posy ++;
+			if(posy >= m.r || posy < 0)
+                return false;
+
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
 			   && m.mappa[posy][posx]!='Q')
@@ -70,6 +72,9 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
 		break;
 		case SU:
 		    posy --;
+		    if(posy >= m.r || posy < 0)
+                return false;
+
             if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
 			   && m.mappa[posy][posx]!='Q')
@@ -77,6 +82,8 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
 		break;
 		case SX:
 		    posx --;
+            if(posx >= m.c+1 || posx < 0)
+                return false;
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
 			   && m.mappa[posy][posx]!='Q')
@@ -84,6 +91,8 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
 		break;
 		case DX:
 		    posx ++;
+            if(posx >= m.c+1 || posx < 0)
+                return false;
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
 			   && m.mappa[posy][posx]!='Q')
@@ -139,44 +148,44 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
     else if(tasto[RIGHT])
         pg.succdir= DX;
 
+    if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q')
+        pac_mangia(m,pg,a);
+
     if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){
         pg.dir = pg.succdir;
         pg.precdir = pg.dir;
     }
 
-        switch (pg.dir){
-           case SU:
+    switch (pg.dir){
+        case SU:
             succy -= BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh, succx, succy, BLOCKSIZE, BLOCKSIZE))
                 pg.y -= pg.movespeed;
             else
                 pg.dir = FERMO;
-           break;
-           case GIU:
+        break;
+        case GIU:
             succy += BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
                 pg.y += pg.movespeed;
             else
                 pg.dir = FERMO;
-           break;
-           case SX:
+        break;
+        case SX:
             succx -= BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
                 pg.x -= pg.movespeed;
             else
                 pg.dir = FERMO;
-           break;
-           case DX:
+        break;
+        case DX:
             succx += BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
                 pg.x += pg.movespeed;
             else
                 pg.dir = FERMO;
-           break;
+        break;
     }
-
-    if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q')
-        pac_mangia(m,pg,a);
 
     if (pg.x < OFFSETX + 1 && pg.dir == SX)
         pg.x = 28 * BLOCKSIZE + OFFSETX;
@@ -269,23 +278,6 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
                 inserisci(testa, coda, u.x -1, u.y);
 			   }
     }
-
-/*
-    ofstream file("data/map/bfs.txt");
-
-    for (int i = 0; i < m.r; i++){
-        for (int j=0; j < m.c +1; j++){
-            if (matt[i][j] >= 0 && matt[i][j] < 10)
-                file <<"0"<< matt[i][j]<<" ";
-            else
-                file << matt[i][j]<<" ";
-        }
-    file<<"\n";
-    }
-
-    scrivi_mappa_su_file(m,"data/map/mappa.txt");
-*/
-
     int minore = matt[fy][fx];
     dir = SX;
 

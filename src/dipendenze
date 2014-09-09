@@ -1,4 +1,6 @@
-game.o: game.cc logic.h io.h gui.h data_struct.h
-gui.o: gui.cc data_struct.h gui.h io.h
-io.o: io.cc data_struct.h logic.h io.h gui.h
-logic.o: logic.cc data_struct.h logic.h io.h gui.h
+debug.o: debug.cc data_struct.h debug.h
+game.o: game.cc data_struct.h io.h logic.h gui.h init.h
+gui.o: gui.cc data_struct.h gui.h io.h logic.h
+init.o: init.cc data_struct.h logic.h io.h
+io.o: io.cc data_struct.h logic.h
+logic.o: logic.cc data_struct.h logic.h io.h
