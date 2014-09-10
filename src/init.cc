@@ -123,8 +123,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.sourcey = 0;
 	pacman.x = 7*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
-	pacman.stato = 1;   		/**< da 1 a 3 per la gestione della sprites di pacman*/
-	pacman.vita = 3;		    /**< Vite di pacman che possono essere minimo 0 massimo 3*/
+	pacman.vita = 0;		    /**< Vite di pacman che possono essere minimo 0 massimo 3*/
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */

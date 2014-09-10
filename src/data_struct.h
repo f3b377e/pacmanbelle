@@ -62,7 +62,6 @@ struct PLAYER_t{
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/
 	float x;		    /**< Coordinata x schermo*/
 	float y;		    /**< Coordinata y schermo*/
-	int stato;		    /**< da 1 a tre che indica che immagine è in esecuzione*/
 	int vita;		    /**< Vite di pacman che possono essere minimo 0 massimo 3*/
 	bool potente;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	int punteggio;		/**< punteggio attuale*/

@@ -453,3 +453,33 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 	}
 }
 
+
+bool collision_pacman(const PLAYER_t &pg, const FANTASMA_t &f)
+{
+    int fx = (f.x - OFFSETX) /BLOCKSIZE;
+    int fy = (f.y - OFFSETY) /BLOCKSIZE;
+    int px = (pg.x - OFFSETX) /BLOCKSIZE;
+    int py = (pg.y - OFFSETY) /BLOCKSIZE;
+    int ph = py + BLOCKSIZE;
+    int pw = px + BLOCKSIZE;
+    int fh = fy + BLOCKSIZE;
+    int fw = fx + BLOCKSIZE;
+
+    if (( fx>px && fx<pw || fw>px && fw<pw )
+        &&
+        ( fy>py && fy<ph || fh>py && fh<ph ))
+       return true;
+    else
+        return false;
+}
+
+void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato)
+{
+    pg.mangiato = true;
+    if (pg.vita >0){
+        pg.vita--;
+        stato = CARICA;
+    }
+    else
+        stato = GAME_OVER;
+}

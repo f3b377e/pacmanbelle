@@ -169,7 +169,9 @@ int main(int argc, char *argv[]){
                 }
                 move_pacman(pacman, mappa, audio, tasto);
                 move_blinky(mappa, pacman, blinky);
-                move_pinky(mappa, pacman, pinky);
+             //   if (collision_pacman(pacman,blinky))
+             //       death_pacman(pacman,stato_gioco);
+            // move_pinky(mappa, pacman, pinky);
             //  move_clyde(mappa, pacman, clyde);
             //  move_inky(mappa, pacman, inky);
                 break;
@@ -190,6 +192,7 @@ int main(int argc, char *argv[]){
                 break;
 
                 case GAME_OVER:
+                    draw_gameover(font, bitmap);
                 break;
 
                 case QUIT:

@@ -31,5 +31,9 @@ void draw_countdown(const FONT_t &, const BITMAP_t &, const MAPPA_t &);
 /** Stampa il fantasma*/
 void draw_fantasma(FANTASMA_t&);
 
+/** Stampa gAME oVER*/
+void draw_gameover(const FONT_t &, const BITMAP_t &);
+
+
 
 #endif /* STAMPA_H_ */
