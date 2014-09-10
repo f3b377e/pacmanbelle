@@ -121,7 +121,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
-	pacman.x = 12*BLOCKSIZE+OFFSETX;
+	pacman.x = 7*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
 	pacman.stato = 1;   		/**< da 1 a 3 per la gestione della sprites di pacman*/
 	pacman.vita = 3;		    /**< Vite di pacman che possono essere minimo 0 massimo 3*/

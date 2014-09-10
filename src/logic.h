@@ -15,4 +15,10 @@ void move_blinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 /** Gestisce il Movimento di Pinky*/
 void move_pinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 
+/** Gestisce il Movimento di Inky*/
+void move_inky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+
+/** Gestisce il Movimento di Clyde*/
+void move_clyde(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+
 #endif /* LOGIC_H_ */

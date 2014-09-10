@@ -244,7 +244,7 @@ static ELEM_t estrai(lista &testa, lista &coda){
 static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
-    int matt[m.r][m.c];
+    int matt[m.r][m.c +1];
     //inizializzo la mappa a infinito (-1)
     for (int j = 0; j < m.c +1; j++)
         for (int i=0; i < m.r; i++)
@@ -253,11 +253,27 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
     ELEM_t *testa = NULL;
     ELEM_t *coda = NULL;
 
-    matt[pgy][pgx] = 0;
+    switch(f.dir){
+    case SU:
+        matt[fy +1][fx] = -2;
+        break;
+    case DX:
+        matt[fy][fx -1] = -2;
+        break;
+    case SX:
+        matt[fy][fx +1] = -2;
+        break;
+    case GIU:
+        matt[fy -1][fx] = -2;
+        break;
+    }
+    if (matt[pgy][pgx] != -2)
+        matt[pgy][pgx] = 0;
     inserisci(testa, coda, pgx, pgy);
 
     while (testa!= NULL){
         ELEM_t u = estrai(testa, coda);
+
             if ( matt[u.y -1][u.x] == -1 && controllo_percorso(m, SU, u.x, u.y)){
                 matt[u.y -1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y -1);
@@ -278,7 +294,21 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
                 inserisci(testa, coda, u.x -1, u.y);
 			   }
     }
-    int minore = matt[fy][fx];
+/*
+
+    ofstream s("data/map/bfs.txt");
+    for (int i = 0; i < m.r; i++){
+        for (int j=0; j < m.c +1; j++){
+            if (matt[i][j] >= 0 && matt[i][j] <= 9)
+                s <<"0"<< matt[i][j]<<" ";
+            else
+                s << matt[i][j]<<" ";
+        }
+    s<<"\n";
+    }
+*/
+
+    int minore = 10000;
     dir = SX;
 
     //su
@@ -301,8 +331,31 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
         minore = matt[fy][fx -1];
         dir = SX;
     }
-
     return dir;
+
+}
+
+
+static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f){
+
+int fx = (f.x - OFFSETX) /BLOCKSIZE;
+int fy = (f.y - OFFSETY) /BLOCKSIZE;
+
+    int count = 0;
+    if (controllo_percorso(m,SU,fx,fy))
+        count++;
+    if (controllo_percorso(m,DX,fx,fy))
+        count++;
+    if (controllo_percorso(m,SX,fx,fy))
+        count++;
+    if (controllo_percorso(m,GIU,fx,fy))
+        count++;
+
+    if (count >2)
+        return true;
+    else
+        return false;
+
 }
 
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
@@ -314,11 +367,11 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int check_x = fx * BLOCKSIZE + OFFSETX;
     int check_y = fy * BLOCKSIZE + OFFSETY;
 
+    f.succdir = bfs(m, f, fx, fy, px, py);
 
-    if(check_x == f.x && check_y == f.y)
-        f.succdir = bfs(m, f, fx, fy, px, py);
-
-    f.dir = f.succdir;
+    if(check_x == f.x && check_y == f.y){
+        f.dir = f.succdir;
+    }
 
     switch (f.dir){
         case FERMO:
@@ -336,9 +389,7 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
             f.x += f.movespeed;
 	   break;
 	}
-
 }
-
 
 void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 {
@@ -349,11 +400,40 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int check_x = fx * BLOCKSIZE + OFFSETX;
     int check_y = fy * BLOCKSIZE + OFFSETY;
 
+    switch(pg.dir){
+    case FERMO:{
+        switch(pg.precdir){
+        case SU:
+            f.succdir = bfs(m, f, fx, fy, px -4, py -4);
+            break;
+        case DX:
+            f.succdir = bfs(m, f, fx, fy, px +4, py);
+            break;
+        case SX:
+            f.succdir = bfs(m, f, fx, fy, px -4, py);
+            break;
+        case GIU:
+            f.succdir = bfs(m, f, fx, fy, px, py +4);
+            break;
+        }
+        }break;
+    case SU:
+        f.succdir = bfs(m, f, fx, fy, px -4, py -4);
+        break;
+    case DX:
+        f.succdir = bfs(m, f, fx, fy, px +4, py);
+        break;
+    case SX:
+        f.succdir = bfs(m, f, fx, fy, px -4, py);
+        break;
+    case GIU:
+        f.succdir = bfs(m, f, fx, fy, px, py +4);
+        break;
+    }
 
-    if(check_x == f.x && check_y == f.y)
-        f.succdir = bfs(m, f, fx, fy, px, py);
-
-    f.dir = f.succdir;
+    if(check_x == f.x && check_y == f.y){
+        f.dir = f.succdir;
+    }
 
     switch (f.dir){
         case FERMO:
@@ -371,5 +451,5 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
             f.x += f.movespeed;
 	   break;
 	}
-
 }
+

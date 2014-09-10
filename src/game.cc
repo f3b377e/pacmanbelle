@@ -169,7 +169,9 @@ int main(int argc, char *argv[]){
                 }
                 move_pacman(pacman, mappa, audio, tasto);
                 move_blinky(mappa, pacman, blinky);
-                //move_pinky(mappa, pacman, pinky);
+                move_pinky(mappa, pacman, pinky);
+            //  move_clyde(mappa, pacman, clyde);
+            //  move_inky(mappa, pacman, inky);
                 break;
 
                 case PAUSA:

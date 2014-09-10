@@ -74,7 +74,8 @@ struct PLAYER_t{
 /**Struttura contenente i dati del singolo fantasma*/
 struct FANTASMA_t{
 	DIREZ dir;		    /**< Stato attuale della direzione del fantasma*/
-	DIREZ succdir;      /**< Stato della sucessiva direzione di pacman*/
+    DIREZ precdir;      /**< Stato della precedente direzione del fantasma*/
+	DIREZ succdir;      /**< Stato della sucessiva direzione del fantasma*/
 	float movespeed;	/**< Velocità del fantasma*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/

@@ -90,34 +90,31 @@ void debug_console(ALLEGRO_TIMER *timer
                     cin>>s;
                     if (s==0)
                         s = (-1);
-                    else if (s==1)
-                        s = (-1);
-                    else if (s==2){
+                    else if (s==1){
                         cout<<"\n Blinky: \n";
                         cout<<"\n\t x = "<<blinky.x;
                         cout<<"\n\t y = "<<blinky.y;
                         mapx = (blinky.x - OFFSETX)/BLOCKSIZE;
                         mapy = (blinky.y - OFFSETY)/BLOCKSIZE;
-                        cout<<"\n\t char casella: "<<mappa.mappa[mapx][mapy];
+                        cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
                         cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
                         cout<<"\n\t velocità attuale "<<blinky.movespeed;
-                        cout<<"\n\t Direzione:  "<<"   attuale:"<<blinky.dir
-                            <<"   attuale:"<<blinky.succdir
+                        cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<blinky.dir
+                            <<"   successiva:"<<blinky.succdir
                             <<endl;
                     }
-                    else if (s==3){
+                    else if (s==2){
                         cout<<"\n Pinky: \n";
                         cout<<"\n\t x = "<<pinky.x;
                         cout<<"\n\t y = "<<pinky.y;
                         mapx = (pinky.x - OFFSETX)/BLOCKSIZE;
                         mapy = (pinky.y - OFFSETY)/BLOCKSIZE;
-                        cout<<"\n\t char casella: "<<mappa.mappa[mapx][mapy];
+                        cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
                         cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
                         cout<<"\n\t velocità attuale "<<pinky.movespeed;
-                        cout<<"\n\t Direzione:  "<<"   attuale:"<<pinky.dir
-                            <<"   attuale:"<<pinky.succdir
+                        cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<pinky.dir
+                            <<"   successiva:"<<pinky.succdir
                             <<endl;
-                        break;
                     }
                 }while (s>=0);
         		break;
