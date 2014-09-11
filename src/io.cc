@@ -60,7 +60,7 @@ static void alloca_mappa(MAPPA_t &m)
 static void dealloca_mappa(MAPPA_t &m)
 {
     for(int i=0;i<m.r;i++)
-    delete m.mappa[i];
+        delete m.mappa[i];
     delete m.mappa;
     m.mappa = NULL;
 }
@@ -73,8 +73,11 @@ void load_map(MAPPA_t& m,const char filename[])
     if (!f)
         cout<<"File Error!";
 
-    if (m.mappa != NULL)
-            dealloca_mappa(m);
+    if (m.mappa != NULL){
+        dealloca_mappa(m);
+    cout<<"\nMap Deleted!!";
+
+    }
 
     f>>m.r>>m.c;
     alloca_mappa(m);

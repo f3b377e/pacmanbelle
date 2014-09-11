@@ -355,7 +355,6 @@ int fy = (f.y - OFFSETY) /BLOCKSIZE;
         return true;
     else
         return false;
-
 }
 
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
@@ -454,20 +453,21 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 }
 
 
-bool collision_pacman(const PLAYER_t &pg, const FANTASMA_t &f)
+bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
 {
-    int fx = (f.x - OFFSETX) /BLOCKSIZE;
-    int fy = (f.y - OFFSETY) /BLOCKSIZE;
-    int px = (pg.x - OFFSETX) /BLOCKSIZE;
-    int py = (pg.y - OFFSETY) /BLOCKSIZE;
-    int ph = py + BLOCKSIZE;
-    int pw = px + BLOCKSIZE;
-    int fh = fy + BLOCKSIZE;
-    int fw = fx + BLOCKSIZE;
+    float dist = 3;
+    float px = p.x + dist;
+    float py = p.y + dist;
+    float fx = f.x + dist;
+    float fy = f.y + dist;
+    float ph = p.y + BLOCKSIZE -dist;
+    float pw = p.x + BLOCKSIZE -dist;
+    float fh = f.y + BLOCKSIZE -dist;
+    float fw = f.x + BLOCKSIZE -dist;
 
-    if (( fx>px && fx<pw || fw>px && fw<pw )
+    if (( fx>=px && fx<=pw || fw>=px && fw<=pw )
         &&
-        ( fy>py && fy<ph || fh>py && fh<ph ))
+        ( fy>=py && fy<=ph || fh>=py && fh<=ph ))
        return true;
     else
         return false;
@@ -475,11 +475,11 @@ bool collision_pacman(const PLAYER_t &pg, const FANTASMA_t &f)
 
 void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato)
 {
-    pg.mangiato = true;
     if (pg.vita >0){
         pg.vita--;
         stato = CARICA;
     }
-    else
+    else{
         stato = GAME_OVER;
+    }
 }

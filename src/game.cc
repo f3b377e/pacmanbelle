@@ -78,21 +78,6 @@ int main(int argc, char *argv[]){
     FANTASMA_t blinky, pinky, inky, clyde;
     PLAYER_t pacman;
 
-    //Pac-Man
-    init_pacman(pacman);
-
-    //Blinky
-    init_blinky(blinky);
-
-    //Pinky
-    init_pinky(pinky);
-
-    //Inki
-    init_inky(inky);
-
-    //Clyde
-    init_clyde(clyde);
-
     //Font
     FONT_t font;
     init_font(font);
@@ -148,10 +133,16 @@ int main(int argc, char *argv[]){
             //Update
             switch(stato_gioco){
                 case MENU:
+                    pacman.vita = 2;
                     anima_menu(menu,tasto,stato_gioco);
                 break;
                 case CARICA:
                     load_map(mappa, filenamelv1);
+                    init_clyde(clyde);
+                    init_pacman(pacman);
+                    init_blinky(blinky);
+                    init_inky(inky);
+                    init_pinky(pinky);
                     if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
                         cout<<"\n Audio Error! - non parte pacman_beginning";
                     al_stop_timer(timer);
@@ -169,8 +160,10 @@ int main(int argc, char *argv[]){
                 }
                 move_pacman(pacman, mappa, audio, tasto);
                 move_blinky(mappa, pacman, blinky);
-             //   if (collision_pacman(pacman,blinky))
-             //       death_pacman(pacman,stato_gioco);
+                if (collision_pacman(pacman,blinky)){
+                    death_pacman(pacman,stato_gioco);
+                    al_stop_sample(&audio.id);
+                }
             // move_pinky(mappa, pacman, pinky);
             //  move_clyde(mappa, pacman, clyde);
             //  move_inky(mappa, pacman, inky);
@@ -192,7 +185,7 @@ int main(int argc, char *argv[]){
                 break;
 
                 case GAME_OVER:
-                    draw_gameover(font, bitmap);
+                    al_stop_sample(&audio.id);
                 break;
 
                 case QUIT:
@@ -225,7 +218,7 @@ int main(int argc, char *argv[]){
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
 									"SCORE: %d",pacman.punteggio);
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
-									"LIVES: ");
+									"LIVES: %d",pacman.vita);
                     al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
                     al_flip_display();
                 break;
@@ -245,6 +238,9 @@ int main(int argc, char *argv[]){
                 break;
 
                 case GAME_OVER:
+                    draw_gameover(font, bitmap);
+                    al_rest(1.0);
+                    stato_gioco = MENU;
                 break;
 
                 case QUIT:
