@@ -92,6 +92,7 @@ int main(int argc, char *argv[]){
 
     //Stato iniziale del gioco
     int livello = 1;
+    bool caricamappa = true;
     STATO_GIOCO stato_gioco = MENU;
 
     //MAPPA
@@ -137,7 +138,8 @@ int main(int argc, char *argv[]){
                     anima_menu(menu,tasto,stato_gioco);
                 break;
                 case CARICA:
-                    load_map(mappa, filenamelv1);
+                    if (caricamappa)
+                        load_map(mappa, filenamelv1);
                     init_clyde(clyde);
                     init_pacman(pacman);
                     init_blinky(blinky);
@@ -151,23 +153,31 @@ int main(int argc, char *argv[]){
                     if (!al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id))
                         cout<<"\n Audio Error! - non parte audio siren";
                     stato_gioco = PLAY;
-                break;
+                    break;
 
                 case PLAY:
-                if(tasto[SPACE]){
-                    stato_gioco = PAUSA;
-                    tasto[SPACE] = false;
-                }
-                move_pacman(pacman, mappa, audio, tasto);
-                move_blinky(mappa, pacman, blinky);
-                if (collision_pacman(pacman,blinky)){
-                    death_pacman(pacman,stato_gioco);
-                    al_stop_sample(&audio.id);
-                }
-            // move_pinky(mappa, pacman, pinky);
-            //  move_clyde(mappa, pacman, clyde);
-            //  move_inky(mappa, pacman, inky);
-                break;
+                    if(tasto[SPACE]){
+                        stato_gioco = PAUSA;
+                        tasto[SPACE] = false;
+                    }
+
+                    move_pacman(pacman, mappa, audio, tasto);
+                    move_blinky(mappa, pacman, blinky);
+                    move_pinky(mappa, pacman, pinky);
+                //  move_clyde(mappa, pacman, clyde);
+                //  move_inky(mappa, pacman, inky);
+
+
+                    if (collision_pacman(pacman,blinky) ||
+                        collision_pacman(pacman,pinky) ||
+                        collision_pacman(pacman,inky) ||
+                        collision_pacman(pacman,clyde)){
+                        death_pacman(pacman, stato_gioco, caricamappa);
+                        al_stop_sample(&audio.id);
+                    }
+                    if (victory(mappa,stato_gioco, caricamappa))
+                        al_stop_sample(&audio.id);
+                    break;
 
                 case PAUSA:
                     al_stop_sample(&audio.id);
@@ -176,21 +186,25 @@ int main(int argc, char *argv[]){
                         al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
                         tasto[SPACE] = false;
                     }
-                break;
+                    break;
 
                 case CONTROLS:
-                break;
+                    break;
 
                 case HIGH_SCORE:
-                break;
+                    break;
 
                 case GAME_OVER:
                     al_stop_sample(&audio.id);
-                break;
+                    break;
+
+                case WIN:
+                    al_stop_sample(&audio.id);
+                    break;
 
                 case QUIT:
                     done = true;
-                break;
+                    break;
             }
             redraw = true;
         }
@@ -239,6 +253,12 @@ int main(int argc, char *argv[]){
 
                 case GAME_OVER:
                     draw_gameover(font, bitmap);
+                    al_rest(1.0);
+                    stato_gioco = MENU;
+                break;
+
+                case WIN:
+                    draw_win(font, bitmap);
                     al_rest(1.0);
                     stato_gioco = MENU;
                 break;

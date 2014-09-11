@@ -231,88 +231,96 @@ static ELEM_t estrai(lista &testa, lista &coda){
     return temp;
 }
 
-/** Restituisce la direzione in cui deve andare il nemico per arrivare a pacman
-  * pgx e pgy sono le coordinate di pacman sulla matrice, sono rese come parametri perché cosi
-  * possono essergli passati valori diversi per i diversi fantasmini.
-  * fx, fy sono le coordinate del fantasma sulla matrice
-  * l'algoritmo per calcolare la distanza migliore utilizza una coda dove inserisce i nodi adiacenti.
-  * inizialmente tutti i nodi sono posti a infinito
-  * l'inserimento avviene in testa e l'estrazione in coda.
-  * inizialmente viene inserito nella coda la sorgente con la posizione di pac-man con distanza 0
-  * ogni volta che un nodo viene estratto dalla coda, viene aggiunta una unità alla distanza del nodo padre.
-  */
+void controlla_pos()
+{
+
+
+
+}
+
 static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
-    int matt[m.r][m.c +1];
+    int matt[m.r][m.c + 1];
     //inizializzo la mappa a infinito (-1)
     for (int j = 0; j < m.c +1; j++)
         for (int i=0; i < m.r; i++)
-            matt[i][j] = -1;
+            matt[i][j] = -2;
+
+    for (int j = 0; j < m.c; j++)
+        for (int i=0; i < m.r; i++)
+            if (m.mappa[i][j] == 'P' || m.mappa[i][j] == 'Q' || m.mappa[i][j] == '0')
+                matt[i][j] = -1;
+
+    if (pgy >= m.r)
+        pgy = m.r -1;
+    if (pgx >= m.c)
+        pgx = m.c -1;
+    if (pgy < 0)
+        pgy = 0;
+    if (pgx < 0)
+        pgx = 0;
+
+    switch(f.dir){
+        case SU:
+            matt[fy +1][fx] = -2;
+            break;
+        case DX:
+            matt[fy][fx -1] = -2;
+            break;
+        case SX:
+            matt[fy][fx +1] = -2;
+            break;
+        case GIU:
+            matt[fy -1][fx] = -2;
+            break;
+        }
+
+    if (matt[pgy][pgx] == -2){
+        if (matt[pgy+1][pgx] == -2 &&
+            matt[pgy-1][pgx] == -2 &&
+            matt[pgy][pgx+1] == -2 &&
+            matt[pgy][pgx-1] == -2 &&
+            pgx != m.r && pgy != m.c
+            && pgx != 0 && pgy != 0)
+                matt[pgy-1][pgx] = -1;
+        matt[pgy][pgx] = -1;
+    }
 
     ELEM_t *testa = NULL;
     ELEM_t *coda = NULL;
 
-    switch(f.dir){
-    case SU:
-        matt[fy +1][fx] = -2;
-        break;
-    case DX:
-        matt[fy][fx -1] = -2;
-        break;
-    case SX:
-        matt[fy][fx +1] = -2;
-        break;
-    case GIU:
-        matt[fy -1][fx] = -2;
-        break;
-    }
-    if (matt[pgy][pgx] != -2)
-        matt[pgy][pgx] = 0;
     inserisci(testa, coda, pgx, pgy);
 
     while (testa!= NULL){
         ELEM_t u = estrai(testa, coda);
 
-            if ( matt[u.y -1][u.x] == -1 && controllo_percorso(m, SU, u.x, u.y)){
+            if ( matt[u.y -1][u.x] == -1){
                 matt[u.y -1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y -1);
 			   }
 
-            if ( matt[u.y][u.x +1] == -1 && controllo_percorso(m, DX, u.x, u.y)){
+            if ( matt[u.y][u.x +1] == -1){
                 matt[u.y][u.x +1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x +1, u.y);
 			   }
 
-            if ( matt[u.y +1][u.x] == -1 && controllo_percorso(m, GIU, u.x, u.y)){
+            if ( matt[u.y +1][u.x] == -1){
                 matt[u.y +1][u.x] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x, u.y +1);
 			   }
 
-            if ( matt[u.y][u.x -1] == -1  && controllo_percorso(m, SX, u.x, u.y)){
+            if ( matt[u.y][u.x -1] == -1){
                 matt[u.y][u.x -1] = matt[u.y][u.x] +1;
                 inserisci(testa, coda, u.x -1, u.y);
 			   }
     }
-/*
-
-    ofstream s("data/map/bfs.txt");
-    for (int i = 0; i < m.r; i++){
-        for (int j=0; j < m.c +1; j++){
-            if (matt[i][j] >= 0 && matt[i][j] <= 9)
-                s <<"0"<< matt[i][j]<<" ";
-            else
-                s << matt[i][j]<<" ";
-        }
-    s<<"\n";
-    }
-*/
 
     int minore = 10000;
     dir = SX;
 
     //su
-    if (matt[fy -1][fx] > -1 && matt[fy -1][fx] < minore){
+    if (matt[fy -1][fx] > -1  && matt[fy -1][fx] < minore){
         minore = matt[fy -1][fx];
         dir = SU;
     }
@@ -341,20 +349,27 @@ static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f){
 int fx = (f.x - OFFSETX) /BLOCKSIZE;
 int fy = (f.y - OFFSETY) /BLOCKSIZE;
 
-    int count = 0;
-    if (controllo_percorso(m,SU,fx,fy))
-        count++;
-    if (controllo_percorso(m,DX,fx,fy))
-        count++;
-    if (controllo_percorso(m,SX,fx,fy))
-        count++;
-    if (controllo_percorso(m,GIU,fx,fy))
-        count++;
-
-    if (count >2)
-        return true;
-    else
-        return false;
+    switch (f.dir){
+    case FERMO:
+        break;
+    case SU:
+        if (controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
+            return false;
+        break;
+    case GIU:
+        if (controllo_percorso(m,GIU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
+            return false;
+        break;
+    case SX:
+        if (controllo_percorso(m,SX,fx,fy) && !controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,GIU,fx,fy))
+            return false;
+        break;
+    case DX:
+        if (controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,GIU,fx,fy))
+            return false;
+        break;
+    }
+    return true;
 }
 
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
@@ -366,9 +381,11 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int check_x = fx * BLOCKSIZE + OFFSETX;
     int check_y = fy * BLOCKSIZE + OFFSETY;
 
-    f.succdir = bfs(m, f, fx, fy, px, py);
+
 
     if(check_x == f.x && check_y == f.y){
+        if (do_bfs(m,f))
+            f.succdir = bfs(m, f, fx, fy, px, py);
         f.dir = f.succdir;
     }
 
@@ -399,38 +416,40 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int check_x = fx * BLOCKSIZE + OFFSETX;
     int check_y = fy * BLOCKSIZE + OFFSETY;
 
-    switch(pg.dir){
-    case FERMO:{
-        switch(pg.precdir){
-        case SU:
-            f.succdir = bfs(m, f, fx, fy, px -4, py -4);
-            break;
-        case DX:
-            f.succdir = bfs(m, f, fx, fy, px +4, py);
-            break;
-        case SX:
-            f.succdir = bfs(m, f, fx, fy, px -4, py);
-            break;
-        case GIU:
-            f.succdir = bfs(m, f, fx, fy, px, py +4);
-            break;
-        }
-        }break;
-    case SU:
-        f.succdir = bfs(m, f, fx, fy, px -4, py -4);
-        break;
-    case DX:
-        f.succdir = bfs(m, f, fx, fy, px +4, py);
-        break;
-    case SX:
-        f.succdir = bfs(m, f, fx, fy, px -4, py);
-        break;
-    case GIU:
-        f.succdir = bfs(m, f, fx, fy, px, py +4);
-        break;
-    }
 
     if(check_x == f.x && check_y == f.y){
+        if (do_bfs(m,f)){
+            switch(pg.dir){
+                case FERMO:{
+                    switch(pg.precdir){
+                        case SU:
+                            f.succdir = bfs(m, f, fx, fy, px -4, py -4);
+                            break;
+                        case DX:
+                            f.succdir = bfs(m, f, fx, fy, px +4, py);
+                            break;
+                        case SX:
+                            f.succdir = bfs(m, f, fx, fy, px -4, py);
+                            break;
+                        case GIU:
+                            f.succdir = bfs(m, f, fx, fy, px, py +4);
+                            break;
+                        }
+                    }break;
+                case SU:
+                    f.succdir = bfs(m, f, fx, fy, px -4, py -4);
+                    break;
+                case DX:
+                    f.succdir = bfs(m, f, fx, fy, px +4, py);
+                    break;
+                case SX:
+                    f.succdir = bfs(m, f, fx, fy, px -4, py);
+                    break;
+                case GIU:
+                    f.succdir = bfs(m, f, fx, fy, px, py +4);
+                    break;
+            }
+        }
         f.dir = f.succdir;
     }
 
@@ -455,7 +474,7 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 
 bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
 {
-    float dist = 3;
+    float dist = 5;
     float px = p.x + dist;
     float py = p.y + dist;
     float fx = f.x + dist;
@@ -473,13 +492,27 @@ bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
         return false;
 }
 
-void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato)
+void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato, bool &caricamappa)
 {
     if (pg.vita >0){
         pg.vita--;
         stato = CARICA;
+        caricamappa = false;
     }
     else{
         stato = GAME_OVER;
+        caricamappa = true;
     }
+}
+
+
+bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa)
+{
+    for (int i=0; i<m.r; i++)
+        for (int j=0; j<m.c; j++)
+            if (m.mappa[i][j] == 'P' || m.mappa[i][j]  == 'Q')
+                return false;
+    stato = WIN;
+    caricamappa = true;
+    return true;
 }

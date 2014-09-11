@@ -34,6 +34,8 @@ void draw_fantasma(FANTASMA_t&);
 /** Stampa gAME oVER*/
 void draw_gameover(const FONT_t &, const BITMAP_t &);
 
+/** Stampa gAME oVER*/
+void draw_win(const FONT_t &, const BITMAP_t &);;
 
 
 #endif /* STAMPA_H_ */

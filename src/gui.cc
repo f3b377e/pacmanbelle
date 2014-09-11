@@ -252,6 +252,13 @@ void draw_fantasma(FANTASMA_t& pg)
 void draw_gameover(const FONT_t &f, const BITMAP_t &b)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
-    al_draw_text(f.h2, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** gAME oVER ****");
+    al_draw_text(f.h1, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** g a m e  o v e r ****");
+    al_flip_display();
+}
+
+void draw_win(const FONT_t &f, const BITMAP_t &b)
+{
+    al_clear_to_color(al_map_rgb(0,0,0));
+    al_draw_text(f.h1, al_map_rgb(15,255,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** v i c t o r y ****");
     al_flip_display();
 }

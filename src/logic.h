@@ -25,6 +25,9 @@ void move_clyde(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 bool collision_pacman(const PLAYER_t &, const FANTASMA_t &);
 
 /** Gestisce la morte di pacman*/
-void death_pacman(PLAYER_t &, STATO_GIOCO &);
+void death_pacman(PLAYER_t &, STATO_GIOCO &, bool &);
+
+/** Controlla la vittoria del giocatore*/
+bool victory(const MAPPA_t &, STATO_GIOCO &, bool &);
 
 #endif /* LOGIC_H_ */

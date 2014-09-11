@@ -121,7 +121,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
-	pacman.x = 7*BLOCKSIZE+OFFSETX;
+	pacman.x = 12*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
