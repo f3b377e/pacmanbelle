@@ -90,6 +90,9 @@ void init_bitmap(BITMAP_t& b)
     b.frutta= al_load_bitmap("data/img/frutta.png");
 	 if (b.frutta == NULL)
         cout<<"\n Bitmap Error, frutta.png error!";
+    b.morte= al_load_bitmap("data/img/morte.png");
+	 if (b.frutta == NULL)
+        cout<<"\n Bitmap Error, morte.png error!";
 }
 
 void init_mappa(MAPPA_t& m)

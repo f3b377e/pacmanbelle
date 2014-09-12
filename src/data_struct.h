@@ -20,8 +20,10 @@
 const int SCREENWIDTH = 650;	                /**< Larghezza dello schermo*/
 const int SCREENHEIGHT = 600;	                /**< Altezza dello schermo*/
 const int OFFSETX = SCREENWIDTH *15/100;	    /**< Margine laterale della finestra */
-const int OFFSETY = SCREENHEIGHT *4/100;        /** < Margine Superiore della finestra */
+const int OFFSETY = SCREENHEIGHT *4/100;        /**< Margine Superiore della finestra */
 const int FPS = 25;		                        /**< Frame del gioco*/
+const int FM = 10;                              /**< Frame del movimento delle animazioni*/
+const int TM = 1;                               /**< Timer del gioco*/
 const int BLOCKSIZE = 16;	                    /**< Blocchi della mappa*/
 const char filenamelv1[] = "data/map/map1.txt"; /**< Mappa Livello 1 */
 const char filenamelv2[] = "data/map/map2.txt"; /**< Mappa Livello 2 */
@@ -32,7 +34,7 @@ enum DIREZ{GIU, SU, SX, DX, FERMO};
  *  Stato del gioco, serve per il loop della funzione ::main per eseguire diverse
  *  operazioni a seconda della fase in cui si trova il gioco
  */
-enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, GAME_OVER, QUIT, WIN};
+enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, MORTE, GAME_OVER, QUIT, WIN};
 
 /** Valori che verranno attribuiti all'array tasto del ::main*/
 enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE};
@@ -108,6 +110,7 @@ struct BITMAP_t{
     ALLEGRO_BITMAP *autotile;       /** Immagine per la composizione della mappa */
     ALLEGRO_BITMAP *f_pericolo;     /** Fantasmi spaventati e morti*/
     ALLEGRO_BITMAP *frutta;         /** Immagine della frutta*/
+    ALLEGRO_BITMAP *morte;          /** Immagine della morte di pacman */
 };
 
 /**Struttura contenente i font del gioco*/

@@ -9,6 +9,9 @@
 /** Funzione che si occupa del movimento di pacman*/
 void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
 
+/**Gestisce il movimento ondulatorio dei fantasmi all'inizio del gioco*/
+void ondula(float &y);
+
 /** Gestisce il Movimento di Blinky*/
 void move_blinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 

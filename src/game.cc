@@ -40,12 +40,15 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     int menu = 1;
+    int morte = -1;
     bool redraw = true;
     bool done = false;
     bool tasto[8] = {false, false, false, false, false, false, false, false};
     ALLEGRO_DISPLAY *display =  NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
+    ALLEGRO_TIMER *timer2 = NULL;
+    ALLEGRO_TIMER *timermov = NULL;
 
     /**Inizializzazioni: */
 
@@ -73,6 +76,8 @@ int main(int argc, char *argv[]){
     event_queue  = al_create_event_queue();
     //Timer
     timer = al_create_timer(1.0 / FPS);
+    timer2 = al_create_timer(1.0 / TM);
+    timermov = al_create_timer(1.0 / FM);
 
     //Player
     FANTASMA_t blinky, pinky, inky, clyde;
@@ -102,10 +107,11 @@ int main(int argc, char *argv[]){
     //Event Queue registries
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    al_register_event_source(event_queue, al_get_timer_event_source(timer2));
+    al_register_event_source(event_queue, al_get_timer_event_source(timermov));
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
-
     //Loop del Gioco;
     while(!done)
     {
@@ -156,6 +162,7 @@ int main(int argc, char *argv[]){
                     break;
 
                 case PLAY:
+                    al_start_timer(timer2);
                     if(tasto[SPACE]){
                         stato_gioco = PAUSA;
                         tasto[SPACE] = false;
@@ -163,20 +170,38 @@ int main(int argc, char *argv[]){
 
                     move_pacman(pacman, mappa, audio, tasto);
                     move_blinky(mappa, pacman, blinky);
-                    move_pinky(mappa, pacman, pinky);
+                    if(al_get_timer_count(timer2) > 2)
+                        move_pinky(mappa, pacman, pinky);
+                    else
+                        ondula(pinky.y);
                 //  move_clyde(mappa, pacman, clyde);
+                        //ondula(clyde.y);
                 //  move_inky(mappa, pacman, inky);
-
-
+                        //ondula(inky.y);
                     if (collision_pacman(pacman,blinky) ||
                         collision_pacman(pacman,pinky) ||
                         collision_pacman(pacman,inky) ||
                         collision_pacman(pacman,clyde)){
-                        death_pacman(pacman, stato_gioco, caricamappa);
+                        stato_gioco = MORTE;
                         al_stop_sample(&audio.id);
+                        al_start_timer(timermov);
+                        al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
                     }
                     if (victory(mappa,stato_gioco, caricamappa))
                         al_stop_sample(&audio.id);
+                    break;
+
+                case MORTE:
+                    if(event.timer.source == timermov){
+                        morte++;
+                        if(morte >= 11){
+                            morte = 0;
+                            death_pacman(pacman, stato_gioco, caricamappa);
+                            al_stop_timer(timer2);
+                            al_stop_timer(timermov);
+                            al_set_timer_count(timer2, 0);
+                        }
+                    }
                     break;
 
                 case PAUSA:
@@ -234,6 +259,13 @@ int main(int argc, char *argv[]){
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
 									"LIVES: %d",pacman.vita);
                     al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
+                    al_flip_display();
+                break;
+
+                case MORTE:
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    draw_path(bitmap, mappa);
+                    al_draw_bitmap_region(bitmap.morte, 17*morte, 0, 17, 17, pacman.x, pacman.y,0);
                     al_flip_display();
                 break;
 

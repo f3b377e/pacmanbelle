@@ -372,6 +372,26 @@ int fy = (f.y - OFFSETY) /BLOCKSIZE;
     return true;
 }
 
+void ondula(float &y){
+    static bool d = true;
+    if(y > 13 * BLOCKSIZE + OFFSETY && d == true){
+        y--;
+        if(y <= 13 * BLOCKSIZE + OFFSETY){
+            d = false;
+            y++;
+        }
+    }
+    else if(y < 15 * BLOCKSIZE + OFFSETY && d == false){
+        y++;
+        if(y >= 15 * BLOCKSIZE + OFFSETY){
+            d = true;
+            y--;
+        }
+    }
+
+}
+
+
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 {
     int fx = (f.x - OFFSETX) /BLOCKSIZE;
@@ -471,7 +491,6 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 	}
 }
 
-
 bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
 {
     float dist = 5;
@@ -504,7 +523,6 @@ void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato, bool &caricamappa)
         caricamappa = true;
     }
 }
-
 
 bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa)
 {
