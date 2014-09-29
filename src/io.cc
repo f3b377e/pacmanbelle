@@ -91,8 +91,11 @@ void load_map(MAPPA_t& m, char fileliv[], int livello)
     alloca_mappa(m);
 
     for(int i = 0; i < m.r; i++){
-        for(int j = 0; j < m.c; j++){
-            f>>m.mappa[i][j];
+        for(int j = 0; j <= m.c; j++){
+            if(j == m.c)
+                m.mappa[i][j] = 0;
+            else
+                f>>m.mappa[i][j];
         }
     }
 }

@@ -69,10 +69,12 @@ void debug_console(ALLEGRO_TIMER *timer
         		cout<<"\n Mappa \n";
        			for(int i = 0; i < mappa.r; i++)
                 	{
-                    		for(int j = 0; j < mappa.c; j++)
+                    		for(int j = 0; j <= mappa.c; j++)
                     		{
-                        		cout<<mappa.mappa[i][j]<<" ";
-
+                                if(mappa.mappa[i][j] != 0)
+                                    cout<<mappa.mappa[i][j]<<" ";
+                                else
+                                    cout<<"null";
                     		}
                     		cout<<endl;
                 	}

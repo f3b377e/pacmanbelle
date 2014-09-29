@@ -40,6 +40,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     int menu = 1;
+    //int morte = -1;
     char fileliv[20];
     bool redraw = true;
     bool done = false;
@@ -48,6 +49,8 @@ int main(int argc, char *argv[]){
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_TIMER *timer2 = NULL;
+    //ALLEGRO_TIMER *timermov = NULL;
+
     /**Inizializzazioni: */
 
     //Inizializzazione Allegro
@@ -76,6 +79,7 @@ int main(int argc, char *argv[]){
     //Timer
     timer = al_create_timer(1.0 / FPS);
     timer2 = al_create_timer(1.0 / FTIME);
+    //timermov = al_create_timer(1.0 / FMOV);
 
     //Player
     PLAYER_t pacman;
@@ -112,6 +116,7 @@ int main(int argc, char *argv[]){
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_timer_event_source(timer2));
+    //al_register_event_source(event_queue, al_get_timer_event_source(timermov));
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
@@ -209,6 +214,7 @@ int main(int argc, char *argv[]){
                             clyde.stato = INSEGUIMENTO;
                         }
                     }
+
                 break;
 
                 case MORTE:
@@ -253,6 +259,7 @@ int main(int argc, char *argv[]){
                 break;
 
                 case CARICA:
+                    draw_path(bitmap, mappa);
                 break;
 
                 case PLAY:
@@ -263,6 +270,11 @@ int main(int argc, char *argv[]){
                     draw_fantasma(inky);
                     draw_fantasma(pinky);
                     draw_fantasma(clyde);
+                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
+									"SCORE: %d",pacman.punteggio);
+                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
+									"LIVES: %d",pacman.vita);
+                    al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
                     al_flip_display();
                 break;
 
@@ -274,9 +286,13 @@ int main(int argc, char *argv[]){
                 break;
 
                 case CONTROLS:
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    al_flip_display();
                 break;
 
                 case HIGH_SCORE:
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    al_flip_display();
                 break;
 
                 case GAME_OVER:

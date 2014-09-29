@@ -8,7 +8,7 @@
 
 /** Funzione che si occupa del movimento di pacman*/
 void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
-
+/** Funzione che si occupa di cambiare le immagini della mappa quando pacman mangia i pallini*/
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio);
 
 /**Gestisce il movimento ondulatorio dei fantasmi all'inizio del gioco*/

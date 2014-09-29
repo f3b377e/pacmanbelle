@@ -128,13 +128,16 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
     else if(tasto[RIGHT])
         pg.succdir= DX;
 
-    //ho aggiunto questa condizione per evitare rallentamenti nel cambio direzione, nel caso si voglia tornare indietro
+    /*
+     * ho aggiunto questa condizione per evitare rallentamenti nel cambio direzione
+     * nel caso si voglia tornare indietro dalla direzione dove si sta
+     */
     if((pg.succdir != SU || pg.dir != GIU)
         && (pg.succdir != GIU || pg.dir != SU)
         && (pg.succdir != SX || pg.dir != DX)
         && (pg.succdir != DX || pg.dir != SX))
     {
-        if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){
+        if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){ //controlla che la direzione dove si vuole andare sia il percorso
             pg.dir = pg.succdir;
             pg.precdir = pg.dir;
         }
@@ -150,9 +153,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
         case SU:
             succy -= BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh, succx, succy, BLOCKSIZE, BLOCKSIZE)){
-                if(pg.y > succy+BLOCKSIZE && pg.y-pg.movespeed < succy+BLOCKSIZE){
+                if(pg.y > succy+BLOCKSIZE && pg.y-pg.movespeed < succy+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
                     pg.y = succy+BLOCKSIZE;
-                }
                 else
                     pg.y -= pg.movespeed;
             }
@@ -162,9 +164,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
         case GIU:
             succy += BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
-                if(pg.y < succy && pg.y+pg.movespeed > succy){
+                if(pg.y < succy && pg.y+pg.movespeed > succy)
                     pg.y = succy;
-                }
                 else
                     pg.y += pg.movespeed;
             }
@@ -174,9 +175,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
         case SX:
             succx -= BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
-                if(pg.x > succx+BLOCKSIZE && pg.x-pg.movespeed < succx+BLOCKSIZE){
+                if(pg.x > succx+BLOCKSIZE && pg.x-pg.movespeed < succx+BLOCKSIZE)
                     pg.x = succx+BLOCKSIZE;
-                }
                 else
                     pg.x -= pg.movespeed;
             }
@@ -186,9 +186,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
         case DX:
             succx += BLOCKSIZE;
             if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
-                if(pg.x < succx && pg.x+pg.movespeed > succx){
+                if(pg.x < succx && pg.x+pg.movespeed > succx)
                     pg.x = succx;
-                }
                 else
                     pg.x += pg.movespeed;
             }
@@ -200,9 +199,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
     if (pg.x < OFFSETX + 1 && pg.dir == SX)
         pg.x = 27 * BLOCKSIZE + OFFSETX;
 
-    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX){
+    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
         pg.x = OFFSETX;
-    }
 }
 
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
@@ -414,21 +412,20 @@ static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f)
 
 void ondula(const MAPPA_t &m, FANTASMA_t &f)
 {
-    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
     int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
 
     switch(f.dir){
         case FERMO:
         break;
         case SU:
-            if (!controllo_percorso(m,SU,fx,fy))
+            if (fy <= 12)
                 f.dir = GIU;
             else
                 f.y -= f.movespeed;
 
         break;
         case GIU:
-            if(!controllo_percorso(m,GIU,fx,fy))
+            if(fy >= 15)
                 f.dir = SU;
             else
                 f.y += f.movespeed;
@@ -461,16 +458,33 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         case FERMO:
         break;
         case SU:
-            f.y -= f.movespeed;
+            check_y -= BLOCKSIZE;
+            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
+                f.y = check_y+BLOCKSIZE;
+            else
+                f.y -= f.movespeed;
+
         break;
         case GIU:
-            f.y += f.movespeed;
+            check_y += BLOCKSIZE;
+            if(f.y < check_y && f.y+f.movespeed > check_y)
+                f.y = check_y;
+            else
+                f.y += f.movespeed;
         break;
         case SX:
-            f.x -= f.movespeed;
+            check_x -= BLOCKSIZE;
+            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
+                f.x = check_x+BLOCKSIZE;
+            else
+                f.x -= f.movespeed;
         break;
         case DX:
-            f.x += f.movespeed;
+            check_x += BLOCKSIZE;
+            if(f.x < check_x && f.x+f.movespeed > check_x)
+                f.x = check_x;
+            else
+                f.x += f.movespeed;
         break;
     }
 
@@ -523,16 +537,33 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         case FERMO:
         break;
         case SU:
-            f.y -= f.movespeed;
+            check_y -= BLOCKSIZE;
+            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
+                f.y = check_y+BLOCKSIZE;
+            else
+                f.y -= f.movespeed;
+
         break;
         case GIU:
-            f.y += f.movespeed;
+            check_y += BLOCKSIZE;
+            if(f.y < check_y && f.y+f.movespeed > check_y)
+                f.y = check_y;
+            else
+                f.y += f.movespeed;
         break;
         case SX:
-            f.x -= f.movespeed;
+            check_x -= BLOCKSIZE;
+            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
+                f.x = check_x+BLOCKSIZE;
+            else
+                f.x -= f.movespeed;
         break;
         case DX:
-            f.x += f.movespeed;
+            check_x += BLOCKSIZE;
+            if(f.x < check_x && f.x+f.movespeed > check_x)
+                f.x = check_x;
+            else
+                f.x += f.movespeed;
         break;
     }
     if (f.x < OFFSETX + 1 && f.dir == SX)
@@ -592,16 +623,33 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
         case FERMO:
         break;
         case SU:
-            f.y -= f.movespeed;
+            check_y -= BLOCKSIZE;
+            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
+                f.y = check_y+BLOCKSIZE;
+            else
+                f.y -= f.movespeed;
+
         break;
         case GIU:
-            f.y += f.movespeed;
+            check_y += BLOCKSIZE;
+            if(f.y < check_y && f.y+f.movespeed > check_y)
+                f.y = check_y;
+            else
+                f.y += f.movespeed;
         break;
         case SX:
-            f.x -= f.movespeed;
+            check_x -= BLOCKSIZE;
+            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
+                f.x = check_x+BLOCKSIZE;
+            else
+                f.x -= f.movespeed;
         break;
         case DX:
-            f.x += f.movespeed;
+            check_x += BLOCKSIZE;
+            if(f.x < check_x && f.x+f.movespeed > check_x)
+                f.x = check_x;
+            else
+                f.x += f.movespeed;
         break;
     }
     if (f.x < OFFSETX + 1 && f.dir == SX)
@@ -620,10 +668,15 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
     int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
     int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
-    int x = 1; //coordinata x della casella alla quale punterà il fantasma
-    int y = m.r-1; //coordinata y della casella alla quale punterà il fantasma
+    int x; //coordinata x della casella alla quale punterà il fantasma
+    int y; //coordinata y della casella alla quale punterà il fantasma
 
-    if(px >= fx-8 && px <= fx+8 && py >= fy-8 && py <= fy+8){
+    if(fx >= px - 8 && fx <= px + 8 && fy >= py - 8 && fy <= py + 8 )
+    {
+        x = 1;
+        y = m.r-1;
+    }
+    else{
         x = px;
         y = py;
     }
@@ -643,16 +696,33 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         case FERMO:
         break;
         case SU:
-            f.y -= f.movespeed;
+            check_y -= BLOCKSIZE;
+            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
+                f.y = check_y+BLOCKSIZE;
+            else
+                f.y -= f.movespeed;
+
         break;
         case GIU:
-            f.y += f.movespeed;
+            check_y += BLOCKSIZE;
+            if(f.y < check_y && f.y+f.movespeed > check_y)
+                f.y = check_y;
+            else
+                f.y += f.movespeed;
         break;
         case SX:
-            f.x -= f.movespeed;
+            check_x -= BLOCKSIZE;
+            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
+                f.x = check_x+BLOCKSIZE;
+            else
+                f.x -= f.movespeed;
         break;
         case DX:
-            f.x += f.movespeed;
+            check_x += BLOCKSIZE;
+            if(f.x < check_x && f.x+f.movespeed > check_x)
+                f.x = check_x;
+            else
+                f.x += f.movespeed;
         break;
     }
     if (f.x < OFFSETX + 1 && f.dir == SX)
@@ -663,7 +733,3 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     }
 }
 
-bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
-{
-    return false;
-}

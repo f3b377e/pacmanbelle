@@ -119,7 +119,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.dir = FERMO;
 	pacman.precdir = SX;
 	pacman.succdir = FERMO;
-	pacman.movespeed = 4;
+	pacman.movespeed = 5;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
 	pacman.x = 13*BLOCKSIZE+OFFSETX;
@@ -127,6 +127,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
+	pacman.vita = 2;
     pacman.img = al_load_bitmap("data/img/pacman2.png");
 	 if (pacman.img == NULL)
         cout<<"\n Bitmap Error, pacman2 error!";
