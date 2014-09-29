@@ -197,6 +197,9 @@ void draw_path(const BITMAP_t &b, const MAPPA_t &m)
                 case 'Z':
                     al_draw_bitmap_region(b.autotile, 48, 80, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
                 break;
+                case 'O':
+                    al_draw_bitmap_region(b.autotile, 32, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                break;
             }
         }
     }
@@ -205,16 +208,16 @@ void draw_path(const BITMAP_t &b, const MAPPA_t &m)
 void draw_pacman(PLAYER_t& pg)
 {
     pg.sourcex += al_get_bitmap_width(pg.img)/3;
-	if(pg.sourcex >= al_get_bitmap_width(pg.img))
-		pg.sourcex = 0;
+    if(pg.sourcex >= al_get_bitmap_width(pg.img))
+        pg.sourcex = 0;
 
-	pg.sourcey = pg.dir;
-	if(pg.dir == FERMO){
-		pg.sourcey = pg.precdir;
-		pg.sourcex = 0;
+    pg.sourcey = pg.dir;
+    if(pg.dir == FERMO){
+        pg.sourcey = pg.precdir;
+        pg.sourcex = 0;
     }
 
-	al_draw_bitmap_region(pg.img, pg.sourcex
+    al_draw_bitmap_region(pg.img, pg.sourcex
                           , pg.sourcey * al_get_bitmap_height(pg.img)/4
                           , al_get_bitmap_width(pg.img)/3
                           , al_get_bitmap_height(pg.img)/4
@@ -224,41 +227,20 @@ void draw_pacman(PLAYER_t& pg)
 void draw_fantasma(FANTASMA_t& pg)
 {
     pg.sourcex += al_get_bitmap_width(pg.img)/2;
-	if(pg.sourcex >= al_get_bitmap_width(pg.img))
-		pg.sourcex = 0;
-    switch (pg.dir){
-    case SU:
-    	pg.sourcey = 0 * al_get_bitmap_height(pg.img)/4;
-    break;
-    case GIU:
-    	pg.sourcey = 1 * al_get_bitmap_height(pg.img)/4;
-    break;
-    case DX:
-    	pg.sourcey = 3 * al_get_bitmap_height(pg.img)/4;
-    break;
-    case SX:
-    	pg.sourcey = 2 * al_get_bitmap_height(pg.img)/4;
-    break;
-    default:
-    	pg.sourcey = 0 * al_get_bitmap_height(pg.img)/4;
-    break;
-    }
-
-	al_draw_bitmap_region(pg.img, pg.sourcex, pg.sourcey, al_get_bitmap_width(pg.img)/2, al_get_bitmap_height(pg.img)/4, pg.x, pg.y, 0);
+    if(pg.sourcex >= al_get_bitmap_width(pg.img))
+        pg.sourcex = 0;
+    pg.sourcey = pg.dir;
+    al_draw_bitmap_region(pg.img, pg.sourcex
+                          , pg.sourcey * al_get_bitmap_height(pg.img)/4
+                          , al_get_bitmap_width(pg.img)/2
+                          , al_get_bitmap_height(pg.img)/4
+                          , pg.x, pg.y, 0);
 }
-
-
 
 void draw_gameover(const FONT_t &f, const BITMAP_t &b)
 {
-    al_clear_to_color(al_map_rgb(0,0,0));
-    al_draw_text(f.h1, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** g a m e  o v e r ****");
-    al_flip_display();
 }
 
 void draw_win(const FONT_t &f, const BITMAP_t &b)
 {
-    al_clear_to_color(al_map_rgb(0,0,0));
-    al_draw_text(f.h1, al_map_rgb(15,255,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** v i c t o r y ****");
-    al_flip_display();
 }

@@ -9,8 +9,10 @@
 /** Funzione che si occupa del movimento di pacman*/
 void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
 
+void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio);
+
 /**Gestisce il movimento ondulatorio dei fantasmi all'inizio del gioco*/
-void ondula(float &y);
+void ondula(const MAPPA_t &m, FANTASMA_t &f);
 
 /** Gestisce il Movimento di Blinky*/
 void move_blinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
@@ -19,7 +21,7 @@ void move_blinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 void move_pinky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
 
 /** Gestisce il Movimento di Inky*/
-void move_inky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);
+void move_inky(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &, FANTASMA_t &);
 
 /** Gestisce il Movimento di Clyde*/
 void move_clyde(const MAPPA_t &, const PLAYER_t &, FANTASMA_t &);

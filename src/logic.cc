@@ -11,6 +11,7 @@
 //allegro header
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
@@ -32,26 +33,26 @@ static bool collision (const DIREZ &direzione, const float sx, const float sy,
                 const float dy, const float dw, const float dh)
 {
     switch (direzione){
-    case FERMO:
-    break;
-    case SX:
-        if (sx <= dx + dw)
-            return true;
-    break;
-    case DX:
-        if (sx+sw >= dx)
-            return true;
-    break;
-    case SU:
-        if (sy <= dy+dh)
-            return true;
-    break;
-    case GIU:
-        if (sy+sh >= dy)
-            return true;
-    break;
+        case FERMO:
+        break;
+        case SX:
+            if (sx <= dx + dw)
+                return true;
+        break;
+        case DX:
+            if (sx+sw >= dx)
+                return true;
+        break;
+        case SU:
+            if (sy <= dy+dh)
+                return true;
+        break;
+        case GIU:
+            if (sy+sh >= dy)
+                return true;
+        break;
     }
-return false;
+    return false;
 }
 
 static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int posx, int posy)
@@ -67,7 +68,8 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
 
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
-			   && m.mappa[posy][posx]!='Q')
+			   && m.mappa[posy][posx]!='Q'
+			   && m.mappa[posy][posx]!= 0)
                 return false;
 		break;
 		case SU:
@@ -77,7 +79,8 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
 
             if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
-			   && m.mappa[posy][posx]!='Q')
+			   && m.mappa[posy][posx]!='Q'
+			   && m.mappa[posy][posx]!= 0)
 				return false;
 		break;
 		case SX:
@@ -86,7 +89,8 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
                 return false;
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
-			   && m.mappa[posy][posx]!='Q')
+			   && m.mappa[posy][posx]!='Q'
+			   && m.mappa[posy][posx]!= 0)
 				return false;
 		break;
 		case DX:
@@ -95,37 +99,13 @@ static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int pos
                 return false;
 			if(m.mappa[posy][posx]!='P'
 			   && m.mappa[posy][posx]!='0'
-			   && m.mappa[posy][posx]!='Q')
+			   && m.mappa[posy][posx]!='Q'
+			   && m.mappa[posy][posx]!= 0)
 				return false;
 		break;
     }
     return true;
 }
-
-static void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
-{
-	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
-	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
-    static bool p_eaten = false;
-
-
-    if (m.mappa[mapy][mapx] == 'P')
-        pg.punteggio += 10;
-    if (m.mappa[mapy][mapx] == 'Q')
-        pg.punteggio += 100;
-
-    m.mappa[mapy][mapx] = '0';
-
-    if(!p_eaten){
-        al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
-        p_eaten = true;
-    }
-    else{
-        al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
-        p_eaten = false;
-    }
-}
-
 
 void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
 {
@@ -148,172 +128,233 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
     else if(tasto[RIGHT])
         pg.succdir= DX;
 
-    if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q')
-        pac_mangia(m,pg,a);
-
-    if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){
+    //ho aggiunto questa condizione per evitare rallentamenti nel cambio direzione, nel caso si voglia tornare indietro
+    if((pg.succdir != SU || pg.dir != GIU)
+        && (pg.succdir != GIU || pg.dir != SU)
+        && (pg.succdir != SX || pg.dir != DX)
+        && (pg.succdir != DX || pg.dir != SX))
+    {
+        if (controllo_percorso(m,pg.succdir,mapx,mapy) && (succx == pg.x) && (succy == pg.y)){
+            pg.dir = pg.succdir;
+            pg.precdir = pg.dir;
+        }
+    }
+    else{
         pg.dir = pg.succdir;
         pg.precdir = pg.dir;
     }
 
     switch (pg.dir){
+        case FERMO:
+        break;
         case SU:
             succy -= BLOCKSIZE;
-            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh, succx, succy, BLOCKSIZE, BLOCKSIZE))
-                pg.y -= pg.movespeed;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh, succx, succy, BLOCKSIZE, BLOCKSIZE)){
+                if(pg.y > succy+BLOCKSIZE && pg.y-pg.movespeed < succy+BLOCKSIZE){
+                    pg.y = succy+BLOCKSIZE;
+                }
+                else
+                    pg.y -= pg.movespeed;
+            }
             else
                 pg.dir = FERMO;
         break;
         case GIU:
             succy += BLOCKSIZE;
-            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
-                pg.y += pg.movespeed;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
+                if(pg.y < succy && pg.y+pg.movespeed > succy){
+                    pg.y = succy;
+                }
+                else
+                    pg.y += pg.movespeed;
+            }
             else
                 pg.dir = FERMO;
         break;
         case SX:
             succx -= BLOCKSIZE;
-            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
-                pg.x -= pg.movespeed;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
+                if(pg.x > succx+BLOCKSIZE && pg.x-pg.movespeed < succx+BLOCKSIZE){
+                    pg.x = succx+BLOCKSIZE;
+                }
+                else
+                    pg.x -= pg.movespeed;
+            }
             else
                 pg.dir = FERMO;
         break;
         case DX:
             succx += BLOCKSIZE;
-            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE))
-                pg.x += pg.movespeed;
+            if ( controllo_percorso(m,pg.dir,mapx,mapy) || !collision(pg.dir, pg.x, pg.y, pgw, pgh,succx, succy, BLOCKSIZE, BLOCKSIZE)){
+                if(pg.x < succx && pg.x+pg.movespeed > succx){
+                    pg.x = succx;
+                }
+                else
+                    pg.x += pg.movespeed;
+            }
             else
                 pg.dir = FERMO;
         break;
     }
 
     if (pg.x < OFFSETX + 1 && pg.dir == SX)
-        pg.x = 28 * BLOCKSIZE + OFFSETX;
+        pg.x = 27 * BLOCKSIZE + OFFSETX;
 
-    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
+    if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX){
         pg.x = OFFSETX;
-}
-
-/** inserisce in testa alla lista, la lista serve per la bfs */
-static void inserisci(lista &testa, lista &coda, int x, int y){
-    ELEM_t *temp = new ELEM_t;
-    temp->x = x;
-    temp->y = y;
-    temp->succ = NULL;
-    temp->prec = testa;
-
-    if (testa != NULL) //lista nn vuota
-        testa->succ = temp;
-    if (coda == NULL)
-        coda = temp;
-    testa = temp;
-}
-
-/** estrae in coda alla lista, la lista serve per la bfs */
-static ELEM_t estrai(lista &testa, lista &coda){
-
-    ELEM_t temp;
-
-    temp.x = coda->x;
-    temp.y = coda->y;
-    temp.prec = NULL;
-    temp.succ = NULL;
-    if (coda->succ == NULL){ //ultimo elemento in coda;
-        coda = NULL;
-        testa = NULL;
-        delete [] coda;
-    }else{
-        ELEM_t *p = coda->succ;
-        p->prec = NULL;
-        delete [] coda;
-        coda = p;
     }
-    return temp;
+}
+
+void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
+{
+	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
+	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
+    static bool p_eaten = false;
+
+
+    if (m.mappa[mapy][mapx] == 'P')
+        pg.punteggio += 10;
+    if (m.mappa[mapy][mapx] == 'Q')
+        pg.punteggio += 100;
+
+    if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q'){
+        m.mappa[mapy][mapx] = '0';
+        if(!p_eaten){
+            al_play_sample(audio.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+            p_eaten = true;
+        }
+        else{
+            al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+            p_eaten = false;
+        }
+    }
 }
 
 void controlla_pos()
 {
+}
 
+/** estrae in coda alla lista, la lista serve per la bfs */
+static ELEM_t estrai(lista &testa)
+{
+    if(testa == NULL)
+        return *testa;
 
+    ELEM_t tmp;
+    tmp.x = testa->x;
+    tmp.y = testa->y;
+    tmp.succ = NULL;
 
+    ELEM_t *temp;
+    temp = testa;
+    testa = testa->succ;
+    delete[] temp;
+
+    return tmp;
+}
+
+/** inserisce in coda alla lista, la lista serve per la bfs */
+static void inserisci(lista &testa, int x, int y)
+{
+    ELEM_t *temp = new ELEM_t;
+    temp->x = x;
+    temp->y = y;
+    temp->succ = NULL;
+
+    if(testa == NULL){ //lista nonvuota
+        testa = temp;
+        return;
+    }
+    ELEM_t * punt = testa;
+    while(punt->succ != NULL){
+        punt = punt->succ;
+    }
+    punt->succ = temp;
 }
 
 static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
-    int matt[m.r][m.c + 1];
-    //inizializzo la mappa a infinito (-1)
-    for (int j = 0; j < m.c +1; j++)
-        for (int i=0; i < m.r; i++)
-            matt[i][j] = -2;
+    int matt[m.r][m.c];
 
-    for (int j = 0; j < m.c; j++)
-        for (int i=0; i < m.r; i++)
-            if (m.mappa[i][j] == 'P' || m.mappa[i][j] == 'Q' || m.mappa[i][j] == '0')
-                matt[i][j] = -1;
-
-    if (pgy >= m.r)
-        pgy = m.r -1;
-    if (pgx >= m.c)
-        pgx = m.c -1;
-    if (pgy < 0)
-        pgy = 0;
-    if (pgx < 0)
-        pgx = 0;
-
-    switch(f.dir){
-        case SU:
-            matt[fy +1][fx] = -2;
-            break;
-        case DX:
-            matt[fy][fx -1] = -2;
-            break;
-        case SX:
-            matt[fy][fx +1] = -2;
-            break;
-        case GIU:
-            matt[fy -1][fx] = -2;
-            break;
-        }
-
-    if (matt[pgy][pgx] == -2){
-        if (matt[pgy+1][pgx] == -2 &&
-            matt[pgy-1][pgx] == -2 &&
-            matt[pgy][pgx+1] == -2 &&
-            matt[pgy][pgx-1] == -2 &&
-            pgx != m.r && pgy != m.c
-            && pgx != 0 && pgy != 0)
-                matt[pgy-1][pgx] = -1;
-        matt[pgy][pgx] = -1;
+    if(pgy >= m.r){
+        pgy = m.r - 2;
+    }
+    if(pgx >= m.c){
+        pgx = m.c - 2;
+    }
+    if(pgy < 0){
+        pgy = 1;
+    }
+    if(pgx < 0){
+        pgx = 1;
     }
 
+    //inizializzo la mappa a infinito (-1)
+    for(int j = 0; j < m.c; j++){
+        for(int i=0; i< m.r; i++){
+            if(m.mappa[i][j] == 'P' || m.mappa[i][j] == 'Q' || m.mappa[i][j] == '0')
+                matt[i][j] = -1;
+            else
+                matt[i][j] = -2;
+        }
+    }
+
+    switch(f.dir){
+        case FERMO:
+        break;
+        case SU:
+            matt[fy + 1][fx] = -2;
+            break;
+        case DX:
+            matt[fy][fx - 1] = -2;
+            break;
+        case SX:
+            matt[fy][fx + 1] = -2;
+            break;
+        case GIU:
+            matt[fy - 1][fx] = -2;
+            break;
+    }
+
+    if(matt[pgy][pgx] == -2 &&
+       matt[pgy+1][pgx] == -2 &&
+       matt[pgy-1][pgx] == -2 &&
+       matt[pgy][pgx+1] == -2 &&
+       matt[pgy][pgx-1] == -2)
+    {
+        if(pgx < 13){
+            pgx = pgx + 2;
+        }
+        if(pgx > 13){
+            pgx = pgx - 2;
+        }
+    }
+
+
     ELEM_t *testa = NULL;
-    ELEM_t *coda = NULL;
 
-    inserisci(testa, coda, pgx, pgy);
+    inserisci(testa, pgx, pgy);
 
-    while (testa!= NULL){
-        ELEM_t u = estrai(testa, coda);
+    while (testa != NULL){
+        ELEM_t u = estrai(testa);
 
-            if ( matt[u.y -1][u.x] == -1){
-                matt[u.y -1][u.x] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x, u.y -1);
-			   }
-
-            if ( matt[u.y][u.x +1] == -1){
-                matt[u.y][u.x +1] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x +1, u.y);
-			   }
-
-            if ( matt[u.y +1][u.x] == -1){
-                matt[u.y +1][u.x] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x, u.y +1);
-			   }
-
-            if ( matt[u.y][u.x -1] == -1){
-                matt[u.y][u.x -1] = matt[u.y][u.x] +1;
-                inserisci(testa, coda, u.x -1, u.y);
-			   }
+        if(matt[u.y - 1][u.x] == -1){
+            matt[u.y - 1][u.x] = matt[u.y][u.x] + 1;
+            inserisci(testa, u.x, u.y - 1);
+        }
+        if(matt[u.y][u.x + 1] == -1){
+            matt[u.y][u.x + 1] = matt[u.y][u.x] + 1;
+            inserisci(testa, u.x + 1, u.y);
+        }
+        if(matt[u.y + 1][u.x] == -1){
+            matt[u.y + 1][u.x] = matt[u.y][u.x] + 1;
+            inserisci(testa, u.x, u.y + 1);
+        }
+        if(matt[u.y][u.x - 1] == -1){
+            matt[u.y][u.x - 1] = matt[u.y][u.x] + 1;
+            inserisci(testa, u.x - 1, u.y);
+        }
     }
 
     int minore = 10000;
@@ -325,8 +366,8 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
         dir = SU;
     }
     //dx
-    if (matt[fy][fx +1] > -1 && matt[fy][fx +1] < minore){
-        minore = matt[fy][fx +1];
+    if(matt[fy][fx + 1] > -1 && matt[fy][fx + 1] < minore){
+        minore = matt[fy][fx + 1];
         dir = DX;
     }
     //giu
@@ -340,135 +381,78 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
         dir = SX;
     }
     return dir;
-
 }
 
+//Questa funzione fa in modo che la bfs venga eseguita in prossimità di un incrocio
+static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f)
+{
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
 
-static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f){
-
-int fx = (f.x - OFFSETX) /BLOCKSIZE;
-int fy = (f.y - OFFSETY) /BLOCKSIZE;
-
-    switch (f.dir){
-    case FERMO:
+    switch(f.dir){
+        case FERMO:
         break;
-    case SU:
-        if (controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
-            return false;
+        case SU:
+            if (controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
+                return false;
         break;
-    case GIU:
-        if (controllo_percorso(m,GIU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
-            return false;
+        case GIU:
+            if(controllo_percorso(m,GIU,fx,fy) && !controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SX,fx,fy))
+                return false;
         break;
-    case SX:
-        if (controllo_percorso(m,SX,fx,fy) && !controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,GIU,fx,fy))
-            return false;
+        case SX:
+            if(controllo_percorso(m, SX, fx, fy) && !controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m, GIU,fx,fy))
+                return false;
         break;
-    case DX:
-        if (controllo_percorso(m,DX,fx,fy) && !controllo_percorso(m,SU,fx,fy) && !controllo_percorso(m,GIU,fx,fy))
-            return false;
+        case DX:
+            if(controllo_percorso(m,DX, fx, fy) && !controllo_percorso(m, SU,fx, fy) && !controllo_percorso(m, GIU,fx,fy))
+                return false;
         break;
     }
     return true;
 }
 
-void ondula(float &y){
-    static bool d = true;
-    if(y > 13 * BLOCKSIZE + OFFSETY && d == true){
-        y--;
-        if(y <= 13 * BLOCKSIZE + OFFSETY){
-            d = false;
-            y++;
-        }
-    }
-    else if(y < 15 * BLOCKSIZE + OFFSETY && d == false){
-        y++;
-        if(y >= 15 * BLOCKSIZE + OFFSETY){
-            d = true;
-            y--;
-        }
-    }
+void ondula(const MAPPA_t &m, FANTASMA_t &f)
+{
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
 
+    switch(f.dir){
+        case FERMO:
+        break;
+        case SU:
+            if (!controllo_percorso(m,SU,fx,fy))
+                f.dir = GIU;
+            else
+                f.y -= f.movespeed;
+
+        break;
+        case GIU:
+            if(!controllo_percorso(m,GIU,fx,fy))
+                f.dir = SU;
+            else
+                f.y += f.movespeed;
+        break;
+        case SX:
+        break;
+        case DX:
+        break;
+    }
 }
 
 
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 {
-    int fx = (f.x - OFFSETX) /BLOCKSIZE;
-    int fy = (f.y - OFFSETY) /BLOCKSIZE;
-    int px = (pg.x - OFFSETX) /BLOCKSIZE;
-    int py = (pg.y - OFFSETY) /BLOCKSIZE;
-    int check_x = fx * BLOCKSIZE + OFFSETX;
-    int check_y = fy * BLOCKSIZE + OFFSETY;
-
-
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
+    int px = (pg.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede pacman
+    int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
+    int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
+    int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
 
     if(check_x == f.x && check_y == f.y){
-        if (do_bfs(m,f))
+        if(do_bfs(m,f)){
             f.succdir = bfs(m, f, fx, fy, px, py);
-        f.dir = f.succdir;
-    }
-
-    switch (f.dir){
-        case FERMO:
-        break;
-	   case SU:
-	        f.y -= f.movespeed;
-	   break;
-	   case GIU:
-            f.y += f.movespeed;
-	   break;
-	   case SX:
-            f.x -= f.movespeed;
-	   break;
-	   case DX:
-            f.x += f.movespeed;
-	   break;
-	}
-}
-
-void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
-{
-    int fx = (f.x - OFFSETX) /BLOCKSIZE;
-    int fy = (f.y - OFFSETY) /BLOCKSIZE;
-    int px = (pg.x - OFFSETX) /BLOCKSIZE;
-    int py = (pg.y - OFFSETY) /BLOCKSIZE;
-    int check_x = fx * BLOCKSIZE + OFFSETX;
-    int check_y = fy * BLOCKSIZE + OFFSETY;
-
-
-    if(check_x == f.x && check_y == f.y){
-        if (do_bfs(m,f)){
-            switch(pg.dir){
-                case FERMO:{
-                    switch(pg.precdir){
-                        case SU:
-                            f.succdir = bfs(m, f, fx, fy, px -4, py -4);
-                            break;
-                        case DX:
-                            f.succdir = bfs(m, f, fx, fy, px +4, py);
-                            break;
-                        case SX:
-                            f.succdir = bfs(m, f, fx, fy, px -4, py);
-                            break;
-                        case GIU:
-                            f.succdir = bfs(m, f, fx, fy, px, py +4);
-                            break;
-                        }
-                    }break;
-                case SU:
-                    f.succdir = bfs(m, f, fx, fy, px -4, py -4);
-                    break;
-                case DX:
-                    f.succdir = bfs(m, f, fx, fy, px +4, py);
-                    break;
-                case SX:
-                    f.succdir = bfs(m, f, fx, fy, px -4, py);
-                    break;
-                case GIU:
-                    f.succdir = bfs(m, f, fx, fy, px, py +4);
-                    break;
-            }
         }
         f.dir = f.succdir;
     }
@@ -476,61 +460,210 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     switch (f.dir){
         case FERMO:
         break;
-	   case SU:
-	        f.y -= f.movespeed;
-	   break;
-	   case GIU:
+        case SU:
+            f.y -= f.movespeed;
+        break;
+        case GIU:
             f.y += f.movespeed;
-	   break;
-	   case SX:
+        break;
+        case SX:
             f.x -= f.movespeed;
-	   break;
-	   case DX:
+        break;
+        case DX:
             f.x += f.movespeed;
-	   break;
-	}
+        break;
+    }
+
+    if (f.x < OFFSETX + 1 && f.dir == SX)
+        f.x = 27 * BLOCKSIZE + OFFSETX;
+
+    if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
+        f.x = OFFSETX;
+    }
+
+}
+
+void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
+{
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
+    int px = (pg.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede pacman
+    int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
+    int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
+    int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
+    int x = px; //coordinata x della casella alla quale punterà il fantasma
+    int y = py; //coordinata y della casella alla quale punterà il fantasma
+
+    switch(pg.precdir){
+        case FERMO:
+        break;
+        case SU:
+            x = px - 4;
+            y = py - 4;
+        break;
+        case GIU:
+            y = py + 4;
+        break;
+        case DX:
+            x = px + 4;
+        break;
+        case SX:
+            x = px - 4;
+        break;
+    }
+
+    if(check_x == f.x && check_y == f.y){
+        if(do_bfs(m,f)){
+            f.succdir = bfs(m, f, fx, fy, x, y);
+        }
+        f.dir = f.succdir;
+    }
+
+    switch (f.dir){
+        case FERMO:
+        break;
+        case SU:
+            f.y -= f.movespeed;
+        break;
+        case GIU:
+            f.y += f.movespeed;
+        break;
+        case SX:
+            f.x -= f.movespeed;
+        break;
+        case DX:
+            f.x += f.movespeed;
+        break;
+    }
+    if (f.x < OFFSETX + 1 && f.dir == SX)
+        f.x = 27 * BLOCKSIZE + OFFSETX;
+
+    if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
+        f.x = OFFSETX;
+    }
+}
+
+void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &b)
+{
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
+    int bx = (b.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede blinky
+    int by = (b.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede blinky
+    int px = (pg.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede pacman
+    int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
+    int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
+    int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
+    int x = px; //coordinata x della casella alla quale punterà il fantasma
+    int y = py; //coordinata y della casella alla quale punterà il fantasma
+
+    switch(pg.precdir){
+        case FERMO:
+        break;
+        case SU:
+           x = (((px-bx)*2)+bx);
+           y = (((py-2-by)*2)+by);
+        break;
+        case GIU:
+           x = (((px-bx)*2)+bx);
+           y = (((py+2-by)*2)+by);
+        break;
+        case DX:
+           x = (((px+2-bx)*2)+bx);
+           y = (((py-by)*2)+by);
+        break;
+        case SX:
+           x = (((px-2-bx)*2)+bx);
+           y = (((py-by)*2)+by);
+        break;
+    }
+    /*#ifdef DEBUG_MODE
+        al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
+        al_flip_display();
+    #endif // DEBUG_MODE
+    */
+    if(check_x == f.x && check_y == f.y){
+        if(do_bfs(m,f)){
+            f.succdir = bfs(m, f, fx, fy, x, y);
+        }
+        f.dir = f.succdir;
+    }
+
+    switch (f.dir){
+        case FERMO:
+        break;
+        case SU:
+            f.y -= f.movespeed;
+        break;
+        case GIU:
+            f.y += f.movespeed;
+        break;
+        case SX:
+            f.x -= f.movespeed;
+        break;
+        case DX:
+            f.x += f.movespeed;
+        break;
+    }
+    if (f.x < OFFSETX + 1 && f.dir == SX)
+        f.x = 27 * BLOCKSIZE + OFFSETX;
+
+    if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
+        f.x = OFFSETX;
+    }
+}
+
+void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
+{
+    int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
+    int fy = (f.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede il fantasma
+    int px = (pg.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede pacman
+    int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
+    int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
+    int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
+    int x = 1; //coordinata x della casella alla quale punterà il fantasma
+    int y = m.r-1; //coordinata y della casella alla quale punterà il fantasma
+
+    if(px >= fx-8 && px <= fx+8 && py >= fy-8 && py <= fy+8){
+        x = px;
+        y = py;
+    }
+    /*#ifdef DEBUG_MODE
+        al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
+        al_flip_display();
+    #endif // DEBUG_MODE
+    */
+    if(check_x == f.x && check_y == f.y){
+        if(do_bfs(m,f)){
+            f.succdir = bfs(m, f, fx, fy, x, y);
+        }
+        f.dir = f.succdir;
+    }
+
+    switch (f.dir){
+        case FERMO:
+        break;
+        case SU:
+            f.y -= f.movespeed;
+        break;
+        case GIU:
+            f.y += f.movespeed;
+        break;
+        case SX:
+            f.x -= f.movespeed;
+        break;
+        case DX:
+            f.x += f.movespeed;
+        break;
+    }
+    if (f.x < OFFSETX + 1 && f.dir == SX)
+        f.x = 27 * BLOCKSIZE + OFFSETX;
+
+    if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
+        f.x = OFFSETX;
+    }
 }
 
 bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
 {
-    float dist = 5;
-    float px = p.x + dist;
-    float py = p.y + dist;
-    float fx = f.x + dist;
-    float fy = f.y + dist;
-    float ph = p.y + BLOCKSIZE -dist;
-    float pw = p.x + BLOCKSIZE -dist;
-    float fh = f.y + BLOCKSIZE -dist;
-    float fw = f.x + BLOCKSIZE -dist;
-
-    if (( fx>=px && fx<=pw || fw>=px && fw<=pw )
-        &&
-        ( fy>=py && fy<=ph || fh>=py && fh<=ph ))
-       return true;
-    else
-        return false;
-}
-
-void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato, bool &caricamappa)
-{
-    if (pg.vita >0){
-        pg.vita--;
-        stato = CARICA;
-        caricamappa = false;
-    }
-    else{
-        stato = GAME_OVER;
-        caricamappa = true;
-    }
-}
-
-bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa)
-{
-    for (int i=0; i<m.r; i++)
-        for (int j=0; j<m.c; j++)
-            if (m.mappa[i][j] == 'P' || m.mappa[i][j]  == 'Q')
-                return false;
-    stato = WIN;
-    caricamappa = true;
-    return true;
+    return false;
 }

@@ -28,11 +28,14 @@ void debug_console(ALLEGRO_TIMER *timer
                    , FANTASMA_t &inky
                    , FANTASMA_t &clyde
                    , MAPPA_t &mappa
-                   , AUDIO_t &audio ){
+                   , AUDIO_t &audio
+                   , int &livello
+                   , bool &caricamappa
+                   , STATO_GIOCO &stato_gioco){
 
     bool menu = true;
     int scelta;
-    int mapx, mapy;
+    int mapx, mapy, liv;
 
 	al_stop_timer(timer);
 	cout<<"*******DEBUG_CONSOLE********"<<endl;
@@ -55,7 +58,7 @@ void debug_console(ALLEGRO_TIMER *timer
         		cout<<"\n\t y = "<<pacman.y;
                 cout<<"\n\t char casella: "<<mappa.mappa[mapx][mapy];
                 cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
-        		cout<<"\n\t velocità attuale "<<pacman.movespeed;
+        		cout<<"\n\t velocitÃ  attuale "<<pacman.movespeed;
                 cout<<"\n\t Direzione:   precedente:"<<pacman.precdir
                     <<"   attuale:"<<pacman.dir
                     <<"   attuale:"<<pacman.succdir
@@ -98,7 +101,7 @@ void debug_console(ALLEGRO_TIMER *timer
                         mapy = (blinky.y - OFFSETY)/BLOCKSIZE;
                         cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
                         cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
-                        cout<<"\n\t velocità attuale "<<blinky.movespeed;
+                        cout<<"\n\t velocitÃ  attuale "<<blinky.movespeed;
                         cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<blinky.dir
                             <<"   successiva:"<<blinky.succdir
                             <<endl;
@@ -111,20 +114,32 @@ void debug_console(ALLEGRO_TIMER *timer
                         mapy = (pinky.y - OFFSETY)/BLOCKSIZE;
                         cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
                         cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
-                        cout<<"\n\t velocità attuale "<<pinky.movespeed;
+                        cout<<"\n\t velocitÃ  attuale "<<pinky.movespeed;
                         cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<pinky.dir
                             <<"   successiva:"<<pinky.succdir
                             <<endl;
                     }
                 }while (s>=0);
         		break;
-    		}case 4:
-                break;
+    		}
+    		case 4:
+                cout<<"Livello: ";
+                cin>>liv;
+                if(liv < 0 || liv > 10)
+                    cout<<"Livello inesistente!\n";
+                else{
+                    livello = liv;
+                    stato_gioco = CARICA;
+                    caricamappa = true;
+                    menu = false;
+                }
+            break;
             case 5:
 
                 break;
             case 6:
                 menu = false;
+                al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
                 al_start_timer(timer);
                 break;
     		}

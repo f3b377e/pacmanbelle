@@ -66,7 +66,6 @@ void init_audio(AUDIO_t& a)
      a.pacman_extrapac = al_load_sample("data/sound/pacman_extrapac.wav");
 	 if (a.pacman_extrapac == NULL)
         	cout<<"\n Audio Error, pacman_extrapac.wav error!";
-
 }
 
 void init_bitmap(BITMAP_t& b)
@@ -113,7 +112,6 @@ void init_font(FONT_t& f)
     if (f.h1 == NULL)
         cout<<"\n Font Error, orbitron-black.ttf error!";
     f.h5 = al_load_font("data/font/orbitron-black.ttf", 20, 0);
-
 }
 
 void init_pacman (PLAYER_t& pacman)
@@ -124,7 +122,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
-	pacman.x = 12*BLOCKSIZE+OFFSETX;
+	pacman.x = 13*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
 	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
@@ -140,13 +138,13 @@ void init_blinky(FANTASMA_t &b)
     b.dir = SU;
     b.sourcex = 0;
     b.sourcey = 0;
+    b.stato = INSEGUIMENTO;
     b.movespeed = 4;
     b.x = 13 * BLOCKSIZE + OFFSETX;
     b.y = 13 * BLOCKSIZE + OFFSETY;
-    b.debole = false;
     b.mangiato = false;
     b.img = al_load_bitmap("data/img/fantasma1.png");
-	 if (b.img == NULL)
+    if(b.img == NULL)
         cout<<"\n Bitmap Error, blinky - fantasma1 error!";
 }
 
@@ -155,44 +153,43 @@ void init_pinky(FANTASMA_t &p)
     p.dir = SU;
     p.sourcex = 0;
     p.sourcey = 0;
+    p.stato = ONDULA;
     p.movespeed = 4;
     p.x = 11 * BLOCKSIZE + OFFSETX;
     p.y = 15 * BLOCKSIZE + OFFSETY;
-    p.debole = false;
     p.mangiato = false;
     p.img = al_load_bitmap("data/img/fantasma2.png");
-	 if (p.img == NULL)
+    if(p.img == NULL)
         cout<<"\n Bitmap Error, pinky - fantasma2 error!";
-
 }
 
 void init_inky(FANTASMA_t &i)
 {
-    i.dir = FERMO;
+    i.dir = SU;
     i.sourcex = 0;
     i.sourcey = 0;
+    i.stato = ONDULA;
     i.movespeed = 4;
     i.x = 15 * BLOCKSIZE + OFFSETX;
     i.y = 15 * BLOCKSIZE + OFFSETY;
-    i.debole = false;
     i.mangiato = false;
     i.img = al_load_bitmap("data/img/fantasma3.png");
-	 if (i.img == NULL)
+    if(i.img == NULL)
         cout<<"\n Bitmap Error, inky - fantasma3 error!";
 }
 
 void init_clyde(FANTASMA_t &c)
 {
-    c.dir = FERMO;
+    c.dir = SU;
     c.sourcex = 0;
     c.sourcey = 0;
+    c.stato = ONDULA;
     c.movespeed = 4;
     c.x = 13 * BLOCKSIZE + OFFSETX;
     c.y = 15 * BLOCKSIZE + OFFSETY;
-    c.debole = false;
     c.mangiato = false;
     c.img = al_load_bitmap("data/img/fantasma4.png");
-	 if (c.img == NULL)
+    if(c.img == NULL)
         cout<<"\n Bitmap Error, clyde - fantasma4 error!";
 }
 

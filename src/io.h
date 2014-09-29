@@ -16,7 +16,7 @@
 void agg_tasti(ALLEGRO_EVENT &event, bool tasto[], bool setting);
 
 /**Carica la mappa da file in Memoria*/
-void load_map(MAPPA_t&, const char []);
+void load_map(MAPPA_t& m, char *fileliv, int livello);
 
 void scrivi_mappa_su_file(const MAPPA_t &, const char []);
 

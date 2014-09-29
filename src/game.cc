@@ -40,16 +40,14 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     int menu = 1;
-    int morte = -1;
+    char fileliv[20];
     bool redraw = true;
     bool done = false;
     bool tasto[8] = {false, false, false, false, false, false, false, false};
-    ALLEGRO_DISPLAY *display =  NULL;
+    ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_TIMER *timer2 = NULL;
-    ALLEGRO_TIMER *timermov = NULL;
-
     /**Inizializzazioni: */
 
     //Inizializzazione Allegro
@@ -74,14 +72,20 @@ int main(int argc, char *argv[]){
 
     //Eventi
     event_queue  = al_create_event_queue();
+
     //Timer
     timer = al_create_timer(1.0 / FPS);
-    timer2 = al_create_timer(1.0 / TM);
-    timermov = al_create_timer(1.0 / FM);
+    timer2 = al_create_timer(1.0 / FTIME);
 
     //Player
-    FANTASMA_t blinky, pinky, inky, clyde;
     PLAYER_t pacman;
+
+    //Nemici
+    FANTASMA_t blinky, pinky, inky, clyde;
+    init_blinky(blinky);
+    init_clyde(clyde);
+    init_inky(inky);
+    init_pinky(pinky);
 
     //Font
     FONT_t font;
@@ -108,13 +112,14 @@ int main(int argc, char *argv[]){
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_timer_event_source(timer2));
-    al_register_event_source(event_queue, al_get_timer_event_source(timermov));
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
+
     //Loop del Gioco;
     while(!done)
     {
+
         ALLEGRO_EVENT event;
         al_wait_for_event(event_queue, &event);
 
@@ -133,24 +138,24 @@ int main(int argc, char *argv[]){
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
             #ifdef DEBUG_MODE
-                if(tasto[D])
-                    debug_console(timer,pacman,blinky,pinky,inky,clyde,mappa,audio);
+                if(tasto[D]){
+                    al_stop_sample(&audio.id);
+                    debug_console(timer,pacman,blinky,pinky,inky,clyde,mappa,audio,livello, caricamappa, stato_gioco);
+                }
             #endif // DEBUG_MODE
 
             //Update
             switch(stato_gioco){
                 case MENU:
-                    pacman.vita = 2;
-                    anima_menu(menu,tasto,stato_gioco);
+                    anima_menu(menu, tasto, stato_gioco);
                 break;
+
                 case CARICA:
-                    if (caricamappa)
-                        load_map(mappa, filenamelv1);
-                    init_clyde(clyde);
+                    if(caricamappa){
+                        load_map(mappa,fileliv,livello);
+                        caricamappa = false;
+                    }
                     init_pacman(pacman);
-                    init_blinky(blinky);
-                    init_inky(inky);
-                    init_pinky(pinky);
                     if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
                         cout<<"\n Audio Error! - non parte pacman_beginning";
                     al_stop_timer(timer);
@@ -159,114 +164,109 @@ int main(int argc, char *argv[]){
                     if (!al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id))
                         cout<<"\n Audio Error! - non parte audio siren";
                     stato_gioco = PLAY;
-                    break;
+                break;
 
                 case PLAY:
                     al_start_timer(timer2);
+
                     if(tasto[SPACE]){
+                        al_stop_timer(timer2);
                         stato_gioco = PAUSA;
                         tasto[SPACE] = false;
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    move_blinky(mappa, pacman, blinky);
-                    if(al_get_timer_count(timer2) > 2)
-                        move_pinky(mappa, pacman, pinky);
-                    else
-                        ondula(pinky.y);
-                //  move_clyde(mappa, pacman, clyde);
-                        //ondula(clyde.y);
-                //  move_inky(mappa, pacman, inky);
-                        //ondula(inky.y);
-                    if (collision_pacman(pacman,blinky) ||
-                        collision_pacman(pacman,pinky) ||
-                        collision_pacman(pacman,inky) ||
-                        collision_pacman(pacman,clyde)){
-                        stato_gioco = MORTE;
-                        al_stop_sample(&audio.id);
-                        al_start_timer(timermov);
-                        al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
-                    }
-                    if (victory(mappa,stato_gioco, caricamappa))
-                        al_stop_sample(&audio.id);
-                    break;
+                    pac_mangia(mappa, pacman, audio);
 
-                case MORTE:
-                    if(event.timer.source == timermov){
-                        morte++;
-                        if(morte >= 11){
-                            morte = 0;
-                            death_pacman(pacman, stato_gioco, caricamappa);
-                            al_stop_timer(timer2);
-                            al_stop_timer(timermov);
-                            al_set_timer_count(timer2, 0);
+                    if(blinky.stato != ONDULA)
+                        move_blinky(mappa, pacman, blinky);
+                    else
+                        ondula(mappa, blinky);
+
+                    if(pinky.stato != ONDULA)
+                        move_pinky(mappa, pacman, pinky);
+                    else{
+                        ondula(mappa, pinky);
+                        if(al_get_timer_count(timer2) > 2){
+                            pinky.stato = INSEGUIMENTO;
                         }
                     }
-                    break;
+
+                    if(inky.stato != ONDULA)
+                        move_inky(mappa,pacman, inky, blinky);
+                    else{
+                        ondula(mappa, inky);
+                        if(al_get_timer_count(timer2) > 8){
+                            inky.stato = INSEGUIMENTO;
+                        }
+                    }
+
+                    if(clyde.stato != ONDULA)
+                        move_clyde(mappa,pacman, clyde);
+                    else{
+                        ondula(mappa, clyde);
+                        if(al_get_timer_count(timer2) > 10){
+                            clyde.stato = INSEGUIMENTO;
+                        }
+                    }
+                break;
+
+                case MORTE:
+                break;
 
                 case PAUSA:
                     al_stop_sample(&audio.id);
                     if (tasto[SPACE]){
+                        al_start_timer(timer2);
                         stato_gioco = PLAY;
                         al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
                         tasto[SPACE] = false;
                     }
-                    break;
+                break;
 
                 case CONTROLS:
-                    break;
+                break;
 
                 case HIGH_SCORE:
-                    break;
+                break;
 
                 case GAME_OVER:
-                    al_stop_sample(&audio.id);
-                    break;
+                break;
 
                 case WIN:
-                    al_stop_sample(&audio.id);
-                    break;
+                break;
 
                 case QUIT:
                     done = true;
-                    break;
+                break;
             }
             redraw = true;
         }
+
         if(redraw && al_is_event_queue_empty(event_queue))
         {
             redraw = false;
-
             //draw
             switch(stato_gioco){
                 case MENU:
                     draw_screen_menu(menu, font, bitmap);
                 break;
+
                 case CARICA:
-                    draw_path(bitmap, mappa);
                 break;
 
                 case PLAY:
                     al_clear_to_color(al_map_rgb(0,0,0));
-                    draw_path(bitmap, mappa);
+                    draw_path(bitmap,mappa);
                     draw_pacman(pacman);
                     draw_fantasma(blinky);
-                    draw_fantasma(clyde);
-                    draw_fantasma(pinky);
                     draw_fantasma(inky);
-                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
-									"SCORE: %d",pacman.punteggio);
-                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
-									"LIVES: %d",pacman.vita);
-                    al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
+                    draw_fantasma(pinky);
+                    draw_fantasma(clyde);
                     al_flip_display();
                 break;
 
                 case MORTE:
-                    al_clear_to_color(al_map_rgb(0,0,0));
-                    draw_path(bitmap, mappa);
-                    al_draw_bitmap_region(bitmap.morte, 17*morte, 0, 17, 17, pacman.x, pacman.y,0);
-                    al_flip_display();
                 break;
 
                 case PAUSA:
@@ -274,25 +274,15 @@ int main(int argc, char *argv[]){
                 break;
 
                 case CONTROLS:
-                    al_clear_to_color(al_map_rgb(0,0,0));
-                    al_flip_display();
                 break;
 
                 case HIGH_SCORE:
-                    al_clear_to_color(al_map_rgb(0,0,0));
-                    al_flip_display();
                 break;
 
                 case GAME_OVER:
-                    draw_gameover(font, bitmap);
-                    al_rest(1.0);
-                    stato_gioco = MENU;
                 break;
 
                 case WIN:
-                    draw_win(font, bitmap);
-                    al_rest(1.0);
-                    stato_gioco = MENU;
                 break;
 
                 case QUIT:
@@ -308,6 +298,7 @@ int main(int argc, char *argv[]){
     dest_font(font);
     dest_audio(audio);
     al_destroy_timer(timer);
+    al_destroy_timer(timer2);
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
    return 0;

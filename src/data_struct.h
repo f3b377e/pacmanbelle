@@ -22,11 +22,9 @@ const int SCREENHEIGHT = 600;	                /**< Altezza dello schermo*/
 const int OFFSETX = SCREENWIDTH *15/100;	    /**< Margine laterale della finestra */
 const int OFFSETY = SCREENHEIGHT *4/100;        /**< Margine Superiore della finestra */
 const int FPS = 25;		                        /**< Frame del gioco*/
-const int FM = 10;                              /**< Frame del movimento delle animazioni*/
-const int TM = 1;                               /**< Timer del gioco*/
+const int FMOV = 10;                            /**< Frame del movimento delle animazioni*/
+const int FTIME = 1;                            /**< Timer del gioco, usato per controllare diversi eventi*/
 const int BLOCKSIZE = 16;	                    /**< Blocchi della mappa*/
-const char filenamelv1[] = "data/map/map1.txt"; /**< Mappa Livello 1 */
-const char filenamelv2[] = "data/map/map2.txt"; /**< Mappa Livello 2 */
 
 /**Stato di direzione per pacman e per i fantasmi*/
 enum DIREZ{GIU, SU, SX, DX, FERMO};
@@ -39,6 +37,12 @@ enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, MORTE, GAME_OV
 /** Valori che verranno attribuiti all'array tasto del ::main*/
 enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE};
 
+/**
+ * Stato del fantasma, serve per capire quando il fantasma deve inseguire pacman,
+ * sparpagliarsi nella mappa, rimanere nella casa, scappare da pacman.
+ */
+enum STATO_FANT{ONDULA, INSEGUIMENTO, SPARPAGLIAMENTO, FUGA};
+
 struct MAPPA_t{
     int r;          /**< Numero di Colonne*/
     int c;          /**< Numero di Righe*/
@@ -47,8 +51,7 @@ struct MAPPA_t{
 
 /** Descrittore di ogni elemento in lista */
 struct ELEM_t{
-    ELEM_t *succ;   /**< Puntatore all'elemento sucessivo */
-    ELEM_t *prec;   /**< Puntatore all'elemento precedente */
+    ELEM_t *succ;   /**< Puntatore all'elemento precedente */
     int x,y;
 };
 
@@ -77,12 +80,12 @@ struct FANTASMA_t{
 	DIREZ dir;		    /**< Stato attuale della direzione del fantasma*/
     DIREZ precdir;      /**< Stato della precedente direzione del fantasma*/
 	DIREZ succdir;      /**< Stato della sucessiva direzione del fantasma*/
+	STATO_FANT stato;   /**< Stato del fantasma, indica cosa deve fare */
 	float movespeed;	/**< Velocità del fantasma*/
 	int sourcex;		/**< Coordinata x per regione dello sheet di pacman*/
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/
 	float x;            /**< Coordinata x schermo*/
 	float y;		    /**< Coordinata y schermo*/
-	bool debole;		/**< Vera quando pacman mangia il pallino grande. Riduce la velocità dei fantasmi e possono essere mangiati*/
 	bool mangiato;		/**< Vera quando pacman mangia il fantasma*/
     ALLEGRO_BITMAP *img;   /**< Immagine relativa al fantasma */
 
