@@ -52,6 +52,7 @@ struct MAPPA_t{
 /** Descrittore di ogni elemento in lista */
 struct ELEM_t{
     ELEM_t *succ;   /**< Puntatore all'elemento precedente */
+    ELEM_t *prec;   /**< Puntatore all'elemento precedente */
     int x,y;
 };
 

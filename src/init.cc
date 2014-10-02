@@ -123,7 +123,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.dir = FERMO;
 	pacman.precdir = SX;
 	pacman.succdir = FERMO;
-	pacman.movespeed = 5;
+	pacman.movespeed = 4;
 	pacman.sourcex = 0;
 	pacman.sourcey = 0;
 	pacman.x = 13*BLOCKSIZE+OFFSETX;

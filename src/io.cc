@@ -100,8 +100,3 @@ void load_map(MAPPA_t& m, char fileliv[], int livello)
     }
 }
 
-void scrivi_mappa_su_file(const MAPPA_t &m, const char filename[])
-{
-}
-
-

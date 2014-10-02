@@ -2,6 +2,7 @@ allegrolib = `pkg-config --cflags --libs allegro-5.0 allegro_acodec-5.0 allegro_
 
 OBJ = game.o gui.o io.o logic.o init.o
 CC = game.cc gui.cc io.cc logic.cc init.cc
+DEBUG = debug.o
 CXXFLAGS = -Wall
 
 Pacman: $(OBJ)
@@ -9,15 +10,15 @@ Pacman: $(OBJ)
 
 -include dipendenze
 
-.PHONY: depend clean cleanall Debug
+.PHONY: depend clean cleanall
 
 depend:
 	g++ -MM *.cc > dipendenze
 clean:
-	rm *.o
+	rm -f *.o
 cleanall:
-	rm *.o *~ Pacman
+	rm -f *.o Pacman Pacman_deb
 
-Debug: 	
+Debug: 	$(DEBUG)
 	g++ -Wall -g -D DEBUG_MODE $(CC) debug.cc $(allegrolib) -o Pacman_deb
 

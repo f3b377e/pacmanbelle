@@ -61,7 +61,7 @@ void debug_console(ALLEGRO_TIMER *timer
         		cout<<"\n\t velocità attuale "<<pacman.movespeed;
                 cout<<"\n\t Direzione:   precedente:"<<pacman.precdir
                     <<"   attuale:"<<pacman.dir
-                    <<"   attuale:"<<pacman.succdir
+                    <<"   successiva:"<<pacman.succdir
                     <<endl;
 
         	break;
@@ -69,7 +69,7 @@ void debug_console(ALLEGRO_TIMER *timer
         		cout<<"\n Mappa \n";
        			for(int i = 0; i < mappa.r; i++)
                 	{
-                    		for(int j = 0; j <= mappa.c; j++)
+                    		for(int j = 0; j < mappa.c; j++)
                     		{
                                 if(mappa.mappa[i][j] != 0)
                                     cout<<mappa.mappa[i][j]<<" ";

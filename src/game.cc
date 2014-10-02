@@ -191,7 +191,6 @@ int main(int argc, char *argv[]){
                         cambia_stato(blinky,pinky,inky,clyde,pacman);
                     }
 
-
                     if(blinky.stato != ONDULA){
                         if(blinky.stato != FUGA){
                             if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
