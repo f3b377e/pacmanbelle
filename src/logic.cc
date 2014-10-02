@@ -695,20 +695,9 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int x; //coordinata x della casella alla quale punterà il fantasma
     int y; //coordinata y della casella alla quale punterà il fantasma
 
-<<<<<<< .mine
     if (f.stato == SPARPAGLIAMENTO){
         x = 1;
         y = 29;
-=======
-    if(fx >= px - 8 && fx <= px + 8 && fy >= py - 8 && fy <= py + 8 )
-    {
-        x = 1;
-        y = m.r-1;
-    }
-    else{
-        x = px;
-        y = py;
->>>>>>> .r39
     }
     else{
         if(fx >= px - 8 && fx <= px + 8 && fy >= py - 8 && fy <= py + 8 )
@@ -773,4 +762,3 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         f.x = OFFSETX;
     }
 }
-
