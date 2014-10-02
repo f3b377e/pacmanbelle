@@ -28,6 +28,9 @@ void draw_pacman(PLAYER_t&);
 /** Stampa il Countdown iniziale*/
 void draw_countdown(const FONT_t &, const BITMAP_t &, const MAPPA_t &);
 
+/**Stampa il fantasma quando è in fuga*/
+void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& pg);
+
 /** Stampa il fantasma*/
 void draw_fantasma(FANTASMA_t&);
 

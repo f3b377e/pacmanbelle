@@ -109,6 +109,7 @@ struct AUDIO_t{
 /**Struttura contenente le bitmap utilizzate*/
 struct BITMAP_t{
     ALLEGRO_BITMAP *header_image;   /** Immagine Principale del menu */
+    ALLEGRO_BITMAP *fant_fuga;      /** Sheet della fuga dei fantasmi*/
     ALLEGRO_BITMAP *puntino;        /** Immagine per la comparsa del puntino nel menu */
     ALLEGRO_BITMAP *autotile;       /** Immagine per la composizione della mappa */
     ALLEGRO_BITMAP *f_pericolo;     /** Fantasmi spaventati e morti*/

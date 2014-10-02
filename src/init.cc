@@ -74,6 +74,10 @@ void init_bitmap(BITMAP_t& b)
 	 if (b.header_image == NULL)
         cout<<"\n Bitmap Error, pacman_header error!";
 
+    b.fant_fuga = al_load_bitmap("data/img/fantasma_pericolo.png");
+	 if (b.fant_fuga == NULL)
+        cout<<"\n Bitmap Error, fantasma_pericolo error!";
+
     b.puntino = al_load_bitmap("data/img/puntino_bianco.png");
 	 if (b.puntino == NULL)
         cout<<"\n Bitmap Error, puntino_bianco error!";
@@ -139,7 +143,7 @@ void init_blinky(FANTASMA_t &b)
     b.dir = SU;
     b.sourcex = 0;
     b.sourcey = 0;
-    b.stato = INSEGUIMENTO;
+    b.stato = SPARPAGLIAMENTO;
     b.movespeed = 4;
     b.x = 13 * BLOCKSIZE + OFFSETX;
     b.y = 13 * BLOCKSIZE + OFFSETY;
@@ -206,6 +210,7 @@ void dest_font(FONT_t& f)
 void dest_bitmap(BITMAP_t& b)
 {
     al_destroy_bitmap(b.autotile);
+    al_destroy_bitmap(b.fant_fuga);
     al_destroy_bitmap(b.header_image);
     al_destroy_bitmap(b.puntino);
     al_destroy_bitmap(b.f_pericolo);

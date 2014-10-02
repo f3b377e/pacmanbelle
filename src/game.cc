@@ -183,13 +183,35 @@ int main(int argc, char *argv[]){
                     move_pacman(pacman, mappa, audio, tasto);
                     pac_mangia(mappa, pacman, audio);
 
-                    if(blinky.stato != ONDULA)
+                    if(blinky.stato != ONDULA && blinky.stato != FUGA){
+                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                            blinky.stato = SPARPAGLIAMENTO;
+                        }
+                        else{
+                            blinky.stato = INSEGUIMENTO;
+                        }
                         move_blinky(mappa, pacman, blinky);
-                    else
+                    }
+                    else if(blinky.stato == ONDULA)
                         ondula(mappa, blinky);
 
-                    if(pinky.stato != ONDULA)
+
+
+                    if(pinky.stato != ONDULA && pinky.stato != FUGA){
+                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                            pinky.stato = SPARPAGLIAMENTO;
+                        }
+                        else{
+                            pinky.stato = INSEGUIMENTO;
+                        }
                         move_pinky(mappa, pacman, pinky);
+                    }
                     else{
                         ondula(mappa, pinky);
                         if(al_get_timer_count(timer2) > 2){
@@ -197,8 +219,18 @@ int main(int argc, char *argv[]){
                         }
                     }
 
-                    if(inky.stato != ONDULA)
-                        move_inky(mappa,pacman, inky, blinky);
+                    if(inky.stato != ONDULA&& inky.stato != FUGA){
+                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                            inky.stato = SPARPAGLIAMENTO;
+                        }
+                        else{
+                            inky.stato = INSEGUIMENTO;
+                        }
+                        move_inky(mappa, pacman, inky, blinky);
+                    }
                     else{
                         ondula(mappa, inky);
                         if(al_get_timer_count(timer2) > 8){
@@ -206,11 +238,21 @@ int main(int argc, char *argv[]){
                         }
                     }
 
-                    if(clyde.stato != ONDULA)
-                        move_clyde(mappa,pacman, clyde);
+                    if(clyde.stato != ONDULA && clyde.stato != FUGA){
+                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                            clyde.stato = SPARPAGLIAMENTO;
+                        }
+                        else{
+                            clyde.stato = INSEGUIMENTO;
+                        }
+                        move_clyde(mappa, pacman, clyde);
+                    }
                     else{
                         ondula(mappa, clyde);
-                        if(al_get_timer_count(timer2) > 10){
+                        if(al_get_timer_count(timer2) > 12 && pacman.punteggio > 600){
                             clyde.stato = INSEGUIMENTO;
                         }
                     }

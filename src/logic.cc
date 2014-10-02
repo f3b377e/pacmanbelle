@@ -203,7 +203,7 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
         pg.x = OFFSETX;
 }
 
-void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
+void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio )
 {
 	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
@@ -212,8 +212,10 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio)
 
     if (m.mappa[mapy][mapx] == 'P')
         pg.punteggio += 10;
-    if (m.mappa[mapy][mapx] == 'Q')
+
+    if (m.mappa[mapy][mapx] == 'Q'){
         pg.punteggio += 100;
+    }
 
     if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q'){
         m.mappa[mapy][mapx] = '0';
@@ -446,10 +448,20 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int py = (pg.y - OFFSETY) / BLOCKSIZE; //coordinata y della casella nella quale risiede pacman
     int check_x = fx * BLOCKSIZE + OFFSETX; //serve per controllare se la x del fantasma si trova in perfetta corrispondenza con la x della casella in cui risiede
     int check_y = fy * BLOCKSIZE + OFFSETY; //serve per controllare se la y del fantasma si trova in perfetta corrispondenza con la y della casella in cui risiede
+    int x = px;
+    int y = py;
 
+    if (f.stato == SPARPAGLIAMENTO){
+        x = 26;
+        y = 1;
+    }
+    else{
+        x = px;
+        y = py;
+    }
     if(check_x == f.x && check_y == f.y){
         if(do_bfs(m,f)){
-            f.succdir = bfs(m, f, fx, fy, px, py);
+            f.succdir = bfs(m, f, fx, fy, x, y);
         }
         f.dir = f.succdir;
     }
@@ -508,22 +520,28 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int x = px; //coordinata x della casella alla quale punterà il fantasma
     int y = py; //coordinata y della casella alla quale punterà il fantasma
 
-    switch(pg.precdir){
-        case FERMO:
-        break;
-        case SU:
-            x = px - 4;
-            y = py - 4;
-        break;
-        case GIU:
-            y = py + 4;
-        break;
-        case DX:
-            x = px + 4;
-        break;
-        case SX:
-            x = px - 4;
-        break;
+    if (f.stato == SPARPAGLIAMENTO){
+        x = 1;
+        y = 1;
+    }
+    else{
+        switch(pg.precdir){
+            case FERMO:
+            break;
+            case SU:
+                x = px - 4;
+                y = py - 4;
+            break;
+            case GIU:
+                y = py + 4;
+            break;
+            case DX:
+                x = px + 4;
+            break;
+            case SX:
+                x = px - 4;
+            break;
+        }
     }
 
     if(check_x == f.x && check_y == f.y){
@@ -587,25 +605,31 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
     int x = px; //coordinata x della casella alla quale punterà il fantasma
     int y = py; //coordinata y della casella alla quale punterà il fantasma
 
-    switch(pg.precdir){
-        case FERMO:
-        break;
-        case SU:
-           x = (((px-bx)*2)+bx);
-           y = (((py-2-by)*2)+by);
-        break;
-        case GIU:
-           x = (((px-bx)*2)+bx);
-           y = (((py+2-by)*2)+by);
-        break;
-        case DX:
-           x = (((px+2-bx)*2)+bx);
-           y = (((py-by)*2)+by);
-        break;
-        case SX:
-           x = (((px-2-bx)*2)+bx);
-           y = (((py-by)*2)+by);
-        break;
+    if (f.stato == SPARPAGLIAMENTO){
+        x = 26;
+        y = 29;
+    }
+    else{
+        switch(pg.precdir){
+            case FERMO:
+            break;
+            case SU:
+               x = (((px-bx)*2)+bx);
+               y = (((py-2-by)*2)+by);
+            break;
+            case GIU:
+               x = (((px-bx)*2)+bx);
+               y = (((py+2-by)*2)+by);
+            break;
+            case DX:
+               x = (((px+2-bx)*2)+bx);
+               y = (((py-by)*2)+by);
+            break;
+            case SX:
+               x = (((px-2-bx)*2)+bx);
+               y = (((py-by)*2)+by);
+            break;
+        }
     }
     /*#ifdef DEBUG_MODE
         al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
@@ -671,6 +695,11 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     int x; //coordinata x della casella alla quale punterà il fantasma
     int y; //coordinata y della casella alla quale punterà il fantasma
 
+<<<<<<< .mine
+    if (f.stato == SPARPAGLIAMENTO){
+        x = 1;
+        y = 29;
+=======
     if(fx >= px - 8 && fx <= px + 8 && fy >= py - 8 && fy <= py + 8 )
     {
         x = 1;
@@ -679,6 +708,18 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     else{
         x = px;
         y = py;
+>>>>>>> .r39
+    }
+    else{
+        if(fx >= px - 8 && fx <= px + 8 && fy >= py - 8 && fy <= py + 8 )
+        {
+            x = 1;
+            y = m.r-1;
+        }
+        else{
+            x = px;
+            y = py;
+        }
     }
     /*#ifdef DEBUG_MODE
         al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
