@@ -42,6 +42,7 @@ int main(int argc, char *argv[]){
     int menu = 1;
     //int morte = -1;
     char fileliv[20];
+    int fuga_count = -1;
     bool redraw = true;
     bool done = false;
     bool tasto[8] = {false, false, false, false, false, false, false, false};
@@ -181,17 +182,27 @@ int main(int argc, char *argv[]){
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    pac_mangia(mappa, pacman, audio);
+                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count);
 
-                    if(blinky.stato != ONDULA && blinky.stato != FUGA){
-                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                            blinky.stato = SPARPAGLIAMENTO;
-                        }
-                        else{
-                            blinky.stato = INSEGUIMENTO;
+                    if(al_get_timer_count(timer2) == fuga_count){
+                        fuga_count = -1;
+                        al_stop_sample(&audio.id);
+                        al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+                        cambia_stato(blinky,pinky,inky,clyde,pacman);
+                    }
+
+
+                    if(blinky.stato != ONDULA){
+                        if(blinky.stato != FUGA){
+                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                               (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                                blinky.stato = SPARPAGLIAMENTO;
+                            }
+                            else{
+                                blinky.stato = INSEGUIMENTO;
+                            }
                         }
                         move_blinky(mappa, pacman, blinky);
                     }
@@ -200,15 +211,17 @@ int main(int argc, char *argv[]){
 
 
 
-                    if(pinky.stato != ONDULA && pinky.stato != FUGA){
-                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                            pinky.stato = SPARPAGLIAMENTO;
-                        }
-                        else{
-                            pinky.stato = INSEGUIMENTO;
+                    if(pinky.stato != ONDULA){
+                        if(pinky.stato != FUGA){
+                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                                pinky.stato = SPARPAGLIAMENTO;
+                            }
+                            else{
+                                pinky.stato = INSEGUIMENTO;
+                            }
                         }
                         move_pinky(mappa, pacman, pinky);
                     }
@@ -219,15 +232,17 @@ int main(int argc, char *argv[]){
                         }
                     }
 
-                    if(inky.stato != ONDULA&& inky.stato != FUGA){
-                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                            inky.stato = SPARPAGLIAMENTO;
-                        }
-                        else{
-                            inky.stato = INSEGUIMENTO;
+                    if(inky.stato != ONDULA){
+                        if(inky.stato != FUGA){
+                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                                inky.stato = SPARPAGLIAMENTO;
+                            }
+                            else{
+                                inky.stato = INSEGUIMENTO;
+                            }
                         }
                         move_inky(mappa, pacman, inky, blinky);
                     }
@@ -238,15 +253,17 @@ int main(int argc, char *argv[]){
                         }
                     }
 
-                    if(clyde.stato != ONDULA && clyde.stato != FUGA){
-                        if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                           (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                           (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                           (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                            clyde.stato = SPARPAGLIAMENTO;
-                        }
-                        else{
-                            clyde.stato = INSEGUIMENTO;
+                    if(clyde.stato != ONDULA){
+                        if(clyde.stato != FUGA){
+                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                                clyde.stato = SPARPAGLIAMENTO;
+                            }
+                            else{
+                                clyde.stato = INSEGUIMENTO;
+                            }
                         }
                         move_clyde(mappa, pacman, clyde);
                     }
@@ -267,7 +284,10 @@ int main(int argc, char *argv[]){
                     if (tasto[SPACE]){
                         al_start_timer(timer2);
                         stato_gioco = PLAY;
-                        al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+                        if(blinky.stato == FUGA || pinky.stato == FUGA || inky.stato == FUGA || clyde.stato == FUGA )
+                            al_play_sample(audio.ghosts_scared, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
+                        else
+                            al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
                         tasto[SPACE] = false;
                     }
                 break;
@@ -308,10 +328,27 @@ int main(int argc, char *argv[]){
                     al_clear_to_color(al_map_rgb(0,0,0));
                     draw_path(bitmap,mappa);
                     draw_pacman(pacman);
-                    draw_fantasma(blinky);
-                    draw_fantasma(inky);
-                    draw_fantasma(pinky);
-                    draw_fantasma(clyde);
+
+                    if(blinky.stato == FUGA)
+                        draw_fant_fuga(bitmap, blinky);
+                    else
+                        draw_fantasma(blinky);
+
+                    if(pinky.stato == FUGA)
+                        draw_fant_fuga(bitmap, pinky);
+                    else
+                        draw_fantasma(pinky);
+
+                    if(inky.stato == FUGA)
+                        draw_fant_fuga(bitmap, inky);
+                    else
+                        draw_fantasma(inky);
+
+                    if(clyde.stato == FUGA)
+                        draw_fant_fuga(bitmap, clyde);
+                    else
+                        draw_fantasma(clyde);
+
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
 									"SCORE: %d",pacman.punteggio);
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,

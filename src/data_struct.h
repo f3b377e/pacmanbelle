@@ -41,7 +41,7 @@ enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE};
  * Stato del fantasma, serve per capire quando il fantasma deve inseguire pacman,
  * sparpagliarsi nella mappa, rimanere nella casa, scappare da pacman.
  */
-enum STATO_FANT{ONDULA, INSEGUIMENTO, SPARPAGLIAMENTO, FUGA};
+enum STATO_FANT{ONDULA, INSEGUIMENTO, SPARPAGLIAMENTO, FUGA, MANGIATO};
 
 struct MAPPA_t{
     int r;          /**< Numero di Colonne*/

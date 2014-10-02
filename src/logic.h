@@ -8,8 +8,15 @@
 
 /** Funzione che si occupa del movimento di pacman*/
 void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
-/** Funzione che si occupa di cambiare le immagini della mappa quando pacman mangia i pallini*/
-void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio);
+
+/** Funzione che si occupa di cambiare le immagini della mappa quando pacman mangia i pallini e richiamare la
+ * cambiare la funzione che cambia di stato i fantasmi quando Pacman mangia il pallino powa!
+ */
+void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c,
+                ALLEGRO_TIMER *t, int &fuga_count);
+
+/**Serve per cambiare lo stato dei fantasmi quando pacman mangia il pallino powa e serve anche per cambiare lo stato quando il tempo di attivazione scade*/
+void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PLAYER_t &pg);
 
 /**Gestisce il movimento ondulatorio dei fantasmi all'inizio del gioco*/
 void ondula(const MAPPA_t &m, FANTASMA_t &f);
