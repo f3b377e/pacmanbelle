@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.4"/>
+<title>Pac-man:  File sorgente data_struct.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Pac-man
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.4 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Classi</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;dei&#160;file</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tutto</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classi</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>File</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funzioni</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variabili</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Ridefinizioni di tipo (typedef)</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Tipi enumerati (enum)</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valori del tipo enumerato</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pagine</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">data_struct.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="data__struct_8h.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * data_struct.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *      Author: Belle &amp; Bruce</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//C++ header</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include&lt;iostream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//allegro header</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;allegro5/allegro.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;allegro5/allegro_color.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;allegro5/allegro_image.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;allegro5/allegro_font.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;allegro5/allegro_audio.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef DATA_STRUCT_</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DATA_STRUCT_</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//Variabili Globali</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="data__struct_8h.html#af898f8fa683c129434a3e7e59fbdeecc">   20</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#af898f8fa683c129434a3e7e59fbdeecc" title="Larghezza dello schermo. ">SCREENWIDTH</a> = 650;                    </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a19d0acd5aaaf61eabc08cd603dc0d470">   21</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#a19d0acd5aaaf61eabc08cd603dc0d470" title="Altezza dello schermo. ">SCREENHEIGHT</a> = 600;                   </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">   22</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924" title="Margine laterale della finestra. ">OFFSETX</a> = <a class="code" href="data__struct_8h.html#af898f8fa683c129434a3e7e59fbdeecc" title="Larghezza dello schermo. ">SCREENWIDTH</a> *15/100;        </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">   23</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955" title="Margine Superiore della finestra. ">OFFSETY</a> = <a class="code" href="data__struct_8h.html#a19d0acd5aaaf61eabc08cd603dc0d470" title="Altezza dello schermo. ">SCREENHEIGHT</a> *4/100;        </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="data__struct_8h.html#ac5090a6568797128b0a5545228bb8b75">   24</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#ac5090a6568797128b0a5545228bb8b75" title="Frame del gioco. ">FPS</a> = 25;                             </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="data__struct_8h.html#aa92d1333aa72962dc07a14f23bbf017d">   25</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#aa92d1333aa72962dc07a14f23bbf017d" title="Frame del movimento delle animazioni. ">FMOV</a> = 10;                            </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="data__struct_8h.html#aa0519d86f2299c951f6cd082cc0a4dd4">   26</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#aa0519d86f2299c951f6cd082cc0a4dd4" title="Timer del gioco, usato per controllare diversi eventi. ">FTIME</a> = 1;                            </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">   27</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a> = 16;                       </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a898fd7abd6aae10a03fc8f61543e1ab6">   30</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a>{<a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a5387bb29e78bfce7c11164018e81ab7b">GIU</a>, <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a7911229e7fd613f96aeaf9413c8251bc">SU</a>, <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a898fd7abd6aae10a03fc8f61543e1ab6">SX</a>, <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a22dc95a35fbd833d9908928812979156">DX</a>, <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a4303eb08a6089d7c223aa1f76fa56a30">FERMO</a>};</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a843dff91ff0b0e5b98a110a512b2f531">   35</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89" title="Stato del gioco, serve per il loop della funzione main per eseguire diverse operazioni a seconda dell...">STATO_GIOCO</a>{<a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a4c40e60bc71a32b924ce1f08d57f9721">MENU</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">CARICA</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a0352906d1ea1dfcd663c918f3a86755b">PLAY</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a60fc5eaee370304305a60cc7ba79aa45">PAUSA</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a9fd926c53f93b60670d93d2d15c36539">CONTROLS</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a668caa755f0257c865341db47993096f">HIGH_SCORE</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89aa5966337e49d3e30c824714ee4e49304">MORTE</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a871723195985a4ae22d7e10d99bf8a00">GAME_OVER</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a76bdc8adfd6c6463ab269ff4c06be9b4">QUIT</a>, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a843dff91ff0b0e5b98a110a512b2f531">WIN</a>};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa">   38</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959c" title="Valori che verranno attribuiti all&#39;array tasto del main. ">TASTI</a>{ <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa">UP</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cadb45120aafd37a973140edee24708065">LEFT</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caec8379af7490bb9eaaf579cf17876f38">RIGHT</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca951ab68bb8f7daafb78951107080904e">ENTER</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8">D</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d">ESCAPE</a>, <a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95">SPACE</a>};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537">   44</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537" title="Stato del fantasma, serve per capire quando il fantasma deve inseguire pacman, sparpagliarsi nella ma...">STATO_FANT</a>{<a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537a819197a69edc465d7895c0589abf037d">ONDULA</a>, <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537a218849f5b3ca77449be28a4fc61a5ba8">INSEGUIMENTO</a>, <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537a0e1c10b4d505df64d77b3696f1061dd7">SPARPAGLIAMENTO</a>, <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537ad70481e5fc511bb88eb875b00fd83fde">FUGA</a>, <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537ae393daa0acf7f3590ce7b682bb47fe6c">MANGIATO</a>};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="structMAPPA__t.html">   46</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structMAPPA__t.html">MAPPA_t</a>{</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">   47</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934" title="Numero di Colonne. ">r</a>;          </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">   48</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54" title="Numero di Righe. ">c</a>;          </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">   49</a></span>&#160;    <span class="keywordtype">char</span> **<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>;   </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="structELEM__t.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structELEM__t.html" title="Descrittore di ogni elemento in lista. ">ELEM_t</a>{</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="structELEM__t.html#abe4f8dfa81d7d65601d3cda2bc149d2a">   54</a></span>&#160;    <a class="code" href="structELEM__t.html" title="Descrittore di ogni elemento in lista. ">ELEM_t</a> *<a class="code" href="structELEM__t.html#abe4f8dfa81d7d65601d3cda2bc149d2a" title="Puntatore all&#39;elemento precedente. ">succ</a>;   </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="structELEM__t.html#a3e2ee72fcfa8653088746bd7f8bad8c1">   55</a></span>&#160;    <a class="code" href="structELEM__t.html" title="Descrittore di ogni elemento in lista. ">ELEM_t</a> *<a class="code" href="structELEM__t.html#a3e2ee72fcfa8653088746bd7f8bad8c1" title="Puntatore all&#39;elemento precedente. ">prec</a>;   </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="structELEM__t.html#ad20c3596ab01bd2454d0acfce56b8cf5">   56</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structELEM__t.html#a4fde7f156cd49e9b30ac1c8209c6ed20">x</a>,<a class="code" href="structELEM__t.html#ad20c3596ab01bd2454d0acfce56b8cf5">y</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="data__struct_8h.html#a312ff9464754c812512bb267fc386e99">   59</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="structELEM__t.html" title="Descrittore di ogni elemento in lista. ">ELEM_t</a> * <a class="code" href="data__struct_8h.html#a312ff9464754c812512bb267fc386e99">lista</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="structPLAYER__t.html">   62</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structPLAYER__t.html" title="Struttura contenente i dati del giocatore. ">PLAYER_t</a>{</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">   63</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8" title="Stato attuale della direzione di pacman. ">dir</a>;          </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#ab008f2009f1a813ef0d34f05e336b92a">   64</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structPLAYER__t.html#ab008f2009f1a813ef0d34f05e336b92a" title="Stato della precedente direzione di pacman. ">precdir</a>;      </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#ac0d443b516a2d514a2680f5682e2aa59">   65</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structPLAYER__t.html#ac0d443b516a2d514a2680f5682e2aa59" title="Stato della sucessiva direzione di pacman. ">succdir</a>;      </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b">   66</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b" title="Velocità del pacman. ">movespeed</a>;    </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#aade4415d08e695ee02427da46073bb2b">   67</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structPLAYER__t.html#aade4415d08e695ee02427da46073bb2b" title="Coordinata x per regione dello sheet di pacman. ">sourcex</a>;        </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#a4b8fca3349d778b421c46b5b98b165fe">   68</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structPLAYER__t.html#a4b8fca3349d778b421c46b5b98b165fe" title="Coordinata y per regione dello sheet di pacman. ">sourcey</a>;        </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">   69</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824" title="Coordinata x schermo. ">x</a>;            </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">   70</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e" title="Coordinata y schermo. ">y</a>;            </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#a15e538b419151663a5a74f229c6f73b1">   71</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structPLAYER__t.html#a15e538b419151663a5a74f229c6f73b1" title="Vite di pacman che possono essere minimo 0 massimo 3. ">vita</a>;           </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#afcc5e2626323904fdc31301009a85bbc">   72</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structPLAYER__t.html#afcc5e2626323904fdc31301009a85bbc" title="se vera pacman aumenta la velocità e può mangiare i fantasmi ">potente</a>;       </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#a7e67b1e986244dc4437d6e3729669f49">   73</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structPLAYER__t.html#a7e67b1e986244dc4437d6e3729669f49" title="punteggio attuale ">punteggio</a>;      </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#a1fd6b8273c0204380ae76c40c2b1f922">   74</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structPLAYER__t.html#a1fd6b8273c0204380ae76c40c2b1f922" title="se vera pacman è mangiato dai fantasmi ">mangiato</a>;      </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="structPLAYER__t.html#aa19de2169570b92a594342181ef3f679">   75</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structPLAYER__t.html#aa19de2169570b92a594342181ef3f679" title="L&#39;immagine associata a Pacman. ">img</a>;   </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html">   80</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a>{</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">   81</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13" title="Stato attuale della direzione del fantasma. ">dir</a>;          </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a90d5534b8511f7da342f51601544643b">   82</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structFANTASMA__t.html#a90d5534b8511f7da342f51601544643b" title="Stato della precedente direzione del fantasma. ">precdir</a>;      </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">   83</a></span>&#160;    <a class="code" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903" title="Stato di direzione per pacman e per i fantasmi. ">DIREZ</a> <a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41" title="Stato della sucessiva direzione del fantasma. ">succdir</a>;      </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a63a2d9c251c49e8b2f4717f71dfff397">   84</a></span>&#160;    <a class="code" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537" title="Stato del fantasma, serve per capire quando il fantasma deve inseguire pacman, sparpagliarsi nella ma...">STATO_FANT</a> <a class="code" href="structFANTASMA__t.html#a63a2d9c251c49e8b2f4717f71dfff397" title="Stato del fantasma, indica cosa deve fare. ">stato</a>;   </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">   85</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899" title="Velocità del fantasma. ">movespeed</a>;    </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#af5132e2e0f8b9d35b182cad0a82f42b5">   86</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structFANTASMA__t.html#af5132e2e0f8b9d35b182cad0a82f42b5" title="Coordinata x per regione dello sheet di pacman. ">sourcex</a>;        </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a15ab38c6ef25ed28735b4a5d9c796f91">   87</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structFANTASMA__t.html#a15ab38c6ef25ed28735b4a5d9c796f91" title="Coordinata y per regione dello sheet di pacman. ">sourcey</a>;        </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">   88</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035" title="Coordinata x schermo. ">x</a>;            </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">   89</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6" title="Coordinata y schermo. ">y</a>;            </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#aa5a6c0103b279a2d4be01a1b807776e7">   90</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structFANTASMA__t.html#aa5a6c0103b279a2d4be01a1b807776e7" title="Vera quando pacman mangia il fantasma. ">mangiato</a>;      </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="code" href="structFANTASMA__t.html#a1049d6a35db7532b5bd521436f702722">   91</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structFANTASMA__t.html#a1049d6a35db7532b5bd521436f702722" title="Immagine relativa al fantasma. ">img</a>;   </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="structAUDIO__t.html">   96</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structAUDIO__t.html" title="Struttura contenente i dati dell&#39;audio. ">AUDIO_t</a>{</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#af02a444bb13b029095c85c2d49c5c6fd">   97</a></span>&#160;    ALLEGRO_SAMPLE_ID <a class="code" href="structAUDIO__t.html#af02a444bb13b029095c85c2d49c5c6fd" title="Identificatore audio in riproduzione. ">id</a>;               </div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a713408ca391db15134f5ed97c9485795">   98</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a713408ca391db15134f5ed97c9485795" title="Quando i fantasmi muoiono. ">ghost_eaten</a>;        </div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#abfea024b1c6ddcba4239c42e80525d71">   99</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#abfea024b1c6ddcba4239c42e80525d71" title="Quando i fantasmi sono in in modalità spavento. ">ghosts_scared</a>;      </div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a761255218806f1d7d18bffce46c4f907">  100</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a761255218806f1d7d18bffce46c4f907" title="Quando inizia il gioco. ">pacman_beginning</a>;   </div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#ae58c9a3c6639f34fa149c5e0b379b89a">  101</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#ae58c9a3c6639f34fa149c5e0b379b89a" title="Quando pacman mangia i pallini speciali. ">pacman_extrapac</a>;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a2fb36eaa8b3c442453e5b267ef93d8cf">  102</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a2fb36eaa8b3c442453e5b267ef93d8cf" title="Quando pacman muore. ">pacman_eaten</a>;       </div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a568eeb0af62ab6923f70fc5e3a4e12f5">  103</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a568eeb0af62ab6923f70fc5e3a4e12f5" title="Quando pacman mangia la frutta. ">pacman_eatfruit</a>;    </div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a2e061bf73cdd95328f1dc0c1eea8f53b">  104</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a2e061bf73cdd95328f1dc0c1eea8f53b" title="Quando pacman mangia i pallini. ">pallet_eaten1</a>;      </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a2731999dfe761408a81cdd3db867b25c">  105</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a2731999dfe761408a81cdd3db867b25c" title="Quando pacman mangia i pallini. ">pallet_eaten2</a>;      </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#af8714a5d7bd0d1c9a337ccf013e7a4d6">  106</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#af8714a5d7bd0d1c9a337ccf013e7a4d6" title="Quando pacman deve scappare dai fantasmi. ">siren</a>;              </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="structAUDIO__t.html#a61e8f2d255dd57fb44a642e01507f041">  107</a></span>&#160;    ALLEGRO_SAMPLE *<a class="code" href="structAUDIO__t.html#a61e8f2d255dd57fb44a642e01507f041" title="Per gli intermezzi tra un livello e l&#39;altro. ">pacman_intermission</a>;    </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="code" href="structBITMAP__t.html">  111</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a>{</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#a066ddc3995050f478afa61d28db86209">  112</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#a066ddc3995050f478afa61d28db86209">header_image</a>;   </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#a749c635ea419d3d69b519023febe08f1">  113</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#a749c635ea419d3d69b519023febe08f1" title="Immagine Principale del menu. ">fant_fuga</a>;      </div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#a7558ca0a3112b67660c40928da042988">  114</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#a7558ca0a3112b67660c40928da042988" title="Sheet della fuga dei fantasmi. ">puntino</a>;        </div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#a88336e9319de6756949da237686a567b">  115</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#a88336e9319de6756949da237686a567b" title="Immagine per la comparsa del puntino nel menu. ">autotile</a>;       </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#aad5404ad9ca7ee73c0e7a71e898695cf">  116</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#aad5404ad9ca7ee73c0e7a71e898695cf" title="Immagine per la composizione della mappa. ">f_pericolo</a>;     </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#a16f81d2b0d3a14509b6907cc383f6e54">  117</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#a16f81d2b0d3a14509b6907cc383f6e54" title="Fantasmi spaventati e morti. ">frutta</a>;         </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="structBITMAP__t.html#aa2d6b783ebf23294af6c77b5c5b5f6ab">  118</a></span>&#160;    ALLEGRO_BITMAP *<a class="code" href="structBITMAP__t.html#aa2d6b783ebf23294af6c77b5c5b5f6ab" title="Immagine della frutta. ">morte</a>;          </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="code" href="structFONT__t.html">  122</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a>{</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="structFONT__t.html#ab8b7bfc03f3e59ae5cc656798d685f95">  123</a></span>&#160;    ALLEGRO_FONT *<a class="code" href="structFONT__t.html#ab8b7bfc03f3e59ae5cc656798d685f95">h1</a>;   </div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="code" href="structFONT__t.html#a76faf4506d1f76b84db356b58d565f72">  124</a></span>&#160;    ALLEGRO_FONT *<a class="code" href="structFONT__t.html#a76faf4506d1f76b84db356b58d565f72" title="Font H1. ">h2</a>;   </div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="code" href="structFONT__t.html#a28052080877dbbb0bc24bcd7aa822bd2">  125</a></span>&#160;    ALLEGRO_FONT *<a class="code" href="structFONT__t.html#a28052080877dbbb0bc24bcd7aa822bd2" title="Font H2. ">h3</a>;   </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="code" href="structFONT__t.html#a4aef7cb48348ee0d28ef61adbeae86d4">  126</a></span>&#160;    ALLEGRO_FONT *<a class="code" href="structFONT__t.html#a4aef7cb48348ee0d28ef61adbeae86d4" title="Font H3. ">h4</a>;   </div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="code" href="structFONT__t.html#add1bb60f423fa53408b6e998917891b7">  127</a></span>&#160;    ALLEGRO_FONT *<a class="code" href="structFONT__t.html#add1bb60f423fa53408b6e998917891b7" title="Font H4. ">h5</a>;   </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif // DATA_STRUCT_</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.4
+</small></address>
+</body>
+</html>
