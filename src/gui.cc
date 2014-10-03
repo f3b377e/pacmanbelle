@@ -224,12 +224,12 @@ void draw_pacman(PLAYER_t& pg)
                           , pg.x, pg.y, 0);
 }
 
-void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& pg)
+void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& pg, int fine_fuga)
 {
     pg.sourcex += al_get_bitmap_width(b.fant_fuga)/2;
     if(pg.sourcex >= al_get_bitmap_width(b.fant_fuga))
         pg.sourcex = 0;
-    pg.sourcey = 0;
+    pg.sourcey = fine_fuga;
     al_draw_bitmap_region(b.fant_fuga, pg.sourcex
                           , pg.sourcey * al_get_bitmap_height(b.fant_fuga)/2
                           , al_get_bitmap_width(b.fant_fuga)/2

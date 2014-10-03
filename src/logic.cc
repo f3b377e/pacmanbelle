@@ -226,20 +226,20 @@ void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PL
         }
     }
     else{
-        if(b.stato != ONDULA ){
+        if(b.stato != ONDULA && b.stato != INSEGUIMENTO && b.stato != SPARPAGLIAMENTO){
             b.stato = INSEGUIMENTO;
             b.movespeed= b.movespeed + 1;
         }
-        if(p.stato != ONDULA){
+        if(p.stato != ONDULA && p.stato != INSEGUIMENTO && p.stato != SPARPAGLIAMENTO){
             p.stato = INSEGUIMENTO;
             p.movespeed = p.movespeed + 1;
         }
-        if(i.stato != ONDULA){
+        if(i.stato != ONDULA && i.stato != INSEGUIMENTO && i.stato != SPARPAGLIAMENTO){
             i.stato = INSEGUIMENTO;
             i.movespeed = i.movespeed + 1;
         }
 
-        if(c.stato != ONDULA){
+        if(c.stato != ONDULA && c.stato != INSEGUIMENTO && c.stato != SPARPAGLIAMENTO){
             c.stato = INSEGUIMENTO;
             c.movespeed = c.movespeed + 1;
         }
@@ -264,7 +264,6 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
         fuga_count = al_get_timer_count(t)+10;
         if(b.stato != FUGA && p.stato != FUGA && i.stato != FUGA && c.stato != FUGA )
             cambia_stato(b,p,i,c,pg);
-        cout<<i.stato<<endl;
     }
 
     if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q'){
@@ -327,16 +326,16 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
     DIREZ dir;
     int matt[m.r][m.c];
 
-    if(pgy >= m.r){
+    if(pgy >= m.r-1){
         pgy = m.r - 2;
     }
-    if(pgx >= m.c){
+    if(pgx >= m.c-1){
         pgx = m.c - 2;
     }
-    if(pgy < 0){
+    if(pgy <= 0){
         pgy = 1;
     }
-    if(pgx < 0){
+    if(pgx <= 0){
         pgx = 1;
     }
 
@@ -511,8 +510,8 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     }
     else if(f.stato == FUGA){
         srand(time(NULL));
-        x = rand() % m.c;
-        y = rand() % m.r;
+        x = rand() % (m.c-1)+1;
+        y = rand() % (m.r-1)+1;
     }
 
     if(check_x == f.x && check_y == f.y){
@@ -601,8 +600,8 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     }
     else if(f.stato == FUGA){
         srand(time(NULL));
-        x = rand() % m.c;
-        y = rand() % m.r;
+        x = rand() % (m.c-1)+1;
+        y = rand() % (m.r-1)+1;
     }
 
     if(check_x == f.x && check_y == f.y){
@@ -694,8 +693,8 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
     }
     else if(f.stato == FUGA){
         srand(time(NULL));
-        x = rand() % m.c;
-        y = rand() % m.r;
+        x = rand() % (m.c-1)+1;
+        y = rand() % (m.r-1)+1;
     }
     /*#ifdef DEBUG_MODE
         al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
@@ -778,8 +777,8 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     }
     else if(f.stato == FUGA){
         srand(time(NULL));
-        x = rand() % m.c;
-        y = rand() % m.r;
+        x = rand() % (m.c-1)+1;
+        y = rand() % (m.r-1)+1;
     }
     /*#ifdef DEBUG_MODE
         al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );

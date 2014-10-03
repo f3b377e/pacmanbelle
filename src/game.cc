@@ -328,23 +328,36 @@ int main(int argc, char *argv[]){
                     draw_path(bitmap,mappa);
                     draw_pacman(pacman);
 
-                    if(blinky.stato == FUGA)
-                        draw_fant_fuga(bitmap, blinky);
+                    if(blinky.stato == FUGA){
+                        if(fuga_count - al_get_timer_count(timer2) <= 3)
+                            draw_fant_fuga(bitmap, blinky, 1);
+                        else
+                            draw_fant_fuga(bitmap, blinky, 0);
+                    }
                     else
                         draw_fantasma(blinky);
 
                     if(pinky.stato == FUGA)
-                        draw_fant_fuga(bitmap, pinky);
+                        if(fuga_count - al_get_timer_count(timer2) <= 3)
+                            draw_fant_fuga(bitmap, pinky, 1);
+                        else
+                            draw_fant_fuga(bitmap, pinky, 0);
                     else
                         draw_fantasma(pinky);
 
                     if(inky.stato == FUGA)
-                        draw_fant_fuga(bitmap, inky);
+                        if(fuga_count - al_get_timer_count(timer2) <= 3)
+                            draw_fant_fuga(bitmap, inky, 1);
+                        else
+                            draw_fant_fuga(bitmap, inky, 0);
                     else
                         draw_fantasma(inky);
 
                     if(clyde.stato == FUGA)
-                        draw_fant_fuga(bitmap, clyde);
+                        if(fuga_count - al_get_timer_count(timer2) <= 3)
+                            draw_fant_fuga(bitmap, clyde, 1);
+                        else
+                            draw_fant_fuga(bitmap, clyde, 0);
                     else
                         draw_fantasma(clyde);
 
