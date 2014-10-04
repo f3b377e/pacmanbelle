@@ -182,14 +182,33 @@ int main(int argc, char *argv[]){
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count);
+                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font);
 
                     if(al_get_timer_count(timer2) == fuga_count){
                         fuga_count = -1;
                         al_stop_sample(&audio.id);
                         al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
-                        if(blinky.stato == FUGA || pinky.stato == FUGA || inky.stato == FUGA || clyde.stato == FUGA )
-                            cambia_stato(blinky,pinky,inky,clyde,pacman);
+                        if(blinky.stato == FUGA || pinky.stato == FUGA || inky.stato == FUGA || clyde.stato == FUGA ){
+                            if(blinky.stato != ONDULA && blinky.stato != INSEGUIMENTO && blinky.stato != SPARPAGLIAMENTO && blinky.stato != MANGIATO){
+                                blinky.stato = INSEGUIMENTO;
+                                blinky.movespeed= blinky.movespeed + 1;
+                            }
+
+                            if(pinky.stato != ONDULA && pinky.stato != INSEGUIMENTO && pinky.stato != SPARPAGLIAMENTO && pinky.stato != MANGIATO){
+                                pinky.stato = INSEGUIMENTO;
+                                pinky.movespeed = pinky.movespeed + 1;
+                            }
+
+                            if(inky.stato != ONDULA && inky.stato != INSEGUIMENTO && inky.stato != SPARPAGLIAMENTO && inky.stato != MANGIATO){
+                                inky.stato = INSEGUIMENTO;
+                                inky.movespeed = inky.movespeed + 1;
+                            }
+
+                            if(clyde.stato != ONDULA && clyde.stato != INSEGUIMENTO && clyde.stato != SPARPAGLIAMENTO && clyde.stato != MANGIATO){
+                                clyde.stato = INSEGUIMENTO;
+                                clyde.movespeed = clyde.movespeed + 1;
+                            }
+                        }
                     }
 
                     if(blinky.stato != ONDULA){

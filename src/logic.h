@@ -13,7 +13,7 @@ void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
  * cambiare la funzione che cambia di stato i fantasmi quando Pacman mangia il pallino powa!
  */
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c,
-                ALLEGRO_TIMER *t, int &fuga_count);
+                ALLEGRO_TIMER *t, int &fuga_count, FONT_t f);
 
 /**Serve per cambiare lo stato dei fantasmi quando pacman mangia il pallino powa e serve anche per cambiare lo stato quando il tempo di attivazione scade*/
 void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PLAYER_t &pg);

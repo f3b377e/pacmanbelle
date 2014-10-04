@@ -207,20 +207,20 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
 
 void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PLAYER_t &pg)
 {
-    if(b.stato != FUGA && p.stato != FUGA && i.stato != FUGA && c.stato != FUGA ){
-        if(b.stato != ONDULA ){
+    if(b.stato != FUGA || p.stato != FUGA || i.stato != FUGA || c.stato != FUGA ){
+        if(b.stato != ONDULA && b.stato != MANGIATO && b.stato != FUGA){
             b.stato = FUGA;
             b.movespeed = b.movespeed - 1;
         }
-        if(p.stato != ONDULA){
+        if(p.stato != ONDULA && p.stato != MANGIATO && p.stato != FUGA){
             p.stato = FUGA;
             p.movespeed = p.movespeed - 1;
         }
-        if(i.stato != ONDULA ){
+        if(i.stato != ONDULA && i.stato != MANGIATO && i.stato != FUGA){
             i.stato = FUGA;
             i.movespeed = i.movespeed - 1;
         }
-        if(c.stato != ONDULA){
+        if(c.stato != ONDULA && c.stato != MANGIATO && c.stato != FUGA){
             c.stato = FUGA;
             c.movespeed = c.movespeed - 1;
         }
@@ -249,12 +249,12 @@ void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PL
 }
 
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c,
-                ALLEGRO_TIMER *t, int &fuga_count)
+                ALLEGRO_TIMER *t, int &fuga_count, FONT_t f)
 {
 	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
     static bool p_eaten = false;
-
+    static int punt_fant = 200; //punteggio attribuito ai fantasmi
 
     if (m.mappa[mapy][mapx] == 'P')
         pg.punteggio += 10;
@@ -264,8 +264,25 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
         al_stop_sample(&audio.id);
         al_play_sample(audio.ghosts_scared, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
         fuga_count = al_get_timer_count(t)+10;
-        if(b.stato != FUGA && p.stato != FUGA && i.stato != FUGA && c.stato != FUGA )
-            cambia_stato(b,p,i,c,pg);
+
+        //controlli per i fantasmi per camgiarli di stato
+        if(b.stato != ONDULA && b.stato != MANGIATO && b.stato != FUGA){
+            b.stato = FUGA;
+            b.movespeed = b.movespeed - 1;
+        }
+        if(p.stato != ONDULA && p.stato != MANGIATO && p.stato != FUGA){
+            p.stato = FUGA;
+            p.movespeed = p.movespeed - 1;
+        }
+        if(i.stato != ONDULA && i.stato != MANGIATO && i.stato != FUGA){
+            i.stato = FUGA;
+            i.movespeed = i.movespeed - 1;
+        }
+        if(c.stato != ONDULA && c.stato != MANGIATO && c.stato != FUGA){
+            c.stato = FUGA;
+            c.movespeed = c.movespeed - 1;
+        }
+
     }
 
     if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q'){
@@ -280,21 +297,32 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
         }
     }
 
+    if(b.stato != FUGA && p.stato != FUGA && i.stato != FUGA && c.stato != FUGA)
+        punt_fant = 200;
+
     if(collision_pacman(pg, b) && b.stato == FUGA){
         b.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        pg.punteggio += punt_fant;
+        punt_fant += 200;
     }
     if(collision_pacman(pg, p) && p.stato == FUGA){
         p.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        pg.punteggio += punt_fant;
+        punt_fant += 200;
     }
     if(collision_pacman(pg, i) && i.stato == FUGA){
         i.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        pg.punteggio += punt_fant;
+        punt_fant += 200;
     }
     if(collision_pacman(pg, c) && c.stato == FUGA){
         c.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        pg.punteggio += punt_fant;
+        punt_fant += 200;
     }
 
 }
