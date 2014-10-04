@@ -69,7 +69,6 @@ struct PLAYER_t{
 	float x;		    /**< Coordinata x schermo*/
 	float y;		    /**< Coordinata y schermo*/
 	int vita;		    /**< Vite di pacman che possono essere minimo 0 massimo 3*/
-	bool potente;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	int punteggio;		/**< punteggio attuale*/
 	bool mangiato;		/**< se vera pacman è mangiato dai fantasmi */
     ALLEGRO_BITMAP *img;   /**< L'immagine associata a Pacman */
@@ -87,7 +86,6 @@ struct FANTASMA_t{
 	int sourcey;		/**< Coordinata y per regione dello sheet di pacman*/
 	float x;            /**< Coordinata x schermo*/
 	float y;		    /**< Coordinata y schermo*/
-	bool mangiato;		/**< Vera quando pacman mangia il fantasma*/
     ALLEGRO_BITMAP *img;   /**< Immagine relativa al fantasma */
 
 };
@@ -111,6 +109,7 @@ struct AUDIO_t{
 struct BITMAP_t{
     ALLEGRO_BITMAP *header_image;   /** Immagine Principale del menu */
     ALLEGRO_BITMAP *fant_fuga;      /** Sheet della fuga dei fantasmi*/
+    ALLEGRO_BITMAP *fant_mangiato;  /** Sheet del fantasma mangiato*/
     ALLEGRO_BITMAP *puntino;        /** Immagine per la comparsa del puntino nel menu */
     ALLEGRO_BITMAP *autotile;       /** Immagine per la composizione della mappa */
     ALLEGRO_BITMAP *f_pericolo;     /** Fantasmi spaventati e morti*/

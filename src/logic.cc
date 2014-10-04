@@ -226,20 +226,22 @@ void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PL
         }
     }
     else{
-        if(b.stato != ONDULA && b.stato != INSEGUIMENTO && b.stato != SPARPAGLIAMENTO){
+        if(b.stato != ONDULA && b.stato != INSEGUIMENTO && b.stato != SPARPAGLIAMENTO && b.stato != MANGIATO){
             b.stato = INSEGUIMENTO;
             b.movespeed= b.movespeed + 1;
         }
-        if(p.stato != ONDULA && p.stato != INSEGUIMENTO && p.stato != SPARPAGLIAMENTO){
+
+        if(p.stato != ONDULA && p.stato != INSEGUIMENTO && p.stato != SPARPAGLIAMENTO && p.stato != MANGIATO){
             p.stato = INSEGUIMENTO;
             p.movespeed = p.movespeed + 1;
         }
-        if(i.stato != ONDULA && i.stato != INSEGUIMENTO && i.stato != SPARPAGLIAMENTO){
+
+        if(i.stato != ONDULA && i.stato != INSEGUIMENTO && i.stato != SPARPAGLIAMENTO && i.stato != MANGIATO){
             i.stato = INSEGUIMENTO;
             i.movespeed = i.movespeed + 1;
         }
 
-        if(c.stato != ONDULA && c.stato != INSEGUIMENTO && c.stato != SPARPAGLIAMENTO){
+        if(c.stato != ONDULA && c.stato != INSEGUIMENTO && c.stato != SPARPAGLIAMENTO && c.stato != MANGIATO){
             c.stato = INSEGUIMENTO;
             c.movespeed = c.movespeed + 1;
         }
@@ -277,6 +279,24 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
             p_eaten = false;
         }
     }
+
+    if(collision_pacman(pg, b) && b.stato == FUGA){
+        b.stato = MANGIATO;
+        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+    }
+    if(collision_pacman(pg, p) && p.stato == FUGA){
+        p.stato = MANGIATO;
+        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+    }
+    if(collision_pacman(pg, i) && i.stato == FUGA){
+        i.stato = MANGIATO;
+        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+    }
+    if(collision_pacman(pg, c) && c.stato == FUGA){
+        c.stato = MANGIATO;
+        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+    }
+
 }
 
 void controlla_pos()
@@ -513,6 +533,14 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         x = rand() % (m.c-1)+1;
         y = rand() % (m.r-1)+1;
     }
+    else if(f.stato == MANGIATO){
+        x = 14;
+        y = 14;
+        if (fx >= 11 && fx <= 16 && fy >= 13 && fy <= 15){
+            f.stato = INSEGUIMENTO;
+            f.movespeed = f.movespeed+1;
+        }
+    }
 
     if(check_x == f.x && check_y == f.y){
         if(do_bfs(m,f)){
@@ -603,6 +631,15 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         x = rand() % (m.c-1)+1;
         y = rand() % (m.r-1)+1;
     }
+    else if(f.stato == MANGIATO){
+        x = 14;
+        y = 14;
+        if (fx >= 11 && fx <= 16 && fy >= 13 && fy <= 15){
+            f.stato = INSEGUIMENTO;
+            f.movespeed = f.movespeed+1;
+        }
+    }
+
 
     if(check_x == f.x && check_y == f.y){
         if(do_bfs(m,f)){
@@ -696,11 +733,19 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
         x = rand() % (m.c-1)+1;
         y = rand() % (m.r-1)+1;
     }
-    /*#ifdef DEBUG_MODE
+    else if(f.stato == MANGIATO){
+        x = 14;
+        y = 14;
+        if (fx >= 11 && fx <= 16 && fy >= 13 && fy <= 15){
+            f.stato = INSEGUIMENTO;
+            f.movespeed = f.movespeed+1;
+        }
+    }
+    #ifdef DEBUG_MODE
         al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
         al_flip_display();
     #endif // DEBUG_MODE
-    */
+
     if(check_x == f.x && check_y == f.y){
         if(do_bfs(m,f)){
             f.succdir = bfs(m, f, fx, fy, x, y);
@@ -780,11 +825,15 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         x = rand() % (m.c-1)+1;
         y = rand() % (m.r-1)+1;
     }
-    /*#ifdef DEBUG_MODE
-        al_draw_filled_rectangle(x*BLOCKSIZE+OFFSETX,y*BLOCKSIZE+OFFSETY,x*BLOCKSIZE+OFFSETX+BLOCKSIZE,y*BLOCKSIZE+OFFSETY+BLOCKSIZE,al_map_rgb(255,0,0) );
-        al_flip_display();
-    #endif // DEBUG_MODE
-    */
+    else if(f.stato == MANGIATO){
+        x = 14;
+        y = 14;
+        if (fx >= 11 && fx <= 16 && fy >= 13 && fy <= 15){
+            f.stato = INSEGUIMENTO;
+            f.movespeed = f.movespeed+1;
+        }
+    }
+
     if(check_x == f.x && check_y == f.y){
         if(do_bfs(m,f)){
             f.succdir = bfs(m, f, fx, fy, x, y);
@@ -833,3 +882,21 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     }
 }
 
+bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
+{
+    float dist = 5;
+    float px = p.x + dist;
+    float py = p.y + dist;
+    float fx = f.x + dist;
+    float fy = f.y + dist;
+    float ph = p.y + BLOCKSIZE -dist;
+    float pw = p.x + BLOCKSIZE -dist;
+    float fh = f.y + BLOCKSIZE -dist;
+    float fw = f.x + BLOCKSIZE -dist;
+
+    if (((fx>=px && fx<=pw) || (fw>=px && fw<=pw))&&
+        ( (fy>=py && fy<=ph) || (fh>=py && fh<=ph) ))
+       return true;
+    else
+        return false;
+}

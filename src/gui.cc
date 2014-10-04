@@ -237,6 +237,17 @@ void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& pg, int fine_fuga)
                           , pg.x, pg.y, 0);
 }
 
+void draw_fant_mangiato(const BITMAP_t &b, FANTASMA_t& pg)
+{
+    pg.sourcex = 0;
+    pg.sourcey = pg.dir;
+    al_draw_bitmap_region(b.fant_mangiato, pg.sourcex
+                          , pg.sourcey * al_get_bitmap_height(b.fant_mangiato)/4
+                          , al_get_bitmap_width(b.fant_mangiato)
+                          , al_get_bitmap_height(b.fant_mangiato)/4
+                          , pg.x, pg.y, 0);
+}
+
 void draw_fantasma(FANTASMA_t& pg)
 {
     pg.sourcex += al_get_bitmap_width(pg.img)/2;

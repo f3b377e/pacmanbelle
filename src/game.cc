@@ -188,11 +188,12 @@ int main(int argc, char *argv[]){
                         fuga_count = -1;
                         al_stop_sample(&audio.id);
                         al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
-                        cambia_stato(blinky,pinky,inky,clyde,pacman);
+                        if(blinky.stato == FUGA || pinky.stato == FUGA || inky.stato == FUGA || clyde.stato == FUGA )
+                            cambia_stato(blinky,pinky,inky,clyde,pacman);
                     }
 
                     if(blinky.stato != ONDULA){
-                        if(blinky.stato != FUGA){
+                        if(blinky.stato != FUGA && blinky.stato != MANGIATO){
                             if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
                                (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
                                (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
@@ -211,7 +212,7 @@ int main(int argc, char *argv[]){
 
 
                     if(pinky.stato != ONDULA){
-                        if(pinky.stato != FUGA){
+                        if(pinky.stato != FUGA && pinky.stato != MANGIATO){
                             if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
                               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
                               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
@@ -232,7 +233,7 @@ int main(int argc, char *argv[]){
                     }
 
                     if(inky.stato != ONDULA){
-                        if(inky.stato != FUGA){
+                        if(inky.stato != FUGA && inky.stato != MANGIATO){
                             if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
                               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
                               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
@@ -253,7 +254,7 @@ int main(int argc, char *argv[]){
                     }
 
                     if(clyde.stato != ONDULA){
-                        if(clyde.stato != FUGA){
+                        if(clyde.stato != FUGA && clyde.stato != MANGIATO){
                             if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
                               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
                               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
@@ -334,31 +335,43 @@ int main(int argc, char *argv[]){
                         else
                             draw_fant_fuga(bitmap, blinky, 0);
                     }
-                    else
+                    else if(blinky.stato == MANGIATO)
+                        draw_fant_mangiato(bitmap, blinky);
+                    else if(blinky.stato == INSEGUIMENTO || blinky.stato == SPARPAGLIAMENTO || blinky.stato == ONDULA)
                         draw_fantasma(blinky);
 
-                    if(pinky.stato == FUGA)
+                    if(pinky.stato == FUGA){
                         if(fuga_count - al_get_timer_count(timer2) <= 3)
                             draw_fant_fuga(bitmap, pinky, 1);
                         else
                             draw_fant_fuga(bitmap, pinky, 0);
-                    else
+                    }
+                    else if(pinky.stato == MANGIATO)
+                        draw_fant_mangiato(bitmap, pinky);
+                    else if(pinky.stato == INSEGUIMENTO || pinky.stato == SPARPAGLIAMENTO || pinky.stato == ONDULA)
                         draw_fantasma(pinky);
 
-                    if(inky.stato == FUGA)
+                    if(inky.stato == FUGA){
                         if(fuga_count - al_get_timer_count(timer2) <= 3)
                             draw_fant_fuga(bitmap, inky, 1);
                         else
                             draw_fant_fuga(bitmap, inky, 0);
-                    else
+                    }
+                    else if(inky.stato == MANGIATO)
+                        draw_fant_mangiato(bitmap, inky);
+                    else if(inky.stato == INSEGUIMENTO || inky.stato == SPARPAGLIAMENTO || inky.stato == ONDULA)
                         draw_fantasma(inky);
 
-                    if(clyde.stato == FUGA)
+
+                    if(clyde.stato == FUGA){
                         if(fuga_count - al_get_timer_count(timer2) <= 3)
                             draw_fant_fuga(bitmap, clyde, 1);
                         else
                             draw_fant_fuga(bitmap, clyde, 0);
-                    else
+                    }
+                    else if(clyde.stato == MANGIATO)
+                        draw_fant_mangiato(bitmap, clyde);
+                    else if(clyde.stato == INSEGUIMENTO || clyde.stato == SPARPAGLIAMENTO || clyde.stato == ONDULA)
                         draw_fantasma(clyde);
 
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,

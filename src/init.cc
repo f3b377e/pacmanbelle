@@ -78,6 +78,10 @@ void init_bitmap(BITMAP_t& b)
 	 if (b.fant_fuga == NULL)
         cout<<"\n Bitmap Error, fantasma_pericolo error!";
 
+    b.fant_mangiato = al_load_bitmap("data/img/fantasma_mangiato.png");
+	 if (b.fant_mangiato == NULL)
+        cout<<"\n Bitmap Error, fantasma_mangiato error!";
+
     b.puntino = al_load_bitmap("data/img/puntino_bianco.png");
 	 if (b.puntino == NULL)
         cout<<"\n Bitmap Error, puntino_bianco error!";
@@ -128,7 +132,6 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.sourcey = 0;
 	pacman.x = 13*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
-	pacman.potente = false;		/**< se vera pacman aumenta la velocità e può mangiare i fantasmi*/
 	pacman.punteggio = 0;		/**< punteggio attuale*/
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
 	pacman.vita = 2;
@@ -147,7 +150,6 @@ void init_blinky(FANTASMA_t &b)
     b.movespeed = 4;
     b.x = 13 * BLOCKSIZE + OFFSETX;
     b.y = 13 * BLOCKSIZE + OFFSETY;
-    b.mangiato = false;
     b.img = al_load_bitmap("data/img/fantasma1.png");
     if(b.img == NULL)
         cout<<"\n Bitmap Error, blinky - fantasma1 error!";
@@ -162,7 +164,6 @@ void init_pinky(FANTASMA_t &p)
     p.movespeed = 4;
     p.x = 11 * BLOCKSIZE + OFFSETX;
     p.y = 15 * BLOCKSIZE + OFFSETY;
-    p.mangiato = false;
     p.img = al_load_bitmap("data/img/fantasma2.png");
     if(p.img == NULL)
         cout<<"\n Bitmap Error, pinky - fantasma2 error!";
@@ -177,7 +178,6 @@ void init_inky(FANTASMA_t &i)
     i.movespeed = 4;
     i.x = 15 * BLOCKSIZE + OFFSETX;
     i.y = 15 * BLOCKSIZE + OFFSETY;
-    i.mangiato = false;
     i.img = al_load_bitmap("data/img/fantasma3.png");
     if(i.img == NULL)
         cout<<"\n Bitmap Error, inky - fantasma3 error!";
@@ -192,7 +192,6 @@ void init_clyde(FANTASMA_t &c)
     c.movespeed = 4;
     c.x = 13 * BLOCKSIZE + OFFSETX;
     c.y = 15 * BLOCKSIZE + OFFSETY;
-    c.mangiato = false;
     c.img = al_load_bitmap("data/img/fantasma4.png");
     if(c.img == NULL)
         cout<<"\n Bitmap Error, clyde - fantasma4 error!";
