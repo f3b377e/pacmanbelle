@@ -20,5 +20,11 @@ void load_map(MAPPA_t& m, char *fileliv, int livello);
 
 void scrivi_mappa_su_file(const MAPPA_t &, const char []);
 
+/**Prende da un file di salvataggio il record fatto in precedenza*/
+int preleva_record();
+
+/**Scrive sul file di salvataggio il record*/
+void salva_record(int new_record);
+
 
 #endif // IO_H_

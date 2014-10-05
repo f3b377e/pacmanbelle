@@ -25,6 +25,7 @@ const int FPS = 25;		                        /**< Frame del gioco*/
 const int FMOV = 10;                            /**< Frame del movimento delle animazioni*/
 const int FTIME = 1;                            /**< Timer del gioco, usato per controllare diversi eventi*/
 const int BLOCKSIZE = 16;	                    /**< Blocchi della mappa*/
+const char FILE_SAV[] = "sav.txt";                /**< Nome del file di salvataggio*/
 
 /**Stato di direzione per pacman e per i fantasmi*/
 enum DIREZ{GIU, SU, SX, DX, FERMO};

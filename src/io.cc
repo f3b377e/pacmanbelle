@@ -100,3 +100,18 @@ void load_map(MAPPA_t& m, char fileliv[], int livello)
     }
 }
 
+int preleva_record(){
+    int punt_sav;
+    ifstream f(FILE_SAV);
+
+    if(!f)
+        cout<<"file Error!";
+    f>>punt_sav;
+    return punt_sav;
+}
+
+void salva_record(int new_record){
+    ofstream f(FILE_SAV);
+    f<<new_record;
+}
+

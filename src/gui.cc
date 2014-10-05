@@ -261,16 +261,22 @@ void draw_fantasma(FANTASMA_t& pg)
                           , pg.x, pg.y, 0);
 }
 
-void draw_gameover(const FONT_t &f, const BITMAP_t &b)
+void draw_gameover(const FONT_t &f, const BITMAP_t &b, bool nuovo_record)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** g a m e  o v e r ****");
+    al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)+200, ALLEGRO_ALIGN_CENTER, "Press Enter");
+    if(nuovo_record)
+        al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)-200, ALLEGRO_ALIGN_CENTER, "Nuovo Record");
     al_flip_display();
 }
 
-void draw_win(const FONT_t &f, const BITMAP_t &b)
+void draw_win(const FONT_t &f, const BITMAP_t &b, bool nuovo_record)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(15,255,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** v i c t o r y ****");
+    al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)+200, ALLEGRO_ALIGN_CENTER, "Press Enter");
+    if(nuovo_record)
+        al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)-200, ALLEGRO_ALIGN_CENTER, "Nuovo Record");
     al_flip_display();
 }

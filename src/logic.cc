@@ -928,3 +928,36 @@ bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)
     else
         return false;
 }
+
+void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato, bool &caricamappa)
+{
+    if (pg.vita > 0){
+        pg.vita--;
+        stato = CARICA;
+        caricamappa = false;
+    }
+    else{
+        stato = GAME_OVER;
+        caricamappa = true;
+    }
+    pg.dir = FERMO;
+    pg.precdir = SX;
+    pg.succdir = FERMO;
+    pg.movespeed = 4;
+    pg.sourcex = 0;
+    pg.sourcey = 0;
+    pg.x = 13*BLOCKSIZE+OFFSETX;
+    pg.y = 23*BLOCKSIZE+OFFSETY;
+    pg.mangiato = false;
+}
+
+bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa)
+{
+    for (int i=0; i<m.r; i++)
+        for (int j=0; j<m.c; j++)
+            if (m.mappa[i][j] == 'P' || m.mappa[i][j]  == 'Q')
+                return false;
+    stato = WIN;
+    caricamappa = true;
+    return true;
+}

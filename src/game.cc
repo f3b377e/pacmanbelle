@@ -40,9 +40,10 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     int menu = 1;
-    //int morte = -1;
+    int morte = -1;
     char fileliv[20];
     int fuga_count = -1;
+    bool nuovo_record = false;
     bool redraw = true;
     bool done = false;
     bool tasto[8] = {false, false, false, false, false, false, false, false};
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]){
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_TIMER *timer2 = NULL;
-    //ALLEGRO_TIMER *timermov = NULL;
+    ALLEGRO_TIMER *timermov = NULL;
 
     /**Inizializzazioni: */
 
@@ -80,17 +81,13 @@ int main(int argc, char *argv[]){
     //Timer
     timer = al_create_timer(1.0 / FPS);
     timer2 = al_create_timer(1.0 / FTIME);
-    //timermov = al_create_timer(1.0 / FMOV);
+    timermov = al_create_timer(1.0 / FMOV);
 
     //Player
     PLAYER_t pacman;
 
     //Nemici
     FANTASMA_t blinky, pinky, inky, clyde;
-    init_blinky(blinky);
-    init_clyde(clyde);
-    init_inky(inky);
-    init_pinky(pinky);
 
     //Font
     FONT_t font;
@@ -117,7 +114,7 @@ int main(int argc, char *argv[]){
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_timer_event_source(timer2));
-    //al_register_event_source(event_queue, al_get_timer_event_source(timermov));
+    al_register_event_source(event_queue, al_get_timer_event_source(timermov));
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
@@ -154,6 +151,7 @@ int main(int argc, char *argv[]){
             switch(stato_gioco){
                 case MENU:
                     anima_menu(menu, tasto, stato_gioco);
+                    init_pacman(pacman);
                 break;
 
                 case CARICA:
@@ -161,7 +159,10 @@ int main(int argc, char *argv[]){
                         load_map(mappa,fileliv,livello);
                         caricamappa = false;
                     }
-                    init_pacman(pacman);
+                    init_blinky(blinky);
+                    init_clyde(clyde);
+                    init_inky(inky);
+                    init_pinky(pinky);
                     if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
                         cout<<"\n Audio Error! - non parte pacman_beginning";
                     al_stop_timer(timer);
@@ -293,9 +294,49 @@ int main(int argc, char *argv[]){
                         }
                     }
 
+                    if(blinky.stato != FUGA && blinky.stato != MANGIATO && collision_pacman(pacman,blinky)){
+                       stato_gioco = MORTE;
+                       al_stop_sample(&audio.id);
+                       al_start_timer(timermov);
+                       al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+                    }
+                    if(pinky.stato != FUGA && pinky.stato != MANGIATO && collision_pacman(pacman,pinky)){
+                        stato_gioco = MORTE;
+                        al_stop_sample(&audio.id);
+                        al_start_timer(timermov);
+                        al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+                    }
+
+                    if(inky.stato != FUGA && inky.stato != MANGIATO && collision_pacman(pacman,inky)){
+                        stato_gioco = MORTE;
+                        al_stop_sample(&audio.id);
+                        al_start_timer(timermov);
+                        al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+                    }
+
+                    if(clyde.stato != FUGA && clyde.stato != MANGIATO && collision_pacman(pacman,clyde)){
+                        stato_gioco = MORTE;
+                        al_stop_sample(&audio.id);
+                        al_start_timer(timermov);
+                        al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+                    }
+
+                    if (victory(mappa,stato_gioco, caricamappa))
+                        al_stop_sample(&audio.id);
+
                 break;
 
                 case MORTE:
+                   if(event.timer.source == timermov){
+                        morte++;
+                        if(morte >= 11){
+                            morte = 0;
+                            death_pacman(pacman, stato_gioco, caricamappa);
+                            al_stop_timer(timer2);
+                            al_stop_timer(timermov);
+                            al_set_timer_count(timer2, 0);
+                        }
+                    }
                 break;
 
                 case PAUSA:
@@ -318,9 +359,21 @@ int main(int argc, char *argv[]){
                 break;
 
                 case GAME_OVER:
+                    if (tasto[ENTER]){
+                        stato_gioco = MENU;
+                        caricamappa = true;
+                        nuovo_record = false;
+                        tasto[ENTER] = false;
+                    }
                 break;
 
                 case WIN:
+                    if (tasto[ENTER]){
+                        stato_gioco = MENU;
+                        caricamappa = true;
+                        nuovo_record = false;
+                        tasto[ENTER] = false;
+                    }
                 break;
 
                 case QUIT:
@@ -402,6 +455,10 @@ int main(int argc, char *argv[]){
                 break;
 
                 case MORTE:
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    draw_path(bitmap, mappa);
+                    al_draw_bitmap_region(bitmap.morte, 17*morte, 0, 17, 17, pacman.x, pacman.y,0);
+                    al_flip_display();
                 break;
 
                 case PAUSA:
@@ -418,11 +475,30 @@ int main(int argc, char *argv[]){
                     al_flip_display();
                 break;
 
-                case GAME_OVER:
+                case GAME_OVER:{
+                    int record;
+                    record = preleva_record();
+                    if(record < pacman.punteggio){
+                        salva_record(pacman.punteggio);
+                        al_flip_display();
+                        nuovo_record = true;
+                   }
+                    draw_gameover(font,bitmap,nuovo_record);
                 break;
+                }
 
-                case WIN:
+                case WIN:{
+                    int record;
+                    record = preleva_record();
+                    if(record < pacman.punteggio){
+                        salva_record(pacman.punteggio);
+                        nuovo_record = true;
+                        al_flip_display();
+                    }
+                    draw_win(font, bitmap, nuovo_record);
+
                 break;
+                }
 
                 case QUIT:
                     al_clear_to_color(al_map_rgb(0,0,0));
