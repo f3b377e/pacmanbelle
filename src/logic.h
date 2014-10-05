@@ -40,6 +40,6 @@ bool collision_pacman(const PLAYER_t &, const FANTASMA_t &);
 void death_pacman(PLAYER_t &, STATO_GIOCO &, bool &);
 
 /** Controlla la vittoria del giocatore*/
-bool victory(const MAPPA_t &, STATO_GIOCO &, bool &);
+bool victory(const MAPPA_t &, STATO_GIOCO &, bool &, int &);
 
 #endif /* LOGIC_H_ */

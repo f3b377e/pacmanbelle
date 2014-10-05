@@ -951,13 +951,19 @@ void death_pacman(PLAYER_t &pg, STATO_GIOCO &stato, bool &caricamappa)
     pg.mangiato = false;
 }
 
-bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa)
+bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa, int &livello)
 {
     for (int i=0; i<m.r; i++)
         for (int j=0; j<m.c; j++)
             if (m.mappa[i][j] == 'P' || m.mappa[i][j]  == 'Q')
                 return false;
-    stato = WIN;
-    caricamappa = true;
+
+    livello++;
+    if(livello <= 2){
+        caricamappa = true;
+        stato = CARICA;
+    }
+    else
+        stato = WIN;
     return true;
 }

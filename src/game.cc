@@ -135,9 +135,6 @@ int main(int argc, char *argv[]){
         else if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 			stato_gioco = QUIT;
 
-        else if(tasto[ESCAPE])
-            stato_gioco = QUIT;
-
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
             #ifdef DEBUG_MODE
@@ -150,6 +147,10 @@ int main(int argc, char *argv[]){
             //Update
             switch(stato_gioco){
                 case MENU:
+                    if(tasto[ESCAPE]){
+                        stato_gioco = QUIT;
+                        tasto[ESCAPE] = false;
+                    }
                     anima_menu(menu, tasto, stato_gioco);
                     init_pacman(pacman);
                 break;
@@ -175,6 +176,15 @@ int main(int argc, char *argv[]){
 
                 case PLAY:
                     al_start_timer(timer2);
+
+                    if(tasto[ESCAPE]){
+                        stato_gioco = MENU;
+                        caricamappa = true;
+                        al_stop_timer(timer2);
+                        al_stop_sample(&audio.id);
+                        tasto[ESCAPE] = false;
+                    }
+
 
                     if(tasto[SPACE]){
                         al_stop_timer(timer2);
@@ -321,8 +331,10 @@ int main(int argc, char *argv[]){
                         al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
                     }
 
-                    if (victory(mappa,stato_gioco, caricamappa))
+                    if (victory(mappa,stato_gioco, caricamappa, livello)){
                         al_stop_sample(&audio.id);
+                        al_stop_timer(timer2);
+                    }
 
                 break;
 
@@ -340,6 +352,11 @@ int main(int argc, char *argv[]){
                 break;
 
                 case PAUSA:
+                    if(tasto[ESCAPE]){
+                        stato_gioco = MENU;
+                        caricamappa = true;
+                        tasto[ESCAPE] = false;
+                    }
                     al_stop_sample(&audio.id);
                     if (tasto[SPACE]){
                         al_start_timer(timer2);
@@ -353,9 +370,17 @@ int main(int argc, char *argv[]){
                 break;
 
                 case CONTROLS:
+                    if(tasto[ESCAPE]){
+                        stato_gioco = MENU;
+                        tasto[ESCAPE] = false;
+                    }
                 break;
 
                 case HIGH_SCORE:
+                    if(tasto[ESCAPE]){
+                        stato_gioco = MENU;
+                        tasto[ESCAPE] = false;
+                    }
                 break;
 
                 case GAME_OVER:
@@ -448,9 +473,17 @@ int main(int argc, char *argv[]){
 
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
 									"SCORE: %d",pacman.punteggio);
-                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
-									"LIVES: %d",pacman.vita);
-                    al_draw_bitmap_region(bitmap.frutta, 0, 0, 16, 16, 550, OFFSETY, 0);
+
+                    for(int i = 0; i < pacman.vita; i++){
+                        al_draw_bitmap_region(pacman.img, 0, 2 * al_get_bitmap_height(pacman.img)/4
+                                              , al_get_bitmap_width(pacman.img)/3
+                                              , al_get_bitmap_height(pacman.img)/4
+                                              , ((al_get_bitmap_width(pacman.img)/3)*i)+OFFSETX+200, 550, 0);
+                    }
+                    /*al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
+									"LIVES: %d",pacman.vita);*/
+                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+350, 550, 0,
+									"LEVEL: %d",livello);
                     al_flip_display();
                 break;
 
@@ -467,14 +500,18 @@ int main(int argc, char *argv[]){
 
                 case CONTROLS:
                     al_clear_to_color(al_map_rgb(0,0,0));
+                    draw_controls(font);
                     al_flip_display();
                 break;
 
-                case HIGH_SCORE:
+                case HIGH_SCORE:{
+                    int record;
+                    record = preleva_record();
                     al_clear_to_color(al_map_rgb(0,0,0));
+                    draw_high_score(font, record);
                     al_flip_display();
                 break;
-
+                }
                 case GAME_OVER:{
                     int record;
                     record = preleva_record();

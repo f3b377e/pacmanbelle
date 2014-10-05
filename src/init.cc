@@ -134,7 +134,7 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
 	pacman.punteggio = 0;		/**< punteggio attuale*/
 	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
-	pacman.vita = 0;
+	pacman.vita = 2;
     pacman.img = al_load_bitmap("data/img/pacman2.png");
 	 if (pacman.img == NULL)
         cout<<"\n Bitmap Error, pacman2 error!";

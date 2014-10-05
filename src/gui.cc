@@ -280,3 +280,28 @@ void draw_win(const FONT_t &f, const BITMAP_t &b, bool nuovo_record)
         al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)-200, ALLEGRO_ALIGN_CENTER, "Nuovo Record");
     al_flip_display();
 }
+
+void draw_controls(FONT_t f)
+{
+    al_clear_to_color(al_map_rgb(0,0,0));
+    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+100, ALLEGRO_ALIGN_LEFT, "Direzione SU: TASTO SU");
+    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+200, ALLEGRO_ALIGN_LEFT, "Direzione GIU: TASTO GIU");
+    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+300, ALLEGRO_ALIGN_LEFT, "Direzione DESTRA: TASTO DESTRA");
+    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+400, ALLEGRO_ALIGN_LEFT, "Direzione SINISTRA: TASTO SINISTRA");
+    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+500, ALLEGRO_ALIGN_LEFT, "PAUSA: SPACE BAR");
+
+    al_draw_text(f.h5, al_map_rgb(225,255,225), OFFSETX, OFFSETY, ALLEGRO_ALIGN_LEFT, "Premere esc per tornare al menu");
+
+    al_flip_display();
+
+}
+
+
+void draw_high_score(const FONT_t &f, int record)
+{
+    al_draw_textf(f.h5, al_map_rgb(15,255,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER,"%d",record);
+
+    al_draw_text(f.h5, al_map_rgb(225,255,225), OFFSETX, OFFSETY, ALLEGRO_ALIGN_LEFT, "Premere esc per tornare al menu");
+
+}
+
