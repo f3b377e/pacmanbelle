@@ -500,7 +500,7 @@ int main(int argc, char *argv[]){
 
                 case CONTROLS:
                     al_clear_to_color(al_map_rgb(0,0,0));
-                    draw_controls(font);
+                    draw_controls(font, bitmap);
                     al_flip_display();
                 break;
 

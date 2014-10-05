@@ -44,10 +44,10 @@ void draw_gameover(const FONT_t &, const BITMAP_t &, bool nuovo_record);
 void draw_win(const FONT_t &, const BITMAP_t &, bool nuovo_record);
 
 /**Stampa i controlli del gioco*/
-void draw_controls(FONT_t f);
+void draw_controls(const FONT_t &, const BITMAP_t &);
 
 /**Stampa il record*/
-void draw_high_score(const FONT_t &f, int record);
+void draw_high_score(const FONT_t &, int record);
 
 
 #endif /* STAMPA_H_ */

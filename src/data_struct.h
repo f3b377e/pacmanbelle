@@ -116,6 +116,7 @@ struct BITMAP_t{
     ALLEGRO_BITMAP *f_pericolo;     /** Fantasmi spaventati e morti*/
     ALLEGRO_BITMAP *frutta;         /** Immagine della frutta*/
     ALLEGRO_BITMAP *morte;          /** Immagine della morte di pacman */
+    ALLEGRO_BITMAP *controls;       /** Immagine dei tasti direzionali della tastiera*/
 };
 
 /**Struttura contenente i font del gioco*/

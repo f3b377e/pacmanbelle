@@ -281,14 +281,28 @@ void draw_win(const FONT_t &f, const BITMAP_t &b, bool nuovo_record)
     al_flip_display();
 }
 
-void draw_controls(FONT_t f)
+void draw_controls(const FONT_t &f, const BITMAP_t &b)
 {
-    al_clear_to_color(al_map_rgb(0,0,0));
-    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+100, ALLEGRO_ALIGN_LEFT, "Direzione SU: TASTO SU");
-    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+200, ALLEGRO_ALIGN_LEFT, "Direzione GIU: TASTO GIU");
-    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+300, ALLEGRO_ALIGN_LEFT, "Direzione DESTRA: TASTO DESTRA");
-    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+400, ALLEGRO_ALIGN_LEFT, "Direzione SINISTRA: TASTO SINISTRA");
-    al_draw_text(f.h5, al_map_rgb(15,255,15), OFFSETX, OFFSETY+500, ALLEGRO_ALIGN_LEFT, "PAUSA: SPACE BAR");
+    int size = 48;
+    int posx, posy;
+
+    posx = OFFSETX;
+    posy = OFFSETY + 3*size;
+
+    //up
+    al_draw_bitmap_region(b.controls, size, size, size, size, posx + size/2, posy - size +10, 0);
+    //down
+    al_draw_bitmap_region(b.controls, 0, size, size, size, posx +size/2 -1, posy + size -10, 0);
+    //left
+    al_draw_bitmap_region(b.controls, 0, 0, size, size, posx -10, posy, 0);
+    //right
+    al_draw_bitmap_region(b.controls, size, 0, size, size, posx + size +10, posy, 0);
+
+    posy = OFFSETY + SCREENHEIGHT * 0.20;
+    al_draw_text(f.h5, al_map_rgb(105,253,105), SCREENWIDTH /2 - SCREENWIDTH *0.05 , posy , ALLEGRO_ALIGN_LEFT, "Utilizza i tasti");
+    al_draw_text(f.h5, al_map_rgb(105,253,105), SCREENWIDTH /2 - SCREENWIDTH *0.05, posy +22 , ALLEGRO_ALIGN_LEFT, "direzionali");
+    al_draw_text(f.h5, al_map_rgb(105,253,105), SCREENWIDTH /2 - SCREENWIDTH *0.05, posy +42 , ALLEGRO_ALIGN_LEFT, "per muoverti");
+    al_draw_text(f.h5, al_map_rgb(105,253,105), SCREENWIDTH /2 - SCREENWIDTH *0.05, posy +82, ALLEGRO_ALIGN_LEFT, "Spazio per la Pausa");
 
     al_draw_text(f.h5, al_map_rgb(225,255,225), OFFSETX, OFFSETY, ALLEGRO_ALIGN_LEFT, "Premere esc per tornare al menu");
 
@@ -304,4 +318,3 @@ void draw_high_score(const FONT_t &f, int record)
     al_draw_text(f.h5, al_map_rgb(225,255,225), OFFSETX, OFFSETY, ALLEGRO_ALIGN_LEFT, "Premere esc per tornare al menu");
 
 }
-
