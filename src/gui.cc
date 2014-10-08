@@ -115,88 +115,234 @@ void draw_countdown(const FONT_t &f, const BITMAP_t &b, const MAPPA_t &m)
 
 void draw_path(const BITMAP_t &b, const MAPPA_t &m)
 {
+    static int alpha;
+    static bool b_alpha;
+
+    if(b_alpha){
+        alpha += 10;
+        if(alpha >= 250)
+            b_alpha = false;
+    }
+    else{
+        alpha -= 10;
+        if(alpha <= 0)
+            b_alpha = true;
+    }
 
     for (int i=0; i < m.r; i++){
         for (int j = 0; j < m.c; j++){
             switch (m.mappa[i][j]){
-                case '0':
+                case '0':{
+                    ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 0, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
                 break;
-                case 'B':
+                }
+                case 'B':{
+                    ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 0, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
                 break;
-                case 'C':
+                }
+                case 'C':{
+                    ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 0, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
                 break;
-                case 'D':
+                }
+                case 'D':{
+                    ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 0, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'E':
+                }
+                case 'E':{
+                    ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 16, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 16, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'F':
+                }
+                case 'F':{
+                ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 16, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 16, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'G':
+                }
+                case 'G':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 16, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 16, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'H':
+                }
+                case 'H':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 16, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 16, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'I':
+                }
+                case 'I':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 32, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 32, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'L':
+                }
+                case 'L':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 32, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 32, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'M':
+                }
+                case 'M':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 32, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 32, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'N':
+                }
+                case 'N':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 32, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 32, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'P':
+                }
+                case 'P':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 48, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 48, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'Q':
+                }
+                case 'Q':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 48, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 48, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'R':
+                }
+                case 'R':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 48, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 48, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'S':
+                }
+                case 'S':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 48, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 48, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'J':
+                }
+                case 'J':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'K':
+                }
+                case 'K':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'W':
+                }
+                case 'W':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'X':
+                }
+                case 'X':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'Y':
+                }
+                case 'Y':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 1);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 1);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'A':
+                }
+                case 'A':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 64, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 64, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 2);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 2);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'T':
+                }
+                case 'T':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 0, 80, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 0, 80, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'U':
+                }
+                case 'U':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 16, 80, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 16, 80, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'V':
+                }
+                case 'V':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 32, 80, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 32, 80, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
-                case 'Z':
+                }
+                case 'Z':{ALLEGRO_BITMAP *subBitmap;
+                    subBitmap = al_create_sub_bitmap(b.autotile, 48, 80, BLOCKSIZE,BLOCKSIZE);
                     al_draw_bitmap_region(b.autotile, 48, 80, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_draw_tinted_bitmap(subBitmap, al_map_rgba(255, 255, 255, alpha), BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
+                    al_destroy_bitmap(subBitmap);
+
                 break;
+                }
                 case 'O':
                     al_draw_bitmap_region(b.autotile, 32, 0, BLOCKSIZE, BLOCKSIZE, BLOCKSIZE * j + OFFSETX, BLOCKSIZE * i + OFFSETY, 0);
                 break;
