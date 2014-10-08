@@ -16,13 +16,13 @@
     /**Inizializzazione di Pacman*/
     void init_pacman(PLAYER_t&);
     /**Inizializzazione di Blinky*/
-    void init_blinky(FANTASMA_t &);
+    void init_blinky(FANTASMA_t &, int);
     /**Inizializzazione di Pinky*/
-    void init_pinky(FANTASMA_t &);
+    void init_pinky(FANTASMA_t &, int);
     /**Inizializzazione di Inky*/
-    void init_inky(FANTASMA_t &);
+    void init_inky(FANTASMA_t &, int);
     /**Inizializzazione di Clyde*/
-    void init_clyde(FANTASMA_t &);
+    void init_clyde(FANTASMA_t &, int);
     /**Funzione che dealloca le immagini caricate */
     void dest_bitmap(BITMAP_t &);
     /**Funzione che dealloca i font caricati */

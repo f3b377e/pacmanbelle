@@ -146,13 +146,18 @@ void init_pacman (PLAYER_t& pacman)
 }
 
 
-void init_blinky(FANTASMA_t &b)
+void init_blinky(FANTASMA_t &b, int livello)
 {
     b.dir = SU;
     b.sourcex = 0;
     b.sourcey = 0;
     b.stato = SPARPAGLIAMENTO;
-    b.movespeed = 4;
+    if(livello >= 1 && livello <= 5)
+        b.movespeed = 4;
+    else if(livello > 5 && livello <= 9)
+        b.movespeed = 5;
+    else if(livello == 10)
+        b.movespeed = 6;
     b.x = 13 * BLOCKSIZE + OFFSETX;
     b.y = 13 * BLOCKSIZE + OFFSETY;
     b.img = al_load_bitmap("data/img/fantasma1.png");
@@ -160,13 +165,18 @@ void init_blinky(FANTASMA_t &b)
         cout<<"\n Bitmap Error, blinky - fantasma1 error!";
 }
 
-void init_pinky(FANTASMA_t &p)
+void init_pinky(FANTASMA_t &p, int livello)
 {
     p.dir = SU;
     p.sourcex = 0;
     p.sourcey = 0;
     p.stato = ONDULA;
-    p.movespeed = 4;
+    if(livello >= 1 && livello <= 5)
+        p.movespeed = 4;
+    else if(livello > 5 && livello <= 9)
+        p.movespeed = 5;
+    else if(livello == 10)
+        p.movespeed = 6;
     p.x = 11 * BLOCKSIZE + OFFSETX;
     p.y = 15 * BLOCKSIZE + OFFSETY;
     p.img = al_load_bitmap("data/img/fantasma2.png");
@@ -174,13 +184,18 @@ void init_pinky(FANTASMA_t &p)
         cout<<"\n Bitmap Error, pinky - fantasma2 error!";
 }
 
-void init_inky(FANTASMA_t &i)
+void init_inky(FANTASMA_t &i, int livello)
 {
     i.dir = SU;
     i.sourcex = 0;
     i.sourcey = 0;
     i.stato = ONDULA;
-    i.movespeed = 4;
+    if(livello >= 1 && livello <= 5)
+        i.movespeed = 4;
+    else if(livello > 5 && livello <= 9)
+        i.movespeed = 5;
+    else if(livello == 10)
+        i.movespeed = 6;
     i.x = 15 * BLOCKSIZE + OFFSETX;
     i.y = 15 * BLOCKSIZE + OFFSETY;
     i.img = al_load_bitmap("data/img/fantasma3.png");
@@ -188,13 +203,18 @@ void init_inky(FANTASMA_t &i)
         cout<<"\n Bitmap Error, inky - fantasma3 error!";
 }
 
-void init_clyde(FANTASMA_t &c)
+void init_clyde(FANTASMA_t &c, int livello)
 {
     c.dir = SU;
     c.sourcex = 0;
     c.sourcey = 0;
     c.stato = ONDULA;
-    c.movespeed = 4;
+    if(livello >= 1 && livello <= 5)
+        c.movespeed = 4;
+    else if(livello > 5 && livello <= 9)
+        c.movespeed = 5;
+    else if(livello == 10)
+        c.movespeed = 6;
     c.x = 13 * BLOCKSIZE + OFFSETX;
     c.y = 15 * BLOCKSIZE + OFFSETY;
     c.img = al_load_bitmap("data/img/fantasma4.png");

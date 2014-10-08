@@ -249,7 +249,7 @@ void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PL
 }
 
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c,
-                ALLEGRO_TIMER *t, int &fuga_count, FONT_t f)
+                ALLEGRO_TIMER *t, int &fuga_count, FONT_t f, int livello)
 {
 	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;
@@ -263,7 +263,7 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
         pg.punteggio += 50;
         al_stop_sample(&audio.id);
         al_play_sample(audio.ghosts_scared, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
-        fuga_count = al_get_timer_count(t)+10;
+        fuga_count = al_get_timer_count(t)+11-livello;
 
         //controlli per i fantasmi per camgiarli di stato
         if(b.stato != ONDULA && b.stato != MANGIATO && b.stato != FUGA){
@@ -536,6 +536,41 @@ void ondula(const MAPPA_t &m, FANTASMA_t &f)
     }
 }
 
+static void direziona_fantasma(FANTASMA_t &f, int check_x, int check_y){
+    switch (f.dir){
+        case FERMO:
+        break;
+        case SU:
+            check_y -= BLOCKSIZE;
+            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
+                f.y = check_y+BLOCKSIZE;
+            else
+                f.y -= f.movespeed;
+
+        break;
+        case GIU:
+            check_y += BLOCKSIZE;
+            if(f.y < check_y && f.y+f.movespeed > check_y)
+                f.y = check_y;
+            else
+                f.y += f.movespeed;
+        break;
+        case SX:
+            check_x -= BLOCKSIZE;
+            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
+                f.x = check_x+BLOCKSIZE;
+            else
+                f.x -= f.movespeed;
+        break;
+        case DX:
+            check_x += BLOCKSIZE;
+            if(f.x < check_x && f.x+f.movespeed > check_x)
+                f.x = check_x;
+            else
+                f.x += f.movespeed;
+        break;
+    }
+}
 
 void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
 {
@@ -577,39 +612,7 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         f.dir = f.succdir;
     }
 
-    switch (f.dir){
-        case FERMO:
-        break;
-        case SU:
-            check_y -= BLOCKSIZE;
-            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
-                f.y = check_y+BLOCKSIZE;
-            else
-                f.y -= f.movespeed;
-
-        break;
-        case GIU:
-            check_y += BLOCKSIZE;
-            if(f.y < check_y && f.y+f.movespeed > check_y)
-                f.y = check_y;
-            else
-                f.y += f.movespeed;
-        break;
-        case SX:
-            check_x -= BLOCKSIZE;
-            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
-                f.x = check_x+BLOCKSIZE;
-            else
-                f.x -= f.movespeed;
-        break;
-        case DX:
-            check_x += BLOCKSIZE;
-            if(f.x < check_x && f.x+f.movespeed > check_x)
-                f.x = check_x;
-            else
-                f.x += f.movespeed;
-        break;
-    }
+    direziona_fantasma(f, check_x, check_y);
 
     if (f.x < OFFSETX + 1 && f.dir == SX)
         f.x = 27 * BLOCKSIZE + OFFSETX;
@@ -676,39 +679,8 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         f.dir = f.succdir;
     }
 
-    switch (f.dir){
-        case FERMO:
-        break;
-        case SU:
-            check_y -= BLOCKSIZE;
-            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
-                f.y = check_y+BLOCKSIZE;
-            else
-                f.y -= f.movespeed;
+    direziona_fantasma(f, check_x, check_y);
 
-        break;
-        case GIU:
-            check_y += BLOCKSIZE;
-            if(f.y < check_y && f.y+f.movespeed > check_y)
-                f.y = check_y;
-            else
-                f.y += f.movespeed;
-        break;
-        case SX:
-            check_x -= BLOCKSIZE;
-            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
-                f.x = check_x+BLOCKSIZE;
-            else
-                f.x -= f.movespeed;
-        break;
-        case DX:
-            check_x += BLOCKSIZE;
-            if(f.x < check_x && f.x+f.movespeed > check_x)
-                f.x = check_x;
-            else
-                f.x += f.movespeed;
-        break;
-    }
     if (f.x < OFFSETX + 1 && f.dir == SX)
         f.x = 27 * BLOCKSIZE + OFFSETX;
 
@@ -781,39 +753,8 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
         f.dir = f.succdir;
     }
 
-    switch (f.dir){
-        case FERMO:
-        break;
-        case SU:
-            check_y -= BLOCKSIZE;
-            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
-                f.y = check_y+BLOCKSIZE;
-            else
-                f.y -= f.movespeed;
+    direziona_fantasma(f, check_x, check_y);
 
-        break;
-        case GIU:
-            check_y += BLOCKSIZE;
-            if(f.y < check_y && f.y+f.movespeed > check_y)
-                f.y = check_y;
-            else
-                f.y += f.movespeed;
-        break;
-        case SX:
-            check_x -= BLOCKSIZE;
-            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
-                f.x = check_x+BLOCKSIZE;
-            else
-                f.x -= f.movespeed;
-        break;
-        case DX:
-            check_x += BLOCKSIZE;
-            if(f.x < check_x && f.x+f.movespeed > check_x)
-                f.x = check_x;
-            else
-                f.x += f.movespeed;
-        break;
-    }
     if (f.x < OFFSETX + 1 && f.dir == SX)
         f.x = 27 * BLOCKSIZE + OFFSETX;
 
@@ -869,39 +810,8 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
         f.dir = f.succdir;
     }
 
-    switch (f.dir){
-        case FERMO:
-        break;
-        case SU:
-            check_y -= BLOCKSIZE;
-            if(f.y > check_y+BLOCKSIZE && f.y-f.movespeed < check_y+BLOCKSIZE) //controllo per poter utilizzare diverse velocità
-                f.y = check_y+BLOCKSIZE;
-            else
-                f.y -= f.movespeed;
+    direziona_fantasma(f, check_x, check_y);
 
-        break;
-        case GIU:
-            check_y += BLOCKSIZE;
-            if(f.y < check_y && f.y+f.movespeed > check_y)
-                f.y = check_y;
-            else
-                f.y += f.movespeed;
-        break;
-        case SX:
-            check_x -= BLOCKSIZE;
-            if(f.x > check_x+BLOCKSIZE && f.x-f.movespeed < check_x+BLOCKSIZE)
-                f.x = check_x+BLOCKSIZE;
-            else
-                f.x -= f.movespeed;
-        break;
-        case DX:
-            check_x += BLOCKSIZE;
-            if(f.x < check_x && f.x+f.movespeed > check_x)
-                f.x = check_x;
-            else
-                f.x += f.movespeed;
-        break;
-    }
     if (f.x < OFFSETX + 1 && f.dir == SX)
         f.x = 27 * BLOCKSIZE + OFFSETX;
 

@@ -22,6 +22,7 @@ using namespace std;
 
 
 void debug_console(ALLEGRO_TIMER *timer
+                   , ALLEGRO_TIMER *timer2
                    , PLAYER_t &pacman
                    , FANTASMA_t &blinky
                    , FANTASMA_t &pinky
@@ -36,7 +37,7 @@ void debug_console(ALLEGRO_TIMER *timer
     bool menu = true;
     int scelta;
     int mapx, mapy, liv;
-
+    al_stop_timer(timer2);
 	al_stop_timer(timer);
 	cout<<"*******DEBUG_CONSOLE********"<<endl;
 
@@ -143,6 +144,7 @@ void debug_console(ALLEGRO_TIMER *timer
                 menu = false;
                 al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
                 al_start_timer(timer);
+                al_start_timer(timer2);
                 break;
     		}
     }

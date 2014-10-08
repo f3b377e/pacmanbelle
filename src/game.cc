@@ -138,9 +138,9 @@ int main(int argc, char *argv[]){
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
             #ifdef DEBUG_MODE
-                if(tasto[D]){
+                if(tasto[D] && stato_gioco == PLAY){
                     al_stop_sample(&audio.id);
-                    debug_console(timer,pacman,blinky,pinky,inky,clyde,mappa,audio,livello, caricamappa, stato_gioco);
+                    debug_console(timer,timer2,pacman,blinky,pinky,inky,clyde,mappa,audio,livello, caricamappa, stato_gioco);
                 }
             #endif // DEBUG_MODE
 
@@ -160,10 +160,10 @@ int main(int argc, char *argv[]){
                         load_map(mappa,fileliv,livello);
                         caricamappa = false;
                     }
-                    init_blinky(blinky);
-                    init_clyde(clyde);
-                    init_inky(inky);
-                    init_pinky(pinky);
+                    init_blinky(blinky,livello);
+                    init_clyde(clyde,livello);
+                    init_inky(inky,livello);
+                    init_pinky(pinky,livello);
                     if (!al_play_sample(audio.pacman_beginning, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,&audio.id))
                         cout<<"\n Audio Error! - non parte pacman_beginning";
                     al_stop_timer(timer);
@@ -195,7 +195,7 @@ int main(int argc, char *argv[]){
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font);
+                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font,livello);
 
                     if(al_get_timer_count(timer2) == fuga_count){
                         fuga_count = -1;
