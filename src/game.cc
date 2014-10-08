@@ -151,8 +151,8 @@ int main(int argc, char *argv[]){
                         stato_gioco = QUIT;
                         tasto[ESCAPE] = false;
                     }
-                    anima_menu(menu, tasto, stato_gioco);
                     init_pacman(pacman);
+                    anima_menu(menu, tasto, stato_gioco);
                 break;
 
                 case CARICA:
@@ -172,16 +172,18 @@ int main(int argc, char *argv[]){
                     if (!al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id))
                         cout<<"\n Audio Error! - non parte audio siren";
                     stato_gioco = PLAY;
+                    al_start_timer(timer2);
                 break;
 
                 case PLAY:
-                    al_start_timer(timer2);
 
                     if(tasto[ESCAPE]){
                         stato_gioco = MENU;
                         caricamappa = true;
+                        livello = 1;
                         al_stop_timer(timer2);
                         al_stop_sample(&audio.id);
+                        al_set_timer_count(timer2, 0);
                         tasto[ESCAPE] = false;
                     }
 
@@ -331,9 +333,10 @@ int main(int argc, char *argv[]){
                         al_play_sample(audio.pacman_eaten, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
                     }
 
-                    if (victory(mappa,stato_gioco, caricamappa, livello)){
+                    if (victory(mappa,stato_gioco, caricamappa, livello, pacman)){
                         al_stop_sample(&audio.id);
                         al_stop_timer(timer2);
+                        al_set_timer_count(timer2, 0);
                     }
 
                 break;
@@ -352,6 +355,15 @@ int main(int argc, char *argv[]){
                 break;
 
                 case PAUSA:
+                    if(tasto[ESCAPE]){
+                        stato_gioco = MENU;
+                        caricamappa = true;
+                        livello = 1;
+                        al_stop_timer(timer2);
+                        al_stop_sample(&audio.id);
+                        tasto[ESCAPE] = false;
+                    }
+
                     if(tasto[ESCAPE]){
                         stato_gioco = MENU;
                         caricamappa = true;
@@ -397,6 +409,7 @@ int main(int argc, char *argv[]){
                         stato_gioco = MENU;
                         caricamappa = true;
                         nuovo_record = false;
+                        al_set_timer_count(timer2, 0);
                         tasto[ENTER] = false;
                     }
                 break;
@@ -480,8 +493,6 @@ int main(int argc, char *argv[]){
                                               , al_get_bitmap_height(pacman.img)/4
                                               , ((al_get_bitmap_width(pacman.img)/3)*i)+OFFSETX+200, 550, 0);
                     }
-                    /*al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+200, 550, 0,
-									"LIVES: %d",pacman.vita);*/
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+350, 550, 0,
 									"LEVEL: %d",livello);
                     al_flip_display();
@@ -491,6 +502,10 @@ int main(int argc, char *argv[]){
                     al_clear_to_color(al_map_rgb(0,0,0));
                     draw_path(bitmap, mappa);
                     al_draw_bitmap_region(bitmap.morte, 17*morte, 0, 17, 17, pacman.x, pacman.y,0);
+                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX, 550, 0,
+									"SCORE: %d",pacman.punteggio);
+                    al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+350, 550, 0,
+									"LEVEL: %d",livello);
                     al_flip_display();
                 break;
 
