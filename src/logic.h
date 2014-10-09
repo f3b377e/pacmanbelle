@@ -49,4 +49,9 @@ void death_pacman(PLAYER_t &, STATO_GIOCO &, bool &);
 /** Controlla la vittoria del giocatore*/
 bool victory(const MAPPA_t &, STATO_GIOCO &, bool &, int &, PLAYER_t &pg);
 
+/** Controlla la logica dei fantasmi*/
+void controlla_fantasmi(PLAYER_t &, FANTASMA_t &, FANTASMA_t &,
+                        FANTASMA_t &, FANTASMA_t &, MAPPA_t &,
+                        ALLEGRO_TIMER *timer2);
+
 #endif /* LOGIC_H_ */

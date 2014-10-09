@@ -6,6 +6,7 @@
 //allegro header
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
@@ -14,9 +15,11 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
+
 //header interni
 #include "data_struct.h"
 #include "debug.h"
+#include "io.h"
 
 using namespace std;
 
@@ -47,6 +50,7 @@ void debug_console(ALLEGRO_TIMER *timer
     		cout<<"\n\t 2) Informazioni mappa di gioco";
     		cout<<"\n\t 3) Informazioni fantasmi";
     		cout<<"\n\t 4) Salta al livello desiderato";
+            cout<<"\n\t 5) editor mappa";
             cout<<"\n\t 6) torna al gioco";
     		cout<<"\n Scelta: ";
     		cin>>scelta;
@@ -138,7 +142,6 @@ void debug_console(ALLEGRO_TIMER *timer
                 }
             break;
             case 5:
-
                 break;
             case 6:
                 menu = false;

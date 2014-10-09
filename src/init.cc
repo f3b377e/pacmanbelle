@@ -122,7 +122,7 @@ void init_font(FONT_t& f)
     f.h2 = al_load_font("data/font/pac-font.ttf", 18, 0);
     f.h3 = al_load_font("data/font/pac-font.ttf", 20, 0);
     f.h4 = al_load_font("data/font/orbitron-black.ttf", 10, 0);
-    if (f.h1 == NULL)
+    if (f.h4 == NULL)
         cout<<"\n Font Error, orbitron-black.ttf error!";
     f.h5 = al_load_font("data/font/orbitron-black.ttf", 20, 0);
 }

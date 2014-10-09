@@ -362,10 +362,6 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
 
 }
 
-void controlla_pos()
-{
-}
-
 /** estrae in coda alla lista, la lista serve per la bfs */
 static ELEM_t estrai(lista &testa)
 {
@@ -853,6 +849,92 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
         f.x = OFFSETX;
     }
+}
+
+void controlla_fantasmi(PLAYER_t &pacman, FANTASMA_t &blinky, FANTASMA_t &inky,
+                        FANTASMA_t &clyde, FANTASMA_t &pinky, MAPPA_t &mappa,
+                        ALLEGRO_TIMER *timer2){
+
+    if(blinky.stato != ONDULA){
+        if(blinky.stato != FUGA && blinky.stato != MANGIATO){
+            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+               (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                blinky.stato = SPARPAGLIAMENTO;
+            }
+            else{
+                blinky.stato = INSEGUIMENTO;
+            }
+        }
+        move_blinky(mappa, pacman, blinky);
+    }
+    else if(blinky.stato == ONDULA)
+        ondula(mappa, blinky);
+
+    if(pinky.stato != ONDULA){
+        if(pinky.stato != FUGA && pinky.stato != MANGIATO){
+            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                pinky.stato = SPARPAGLIAMENTO;
+            }
+            else{
+                pinky.stato = INSEGUIMENTO;
+            }
+        }
+        move_pinky(mappa, pacman, pinky);
+    }
+    else{
+        ondula(mappa, pinky);
+        if(al_get_timer_count(timer2) > 2){
+            pinky.stato = INSEGUIMENTO;
+        }
+    }
+
+    if(inky.stato != ONDULA){
+        if(inky.stato != FUGA && inky.stato != MANGIATO){
+            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                inky.stato = SPARPAGLIAMENTO;
+            }
+            else{
+                inky.stato = INSEGUIMENTO;
+            }
+        }
+        move_inky(mappa, pacman, inky, blinky);
+    }
+    else{
+        ondula(mappa, inky);
+        if(al_get_timer_count(timer2) > 8){
+            inky.stato = INSEGUIMENTO;
+        }
+    }
+
+    if(clyde.stato != ONDULA){
+        if(clyde.stato != FUGA && clyde.stato != MANGIATO){
+            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
+              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
+              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
+              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
+                clyde.stato = SPARPAGLIAMENTO;
+            }
+            else{
+                clyde.stato = INSEGUIMENTO;
+            }
+        }
+        move_clyde(mappa, pacman, clyde);
+    }
+    else{
+        ondula(mappa, clyde);
+        if(al_get_timer_count(timer2) > 12 && pacman.punteggio > 600){
+            clyde.stato = INSEGUIMENTO;
+        }
+    }
+
 }
 
 bool collision_pacman(const PLAYER_t &p, const FANTASMA_t &f)

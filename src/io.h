@@ -26,5 +26,8 @@ int preleva_record();
 /**Scrive sul file di salvataggio il record*/
 void salva_record(int new_record);
 
+/**Editor per la creazione di mappe*/
+void editor_map(const BITMAP_t &, bool [], STATO_GIOCO &, const FONT_t &);
+
 
 #endif // IO_H_

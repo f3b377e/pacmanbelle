@@ -16,6 +16,7 @@
 //Allegro header
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
@@ -23,6 +24,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
+
 
 //header interni
 #include "data_struct.h"
@@ -46,7 +48,7 @@ int main(int argc, char *argv[]){
     bool nuovo_record = false;
     bool redraw = true;
     bool done = false;
-    bool tasto[8] = {false, false, false, false, false, false, false, false};
+    bool tasto[10] = {false, false, false, false, false, false, false, false, false, false};
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
@@ -58,7 +60,7 @@ int main(int argc, char *argv[]){
     //Inizializzazione Allegro
     if(!al_init())
         return -1;
-
+    al_init_primitives_addon();
     al_init_image_addon();
     al_init_font_addon();
     al_init_ttf_addon();
@@ -119,6 +121,8 @@ int main(int argc, char *argv[]){
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
+    init_pacman(pacman);
+
 
     //Loop del Gioco;
     while(!done)
@@ -154,7 +158,11 @@ int main(int argc, char *argv[]){
                         tasto[ESCAPE] = false;
                     }
                     anima_menu(menu, tasto, stato_gioco, pacman, audio);
-                break;
+                    if (tasto[SPACE]){
+                        stato_gioco = EDITOR;
+                        tasto[SPACE] = false;
+                    }
+                    break;
 
                 case CARICA:
                     if(caricamappa){
@@ -187,8 +195,6 @@ int main(int argc, char *argv[]){
                         al_set_timer_count(timer2, 0);
                         tasto[ESCAPE] = false;
                     }
-
-
                     if(tasto[SPACE]){
                         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         al_stop_timer(timer2);
@@ -226,87 +232,7 @@ int main(int argc, char *argv[]){
                         }
                     }
 
-                    if(blinky.stato != ONDULA){
-                        if(blinky.stato != FUGA && blinky.stato != MANGIATO){
-                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                               (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                               (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                               (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                                blinky.stato = SPARPAGLIAMENTO;
-                            }
-                            else{
-                                blinky.stato = INSEGUIMENTO;
-                            }
-                        }
-                        move_blinky(mappa, pacman, blinky);
-                    }
-                    else if(blinky.stato == ONDULA)
-                        ondula(mappa, blinky);
-
-
-
-                    if(pinky.stato != ONDULA){
-                        if(pinky.stato != FUGA && pinky.stato != MANGIATO){
-                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                                pinky.stato = SPARPAGLIAMENTO;
-                            }
-                            else{
-                                pinky.stato = INSEGUIMENTO;
-                            }
-                        }
-                        move_pinky(mappa, pacman, pinky);
-                    }
-                    else{
-                        ondula(mappa, pinky);
-                        if(al_get_timer_count(timer2) > 2){
-                            pinky.stato = INSEGUIMENTO;
-                        }
-                    }
-
-                    if(inky.stato != ONDULA){
-                        if(inky.stato != FUGA && inky.stato != MANGIATO){
-                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                                inky.stato = SPARPAGLIAMENTO;
-                            }
-                            else{
-                                inky.stato = INSEGUIMENTO;
-                            }
-                        }
-                        move_inky(mappa, pacman, inky, blinky);
-                    }
-                    else{
-                        ondula(mappa, inky);
-                        if(al_get_timer_count(timer2) > 8){
-                            inky.stato = INSEGUIMENTO;
-                        }
-                    }
-
-                    if(clyde.stato != ONDULA){
-                        if(clyde.stato != FUGA && clyde.stato != MANGIATO){
-                            if((al_get_timer_count(timer2) >= 0 && al_get_timer_count(timer2) <= 7) ||
-                              (al_get_timer_count(timer2) >= 27 && al_get_timer_count(timer2) <= 34) ||
-                              (al_get_timer_count(timer2) >= 54 && al_get_timer_count(timer2) <= 59) ||
-                              (al_get_timer_count(timer2) >= 79 && al_get_timer_count(timer2) <= 84)){
-                                clyde.stato = SPARPAGLIAMENTO;
-                            }
-                            else{
-                                clyde.stato = INSEGUIMENTO;
-                            }
-                        }
-                        move_clyde(mappa, pacman, clyde);
-                    }
-                    else{
-                        ondula(mappa, clyde);
-                        if(al_get_timer_count(timer2) > 12 && pacman.punteggio > 600){
-                            clyde.stato = INSEGUIMENTO;
-                        }
-                    }
+                    controlla_fantasmi(pacman, blinky,inky,clyde,pinky,mappa,timer2);
 
                     if(blinky.stato != FUGA && blinky.stato != MANGIATO && collision_pacman(pacman,blinky)){
                        stato_gioco = MORTE;
@@ -366,7 +292,6 @@ int main(int argc, char *argv[]){
                         al_stop_sample(&audio.id);
                         tasto[ESCAPE] = false;
                     }
-
                     al_stop_sample(&audio.id);
                     if (tasto[SPACE]){
                         al_start_timer(timer2);
@@ -415,7 +340,8 @@ int main(int argc, char *argv[]){
                         tasto[ENTER] = false;
                     }
                 break;
-
+                case EDITOR:
+                break;
                 case QUIT:
                     done = true;
                 break;
@@ -553,7 +479,12 @@ int main(int argc, char *argv[]){
 
                 break;
                 }
-
+                case EDITOR:{
+                    al_clear_to_color(al_map_rgb(0,0,0));
+                    editor_map(bitmap, tasto, stato_gioco, font);
+                    al_flip_display();
+                break;
+                }
                 case QUIT:
                     al_clear_to_color(al_map_rgb(0,0,0));
                     al_flip_display();
@@ -568,6 +499,7 @@ int main(int argc, char *argv[]){
     dest_audio(audio);
     al_destroy_timer(timer);
     al_destroy_timer(timer2);
+    al_destroy_timer(timermov);
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
    return 0;
