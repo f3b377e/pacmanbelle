@@ -12,6 +12,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
@@ -24,39 +25,25 @@
 
 using namespace std;
 
-void anima_menu(int &menu, bool tasto[],STATO_GIOCO &stato_gioco)
-{
-    //static int tempo = 0;
-    if(tasto[DOWN]){
-        menu ++;
-        if(menu > 3)
-            menu = 3;
-        tasto[DOWN] = false;
-    }
-   else if(tasto[UP]){
-        menu --;
-        if(menu < 1)
-            menu = 1;
-        tasto[UP] = false;
-    }
-    if(tasto[ENTER]){
-        tasto[ENTER] = false;
-        switch (menu){
-        case 1:
-           stato_gioco = CARICA;
-        break;
-        case 2:
-            stato_gioco = CONTROLS;
-        break;
-        case 3:
-            stato_gioco = HIGH_SCORE;
-        break;
-        }
-    }
-}
-
 void draw_screen_menu(const int menu, const FONT_t &f, const BITMAP_t &b)
 {
+    static float inc_dec;
+    static bool b_inc_dec;
+
+    if(b_inc_dec){
+        inc_dec += 0.2;
+        if(inc_dec >= 4){
+            inc_dec = 5;
+            b_inc_dec = false;
+        }
+    }
+    else{
+        inc_dec -= 0.2;
+        if(inc_dec <= 3){
+            inc_dec = 2;
+            b_inc_dec = true;
+        }
+    }
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *10/100, ALLEGRO_ALIGN_CENTER, "pACMAN gAME");
     al_draw_bitmap(b.header_image, SCREENWIDTH *21/100, SCREENHEIGHT *25/100, 0);
@@ -70,16 +57,16 @@ void draw_screen_menu(const int menu, const FONT_t &f, const BITMAP_t &b)
       case 0:
       break;
       case 1:
-            al_draw_bitmap(b.puntino, SCREENWIDTH *65/100, SCREENHEIGHT *56/100, 0);
-            al_draw_bitmap(b.puntino, SCREENWIDTH *34/100, SCREENHEIGHT *56/100, 0);
-      break;
+            al_draw_filled_circle(SCREENWIDTH *66/100, SCREENHEIGHT *56/100, inc_dec, al_map_rgb(255,255,255));
+            al_draw_filled_circle(SCREENWIDTH *34/100, SCREENHEIGHT *56/100, inc_dec, al_map_rgb(255,255,255));
+            break;
       case 2:
-            al_draw_bitmap(b.puntino, SCREENWIDTH *65/100, SCREENHEIGHT *66/100, 0);
-            al_draw_bitmap(b.puntino, SCREENWIDTH *34/100, SCREENHEIGHT *66/100, 0);
+            al_draw_filled_circle(SCREENWIDTH *66/100, SCREENHEIGHT *66/100, inc_dec, al_map_rgb(255,255,255));
+            al_draw_filled_circle(SCREENWIDTH *34/100, SCREENHEIGHT *66/100, inc_dec, al_map_rgb(255,255,255));
       break;
       case 3:
-            al_draw_bitmap(b.puntino, SCREENWIDTH *65/100, SCREENHEIGHT *76/100, 0);
-            al_draw_bitmap(b.puntino, SCREENWIDTH *34/100, SCREENHEIGHT *76/100, 0);
+            al_draw_filled_circle(SCREENWIDTH *66/100, SCREENHEIGHT *76/100, inc_dec, al_map_rgb(255,255,255));
+            al_draw_filled_circle(SCREENWIDTH *34/100, SCREENHEIGHT *76/100, inc_dec, al_map_rgb(255,255,255));
       break;
     }
     al_flip_display();
@@ -119,14 +106,18 @@ void draw_path(const BITMAP_t &b, const MAPPA_t &m)
     static bool b_alpha;
 
     if(b_alpha){
-        alpha += 10;
-        if(alpha >= 250)
+        alpha += 15;
+        if(alpha >= 255){
+            alpha = 255;
             b_alpha = false;
+        }
     }
     else{
-        alpha -= 10;
-        if(alpha <= 0)
+        alpha -= 15;
+        if(alpha <= 0){
+            alpha = 0;
             b_alpha = true;
+        }
     }
 
     for (int i=0; i < m.r; i++){

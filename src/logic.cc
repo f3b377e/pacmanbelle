@@ -26,8 +26,43 @@
 #include "data_struct.h"
 #include "logic.h"
 #include "io.h"
+#include "init.h"
 
 using namespace std;
+
+void anima_menu(int &menu, bool tasto[],STATO_GIOCO &stato_gioco, PLAYER_t &pg, AUDIO_t &a)
+{
+    if(tasto[DOWN]){
+        al_play_sample(a.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        menu ++;
+        if(menu > 3)
+            menu = 3;
+        tasto[DOWN] = false;
+    }
+   else if(tasto[UP]){
+        al_play_sample(a.pallet_eaten1,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        menu --;
+        if(menu < 1)
+            menu = 1;
+        tasto[UP] = false;
+    }
+    if(tasto[ENTER]){
+        al_play_sample(a.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        tasto[ENTER] = false;
+        switch (menu){
+        case 1:
+            init_pacman(pg);
+            stato_gioco = CARICA;
+        break;
+        case 2:
+            stato_gioco = CONTROLS;
+        break;
+        case 3:
+            stato_gioco = HIGH_SCORE;
+        break;
+        }
+    }
+}
 
 /** Funzione di Collisione oggetti ritorna vero se pacman collide con l'oggetto */
 static bool collision (const DIREZ &direzione, const float sx, const float sy,

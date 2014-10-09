@@ -85,6 +85,7 @@ int main(int argc, char *argv[]){
 
     //Player
     PLAYER_t pacman;
+    init_pacman(pacman);
 
     //Nemici
     FANTASMA_t blinky, pinky, inky, clyde;
@@ -148,11 +149,11 @@ int main(int argc, char *argv[]){
             switch(stato_gioco){
                 case MENU:
                     if(tasto[ESCAPE]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = QUIT;
                         tasto[ESCAPE] = false;
                     }
-                    init_pacman(pacman);
-                    anima_menu(menu, tasto, stato_gioco);
+                    anima_menu(menu, tasto, stato_gioco, pacman, audio);
                 break;
 
                 case CARICA:
@@ -189,13 +190,14 @@ int main(int argc, char *argv[]){
 
 
                     if(tasto[SPACE]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         al_stop_timer(timer2);
                         stato_gioco = PAUSA;
                         tasto[SPACE] = false;
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font,livello);
+                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font, livello);
 
                     if(al_get_timer_count(timer2) == fuga_count){
                         fuga_count = -1;
@@ -356,6 +358,7 @@ int main(int argc, char *argv[]){
 
                 case PAUSA:
                     if(tasto[ESCAPE]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         caricamappa = true;
                         livello = 1;
@@ -364,11 +367,6 @@ int main(int argc, char *argv[]){
                         tasto[ESCAPE] = false;
                     }
 
-                    if(tasto[ESCAPE]){
-                        stato_gioco = MENU;
-                        caricamappa = true;
-                        tasto[ESCAPE] = false;
-                    }
                     al_stop_sample(&audio.id);
                     if (tasto[SPACE]){
                         al_start_timer(timer2);
@@ -383,6 +381,7 @@ int main(int argc, char *argv[]){
 
                 case CONTROLS:
                     if(tasto[ESCAPE]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         tasto[ESCAPE] = false;
                     }
@@ -390,6 +389,7 @@ int main(int argc, char *argv[]){
 
                 case HIGH_SCORE:
                     if(tasto[ESCAPE]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         tasto[ESCAPE] = false;
                     }
@@ -397,6 +397,7 @@ int main(int argc, char *argv[]){
 
                 case GAME_OVER:
                     if (tasto[ENTER]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         caricamappa = true;
                         nuovo_record = false;
@@ -406,6 +407,7 @@ int main(int argc, char *argv[]){
 
                 case WIN:
                     if (tasto[ENTER]){
+                        al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         caricamappa = true;
                         nuovo_record = false;

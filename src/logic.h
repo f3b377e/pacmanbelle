@@ -6,6 +6,13 @@
 #ifndef LOGIC_H_
 #define LOGIC_H_
 
+/**La funzione gestisce l'animazione del menu in base al tasto premuto
+ * Parametri: menu, indica quale campo si sta selezionando
+ * Parametri: tasto, array contenente lo stato dei tasti premuti o rilasciati
+ * Parametri: stato_gioco, stato del gioco
+ */
+ void anima_menu(int &, bool [],STATO_GIOCO &, PLAYER_t &, AUDIO_t &a);
+
 /** Funzione che si occupa del movimento di pacman*/
 void move_pacman(PLAYER_t&, MAPPA_t &, AUDIO_t &, bool []);
 
