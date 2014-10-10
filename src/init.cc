@@ -257,6 +257,7 @@ void dest_audio(AUDIO_t& a)
     #endif // defined unix
     #if defined(_WIN32)
         al_free(a.ghost_eaten);
+        al_free(a.ghost_eaten);
         al_free(a.ghosts_scared);
         al_free(a.pacman_beginning);
         al_free(a.pacman_eaten);

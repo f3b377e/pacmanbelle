@@ -201,7 +201,7 @@ static char conversione_char(int sourcex, int sourcey, bool sp1, bool sp2)
         return 'Y';
     if (sp2)
         return 'A';
-
+    return 0;
 }
 
 void editor_map(const BITMAP_t &b, bool tasto[], STATO_GIOCO &stato_gioco, const FONT_t &f){
@@ -394,7 +394,7 @@ void editor_map(const BITMAP_t &b, bool tasto[], STATO_GIOCO &stato_gioco, const
     dy = BLOCKSIZE * r + OFFSETY;
     al_draw_text(f.h4, al_map_rgb(105,253,105), dx, dy, ALLEGRO_ALIGN_LEFT,"s: pezzo successivo");
     dx = SCREENWIDTH*0.5;
-    al_draw_text(f.h4, al_map_rgb(105,253,105), dx , dy, ALLEGRO_ALIGN_CENTER, "p: pezzo successivo");
+    al_draw_text(f.h4, al_map_rgb(105,253,105), dx , dy, ALLEGRO_ALIGN_CENTER, "p: pezzo precedente");
     dx = BLOCKSIZE * c + OFFSETX;
     al_draw_text(f.h4, al_map_rgb(105,253,105), dx, dy, ALLEGRO_ALIGN_RIGHT, "spazio: piazza");
     dx = SCREENWIDTH*0.5;

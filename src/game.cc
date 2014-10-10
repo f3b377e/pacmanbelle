@@ -123,7 +123,6 @@ int main(int argc, char *argv[]){
     al_start_timer(timer);
     init_pacman(pacman);
 
-
     //Loop del Gioco;
     while(!done)
     {
@@ -158,6 +157,7 @@ int main(int argc, char *argv[]){
                         tasto[ESCAPE] = false;
                     }
                     anima_menu(menu, tasto, stato_gioco, pacman, audio);
+
                     if (tasto[SPACE]){
                         stato_gioco = EDITOR;
                         tasto[SPACE] = false;
@@ -366,6 +366,7 @@ int main(int argc, char *argv[]){
                     al_clear_to_color(al_map_rgb(0,0,0));
                     draw_path(bitmap,mappa);
                     draw_pacman(pacman);
+                    draw_frutta(timer2, bitmap, livello, pacman, audio);
 
                     if(blinky.stato == FUGA){
                         if(fuga_count - al_get_timer_count(timer2) <= 3)
@@ -421,6 +422,14 @@ int main(int argc, char *argv[]){
                                               , al_get_bitmap_height(pacman.img)/4
                                               , ((al_get_bitmap_width(pacman.img)/3)*i)+OFFSETX+200, 550, 0);
                     }
+
+                    for(int i = 0; i < livello; i++){
+                        al_draw_bitmap_region(bitmap.frutta, i * al_get_bitmap_width(bitmap.frutta)/8, 0
+                                                , al_get_bitmap_width(bitmap.frutta)/8
+                                                , al_get_bitmap_height(bitmap.frutta)
+                                                , mappa.c * BLOCKSIZE + OFFSETX + 50, OFFSETY + (30*i), 0);
+                    }
+
                     al_draw_textf(font.h5, al_map_rgb(255,0,0), OFFSETX+350, 550, 0,
 									"LEVEL: %d",livello);
                     al_flip_display();

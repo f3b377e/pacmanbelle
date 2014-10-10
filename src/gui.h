@@ -30,6 +30,9 @@ void draw_fant_mangiato(const BITMAP_t &b, FANTASMA_t& pg);
 /** Stampa il fantasma*/
 void draw_fantasma(FANTASMA_t&);
 
+/**Stampa la frutta */
+void draw_frutta(ALLEGRO_TIMER *, BITMAP_t , int , PLAYER_t &, AUDIO_t & );
+
 /** Stampa gAME oVER*/
 void draw_gameover(const FONT_t &, const BITMAP_t &, bool nuovo_record);
 

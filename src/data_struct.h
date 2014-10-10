@@ -93,16 +93,16 @@ struct FANTASMA_t{
 
 /**Struttura contenente i dati dell'audio*/
 struct AUDIO_t{
-	ALLEGRO_SAMPLE_ID id;               /**< Identificatore audio in riproduzione */
-	ALLEGRO_SAMPLE *ghost_eaten;        /**< Quando i fantasmi muoiono*/
-	ALLEGRO_SAMPLE *ghosts_scared;      /**< Quando i fantasmi sono in in modalità spavento*/
-	ALLEGRO_SAMPLE *pacman_beginning;   /**< Quando inizia il gioco */
-	ALLEGRO_SAMPLE *pacman_extrapac;    /**< Quando pacman mangia i pallini speciali*/
-	ALLEGRO_SAMPLE *pacman_eaten;       /**< Quando pacman muore */
-	ALLEGRO_SAMPLE *pacman_eatfruit;    /**< Quando pacman mangia la frutta */
-	ALLEGRO_SAMPLE *pallet_eaten1;      /**< Quando pacman mangia i pallini */
-	ALLEGRO_SAMPLE *pallet_eaten2;      /**< Quando pacman mangia i pallini */
-	ALLEGRO_SAMPLE *siren;              /**< Quando pacman deve scappare dai fantasmi */
+	ALLEGRO_SAMPLE_ID id;                   /**< Identificatore audio in riproduzione */
+	ALLEGRO_SAMPLE *ghost_eaten;            /**< Quando i fantasmi muoiono*/
+	ALLEGRO_SAMPLE *ghosts_scared;          /**< Quando i fantasmi sono in in modalità spavento*/
+	ALLEGRO_SAMPLE *pacman_beginning;       /**< Quando inizia il gioco */
+	ALLEGRO_SAMPLE *pacman_extrapac;        /**< Quando pacman mangia i pallini speciali*/
+	ALLEGRO_SAMPLE *pacman_eaten;           /**< Quando pacman muore */
+	ALLEGRO_SAMPLE *pacman_eatfruit;        /**< Quando pacman mangia la frutta */
+	ALLEGRO_SAMPLE *pallet_eaten1;          /**< Quando pacman mangia i pallini */
+	ALLEGRO_SAMPLE *pallet_eaten2;          /**< Quando pacman mangia i pallini */
+	ALLEGRO_SAMPLE *siren;                  /**< Quando pacman deve scappare dai fantasmi */
 	ALLEGRO_SAMPLE *pacman_intermission;    /**< Per gli intermezzi tra un livello e l'altro*/
 };
 

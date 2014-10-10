@@ -50,7 +50,6 @@ void debug_console(ALLEGRO_TIMER *timer
     		cout<<"\n\t 2) Informazioni mappa di gioco";
     		cout<<"\n\t 3) Informazioni fantasmi";
     		cout<<"\n\t 4) Salta al livello desiderato";
-            cout<<"\n\t 5) editor mappa";
             cout<<"\n\t 6) torna al gioco";
     		cout<<"\n Scelta: ";
     		cin>>scelta;
@@ -141,8 +140,6 @@ void debug_console(ALLEGRO_TIMER *timer
                     menu = false;
                 }
             break;
-            case 5:
-                break;
             case 6:
                 menu = false;
                 al_play_sample(audio.siren, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);

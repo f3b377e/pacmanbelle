@@ -291,10 +291,23 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
     static bool p_eaten = false;
     static int punt_fant = 200; //punteggio attribuito ai fantasmi
 
-    if (m.mappa[mapy][mapx] == 'P')
+    if (m.mappa[mapy][mapx] == 'P'){
+        if((pg.punteggio <= 10000 && pg.punteggio + 10 > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + 10 > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + 10 > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += 10;
+    }
 
     if (m.mappa[mapy][mapx] == 'Q'){
+        if((pg.punteggio <= 10000 && pg.punteggio + 50 > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + 50 > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + 50 > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += 50;
         al_stop_sample(&audio.id);
         al_play_sample(audio.ghosts_scared, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&audio.id);
@@ -317,7 +330,6 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
             c.stato = FUGA;
             c.movespeed = c.movespeed - 1;
         }
-
     }
 
     if (m.mappa[mapy][mapx] == 'P' || m.mappa[mapy][mapx] == 'Q'){
@@ -338,24 +350,48 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
     if(collision_pacman(pg, b) && b.stato == FUGA){
         b.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        if((pg.punteggio <= 10000 && pg.punteggio + punt_fant > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + punt_fant > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + punt_fant > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += punt_fant;
         punt_fant += 200;
     }
     if(collision_pacman(pg, p) && p.stato == FUGA){
         p.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        if((pg.punteggio <= 10000 && pg.punteggio + punt_fant > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + punt_fant > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + punt_fant > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += punt_fant;
         punt_fant += 200;
     }
     if(collision_pacman(pg, i) && i.stato == FUGA){
         i.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        if((pg.punteggio <= 10000 && pg.punteggio + punt_fant > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + punt_fant > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + punt_fant > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += punt_fant;
         punt_fant += 200;
     }
     if(collision_pacman(pg, c) && c.stato == FUGA){
         c.stato = MANGIATO;
         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
+        if((pg.punteggio <= 10000 && pg.punteggio + punt_fant > 10000) ||
+           (pg.punteggio <= 20000 && pg.punteggio + punt_fant > 20000) ||
+           (pg.punteggio <= 40000 && pg.punteggio + punt_fant > 40000)){
+            al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+            pg.vita++;
+        }
         pg.punteggio += punt_fant;
         punt_fant += 200;
     }
@@ -986,7 +1022,7 @@ bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa, int &livel
                 return false;
 
     livello++;
-    if(livello <= 2){
+    if(livello <= 10){
         caricamappa = true;
         stato = CARICA;
         pg.dir = FERMO;
