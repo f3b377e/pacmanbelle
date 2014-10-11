@@ -123,7 +123,7 @@ void salva_record(int new_record){
     ofstream f(FILE_SAV);
     f<<new_record;
 }
-
+/*
 static char* file_string()
 {
     char buff[20];
@@ -406,6 +406,6 @@ void editor_map(const BITMAP_t &b, bool tasto[], STATO_GIOCO &stato_gioco, const
 
 
 
-}
+}*/
 
 

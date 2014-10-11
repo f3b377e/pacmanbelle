@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <cassert>
 #include <iostream>
 #include <fstream>
 //#include <windows.h>
@@ -34,17 +35,20 @@ void draw_screen_menu(const int menu, const FONT_t &f, const BITMAP_t &b)
 
     if(b_inc_dec){
         inc_dec += 0.2;
-        if(inc_dec >= 4){
+        if(inc_dec > 5){
             inc_dec = 5;
             b_inc_dec = false;
         }
     }
     else{
         inc_dec -= 0.2;
-        if(inc_dec <= 3){
+        if(inc_dec < 2){
             inc_dec = 2;
             b_inc_dec = true;
         }
+
+    assert(inc_dec <= 5 && inc_dec >= 2);
+
     }
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(255,255,255), SCREENWIDTH / 2, SCREENHEIGHT *10/100, ALLEGRO_ALIGN_CENTER, "pACMAN gAME");
@@ -121,6 +125,8 @@ void draw_path(const BITMAP_t &b, const MAPPA_t &m)
             b_alpha = true;
         }
     }
+
+    assert(alpha < 255 || alpha > 0);
 
     for (int i=0; i < m.r; i++){
         for (int j = 0; j < m.c; j++){
@@ -408,7 +414,7 @@ void draw_frutta(ALLEGRO_TIMER *t, BITMAP_t b, int liv, PLAYER_t &pg, AUDIO_t &a
             if((pg.punteggio <= 10000 && pg.punteggio + 100*liv > 10000) ||
                (pg.punteggio <= 20000 && pg.punteggio + 100*liv  > 20000) ||
                (pg.punteggio <= 40000 && pg.punteggio + 100*liv  > 40000)){
-                al_play_sample(audio.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
+                al_play_sample(a.pacman_extrapac, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE,0);
                 pg.vita++;
             }
             pg.punteggio += 100*liv;

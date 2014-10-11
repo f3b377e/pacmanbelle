@@ -65,8 +65,9 @@ void debug_console(ALLEGRO_TIMER *timer
         		cout<<"\n\t velocità attuale "<<pacman.movespeed;
                 cout<<"\n\t Direzione:   precedente:"<<pacman.precdir
                     <<"   attuale:"<<pacman.dir
-                    <<"   successiva:"<<pacman.succdir
-                    <<endl;
+                    <<"   successiva:"<<pacman.succdir;
+                cout<<"\n\t Punteggio"<<pacman.punteggio;
+                cout<<"\n\t Vita: "<<pacman.vita;
 
         	break;
     		case 2:
@@ -123,6 +124,32 @@ void debug_console(ALLEGRO_TIMER *timer
                         cout<<"\n\t velocità attuale "<<pinky.movespeed;
                         cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<pinky.dir
                             <<"   successiva:"<<pinky.succdir
+                            <<endl;
+                    }
+                    else if (s==3){
+                        cout<<"\n Inky: \n";
+                        cout<<"\n\t x = "<<inky.x;
+                        cout<<"\n\t y = "<<inky.y;
+                        mapx = (inky.x - OFFSETX)/BLOCKSIZE;
+                        mapy = (inky.y - OFFSETY)/BLOCKSIZE;
+                        cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
+                        cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
+                        cout<<"\n\t velocità attuale "<<inky.movespeed;
+                        cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<inky.dir
+                            <<"   successiva:"<<inky.succdir
+                            <<endl;
+                    }
+                    else if (s==4){
+                        cout<<"\n Clyde: \n";
+                        cout<<"\n\t x = "<<clyde.x;
+                        cout<<"\n\t y = "<<clyde.y;
+                        mapx = (clyde.x - OFFSETX)/BLOCKSIZE;
+                        mapy = (clyde.y - OFFSETY)/BLOCKSIZE;
+                        cout<<"\n\t char casella: "<<mappa.mappa[mapy][mapx];
+                        cout<<"\n\t coordinata:("<<mapx<<","<<mapy<<")";
+                        cout<<"\n\t velocità attuale "<<clyde.movespeed;
+                        cout<<"\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO "<<"   attuale:"<<clyde.dir
+                            <<"   successiva:"<<clyde.succdir
                             <<endl;
                     }
                 }while (s>=0);

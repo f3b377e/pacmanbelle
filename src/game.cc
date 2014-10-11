@@ -158,10 +158,12 @@ int main(int argc, char *argv[]){
                     }
                     anima_menu(menu, tasto, stato_gioco, pacman, audio);
 
+                    /*
                     if (tasto[SPACE]){
                         stato_gioco = EDITOR;
                         tasto[SPACE] = false;
                     }
+                    */
                     break;
 
                 case CARICA:
@@ -185,7 +187,7 @@ int main(int argc, char *argv[]){
                 break;
 
                 case PLAY:
-
+                    assert(!caricamappa);
                     if(tasto[ESCAPE]){
                         stato_gioco = MENU;
                         caricamappa = true;
@@ -325,6 +327,7 @@ int main(int argc, char *argv[]){
                         al_play_sample(audio.ghost_eaten,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
                         stato_gioco = MENU;
                         caricamappa = true;
+                        livello = 1;
                         nuovo_record = false;
                         tasto[ENTER] = false;
                     }
@@ -340,8 +343,8 @@ int main(int argc, char *argv[]){
                         tasto[ENTER] = false;
                     }
                 break;
-                case EDITOR:
-                break;
+                /*case EDITOR:
+                break;*/
                 case QUIT:
                     done = true;
                 break;
@@ -488,12 +491,12 @@ int main(int argc, char *argv[]){
 
                 break;
                 }
-                case EDITOR:{
+                /*case EDITOR:{
                     al_clear_to_color(al_map_rgb(0,0,0));
                     editor_map(bitmap, tasto, stato_gioco, font);
                     al_flip_display();
                 break;
-                }
+                }*/
                 case QUIT:
                     al_clear_to_color(al_map_rgb(0,0,0));
                     al_flip_display();

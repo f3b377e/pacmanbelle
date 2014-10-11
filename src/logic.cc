@@ -238,6 +238,8 @@ void move_pacman(PLAYER_t& pg, MAPPA_t &m, AUDIO_t &a, bool tasto[])
 
     if (pg.x > 27 * BLOCKSIZE + OFFSETX && pg.dir == DX)
         pg.x = OFFSETX;
+
+    assert(pg.x <= (m.c*BLOCKSIZE)+OFFSETX || pg.x >= OFFSETX || pg.y <= (m.r*BLOCKSIZE)+OFFSETY || pg.y <= OFFSETY);
 }
 
 void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PLAYER_t &pg)
@@ -453,6 +455,8 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
     if(pgx <= 0){
         pgx = 1;
     }
+
+    assert(pgx <= m.c || pgx >= 0 || pgy <= m.r || pgy >= 0);
 
     //inizializzo la mappa a infinito (-1)
     for(int j = 0; j < m.c; j++){
@@ -687,7 +691,7 @@ void move_blinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
         f.x = OFFSETX;
     }
-
+    assert(f.x <= (m.c*BLOCKSIZE)+OFFSETX || f.x >= OFFSETX || f.y <= (m.r*BLOCKSIZE)+OFFSETY || f.y <= OFFSETY);
 }
 
 void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
@@ -754,6 +758,7 @@ void move_pinky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
         f.x = OFFSETX;
     }
+    assert(f.x <= (m.c*BLOCKSIZE)+OFFSETX || f.x >= OFFSETX || f.y <= (m.r*BLOCKSIZE)+OFFSETY || f.y <= OFFSETY);
 }
 
 void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &b)
@@ -828,6 +833,7 @@ void move_inky(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f, FANTASMA_t &
     if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
         f.x = OFFSETX;
     }
+    assert(f.x <= (m.c*BLOCKSIZE)+OFFSETX || f.x >= OFFSETX || f.y <= (m.r*BLOCKSIZE)+OFFSETY || f.y <= OFFSETY);
 }
 
 void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
@@ -885,6 +891,7 @@ void move_clyde(const MAPPA_t &m, const PLAYER_t &pg, FANTASMA_t &f)
     if (f.x > 27 * BLOCKSIZE + OFFSETX && f.dir == DX){
         f.x = OFFSETX;
     }
+    assert(f.x <= (m.c*BLOCKSIZE)+OFFSETX || f.x >= OFFSETX || f.y <= (m.r*BLOCKSIZE)+OFFSETY || f.y <= OFFSETY);
 }
 
 void controlla_fantasmi(PLAYER_t &pacman, FANTASMA_t &blinky, FANTASMA_t &inky,
@@ -1037,5 +1044,6 @@ bool victory(const MAPPA_t &m, STATO_GIOCO &stato, bool &caricamappa, int &livel
     }
     else
         stato = WIN;
+    assert(livello <= 10 || livello >= 1 );
     return true;
 }
