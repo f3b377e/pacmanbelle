@@ -286,7 +286,7 @@ void cambia_stato(FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c, PL
 }
 
 void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASMA_t &p, FANTASMA_t &i, FANTASMA_t &c,
-                ALLEGRO_TIMER *t, int &fuga_count, FONT_t f, int livello)
+                ALLEGRO_TIMER *t, int &fuga_count, int livello)
 {
 	int mapx = (pg.x - OFFSETX)/BLOCKSIZE;
 	int mapy = (pg.y - OFFSETY)/BLOCKSIZE;

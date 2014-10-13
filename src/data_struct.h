@@ -33,7 +33,7 @@ enum DIREZ{GIU, SU, SX, DX, FERMO};
  *  Stato del gioco, serve per il loop della funzione ::main per eseguire diverse
  *  operazioni a seconda della fase in cui si trova il gioco
  */
-enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, MORTE, GAME_OVER, QUIT, WIN, EDITOR};
+enum STATO_GIOCO{MENU, CARICA, PLAY, PAUSA, CONTROLS, HIGH_SCORE, MORTE, GAME_OVER, QUIT, WIN};
 
 /** Valori che verranno attribuiti all'array tasto del ::main*/
 enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE, S, P};

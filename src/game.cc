@@ -157,13 +157,6 @@ int main(int argc, char *argv[]){
                         tasto[ESCAPE] = false;
                     }
                     anima_menu(menu, tasto, stato_gioco, pacman, audio);
-
-                    /*
-                    if (tasto[SPACE]){
-                        stato_gioco = EDITOR;
-                        tasto[SPACE] = false;
-                    }
-                    */
                     break;
 
                 case CARICA:
@@ -343,8 +336,6 @@ int main(int argc, char *argv[]){
                         tasto[ENTER] = false;
                     }
                 break;
-                /*case EDITOR:
-                break;*/
                 case QUIT:
                     done = true;
                 break;
@@ -491,12 +482,6 @@ int main(int argc, char *argv[]){
 
                 break;
                 }
-                /*case EDITOR:{
-                    al_clear_to_color(al_map_rgb(0,0,0));
-                    editor_map(bitmap, tasto, stato_gioco, font);
-                    al_flip_display();
-                break;
-                }*/
                 case QUIT:
                     al_clear_to_color(al_map_rgb(0,0,0));
                     al_flip_display();
