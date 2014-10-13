@@ -137,8 +137,8 @@ void init_pacman (PLAYER_t& pacman)
 	pacman.sourcey = 0;
 	pacman.x = 13*BLOCKSIZE+OFFSETX;
 	pacman.y = 23*BLOCKSIZE+OFFSETY;
-	pacman.punteggio = 0;		/**< punteggio attuale*/
-	pacman.mangiato = false;	/**< se vera pacman è mangiato dai fantasmi */
+	pacman.punteggio = 0;
+	pacman.mangiato = false;
 	pacman.vita = 2;
     pacman.img = al_load_bitmap("data/img/pacman2.png");
 	 if (pacman.img == NULL)

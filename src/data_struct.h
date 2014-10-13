@@ -1,8 +1,3 @@
-/*
- * data_struct.h
- *
- *      Author: Belle & Bruce
- */
 //C++ header
 #include<iostream>
 
@@ -44,6 +39,7 @@ enum TASTI{ UP, DOWN, LEFT, RIGHT, ENTER, D, ESCAPE, SPACE, S, P};
  */
 enum STATO_FANT{ONDULA, INSEGUIMENTO, SPARPAGLIAMENTO, FUGA, MANGIATO};
 
+/**Struttura della mappa di gioco che verrà caricata da file nella funzione ::load_map*/
 struct MAPPA_t{
     int r;          /**< Numero di Colonne*/
     int c;          /**< Numero di Righe*/
@@ -127,4 +123,5 @@ struct FONT_t{
     ALLEGRO_FONT *h4;   /** Font H4*/
     ALLEGRO_FONT *h5;   /** Font H5*/
 };
-#endif // DATA_STRUCT_
+
+#endif /*DATA_STRUCT_*/

@@ -23,6 +23,25 @@
 
 using namespace std;
 
+/**Funzione utilizzabile solo in fase di debug.
+ * Eseguita solo nello stato ::PLAY nella funzione ::main, non appena si preme il tasto D.
+ * In questa funzione è possibile controllare da terminale le informazioni di pacman, dei fantasmi e della mappa,
+ * al momento dell'attivazione della debugconsole, la quale fermera' i timer di gioco per poi riattivarli appena si rientra in gioco.
+ * Inoltre in questa modalità si può passare da un livello ad un altro per eventuali controlli.
+ * @param timer: Frame del movimento delle animazioni.
+ * @param timer2: Timer di gioco che controlla i secondi trascorsi dall'inizio della vita.
+ * @param pacman: varibaile contenente i dati di pac-man di tipo PLAYER_T.
+ * @param blinky: variabile di tipo FANTASMA_T contenente le informazioni di blinky.
+ * @param pinky: variabile di tipo FANTASMA_T contenente le informazioni di pinky.
+ * @param inky: variabile di tipo FANTASMA_T contenente le informazioni di inky.
+ * @param clyde: variabile di tipo FANTASMA_T contenente le informazioni di clyde.
+ * @param mappa: variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T.
+ * @param audio: variabile di tipo struttura AUDIO_T contenente i suoni del gioco.
+ * @param livello: livello corrente in gioco.
+ * @param caricamappa: indica se è presente la mappa, true se è caricata in memoria.
+ * @param stato: indica lo stato del gioco di tipo STATO_GIOCO.
+ * @return void.
+ */
 
 void debug_console(ALLEGRO_TIMER *timer
                    , ALLEGRO_TIMER *timer2
