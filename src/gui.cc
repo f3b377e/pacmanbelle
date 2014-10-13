@@ -369,41 +369,41 @@ void draw_pacman(PLAYER_t& pg)
                           , pg.x, pg.y, 0);
 }
 
-void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& pg, int fine_fuga)
+void draw_fant_fuga(const BITMAP_t &b, FANTASMA_t& f, int fine_fuga)
 {
-    pg.sourcex += al_get_bitmap_width(b.fant_fuga)/2;
-    if(pg.sourcex >= al_get_bitmap_width(b.fant_fuga))
-        pg.sourcex = 0;
-    pg.sourcey = fine_fuga;
-    al_draw_bitmap_region(b.fant_fuga, pg.sourcex
-                          , pg.sourcey * al_get_bitmap_height(b.fant_fuga)/2
+    f.sourcex += al_get_bitmap_width(b.fant_fuga)/2;
+    if(f.sourcex >= al_get_bitmap_width(b.fant_fuga))
+        f.sourcex = 0;
+    f.sourcey = fine_fuga;
+    al_draw_bitmap_region(b.fant_fuga, f.sourcex
+                          , f.sourcey * al_get_bitmap_height(b.fant_fuga)/2
                           , al_get_bitmap_width(b.fant_fuga)/2
                           , al_get_bitmap_height(b.fant_fuga)/2
-                          , pg.x, pg.y, 0);
+                          , f.x, f.y, 0);
 }
 
-void draw_fant_mangiato(const BITMAP_t &b, FANTASMA_t& pg)
+void draw_fant_mangiato(const BITMAP_t &b, FANTASMA_t& f)
 {
-    pg.sourcex = 0;
-    pg.sourcey = pg.dir;
-    al_draw_bitmap_region(b.fant_mangiato, pg.sourcex
-                          , pg.sourcey * al_get_bitmap_height(b.fant_mangiato)/4
+    f.sourcex = 0;
+    f.sourcey = f.dir;
+    al_draw_bitmap_region(b.fant_mangiato, f.sourcex
+                          , f.sourcey * al_get_bitmap_height(b.fant_mangiato)/4
                           , al_get_bitmap_width(b.fant_mangiato)
                           , al_get_bitmap_height(b.fant_mangiato)/4
-                          , pg.x, pg.y, 0);
+                          , f.x, f.y, 0);
 }
 
-void draw_fantasma(FANTASMA_t& pg)
+void draw_fantasma(FANTASMA_t& f)
 {
-    pg.sourcex += al_get_bitmap_width(pg.img)/2;
-    if(pg.sourcex >= al_get_bitmap_width(pg.img))
-        pg.sourcex = 0;
-    pg.sourcey = pg.dir;
-    al_draw_bitmap_region(pg.img, pg.sourcex
-                          , pg.sourcey * al_get_bitmap_height(pg.img)/4
-                          , al_get_bitmap_width(pg.img)/2
-                          , al_get_bitmap_height(pg.img)/4
-                          , pg.x, pg.y, 0);
+    f.sourcex += al_get_bitmap_width(f.img)/2;
+    if(f.sourcex >= al_get_bitmap_width(f.img))
+        f.sourcex = 0;
+    f.sourcey = f.dir;
+    al_draw_bitmap_region(f.img, f.sourcex
+                          , f.sourcey * al_get_bitmap_height(f.img)/4
+                          , al_get_bitmap_width(f.img)/2
+                          , al_get_bitmap_height(f.img)/4
+                          , f.x, f.y, 0);
 }
 
 void draw_frutta(ALLEGRO_TIMER *t, BITMAP_t b, int liv, PLAYER_t &pg, AUDIO_t &a){

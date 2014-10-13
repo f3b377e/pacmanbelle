@@ -198,7 +198,7 @@ int main(int argc, char *argv[]){
                     }
 
                     move_pacman(pacman, mappa, audio, tasto);
-                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, font, livello);
+                    pac_mangia(mappa, pacman, audio, blinky, pinky, inky, clyde, timer2, fuga_count, livello);
 
                     if(al_get_timer_count(timer2) == fuga_count){
                         fuga_count = -1;

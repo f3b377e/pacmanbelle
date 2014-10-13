@@ -400,42 +400,40 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
 
 }
 
-/** estrae in coda alla lista, la lista serve per la bfs */
-static ELEM_t estrai(lista &testa)
-{
-    if(testa == NULL)
-        return *testa;
-
-    ELEM_t tmp;
-    tmp.x = testa->x;
-    tmp.y = testa->y;
-    tmp.succ = NULL;
-
-    ELEM_t *temp;
-    temp = testa;
-    testa = testa->succ;
-    delete[] temp;
-
-    return tmp;
-}
-
-/** inserisce in coda alla lista, la lista serve per la bfs */
-static void inserisci(lista &testa, int x, int y)
-{
+static void inserisci(lista &testa, lista &coda, int x, int y){
     ELEM_t *temp = new ELEM_t;
     temp->x = x;
     temp->y = y;
     temp->succ = NULL;
+    temp->prec = testa;
 
-    if(testa == NULL){ //lista nonvuota
-        testa = temp;
-        return;
+    if (testa != NULL) //lista nn vuota
+        testa->succ = temp;
+    if (coda == NULL)
+        coda = temp;
+    testa = temp;
+}
+
+/** estrae in coda alla lista, la lista serve per la bfs */
+static ELEM_t estrai(lista &testa, lista &coda){
+
+    ELEM_t temp;
+
+    temp.x = coda->x;
+    temp.y = coda->y;
+    temp.prec = NULL;
+    temp.succ = NULL;
+    if (coda->succ == NULL){ //ultimo elemento in coda;
+        coda = NULL;
+        testa = NULL;
+        delete [] coda;
+    }else{
+        ELEM_t *p = coda->succ;
+        p->prec = NULL;
+        delete [] coda;
+        coda = p;
     }
-    ELEM_t * punt = testa;
-    while(punt->succ != NULL){
-        punt = punt->succ;
-    }
-    punt->succ = temp;
+    return temp;
 }
 
 static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
@@ -501,27 +499,28 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
 
 
     ELEM_t *testa = NULL;
+    ELEM_t *coda = NULL;
 
-    inserisci(testa, pgx, pgy);
+    inserisci(testa, coda, pgx, pgy);
 
     while (testa != NULL){
-        ELEM_t u = estrai(testa);
+        ELEM_t u = estrai(testa, coda);
 
         if(matt[u.y - 1][u.x] == -1){
             matt[u.y - 1][u.x] = matt[u.y][u.x] + 1;
-            inserisci(testa, u.x, u.y - 1);
+            inserisci(testa, coda, u.x, u.y - 1);
         }
         if(matt[u.y][u.x + 1] == -1){
             matt[u.y][u.x + 1] = matt[u.y][u.x] + 1;
-            inserisci(testa, u.x + 1, u.y);
+            inserisci(testa, coda, u.x + 1, u.y);
         }
         if(matt[u.y + 1][u.x] == -1){
             matt[u.y + 1][u.x] = matt[u.y][u.x] + 1;
-            inserisci(testa, u.x, u.y + 1);
+            inserisci(testa, coda, u.x, u.y + 1);
         }
         if(matt[u.y][u.x - 1] == -1){
             matt[u.y][u.x - 1] = matt[u.y][u.x] + 1;
-            inserisci(testa, u.x - 1, u.y);
+            inserisci(testa, coda, u.x - 1, u.y);
         }
     }
 
