@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man:  File sorgente io.h</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man:  File sorgente io.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -92,20 +93,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef IO_H_</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define IO_H_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8cc.html#a6cc7e5402d075aeecd086dcc4aaa54a5" title="La funzione setta i valori booleani dell&#39;array tasto inizializzato nel main, a seconda se il tasto è ...">agg_tasti</a>(ALLEGRO_EVENT &amp;event, <span class="keywordtype">bool</span> tasto[], <span class="keywordtype">bool</span> setting);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8cc.html#a66aaceaba8d215e5d7cdd231291c2a4d">load_map</a>(<a class="code" href="structMAPPA__t.html">MAPPA_t</a>&amp; m, <span class="keywordtype">char</span> *fileliv, <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8h.html#a6cc7e5402d075aeecd086dcc4aaa54a5">agg_tasti</a>(ALLEGRO_EVENT &amp;event, <span class="keywordtype">bool</span> tasto[], <span class="keywordtype">bool</span> setting);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8h.html#a01e465d440e9f03295c934e3ccdb1693">scrivi_mappa_su_file</a>(<span class="keyword">const</span> <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;, <span class="keyword">const</span> <span class="keywordtype">char</span> []);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif // IO_H_</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8h.html#a66aaceaba8d215e5d7cdd231291c2a4d">load_map</a>(<a class="code" href="structMAPPA__t.html">MAPPA_t</a>&amp; m, <span class="keywordtype">char</span> fileliv[], <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">int</span> <a class="code" href="io_8h.html#a689b2b0934cdf05a929ee230e0d3e677">preleva_record</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="io_8h.html#a9bf9fb1ff574b0a3cccaa15eedebc87e">salva_record</a>(<span class="keywordtype">int</span> new_record);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif // IO_H_</span></div>
+<div class="ttc" id="io_8h_html_a689b2b0934cdf05a929ee230e0d3e677"><div class="ttname"><a href="io_8h.html#a689b2b0934cdf05a929ee230e0d3e677">preleva_record</a></div><div class="ttdeci">int preleva_record()</div><div class="ttdoc">Prende in ingresso da un file di salvataggio (sav.txt) il record fatto in precedenza. </div><div class="ttdef"><b>Definition:</b> io.cc:121</div></div>
+<div class="ttc" id="structMAPPA__t_html"><div class="ttname"><a href="structMAPPA__t.html">MAPPA_t</a></div><div class="ttdoc">Struttura della mappa di gioco che verrà caricata da file nella funzione load_map. </div><div class="ttdef"><b>Definition:</b> data_struct.h:43</div></div>
+<div class="ttc" id="io_8h_html_a9bf9fb1ff574b0a3cccaa15eedebc87e"><div class="ttname"><a href="io_8h.html#a9bf9fb1ff574b0a3cccaa15eedebc87e">salva_record</a></div><div class="ttdeci">void salva_record(int new_record)</div><div class="ttdoc">Scrive sul file di salvataggio (sav.txt) il record. </div><div class="ttdef"><b>Definition:</b> io.cc:132</div></div>
+<div class="ttc" id="io_8h_html_a6cc7e5402d075aeecd086dcc4aaa54a5"><div class="ttname"><a href="io_8h.html#a6cc7e5402d075aeecd086dcc4aaa54a5">agg_tasti</a></div><div class="ttdeci">void agg_tasti(ALLEGRO_EVENT &amp;event, bool tasto[], bool setting)</div><div class="ttdoc">La funzione setta i valori booleani dell&#39;array tasto inizializzato nel main, a seconda se il tasto è ...</div><div class="ttdef"><b>Definition:</b> io.cc:25</div></div>
+<div class="ttc" id="io_8h_html_a66aaceaba8d215e5d7cdd231291c2a4d"><div class="ttname"><a href="io_8h.html#a66aaceaba8d215e5d7cdd231291c2a4d">load_map</a></div><div class="ttdeci">void load_map(MAPPA_t &amp;m, char fileliv[], int livello)</div><div class="ttdoc">Carica la mappa da un file contenuto nella cartella data/map/. </div><div class="ttdef"><b>Definition:</b> io.cc:90</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

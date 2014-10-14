@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man: Elementi dei file</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man: Elementi dei file</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -94,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
       <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
       <li><a href="#index_v"><span>v</span></a></li>
-      <li><a href="#index_w"><span>w</span></a></li>
+      <li class="current"><a href="#index_w"><span>w</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -120,14 +121,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 : <a class="el" href="io_8cc.html#a6cc7e5402d075aeecd086dcc4aaa54a5">io.cc</a>
 , <a class="el" href="io_8h.html#a6cc7e5402d075aeecd086dcc4aaa54a5">io.h</a>
 </li>
+<li>alloca_mappa()
+: <a class="el" href="io_8cc.html#a740ad2e5687b1e22256119003467b4c2">io.cc</a>
+</li>
 <li>anima_menu()
-: <a class="el" href="gui_8cc.html#a06b138e2a837ddb0d10dc38deb83485e">gui.cc</a>
-, <a class="el" href="gui_8h.html#acee855978d4f285282e0dbc4fd1fe4ec">gui.h</a>
+: <a class="el" href="logic_8cc.html#a5536dfecfcb0c57f471b5995bb9ee690">logic.cc</a>
+, <a class="el" href="logic_8h.html#a5536dfecfcb0c57f471b5995bb9ee690">logic.h</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>bfs()
+: <a class="el" href="logic_8cc.html#abb1f91d874863451f4df05181613db5b">logic.cc</a>
+</li>
 <li>BLOCKSIZE
 : <a class="el" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">data_struct.h</a>
 </li>
@@ -142,11 +149,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <li>CARICA
 : <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">data_struct.h</a>
 </li>
-<li>collision_pacman()
-: <a class="el" href="logic_8h.html#a318210dbb198d6e869e4fce7eee57bce">logic.h</a>
+<li>collision()
+: <a class="el" href="logic_8cc.html#a09b8552bf64db305f2e60ceb18823662">logic.cc</a>
 </li>
-<li>controlla_pos()
-: <a class="el" href="logic_8cc.html#ae10f394828dd61bc0d448cbdc24c9456">logic.cc</a>
+<li>collision_pacman()
+: <a class="el" href="logic_8cc.html#acb75cf8ce10541967f1aeb24073d84f9">logic.cc</a>
+, <a class="el" href="logic_8h.html#acb75cf8ce10541967f1aeb24073d84f9">logic.h</a>
+</li>
+<li>controlla_fantasmi()
+: <a class="el" href="logic_8cc.html#ab5e7949df9e9fe0056cb994f4d00fab0">logic.cc</a>
+, <a class="el" href="logic_8h.html#ab5e7949df9e9fe0056cb994f4d00fab0">logic.h</a>
+</li>
+<li>controllo_percorso()
+: <a class="el" href="logic_8cc.html#af90cb89e5768f81596489f6785600ee5">logic.cc</a>
 </li>
 <li>CONTROLS
 : <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a9fd926c53f93b60670d93d2d15c36539">data_struct.h</a>
@@ -158,65 +173,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <li>D
 : <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8">data_struct.h</a>
 </li>
+<li>dealloca_mappa()
+: <a class="el" href="io_8cc.html#a5811193309b350af82365fe506add6cf">io.cc</a>
+</li>
 <li>death_pacman()
-: <a class="el" href="logic_8h.html#af60d4bacdab12babb3241c04fa882521">logic.h</a>
+: <a class="el" href="logic_8cc.html#a8bd1f22c1e4af91b3e31dca9d0a163bc">logic.cc</a>
+, <a class="el" href="logic_8h.html#a8bd1f22c1e4af91b3e31dca9d0a163bc">logic.h</a>
 </li>
 <li>debug_console()
-: <a class="el" href="debug_8cc.html#ae51f3659251eb296b300e0a5062706b2">debug.cc</a>
+: <a class="el" href="debug_8cc.html#a8f014a4cb90a91e8f29c9c941d5f7286">debug.cc</a>
 </li>
 <li>dest_audio()
 : <a class="el" href="init_8cc.html#a9ae066949127e2841ab2e0f9d76f0d9a">init.cc</a>
-, <a class="el" href="init_8h.html#af845e10b71ac16b03df6546e79416a12">init.h</a>
+, <a class="el" href="init_8h.html#a9ae066949127e2841ab2e0f9d76f0d9a">init.h</a>
 </li>
 <li>dest_bitmap()
 : <a class="el" href="init_8cc.html#aa16ea7d536a9001ee02399117fc677c6">init.cc</a>
-, <a class="el" href="init_8h.html#a2541be42d3c65401a6eea364433363bc">init.h</a>
+, <a class="el" href="init_8h.html#aa16ea7d536a9001ee02399117fc677c6">init.h</a>
 </li>
 <li>dest_font()
 : <a class="el" href="init_8cc.html#a4b5cc1f06aed3f0a9e400e47228c4791">init.cc</a>
-, <a class="el" href="init_8h.html#a0f529cb4e28f2efac979a4ff1a8b3508">init.h</a>
+, <a class="el" href="init_8h.html#a4b5cc1f06aed3f0a9e400e47228c4791">init.h</a>
 </li>
 <li>DIREZ
 : <a class="el" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903">data_struct.h</a>
 </li>
+<li>direziona_fantasma()
+: <a class="el" href="logic_8cc.html#aff2f49b32943c829ec1499fda69fc68b">logic.cc</a>
+</li>
+<li>do_bfs()
+: <a class="el" href="logic_8cc.html#ad1ae5f57fedbdb320091b64850fbd0dc">logic.cc</a>
+</li>
 <li>DOWN
 : <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da">data_struct.h</a>
 </li>
+<li>draw_controls()
+: <a class="el" href="gui_8cc.html#af6748c7e38a8d8198b3ce40025001cf9">gui.cc</a>
+, <a class="el" href="gui_8h.html#af6748c7e38a8d8198b3ce40025001cf9">gui.h</a>
+</li>
 <li>draw_countdown()
 : <a class="el" href="gui_8cc.html#a9cb68876b52fda2415c2db9800c0167d">gui.cc</a>
-, <a class="el" href="gui_8h.html#ad2a1fc9efe4897f0e07cdbdb40824a13">gui.h</a>
+, <a class="el" href="gui_8h.html#a9cb68876b52fda2415c2db9800c0167d">gui.h</a>
 </li>
 <li>draw_fant_fuga()
-: <a class="el" href="gui_8cc.html#a0ea023b848a109a7634efb16b1612ee2">gui.cc</a>
-, <a class="el" href="gui_8h.html#a0ea023b848a109a7634efb16b1612ee2">gui.h</a>
+: <a class="el" href="gui_8cc.html#a5cccf6648641872f9fadf2cf74897b7d">gui.cc</a>
+, <a class="el" href="gui_8h.html#a5cccf6648641872f9fadf2cf74897b7d">gui.h</a>
+</li>
+<li>draw_fant_mangiato()
+: <a class="el" href="gui_8cc.html#aa41796a01045c20787c9f9e3c4a6055e">gui.cc</a>
+, <a class="el" href="gui_8h.html#aa41796a01045c20787c9f9e3c4a6055e">gui.h</a>
 </li>
 <li>draw_fantasma()
-: <a class="el" href="gui_8cc.html#aa9b800b4d56bfb2b416f4a2df5cb2c6d">gui.cc</a>
-, <a class="el" href="gui_8h.html#ac0088b3698f354377545d9b91b4a8232">gui.h</a>
+: <a class="el" href="gui_8cc.html#a8a8cf3546f0b7cfb17d295ecaab62ebe">gui.cc</a>
+, <a class="el" href="gui_8h.html#a8a8cf3546f0b7cfb17d295ecaab62ebe">gui.h</a>
+</li>
+<li>draw_frutta()
+: <a class="el" href="gui_8cc.html#afd1f29080e2bae773cbecdf6d3d323c9">gui.cc</a>
+, <a class="el" href="gui_8h.html#afd1f29080e2bae773cbecdf6d3d323c9">gui.h</a>
 </li>
 <li>draw_gameover()
-: <a class="el" href="gui_8cc.html#a883a9d60d025f639536821163bcea1d5">gui.cc</a>
-, <a class="el" href="gui_8h.html#a2bcc2edf2d97dadcf7cb8b0f7833ca0c">gui.h</a>
+: <a class="el" href="gui_8cc.html#a6d8252d963a670367657f89996e07d9d">gui.cc</a>
+, <a class="el" href="gui_8h.html#a6d8252d963a670367657f89996e07d9d">gui.h</a>
+</li>
+<li>draw_high_score()
+: <a class="el" href="gui_8cc.html#a8ec2dd4fec87f07220a47e69c19501b4">gui.cc</a>
+, <a class="el" href="gui_8h.html#a8ec2dd4fec87f07220a47e69c19501b4">gui.h</a>
 </li>
 <li>draw_pacman()
 : <a class="el" href="gui_8cc.html#a67480dc636230e283edfe7718ba699b9">gui.cc</a>
-, <a class="el" href="gui_8h.html#ab256d055d4d8e63752e5fc9b381db3bc">gui.h</a>
+, <a class="el" href="gui_8h.html#a67480dc636230e283edfe7718ba699b9">gui.h</a>
 </li>
 <li>draw_path()
 : <a class="el" href="gui_8cc.html#a60c70a7e98039e03f0dd26c4010cc196">gui.cc</a>
-, <a class="el" href="gui_8h.html#a5b2c8cf33c03b778a0dcdd9ccc09787d">gui.h</a>
+, <a class="el" href="gui_8h.html#a60c70a7e98039e03f0dd26c4010cc196">gui.h</a>
 </li>
 <li>draw_pause()
-: <a class="el" href="gui_8h.html#a8574c0379a94f1cc096680c3ae8f62c2">gui.h</a>
-, <a class="el" href="gui_8cc.html#ac909a1c5f452b4d5957792d9ba875f2a">gui.cc</a>
+: <a class="el" href="gui_8cc.html#ac909a1c5f452b4d5957792d9ba875f2a">gui.cc</a>
+, <a class="el" href="gui_8h.html#ac909a1c5f452b4d5957792d9ba875f2a">gui.h</a>
 </li>
 <li>draw_screen_menu()
-: <a class="el" href="gui_8h.html#a89da7487d8708837978fe9632b1664ef">gui.h</a>
-, <a class="el" href="gui_8cc.html#a92afb82cda0774250bff5c33a94203f9">gui.cc</a>
+: <a class="el" href="gui_8cc.html#a92afb82cda0774250bff5c33a94203f9">gui.cc</a>
+, <a class="el" href="gui_8h.html#a92afb82cda0774250bff5c33a94203f9">gui.h</a>
 </li>
 <li>draw_win()
-: <a class="el" href="gui_8cc.html#a48cc4745453c5986bf7a0e66c3d69bd7">gui.cc</a>
-, <a class="el" href="gui_8h.html#a77f05470b275077fefe66d140e305db2">gui.h</a>
+: <a class="el" href="gui_8cc.html#a0534db11adec5bb7032ca5c8246cc0dc">gui.cc</a>
+, <a class="el" href="gui_8h.html#a0534db11adec5bb7032ca5c8246cc0dc">gui.h</a>
 </li>
 <li>DX
 : <a class="el" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a22dc95a35fbd833d9908928812979156">data_struct.h</a>
@@ -231,12 +272,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <li>ESCAPE
 : <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d">data_struct.h</a>
 </li>
+<li>estrai()
+: <a class="el" href="logic_8cc.html#a142a555f5b29a5a036cb6d3cb178d05c">logic.cc</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
 <li>FERMO
 : <a class="el" href="data__struct_8h.html#a31c6f3fb507a4edd8e1f355b0e772903a4303eb08a6089d7c223aa1f76fa56a30">data_struct.h</a>
+</li>
+<li>FILE_SAV
+: <a class="el" href="data__struct_8h.html#aa871f9ecb39da91f2333c782a9ed19f0">data_struct.h</a>
 </li>
 <li>FMOV
 : <a class="el" href="data__struct_8h.html#aa92d1333aa72962dc07a14f23bbf017d">data_struct.h</a>
@@ -273,42 +320,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>init_audio()
 : <a class="el" href="init_8cc.html#a95299d67e99eee0eefd279c7d2f09646">init.cc</a>
-, <a class="el" href="init_8h.html#a538638417a19490c718182ee9726223c">init.h</a>
+, <a class="el" href="init_8h.html#a95299d67e99eee0eefd279c7d2f09646">init.h</a>
 </li>
 <li>init_bitmap()
-: <a class="el" href="init_8h.html#a2de70ae20e8a368d4811f815f40ed740">init.h</a>
-, <a class="el" href="init_8cc.html#aff3fe1979016a30ee36b803c349e62da">init.cc</a>
+: <a class="el" href="init_8cc.html#aff3fe1979016a30ee36b803c349e62da">init.cc</a>
+, <a class="el" href="init_8h.html#aff3fe1979016a30ee36b803c349e62da">init.h</a>
 </li>
 <li>init_blinky()
-: <a class="el" href="init_8cc.html#a323cfe8d20211bb57659de9a35f2da9f">init.cc</a>
-, <a class="el" href="init_8h.html#aefce60feaceb9ae4d2affac9d0e9b144">init.h</a>
+: <a class="el" href="init_8cc.html#a0cbb3c20c6f8c57853fe8489b819f0b0">init.cc</a>
+, <a class="el" href="init_8h.html#a0cbb3c20c6f8c57853fe8489b819f0b0">init.h</a>
 </li>
 <li>init_clyde()
-: <a class="el" href="init_8h.html#af67a8f4aae3355105c6b4ddc6103c4b6">init.h</a>
-, <a class="el" href="init_8cc.html#a1c3436d1b9bdbafe5cb1f586d556dbb9">init.cc</a>
+: <a class="el" href="init_8cc.html#a1594c965e73ecb7109ce93b3e7c21976">init.cc</a>
+, <a class="el" href="init_8h.html#a1594c965e73ecb7109ce93b3e7c21976">init.h</a>
 </li>
 <li>init_font()
 : <a class="el" href="init_8cc.html#afbe96c13789d3f6f32b5df1110e8b66b">init.cc</a>
-, <a class="el" href="init_8h.html#aa06908d0d81fb73cc3c5ad2907c4dd9a">init.h</a>
+, <a class="el" href="init_8h.html#afbe96c13789d3f6f32b5df1110e8b66b">init.h</a>
 </li>
 <li>init_inky()
-: <a class="el" href="init_8cc.html#a614eb32a12d95a59b646d5f1587846b3">init.cc</a>
-, <a class="el" href="init_8h.html#a4090b9bbe3dcb89643778ada3322e02c">init.h</a>
+: <a class="el" href="init_8cc.html#a04ae98b451db1b99599c16a041f68204">init.cc</a>
+, <a class="el" href="init_8h.html#a04ae98b451db1b99599c16a041f68204">init.h</a>
 </li>
 <li>init_mappa()
 : <a class="el" href="init_8cc.html#a7a34723cc311f540decf32490d3e6dcf">init.cc</a>
-, <a class="el" href="init_8h.html#ab25d91bcc0dd4bc6c7b61ff1c6894684">init.h</a>
+, <a class="el" href="init_8h.html#a7a34723cc311f540decf32490d3e6dcf">init.h</a>
 </li>
 <li>init_pacman()
 : <a class="el" href="init_8cc.html#acfe91385c77007d8f990e6b397878a63">init.cc</a>
-, <a class="el" href="init_8h.html#adb50391b3199017d4f5bab71697857a7">init.h</a>
+, <a class="el" href="init_8h.html#acfe91385c77007d8f990e6b397878a63">init.h</a>
 </li>
 <li>init_pinky()
-: <a class="el" href="init_8cc.html#a1583202f61f6fd63545d2d3eedccc4f5">init.cc</a>
-, <a class="el" href="init_8h.html#aa54979e851594277b3c26a981405b33f">init.h</a>
+: <a class="el" href="init_8cc.html#af3cc6a733c5a5ec33060db1b8fd219e8">init.cc</a>
+, <a class="el" href="init_8h.html#af3cc6a733c5a5ec33060db1b8fd219e8">init.h</a>
 </li>
 <li>INSEGUIMENTO
 : <a class="el" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537a218849f5b3ca77449be28a4fc61a5ba8">data_struct.h</a>
+</li>
+<li>inserisci()
+: <a class="el" href="logic_8cc.html#a0e81c4a45280e6e30323be161dbb25e5">logic.cc</a>
 </li>
 </ul>
 
@@ -322,7 +372,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </li>
 <li>load_map()
 : <a class="el" href="io_8cc.html#a66aaceaba8d215e5d7cdd231291c2a4d">io.cc</a>
-, <a class="el" href="io_8h.html#abe87201cb468bd525c0f6f4d1074eaad">io.h</a>
+, <a class="el" href="io_8h.html#a66aaceaba8d215e5d7cdd231291c2a4d">io.h</a>
 </li>
 </ul>
 
@@ -342,23 +392,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </li>
 <li>move_blinky()
 : <a class="el" href="logic_8cc.html#afc5d6ec299a7537e10e17bd068593afa">logic.cc</a>
-, <a class="el" href="logic_8h.html#a8d2b84e9bc457d863676a2138326c9ab">logic.h</a>
+, <a class="el" href="logic_8h.html#afc5d6ec299a7537e10e17bd068593afa">logic.h</a>
 </li>
 <li>move_clyde()
-: <a class="el" href="logic_8h.html#a676f8609512a461640abf72fe9447fed">logic.h</a>
-, <a class="el" href="logic_8cc.html#a61740b3df28ee21dcf9ad0b5ae2bc899">logic.cc</a>
+: <a class="el" href="logic_8cc.html#a61740b3df28ee21dcf9ad0b5ae2bc899">logic.cc</a>
+, <a class="el" href="logic_8h.html#a61740b3df28ee21dcf9ad0b5ae2bc899">logic.h</a>
 </li>
 <li>move_inky()
 : <a class="el" href="logic_8cc.html#aa5def70b760856d66debf0240deb58d5">logic.cc</a>
-, <a class="el" href="logic_8h.html#a9b0f3beb817896467e00f1973160a10d">logic.h</a>
+, <a class="el" href="logic_8h.html#aa5def70b760856d66debf0240deb58d5">logic.h</a>
 </li>
 <li>move_pacman()
 : <a class="el" href="logic_8cc.html#ae90800e91ff24611eaebdfd522c10c51">logic.cc</a>
-, <a class="el" href="logic_8h.html#aa63d1a4f53995e152a7c974a33f74cfa">logic.h</a>
+, <a class="el" href="logic_8h.html#ae90800e91ff24611eaebdfd522c10c51">logic.h</a>
 </li>
 <li>move_pinky()
-: <a class="el" href="logic_8h.html#a9e62a1a2903dba581bed76323e5abdc9">logic.h</a>
-, <a class="el" href="logic_8cc.html#a364939cc32b1d07a8e97f64b74a63cc8">logic.cc</a>
+: <a class="el" href="logic_8cc.html#a364939cc32b1d07a8e97f64b74a63cc8">logic.cc</a>
+, <a class="el" href="logic_8h.html#a364939cc32b1d07a8e97f64b74a63cc8">logic.h</a>
 </li>
 </ul>
 
@@ -372,26 +422,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </li>
 <li>ondula()
 : <a class="el" href="logic_8cc.html#a3adb21936ea44e2344a733ea5b66f75a">logic.cc</a>
+, <a class="el" href="logic_8h.html#a3adb21936ea44e2344a733ea5b66f75a">logic.h</a>
 </li>
 <li>ONDULA
 : <a class="el" href="data__struct_8h.html#aa00140705985f9874a4cf8b4404e9537a819197a69edc465d7895c0589abf037d">data_struct.h</a>
-</li>
-<li>ondula()
-: <a class="el" href="logic_8h.html#a3adb21936ea44e2344a733ea5b66f75a">logic.h</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>P
+: <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca82f05f38f6a17b117cdd2b83227912c6">data_struct.h</a>
+</li>
 <li>pac_mangia()
-: <a class="el" href="logic_8cc.html#a9e0b83bd318957c1973fd5a2ead36130">logic.cc</a>
-, <a class="el" href="logic_8h.html#a9e0b83bd318957c1973fd5a2ead36130">logic.h</a>
+: <a class="el" href="logic_8cc.html#a323d78ca7df3adca2dd32ca5f9581658">logic.cc</a>
+, <a class="el" href="logic_8h.html#a323d78ca7df3adca2dd32ca5f9581658">logic.h</a>
 </li>
 <li>PAUSA
 : <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a60fc5eaee370304305a60cc7ba79aa45">data_struct.h</a>
 </li>
 <li>PLAY
 : <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a0352906d1ea1dfcd663c918f3a86755b">data_struct.h</a>
+</li>
+<li>preleva_record()
+: <a class="el" href="io_8cc.html#a689b2b0934cdf05a929ee230e0d3e677">io.cc</a>
+, <a class="el" href="io_8h.html#a689b2b0934cdf05a929ee230e0d3e677">io.h</a>
 </li>
 </ul>
 
@@ -411,14 +466,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>S
+: <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caf1ce01387d2348f8b858721a7db81670">data_struct.h</a>
+</li>
+<li>salva_record()
+: <a class="el" href="io_8cc.html#a9bf9fb1ff574b0a3cccaa15eedebc87e">io.cc</a>
+, <a class="el" href="io_8h.html#a9bf9fb1ff574b0a3cccaa15eedebc87e">io.h</a>
+</li>
 <li>SCREENHEIGHT
 : <a class="el" href="data__struct_8h.html#a19d0acd5aaaf61eabc08cd603dc0d470">data_struct.h</a>
 </li>
 <li>SCREENWIDTH
 : <a class="el" href="data__struct_8h.html#af898f8fa683c129434a3e7e59fbdeecc">data_struct.h</a>
-</li>
-<li>scrivi_mappa_su_file()
-: <a class="el" href="io_8h.html#a01e465d440e9f03295c934e3ccdb1693">io.h</a>
 </li>
 <li>SPACE
 : <a class="el" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95">data_struct.h</a>
@@ -457,7 +516,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 
 <h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
 <li>victory()
-: <a class="el" href="logic_8h.html#ae88e131f829039c9c36b7526502a5c2e">logic.h</a>
+: <a class="el" href="logic_8cc.html#ac542454828aaa49308f40de8d5ae3341">logic.cc</a>
+, <a class="el" href="logic_8h.html#ac542454828aaa49308f40de8d5ae3341">logic.h</a>
 </li>
 </ul>
 
@@ -470,9 +530,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:46 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

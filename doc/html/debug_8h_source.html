@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man:  File sorgente debug.h</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man:  File sorgente debug.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -88,17 +89,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *      Author: Belle &amp; Bruce</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifdef DEBUG_MODE</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="keywordtype">void</span> <a class="code" href="debug_8cc.html#ae51f3659251eb296b300e0a5062706b2">debug_console</a>(ALLEGRO_TIMER *, <a class="code" href="structPLAYER__t.html" title="Struttura contenente i dati del giocatore. ">PLAYER_t</a> &amp;, <a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;, <a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                   , <a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;, <a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;, <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;, <a class="code" href="structAUDIO__t.html" title="Struttura contenente i dati dell&#39;audio. ">AUDIO_t</a> &amp;, <span class="keywordtype">int</span> &amp;, <span class="keywordtype">bool</span> &amp;, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89" title="Stato del gioco, serve per il loop della funzione main per eseguire diverse operazioni a seconda dell...">STATO_GIOCO</a> &amp;);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifdef DEBUG_MODE</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; <span class="keywordtype">void</span> <a class="code" href="debug_8cc.html#a8f014a4cb90a91e8f29c9c941d5f7286">debug_console</a>(ALLEGRO_TIMER *timer, ALLEGRO_TIMER *timer2, <a class="code" href="structPLAYER__t.html">PLAYER_t</a> &amp;pacman, <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;blinky, <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;pinky</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                   , <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;inky, <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;clyde, <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;mappa, <a class="code" href="structAUDIO__t.html">AUDIO_t</a> &amp;audio, <span class="keywordtype">int</span> &amp;livello, <span class="keywordtype">bool</span> &amp;caricamappa, <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89">STATO_GIOCO</a> &amp;stato_gioco);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif // DEBUG_MODE</span></div>
+<div class="ttc" id="structMAPPA__t_html"><div class="ttname"><a href="structMAPPA__t.html">MAPPA_t</a></div><div class="ttdoc">Struttura della mappa di gioco che verrà caricata da file nella funzione load_map. </div><div class="ttdef"><b>Definition:</b> data_struct.h:43</div></div>
+<div class="ttc" id="data__struct_8h_html_a2b4fca65b06655936250de8523872c89"><div class="ttname"><a href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89">STATO_GIOCO</a></div><div class="ttdeci">STATO_GIOCO</div><div class="ttdoc">Stato del gioco, serve per il loop della funzione main per eseguire diverse operazioni a seconda dell...</div><div class="ttdef"><b>Definition:</b> data_struct.h:31</div></div>
+<div class="ttc" id="structPLAYER__t_html"><div class="ttname"><a href="structPLAYER__t.html">PLAYER_t</a></div><div class="ttdoc">Struttura contenente i dati del giocatore. </div><div class="ttdef"><b>Definition:</b> data_struct.h:59</div></div>
+<div class="ttc" id="structAUDIO__t_html"><div class="ttname"><a href="structAUDIO__t.html">AUDIO_t</a></div><div class="ttdoc">Struttura contenente i dati dell&#39;audio. </div><div class="ttdef"><b>Definition:</b> data_struct.h:91</div></div>
+<div class="ttc" id="debug_8cc_html_a8f014a4cb90a91e8f29c9c941d5f7286"><div class="ttname"><a href="debug_8cc.html#a8f014a4cb90a91e8f29c9c941d5f7286">debug_console</a></div><div class="ttdeci">void debug_console(ALLEGRO_TIMER *timer, ALLEGRO_TIMER *timer2, PLAYER_t &amp;pacman, FANTASMA_t &amp;blinky, FANTASMA_t &amp;pinky, FANTASMA_t &amp;inky, FANTASMA_t &amp;clyde, MAPPA_t &amp;mappa, AUDIO_t &amp;audio, int &amp;livello, bool &amp;caricamappa, STATO_GIOCO &amp;stato_gioco)</div><div class="ttdoc">Funzione utilizzabile solo in fase di debug. </div><div class="ttdef"><b>Definition:</b> debug.cc:46</div></div>
+<div class="ttc" id="structFANTASMA__t_html"><div class="ttname"><a href="structFANTASMA__t.html">FANTASMA_t</a></div><div class="ttdoc">Struttura contenente i dati del singolo fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:76</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

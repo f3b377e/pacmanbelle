@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man: Riferimenti per il file debug.cc</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man: Riferimenti per il file debug.cc</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -89,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <code>#include &lt;fstream&gt;</code><br/>
 <code>#include &lt;allegro5/allegro.h&gt;</code><br/>
 <code>#include &lt;allegro5/allegro_native_dialog.h&gt;</code><br/>
+<code>#include &lt;allegro5/allegro_primitives.h&gt;</code><br/>
 <code>#include &lt;allegro5/allegro_ttf.h&gt;</code><br/>
 <code>#include &lt;allegro5/allegro_font.h&gt;</code><br/>
 <code>#include &lt;allegro5/allegro_color.h&gt;</code><br/>
@@ -97,14 +99,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <code>#include &lt;allegro5/allegro_acodec.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="data__struct_8h_source.html">data_struct.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="io_8h_source.html">io.h</a>&quot;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funzioni</h2></td></tr>
-<tr class="memitem:ae51f3659251eb296b300e0a5062706b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8cc.html#ae51f3659251eb296b300e0a5062706b2">debug_console</a> (ALLEGRO_TIMER *timer, <a class="el" href="structPLAYER__t.html">PLAYER_t</a> &amp;pacman, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;blinky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;pinky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;inky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;clyde, <a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;mappa, <a class="el" href="structAUDIO__t.html">AUDIO_t</a> &amp;audio, int &amp;livello, bool &amp;caricamappa, <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89">STATO_GIOCO</a> &amp;stato_gioco)</td></tr>
-<tr class="separator:ae51f3659251eb296b300e0a5062706b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f014a4cb90a91e8f29c9c941d5f7286"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8cc.html#a8f014a4cb90a91e8f29c9c941d5f7286">debug_console</a> (ALLEGRO_TIMER *timer, ALLEGRO_TIMER *timer2, <a class="el" href="structPLAYER__t.html">PLAYER_t</a> &amp;pacman, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;blinky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;pinky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;inky, <a class="el" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;clyde, <a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;mappa, <a class="el" href="structAUDIO__t.html">AUDIO_t</a> &amp;audio, int &amp;livello, bool &amp;caricamappa, <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89">STATO_GIOCO</a> &amp;stato_gioco)</td></tr>
+<tr class="memdesc:a8f014a4cb90a91e8f29c9c941d5f7286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione utilizzabile solo in fase di debug.  <a href="#a8f014a4cb90a91e8f29c9c941d5f7286">Continua...</a><br/></td></tr>
+<tr class="separator:a8f014a4cb90a91e8f29c9c941d5f7286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentazione delle funzioni</h2>
-<a class="anchor" id="ae51f3659251eb296b300e0a5062706b2"></a>
+<a class="anchor" id="a8f014a4cb90a91e8f29c9c941d5f7286"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -113,6 +117,12 @@ Funzioni</h2></td></tr>
           <td>(</td>
           <td class="paramtype">ALLEGRO_TIMER *&#160;</td>
           <td class="paramname"><em>timer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_TIMER *&#160;</td>
+          <td class="paramname"><em>timer2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -181,132 +191,200 @@ Funzioni</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                                              {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> menu = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> scelta;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">int</span> mapx, mapy, liv;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    al_stop_timer(timer);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    cout&lt;&lt;<span class="stringliteral">&quot;*******DEBUG_CONSOLE********&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">while</span>(menu) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n MENU:&quot;</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 1) Informazioni Pac-Man&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 2) Informazioni mappa di gioco&quot;</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 3) Informazioni fantasmi&quot;</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 4) Salta al livello desiderato&quot;</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 6) torna al gioco&quot;</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n Scelta: &quot;</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            cin&gt;&gt;scelta;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">switch</span>(scelta) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                mapx = (pacman.<a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824" title="Coordinata x schermo. ">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924" title="Margine laterale della finestra. ">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                mapy = (pacman.<a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e" title="Coordinata y schermo. ">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955" title="Margine Superiore della finestra. ">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n Pac-Man&quot;</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824" title="Coordinata x schermo. ">x</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e" title="Coordinata y schermo. ">y</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>[mapx][mapy];</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b" title="Velocità del pacman. ">movespeed</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione:   precedente:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ab008f2009f1a813ef0d34f05e336b92a" title="Stato della precedente direzione di pacman. ">precdir</a></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    &lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8" title="Stato attuale della direzione di pacman. ">dir</a></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ac0d443b516a2d514a2680f5682e2aa59" title="Stato della sucessiva direzione di pacman. ">succdir</a></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    &lt;&lt;endl;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n Mappa \n&quot;</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; mappa.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934" title="Numero di Colonne. ">r</a>; i++)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; mappa.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54" title="Numero di Righe. ">c</a>; j++)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                            {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                <span class="keywordflow">if</span>(mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>[i][j] != 0)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                    cout&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>[i][j]&lt;&lt;<span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                    cout&lt;&lt;<span class="stringliteral">&quot;null&quot;</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                            }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                            cout&lt;&lt;endl;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                cout&lt;&lt;endl;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n righe mappa: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934" title="Numero di Colonne. ">r</a>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n colonne mappa: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54" title="Numero di Righe. ">c</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                cout&lt;&lt;endl;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">case</span> 3:{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordtype">int</span> s=0;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">do</span>{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\n Fantasmi: \n&quot;</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 0) Esci&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 1) Blinky&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 2) Pinky&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 3) Inky&quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 4) Clyde &quot;</span>&lt;&lt;endl;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    cin&gt;&gt;s;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordflow">if</span> (s==0)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                        s = (-1);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==1){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Blinky: \n&quot;</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035" title="Coordinata x schermo. ">x</a>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6" title="Coordinata y schermo. ">y</a>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        mapx = (blinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035" title="Coordinata x schermo. ">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924" title="Margine laterale della finestra. ">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        mapy = (blinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6" title="Coordinata y schermo. ">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955" title="Margine Superiore della finestra. ">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>[mapy][mapx];</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899" title="Velocità del fantasma. ">movespeed</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13" title="Stato attuale della direzione del fantasma. ">dir</a></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41" title="Stato della sucessiva direzione del fantasma. ">succdir</a></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                            &lt;&lt;endl;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==2){</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Pinky: \n&quot;</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035" title="Coordinata x schermo. ">x</a>;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6" title="Coordinata y schermo. ">y</a>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        mapx = (pinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035" title="Coordinata x schermo. ">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924" title="Margine laterale della finestra. ">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                        mapy = (pinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6" title="Coordinata y schermo. ">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955" title="Margine Superiore della finestra. ">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105" title="Blocchi della mappa. ">BLOCKSIZE</a>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d" title="Matrice che definisce la mappa. ">mappa</a>[mapy][mapx];</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899" title="Velocità del fantasma. ">movespeed</a>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13" title="Stato attuale della direzione del fantasma. ">dir</a></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41" title="Stato della sucessiva direzione del fantasma. ">succdir</a></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                            &lt;&lt;endl;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                }<span class="keywordflow">while</span> (s&gt;=0);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">case</span> 4:</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;Livello: &quot;</span>;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                cin&gt;&gt;liv;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <span class="keywordflow">if</span>(liv &lt; 0 || liv &gt; 10)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;Livello inesistente!\n&quot;</span>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                    livello = liv;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    stato_gioco = <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">CARICA</a>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    caricamappa = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                    menu = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">case</span> 5:</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">case</span> 6:</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                menu = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                al_play_sample(audio.<a class="code" href="structAUDIO__t.html#af8714a5d7bd0d1c9a337ccf013e7a4d6" title="Quando pacman deve scappare dai fantasmi. ">siren</a>, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&amp;audio.<a class="code" href="structAUDIO__t.html#af02a444bb13b029095c85c2d49c5c6fd" title="Identificatore audio in riproduzione. ">id</a>);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                al_start_timer(timer);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+
+<p>Funzione utilizzabile solo in fase di debug. </p>
+<p>Eseguita solo nello stato <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a0352906d1ea1dfcd663c918f3a86755b">PLAY</a> nella funzione <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, non appena si preme il tasto D. In questa funzione è possibile controllare da terminale le informazioni di pacman, dei fantasmi e della mappa, al momento dell'attivazione della debugconsole, la quale fermera' i timer di gioco per poi riattivarli appena si rientra in gioco. Inoltre in questa modalità si può passare da un livello ad un altro per eventuali controlli. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>Frame del movimento delle animazioni. </td></tr>
+    <tr><td class="paramname">timer2</td><td>Timer di gioco che controlla i secondi trascorsi dall'inizio della vita. </td></tr>
+    <tr><td class="paramname">pacman</td><td>varibaile contenente i dati di pac-man di tipo PLAYER_T. </td></tr>
+    <tr><td class="paramname">blinky</td><td>variabile di tipo FANTASMA_T contenente le informazioni di blinky. </td></tr>
+    <tr><td class="paramname">pinky</td><td>variabile di tipo FANTASMA_T contenente le informazioni di pinky. </td></tr>
+    <tr><td class="paramname">inky</td><td>variabile di tipo FANTASMA_T contenente le informazioni di inky. </td></tr>
+    <tr><td class="paramname">clyde</td><td>variabile di tipo FANTASMA_T contenente le informazioni di clyde. </td></tr>
+    <tr><td class="paramname">mappa</td><td>variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T. </td></tr>
+    <tr><td class="paramname">audio</td><td>variabile di tipo struttura AUDIO_T contenente i suoni del gioco. </td></tr>
+    <tr><td class="paramname">livello</td><td>livello corrente in gioco. </td></tr>
+    <tr><td class="paramname">caricamappa</td><td>indica se è presente la mappa, true se è caricata in memoria. </td></tr>
+    <tr><td class="paramname">stato</td><td>indica lo stato del gioco di tipo STATO_GIOCO. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>void. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                              {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">bool</span> menu = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span> scelta;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> mapx, mapy, liv;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    al_stop_timer(timer2);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        al_stop_timer(timer);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        cout&lt;&lt;<span class="stringliteral">&quot;*******DEBUG_CONSOLE********&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">while</span>(menu) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n MENU:&quot;</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t 1) Informazioni Pac-Man&quot;</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t 2) Informazioni mappa di gioco&quot;</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t 3) Informazioni fantasmi&quot;</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t 4) Salta al livello desiderato&quot;</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            cout&lt;&lt;<span class="stringliteral">&quot;\n\t 6) torna al gioco&quot;</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n Scelta: &quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                cin&gt;&gt;scelta;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordflow">switch</span>(scelta) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                mapx = (pacman.<a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                mapy = (pacman.<a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Pac-Man&quot;</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">x</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">y</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[mapx][mapy];</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b">movespeed</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione:   precedente:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ab008f2009f1a813ef0d34f05e336b92a">precdir</a></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    &lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">dir</a></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#ac0d443b516a2d514a2680f5682e2aa59">succdir</a>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t Punteggio&quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#a7e67b1e986244dc4437d6e3729669f49">punteggio</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n\t Vita: &quot;</span>&lt;&lt;pacman.<a class="code" href="structPLAYER__t.html#a15e538b419151663a5a74f229c6f73b1">vita</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Mappa \n&quot;</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; mappa.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">r</a>; i++)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; mappa.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">c</a>; j++)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                                {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                <span class="keywordflow">if</span>(mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[i][j] != 0)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                    cout&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[i][j]&lt;&lt;<span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                    cout&lt;&lt;<span class="stringliteral">&quot;null&quot;</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                                }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                cout&lt;&lt;endl;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                cout&lt;&lt;endl;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n righe mappa: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">r</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;\n colonne mappa: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">c</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                cout&lt;&lt;endl;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">case</span> 3:{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordtype">int</span> s=0;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">do</span>{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\n Fantasmi: \n&quot;</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 0) Esci&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 1) Blinky&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 2) Pinky&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 3) Inky&quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;\t 4) Clyde &quot;</span>&lt;&lt;endl;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    cin&gt;&gt;s;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    <span class="keywordflow">if</span> (s==0)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        s = (-1);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==1){</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Blinky: \n&quot;</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        mapx = (blinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        mapy = (blinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[mapy][mapx];</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">movespeed</a>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">dir</a></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;blinky.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">succdir</a></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                            &lt;&lt;endl;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==2){</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Pinky: \n&quot;</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                        mapx = (pinky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                        mapy = (pinky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[mapy][mapx];</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">movespeed</a>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">dir</a></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;pinky.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">succdir</a></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                            &lt;&lt;endl;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                    }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==3){</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Inky: \n&quot;</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;inky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;inky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        mapx = (inky.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                        mapy = (inky.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[mapy][mapx];</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;inky.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">movespeed</a>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;inky.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">dir</a></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;inky.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">succdir</a></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                            &lt;&lt;endl;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                    }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (s==4){</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n Clyde: \n&quot;</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t x = &quot;</span>&lt;&lt;clyde.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t y = &quot;</span>&lt;&lt;clyde.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                        mapx = (clyde.<a class="code" href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">x</a> - <a class="code" href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        mapy = (clyde.<a class="code" href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">y</a> - <a class="code" href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a>)/<a class="code" href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t char casella: &quot;</span>&lt;&lt;mappa.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[mapy][mapx];</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t coordinata:(&quot;</span>&lt;&lt;mapx&lt;&lt;<span class="stringliteral">&quot;,&quot;</span>&lt;&lt;mapy&lt;&lt;<span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t velocità attuale &quot;</span>&lt;&lt;clyde.<a class="code" href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">movespeed</a>;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                        cout&lt;&lt;<span class="stringliteral">&quot;\n\t Direzione: 0: GIU 1:SU 2:SX 3:DX 4:FERMO &quot;</span>&lt;&lt;<span class="stringliteral">&quot;   attuale:&quot;</span>&lt;&lt;clyde.<a class="code" href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">dir</a></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                            &lt;&lt;<span class="stringliteral">&quot;   successiva:&quot;</span>&lt;&lt;clyde.<a class="code" href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">succdir</a></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                            &lt;&lt;endl;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                }<span class="keywordflow">while</span> (s&gt;=0);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordflow">case</span> 4:</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                cout&lt;&lt;<span class="stringliteral">&quot;Livello: &quot;</span>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                cin&gt;&gt;liv;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <span class="keywordflow">if</span>(liv &lt; 0 || liv &gt; 10)</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    cout&lt;&lt;<span class="stringliteral">&quot;Livello inesistente!\n&quot;</span>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                    livello = liv;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                    stato_gioco = <a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">CARICA</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                    caricamappa = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                    menu = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordflow">case</span> 6:</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                menu = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                al_play_sample(audio.<a class="code" href="structAUDIO__t.html#af8714a5d7bd0d1c9a337ccf013e7a4d6">siren</a>, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP,&amp;audio.<a class="code" href="structAUDIO__t.html#af02a444bb13b029095c85c2d49c5c6fd">id</a>);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                al_start_timer(timer);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                al_start_timer(timer2);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
+<div class="ttc" id="structPLAYER__t_html_a15e538b419151663a5a74f229c6f73b1"><div class="ttname"><a href="structPLAYER__t.html#a15e538b419151663a5a74f229c6f73b1">PLAYER_t::vita</a></div><div class="ttdeci">int vita</div><div class="ttdoc">Vite di pacman che possono essere minimo 0 massimo 3. </div><div class="ttdef"><b>Definition:</b> data_struct.h:68</div></div>
+<div class="ttc" id="data__struct_8h_html_af60f6b462c324a9945966c9b5992a105"><div class="ttname"><a href="data__struct_8h.html#af60f6b462c324a9945966c9b5992a105">BLOCKSIZE</a></div><div class="ttdeci">const int BLOCKSIZE</div><div class="ttdoc">Blocchi della mappa. </div><div class="ttdef"><b>Definition:</b> data_struct.h:22</div></div>
+<div class="ttc" id="structAUDIO__t_html_af8714a5d7bd0d1c9a337ccf013e7a4d6"><div class="ttname"><a href="structAUDIO__t.html#af8714a5d7bd0d1c9a337ccf013e7a4d6">AUDIO_t::siren</a></div><div class="ttdeci">ALLEGRO_SAMPLE * siren</div><div class="ttdoc">Quando pacman deve scappare dai fantasmi. </div><div class="ttdef"><b>Definition:</b> data_struct.h:101</div></div>
+<div class="ttc" id="structPLAYER__t_html_aa6bfc54bd6064533300002983d91b824"><div class="ttname"><a href="structPLAYER__t.html#aa6bfc54bd6064533300002983d91b824">PLAYER_t::x</a></div><div class="ttdeci">float x</div><div class="ttdoc">Coordinata x schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:66</div></div>
+<div class="ttc" id="structMAPPA__t_html_ab2e9ea9798d2de75538abca11cb7372d"><div class="ttname"><a href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">MAPPA_t::mappa</a></div><div class="ttdeci">char ** mappa</div><div class="ttdoc">Matrice che definisce la mappa. </div><div class="ttdef"><b>Definition:</b> data_struct.h:46</div></div>
+<div class="ttc" id="structFANTASMA__t_html_a20db36f80295122f3951358eee0ffa41"><div class="ttname"><a href="structFANTASMA__t.html#a20db36f80295122f3951358eee0ffa41">FANTASMA_t::succdir</a></div><div class="ttdeci">DIREZ succdir</div><div class="ttdoc">Stato della sucessiva direzione del fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:79</div></div>
+<div class="ttc" id="structFANTASMA__t_html_a866e6bc2dd2d2553ca34011af8aa17b6"><div class="ttname"><a href="structFANTASMA__t.html#a866e6bc2dd2d2553ca34011af8aa17b6">FANTASMA_t::y</a></div><div class="ttdeci">float y</div><div class="ttdoc">Coordinata y schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:85</div></div>
+<div class="ttc" id="structFANTASMA__t_html_a41ce6e9f1fb649408c4a91a154028035"><div class="ttname"><a href="structFANTASMA__t.html#a41ce6e9f1fb649408c4a91a154028035">FANTASMA_t::x</a></div><div class="ttdeci">float x</div><div class="ttdoc">Coordinata x schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:84</div></div>
+<div class="ttc" id="data__struct_8h_html_ae74f21004c88ef9b937f7505daccb924"><div class="ttname"><a href="data__struct_8h.html#ae74f21004c88ef9b937f7505daccb924">OFFSETX</a></div><div class="ttdeci">const int OFFSETX</div><div class="ttdoc">Margine laterale della finestra. </div><div class="ttdef"><b>Definition:</b> data_struct.h:17</div></div>
+<div class="ttc" id="structPLAYER__t_html_ac0d443b516a2d514a2680f5682e2aa59"><div class="ttname"><a href="structPLAYER__t.html#ac0d443b516a2d514a2680f5682e2aa59">PLAYER_t::succdir</a></div><div class="ttdeci">DIREZ succdir</div><div class="ttdoc">Stato della sucessiva direzione di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:62</div></div>
+<div class="ttc" id="structFANTASMA__t_html_a24d4818b10c3a68aee3befe7136f8899"><div class="ttname"><a href="structFANTASMA__t.html#a24d4818b10c3a68aee3befe7136f8899">FANTASMA_t::movespeed</a></div><div class="ttdeci">float movespeed</div><div class="ttdoc">Velocità del fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:81</div></div>
+<div class="ttc" id="data__struct_8h_html_a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52"><div class="ttname"><a href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">CARICA</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:31</div></div>
+<div class="ttc" id="structMAPPA__t_html_a2644bce73327c50b0538aac5a9039c54"><div class="ttname"><a href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">MAPPA_t::c</a></div><div class="ttdeci">int c</div><div class="ttdoc">Numero di Righe. </div><div class="ttdef"><b>Definition:</b> data_struct.h:45</div></div>
+<div class="ttc" id="data__struct_8h_html_a18cc4152fb6dfb25ab26a2167c6db955"><div class="ttname"><a href="data__struct_8h.html#a18cc4152fb6dfb25ab26a2167c6db955">OFFSETY</a></div><div class="ttdeci">const int OFFSETY</div><div class="ttdoc">Margine Superiore della finestra. </div><div class="ttdef"><b>Definition:</b> data_struct.h:18</div></div>
+<div class="ttc" id="structAUDIO__t_html_af02a444bb13b029095c85c2d49c5c6fd"><div class="ttname"><a href="structAUDIO__t.html#af02a444bb13b029095c85c2d49c5c6fd">AUDIO_t::id</a></div><div class="ttdeci">ALLEGRO_SAMPLE_ID id</div><div class="ttdoc">Identificatore audio in riproduzione. </div><div class="ttdef"><b>Definition:</b> data_struct.h:92</div></div>
+<div class="ttc" id="structFANTASMA__t_html_aa673871d3a0e3bee91962314a5379e13"><div class="ttname"><a href="structFANTASMA__t.html#aa673871d3a0e3bee91962314a5379e13">FANTASMA_t::dir</a></div><div class="ttdeci">DIREZ dir</div><div class="ttdoc">Stato attuale della direzione del fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:77</div></div>
+<div class="ttc" id="structPLAYER__t_html_a8be89f53b4e130501b728955315bcc2b"><div class="ttname"><a href="structPLAYER__t.html#a8be89f53b4e130501b728955315bcc2b">PLAYER_t::movespeed</a></div><div class="ttdeci">float movespeed</div><div class="ttdoc">Velocità del pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:63</div></div>
+<div class="ttc" id="structPLAYER__t_html_a7e67b1e986244dc4437d6e3729669f49"><div class="ttname"><a href="structPLAYER__t.html#a7e67b1e986244dc4437d6e3729669f49">PLAYER_t::punteggio</a></div><div class="ttdeci">int punteggio</div><div class="ttdoc">punteggio attuale </div><div class="ttdef"><b>Definition:</b> data_struct.h:69</div></div>
+<div class="ttc" id="structPLAYER__t_html_afb6bd811c5d4e65c62cb6435b7df42e8"><div class="ttname"><a href="structPLAYER__t.html#afb6bd811c5d4e65c62cb6435b7df42e8">PLAYER_t::dir</a></div><div class="ttdeci">DIREZ dir</div><div class="ttdoc">Stato attuale della direzione di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:60</div></div>
+<div class="ttc" id="structPLAYER__t_html_ab008f2009f1a813ef0d34f05e336b92a"><div class="ttname"><a href="structPLAYER__t.html#ab008f2009f1a813ef0d34f05e336b92a">PLAYER_t::precdir</a></div><div class="ttdeci">DIREZ precdir</div><div class="ttdoc">Stato della precedente direzione di pacman. </div><div class="ttdef"><b>Definition:</b> data_struct.h:61</div></div>
+<div class="ttc" id="structMAPPA__t_html_a66ed78e0a589ef13ecb5e82ec4097934"><div class="ttname"><a href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">MAPPA_t::r</a></div><div class="ttdeci">int r</div><div class="ttdoc">Numero di Colonne. </div><div class="ttdef"><b>Definition:</b> data_struct.h:44</div></div>
+<div class="ttc" id="structPLAYER__t_html_ab81f7ae3799b19f183ae25e433f6637e"><div class="ttname"><a href="structPLAYER__t.html#ab81f7ae3799b19f183ae25e433f6637e">PLAYER_t::y</a></div><div class="ttdeci">float y</div><div class="ttdoc">Coordinata y schermo. </div><div class="ttdef"><b>Definition:</b> data_struct.h:67</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man: Riferimenti per il file io.h</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man: Riferimenti per il file io.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -91,13 +92,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funzioni</h2></td></tr>
 <tr class="memitem:a6cc7e5402d075aeecd086dcc4aaa54a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#a6cc7e5402d075aeecd086dcc4aaa54a5">agg_tasti</a> (ALLEGRO_EVENT &amp;event, bool tasto[], bool setting)</td></tr>
-<tr class="memdesc:a6cc7e5402d075aeecd086dcc4aaa54a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">La funzione setta i valori booleani dell'array tasto inizializzato nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, a seconda se il tasto è stato premuto o rilasciato; Parametri: event evento Allegro Parametri: tasto array contenente lo stato dei tasti premuti o rilasciati Parametri: setting valore da attribuire al campo booleano dell'array.  <a href="#a6cc7e5402d075aeecd086dcc4aaa54a5">Continua...</a><br/></td></tr>
+<tr class="memdesc:a6cc7e5402d075aeecd086dcc4aaa54a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">La funzione setta i valori booleani dell'array tasto inizializzato nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, a seconda se il tasto è stato premuto o rilasciato.  <a href="#a6cc7e5402d075aeecd086dcc4aaa54a5">Continua...</a><br/></td></tr>
 <tr class="separator:a6cc7e5402d075aeecd086dcc4aaa54a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe87201cb468bd525c0f6f4d1074eaad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#abe87201cb468bd525c0f6f4d1074eaad">load_map</a> (<a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;m, char *fileliv, int livello)</td></tr>
-<tr class="memdesc:abe87201cb468bd525c0f6f4d1074eaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica la mappa da file in Memoria.  <a href="#abe87201cb468bd525c0f6f4d1074eaad">Continua...</a><br/></td></tr>
-<tr class="separator:abe87201cb468bd525c0f6f4d1074eaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01e465d440e9f03295c934e3ccdb1693"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#a01e465d440e9f03295c934e3ccdb1693">scrivi_mappa_su_file</a> (const <a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;, const char[])</td></tr>
-<tr class="separator:a01e465d440e9f03295c934e3ccdb1693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66aaceaba8d215e5d7cdd231291c2a4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#a66aaceaba8d215e5d7cdd231291c2a4d">load_map</a> (<a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;m, char fileliv[], int livello)</td></tr>
+<tr class="memdesc:a66aaceaba8d215e5d7cdd231291c2a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica la mappa da un file contenuto nella cartella data/map/.  <a href="#a66aaceaba8d215e5d7cdd231291c2a4d">Continua...</a><br/></td></tr>
+<tr class="separator:a66aaceaba8d215e5d7cdd231291c2a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689b2b0934cdf05a929ee230e0d3e677"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#a689b2b0934cdf05a929ee230e0d3e677">preleva_record</a> ()</td></tr>
+<tr class="memdesc:a689b2b0934cdf05a929ee230e0d3e677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prende in ingresso da un file di salvataggio (sav.txt) il record fatto in precedenza.  <a href="#a689b2b0934cdf05a929ee230e0d3e677">Continua...</a><br/></td></tr>
+<tr class="separator:a689b2b0934cdf05a929ee230e0d3e677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf9fb1ff574b0a3cccaa15eedebc87e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8h.html#a9bf9fb1ff574b0a3cccaa15eedebc87e">salva_record</a> (int new_record)</td></tr>
+<tr class="memdesc:a9bf9fb1ff574b0a3cccaa15eedebc87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive sul file di salvataggio (sav.txt) il record.  <a href="#a9bf9fb1ff574b0a3cccaa15eedebc87e">Continua...</a><br/></td></tr>
+<tr class="separator:a9bf9fb1ff574b0a3cccaa15eedebc87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentazione delle funzioni</h2>
 <a class="anchor" id="a6cc7e5402d075aeecd086dcc4aaa54a5"></a>
@@ -130,40 +135,66 @@ Funzioni</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>La funzione setta i valori booleani dell'array tasto inizializzato nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, a seconda se il tasto è stato premuto o rilasciato; Parametri: event evento Allegro Parametri: tasto array contenente lo stato dei tasti premuti o rilasciati Parametri: setting valore da attribuire al campo booleano dell'array. </p>
-<div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">switch</span>(event.keyboard.keycode)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_UP:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = setting;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_DOWN:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = setting;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_RIGHT:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = setting;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_LEFT:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cadb45120aafd37a973140edee24708065">LEFT</a>] = setting;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_ENTER:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca951ab68bb8f7daafb78951107080904e">ENTER</a>] = setting;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_D:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8">D</a>] = setting;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_ESCAPE:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d">ESCAPE</a>] = setting;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_SPACE:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95">SPACE</a>] = setting;</div>
+<p>La funzione setta i valori booleani dell'array tasto inizializzato nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, a seconda se il tasto è stato premuto o rilasciato. </p>
+<p>Viene eseguito nella funzione <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, una volta per assegnare a setting true, se un tasto (tra quelli predefiniti) viene premuti,un'altra volta per assegnare a setting false, quando questo tasto viene rilasciato. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>variabile utilizzata contenente l'evento dei tasti </td></tr>
+    <tr><td class="paramname">tasto</td><td>array contenente lo stato dei tasti premuti o rilasciati </td></tr>
+    <tr><td class="paramname">setting</td><td>valore da attribuire al campo booleano dell'array ::tasto </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>void. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">switch</span>(event.keyboard.keycode)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_UP:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa">UP</a>] = setting;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_DOWN:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>] = setting;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_RIGHT:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caec8379af7490bb9eaaf579cf17876f38">RIGHT</a>] = setting;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_LEFT:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cadb45120aafd37a973140edee24708065">LEFT</a>] = setting;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_ENTER:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca951ab68bb8f7daafb78951107080904e">ENTER</a>] = setting;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_D:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8">D</a>] = setting;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keywordflow">case</span> ALLEGRO_KEY_ESCAPE:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d">ESCAPE</a>] = setting;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_SPACE:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95">SPACE</a>] = setting;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_P:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca82f05f38f6a17b117cdd2b83227912c6">P</a>] = setting;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">case</span> ALLEGRO_KEY_S:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            tasto[<a class="code" href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caf1ce01387d2348f8b858721a7db81670">S</a>] = setting;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959cadb45120aafd37a973140edee24708065"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cadb45120aafd37a973140edee24708065">LEFT</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca77a6b11f9898c052926f1d49765861e8">D</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caba595d8bca8bc5e67c37c0a9d89becfa">UP</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959caf1ce01387d2348f8b858721a7db81670"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caf1ce01387d2348f8b858721a7db81670">S</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959cac08dae7edcb5c5bb959fee5971fbad95">SPACE</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca9b0b4a95b99523966e0e34ffdadac9da">DOWN</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959ca951ab68bb8f7daafb78951107080904e"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca951ab68bb8f7daafb78951107080904e">ENTER</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959ca82f05f38f6a17b117cdd2b83227912c6"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca82f05f38f6a17b117cdd2b83227912c6">P</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959ca0a311695a4f6c56869245418bebeb33d">ESCAPE</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
+<div class="ttc" id="data__struct_8h_html_a9c87ca40e543ebbb6e33116215d4959caec8379af7490bb9eaaf579cf17876f38"><div class="ttname"><a href="data__struct_8h.html#a9c87ca40e543ebbb6e33116215d4959caec8379af7490bb9eaaf579cf17876f38">RIGHT</a></div><div class="ttdef"><b>Definition:</b> data_struct.h:34</div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="abe87201cb468bd525c0f6f4d1074eaad"></a>
+<a class="anchor" id="a66aaceaba8d215e5d7cdd231291c2a4d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -176,8 +207,8 @@ Funzioni</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>fileliv</em>, </td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>fileliv</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -193,42 +224,127 @@ Funzioni</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Carica la mappa da file in Memoria. </p>
-
+<p>Carica la mappa da un file contenuto nella cartella data/map/. </p>
+<p>A fileliv viene assegnata la prima parte della stringa del percorso dove risiede il file contenente la mappa, successivamente gli viene assegnato il valore del livello convertito in una stringa, scritto prima su una stringa provvisoria (buff), in fine a fileliv viene assegnata l'ultima parte del percorso. Dopo di che viene aperto il file di nome fileliv per leggere una matrice che sarà poi la mappa del gioco.</p>
+<p>La funzione viene eseguita dalla funzione <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, ogni volta che si attiva la variabile booleana caricamappa nello stato stato di gioco <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a348ee0b12aa2add36de34a33d06c2a52">CARICA</a>. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T </td></tr>
+    <tr><td class="paramname">fileliv</td><td>variabile che viene modificata per contenere il nome del file in base al livello </td></tr>
+    <tr><td class="paramname">livello</td><td>livello corrente in gioco. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>void. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">//trovo il nome del file per la mappa del determinato livello</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    strcpy(fileliv,<span class="stringliteral">&quot;data/map/map&quot;</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">char</span> buff[20];</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    snprintf(buff, <span class="keyword">sizeof</span>(buff), <span class="stringliteral">&quot;%d&quot;</span>, livello);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    strcat(fileliv,buff);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    strcat(fileliv,<span class="stringliteral">&quot;.txt&quot;</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    ifstream f(fileliv);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">if</span>(!f)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        cout&lt;&lt;<span class="stringliteral">&quot;file Error!&quot;</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span>(m.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a> != NULL)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="io_8cc.html#a5811193309b350af82365fe506add6cf">dealloca_mappa</a>(m);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    f&gt;&gt;m.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">r</a>&gt;&gt;m.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">c</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="io_8cc.html#a740ad2e5687b1e22256119003467b4c2">alloca_mappa</a>(m);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; m.<a class="code" href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">r</a>; i++){</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt;= m.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">c</a>; j++){</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">if</span>(j == m.<a class="code" href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">c</a>)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                m.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[i][j] = 0;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                f&gt;&gt;m.<a class="code" href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">mappa</a>[i][j];</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
+<div class="ttc" id="io_8cc_html_a5811193309b350af82365fe506add6cf"><div class="ttname"><a href="io_8cc.html#a5811193309b350af82365fe506add6cf">dealloca_mappa</a></div><div class="ttdeci">static void dealloca_mappa(MAPPA_t &amp;m)</div><div class="ttdoc">Funzione che dealloca la matrice mappa in memoria. </div><div class="ttdef"><b>Definition:</b> io.cc:79</div></div>
+<div class="ttc" id="structMAPPA__t_html_ab2e9ea9798d2de75538abca11cb7372d"><div class="ttname"><a href="structMAPPA__t.html#ab2e9ea9798d2de75538abca11cb7372d">MAPPA_t::mappa</a></div><div class="ttdeci">char ** mappa</div><div class="ttdoc">Matrice che definisce la mappa. </div><div class="ttdef"><b>Definition:</b> data_struct.h:46</div></div>
+<div class="ttc" id="structMAPPA__t_html_a2644bce73327c50b0538aac5a9039c54"><div class="ttname"><a href="structMAPPA__t.html#a2644bce73327c50b0538aac5a9039c54">MAPPA_t::c</a></div><div class="ttdeci">int c</div><div class="ttdoc">Numero di Righe. </div><div class="ttdef"><b>Definition:</b> data_struct.h:45</div></div>
+<div class="ttc" id="io_8cc_html_a740ad2e5687b1e22256119003467b4c2"><div class="ttname"><a href="io_8cc.html#a740ad2e5687b1e22256119003467b4c2">alloca_mappa</a></div><div class="ttdeci">static void alloca_mappa(MAPPA_t &amp;m)</div><div class="ttdoc">Funzione che alloca la memoria necessaria al caricamento della mappa da file. </div><div class="ttdef"><b>Definition:</b> io.cc:67</div></div>
+<div class="ttc" id="structMAPPA__t_html_a66ed78e0a589ef13ecb5e82ec4097934"><div class="ttname"><a href="structMAPPA__t.html#a66ed78e0a589ef13ecb5e82ec4097934">MAPPA_t::r</a></div><div class="ttdeci">int r</div><div class="ttdoc">Numero di Colonne. </div><div class="ttdef"><b>Definition:</b> data_struct.h:44</div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="a01e465d440e9f03295c934e3ccdb1693"></a>
+<a class="anchor" id="a689b2b0934cdf05a929ee230e0d3e677"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void scrivi_mappa_su_file </td>
+          <td class="memname">int preleva_record </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structMAPPA__t.html">MAPPA_t</a> &amp;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">const char&#160;</td>
-          <td class="paramname">[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Prende in ingresso da un file di salvataggio (sav.txt) il record fatto in precedenza. </p>
+<p>Viene eseguita nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, negli stati di gioco <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a843dff91ff0b0e5b98a110a512b2f531">WIN</a> e <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a871723195985a4ae22d7e10d99bf8a00">GAME_OVER</a> nel caso in cui il giocatore ha fatto un nuovo punteggio record, oppure nello stato <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a668caa755f0257c865341db47993096f">HIGH_SCORE</a> quando un giocatore vuole vedere qual'e' stato il miglior punteggio. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">.</td><td>nessun parametro in ingresso. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>ritorna un valore intero che rappresenta il record. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">int</span> punt_sav;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    ifstream f(<a class="code" href="data__struct_8h.html#aa871f9ecb39da91f2333c782a9ed19f0">FILE_SAV</a>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">if</span>(!f)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        cout&lt;&lt;<span class="stringliteral">&quot;file Error!&quot;</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    f&gt;&gt;punt_sav;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> punt_sav;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="ttc" id="data__struct_8h_html_aa871f9ecb39da91f2333c782a9ed19f0"><div class="ttname"><a href="data__struct_8h.html#aa871f9ecb39da91f2333c782a9ed19f0">FILE_SAV</a></div><div class="ttdeci">const char FILE_SAV[]</div><div class="ttdoc">Nome del file di salvataggio. </div><div class="ttdef"><b>Definition:</b> data_struct.h:23</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a9bf9fb1ff574b0a3cccaa15eedebc87e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void salva_record </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_record</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scrive sul file di salvataggio (sav.txt) il record. </p>
+<p>Viene eseguita nel <a class="el" href="game_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>, negli stati di gioco <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a843dff91ff0b0e5b98a110a512b2f531">WIN</a> e <a class="el" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89a871723195985a4ae22d7e10d99bf8a00">GAME_OVER</a> nel caso in cui il giocatore ha fatto un nuovo punteggio record. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_record</td><td>variabile contenente il valore del record </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>void. </dd></dl>
+<div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    ofstream f(<a class="code" href="data__struct_8h.html#aa871f9ecb39da91f2333c782a9ed19f0">FILE_SAV</a>);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    f&lt;&lt;new_record;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="ttc" id="data__struct_8h_html_aa871f9ecb39da91f2333c782a9ed19f0"><div class="ttname"><a href="data__struct_8h.html#aa871f9ecb39da91f2333c782a9ed19f0">FILE_SAV</a></div><div class="ttdeci">const char FILE_SAV[]</div><div class="ttdoc">Nome del file di salvataggio. </div><div class="ttdef"><b>Definition:</b> data_struct.h:23</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

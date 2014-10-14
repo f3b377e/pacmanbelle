@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man:  File sorgente init.h</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man:  File sorgente init.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -91,26 +92,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef INIT_H_</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define INIT_H_</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a95299d67e99eee0eefd279c7d2f09646" title="Caricamento dei file audio. ">init_audio</a>(<a class="code" href="structAUDIO__t.html" title="Struttura contenente i dati dell&#39;audio. ">AUDIO_t</a>&amp;);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#aff3fe1979016a30ee36b803c349e62da" title="Caricamento delle immagini. ">init_bitmap</a>(<a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a>&amp;);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#afbe96c13789d3f6f32b5df1110e8b66b" title="Caricamento dei font. ">init_font</a>(<a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a>&amp;);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a7a34723cc311f540decf32490d3e6dcf" title="Inizializzazione della mappa. ">init_mappa</a>(<a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#acfe91385c77007d8f990e6b397878a63" title="Inizializzazione di Pacman. ">init_pacman</a>(<a class="code" href="structPLAYER__t.html" title="Struttura contenente i dati del giocatore. ">PLAYER_t</a>&amp;);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a323cfe8d20211bb57659de9a35f2da9f" title="Inizializzazione di Blinky. ">init_blinky</a>(<a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a1583202f61f6fd63545d2d3eedccc4f5" title="Inizializzazione di Pinky. ">init_pinky</a>(<a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a614eb32a12d95a59b646d5f1587846b3" title="Inizializzazione di Inky. ">init_inky</a>(<a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a1c3436d1b9bdbafe5cb1f586d556dbb9" title="Inizializzazione di Clyde. ">init_clyde</a>(<a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a> &amp;);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#aa16ea7d536a9001ee02399117fc677c6" title="Funzione che dealloca le immagini caricate. ">dest_bitmap</a>(<a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a4b5cc1f06aed3f0a9e400e47228c4791" title="Funzione che dealloca i font caricati. ">dest_font</a>(<a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="init_8cc.html#a9ae066949127e2841ab2e0f9d76f0d9a" title="Funzione che dealloca l&#39;audio. ">dest_audio</a>(<a class="code" href="structAUDIO__t.html" title="Struttura contenente i dati dell&#39;audio. ">AUDIO_t</a> &amp;);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif // INIT_H_</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a95299d67e99eee0eefd279c7d2f09646">init_audio</a>(<a class="code" href="structAUDIO__t.html">AUDIO_t</a>&amp; a);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#aff3fe1979016a30ee36b803c349e62da">init_bitmap</a>(<a class="code" href="structBITMAP__t.html">BITMAP_t</a>&amp; b);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#afbe96c13789d3f6f32b5df1110e8b66b">init_font</a>(<a class="code" href="structFONT__t.html">FONT_t</a>&amp; f);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a7a34723cc311f540decf32490d3e6dcf">init_mappa</a>(<a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;m);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#acfe91385c77007d8f990e6b397878a63">init_pacman</a>(<a class="code" href="structPLAYER__t.html">PLAYER_t</a>&amp; pacman);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a0cbb3c20c6f8c57853fe8489b819f0b0">init_blinky</a>(<a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;b, <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#af3cc6a733c5a5ec33060db1b8fd219e8">init_pinky</a>(<a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;p, <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a04ae98b451db1b99599c16a041f68204">init_inky</a>(<a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;i, <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a1594c965e73ecb7109ce93b3e7c21976">init_clyde</a>(<a class="code" href="structFANTASMA__t.html">FANTASMA_t</a> &amp;c, <span class="keywordtype">int</span> livello);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#aa16ea7d536a9001ee02399117fc677c6">dest_bitmap</a>(<a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a4b5cc1f06aed3f0a9e400e47228c4791">dest_font</a>(<a class="code" href="structFONT__t.html">FONT_t</a> &amp;f);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> <a class="code" href="init_8h.html#a9ae066949127e2841ab2e0f9d76f0d9a">dest_audio</a>(<a class="code" href="structAUDIO__t.html">AUDIO_t</a> &amp;a);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif // INIT_H_</span></div>
+<div class="ttc" id="init_8h_html_a1594c965e73ecb7109ce93b3e7c21976"><div class="ttname"><a href="init_8h.html#a1594c965e73ecb7109ce93b3e7c21976">init_clyde</a></div><div class="ttdeci">void init_clyde(FANTASMA_t &amp;c, int livello)</div><div class="ttdoc">Inizializzazione di Clyde. </div><div class="ttdef"><b>Definition:</b> init.cc:206</div></div>
+<div class="ttc" id="structMAPPA__t_html"><div class="ttname"><a href="structMAPPA__t.html">MAPPA_t</a></div><div class="ttdoc">Struttura della mappa di gioco che verrà caricata da file nella funzione load_map. </div><div class="ttdef"><b>Definition:</b> data_struct.h:43</div></div>
+<div class="ttc" id="init_8h_html_acfe91385c77007d8f990e6b397878a63"><div class="ttname"><a href="init_8h.html#acfe91385c77007d8f990e6b397878a63">init_pacman</a></div><div class="ttdeci">void init_pacman(PLAYER_t &amp;pacman)</div><div class="ttdoc">Inizializzazione di Pacman. </div><div class="ttdef"><b>Definition:</b> init.cc:130</div></div>
+<div class="ttc" id="init_8h_html_a4b5cc1f06aed3f0a9e400e47228c4791"><div class="ttname"><a href="init_8h.html#a4b5cc1f06aed3f0a9e400e47228c4791">dest_font</a></div><div class="ttdeci">void dest_font(FONT_t &amp;f)</div><div class="ttdoc">Funzione che dealloca i font caricati. </div><div class="ttdef"><b>Definition:</b> init.cc:225</div></div>
+<div class="ttc" id="init_8h_html_a0cbb3c20c6f8c57853fe8489b819f0b0"><div class="ttname"><a href="init_8h.html#a0cbb3c20c6f8c57853fe8489b819f0b0">init_blinky</a></div><div class="ttdeci">void init_blinky(FANTASMA_t &amp;b, int livello)</div><div class="ttdoc">Inizializzazione di Blinky. </div><div class="ttdef"><b>Definition:</b> init.cc:149</div></div>
+<div class="ttc" id="init_8h_html_a9ae066949127e2841ab2e0f9d76f0d9a"><div class="ttname"><a href="init_8h.html#a9ae066949127e2841ab2e0f9d76f0d9a">dest_audio</a></div><div class="ttdeci">void dest_audio(AUDIO_t &amp;a)</div><div class="ttdoc">Funzione che dealloca l&#39;audio. </div><div class="ttdef"><b>Definition:</b> init.cc:244</div></div>
+<div class="ttc" id="init_8h_html_a95299d67e99eee0eefd279c7d2f09646"><div class="ttname"><a href="init_8h.html#a95299d67e99eee0eefd279c7d2f09646">init_audio</a></div><div class="ttdeci">void init_audio(AUDIO_t &amp;a)</div><div class="ttdoc">Caricamento dei file audio. </div><div class="ttdef"><b>Definition:</b> init.cc:28</div></div>
+<div class="ttc" id="init_8h_html_afbe96c13789d3f6f32b5df1110e8b66b"><div class="ttname"><a href="init_8h.html#afbe96c13789d3f6f32b5df1110e8b66b">init_font</a></div><div class="ttdeci">void init_font(FONT_t &amp;f)</div><div class="ttdoc">Caricamento dei font. </div><div class="ttdef"><b>Definition:</b> init.cc:117</div></div>
+<div class="ttc" id="init_8h_html_a04ae98b451db1b99599c16a041f68204"><div class="ttname"><a href="init_8h.html#a04ae98b451db1b99599c16a041f68204">init_inky</a></div><div class="ttdeci">void init_inky(FANTASMA_t &amp;i, int livello)</div><div class="ttdoc">Inizializzazione di Inky. </div><div class="ttdef"><b>Definition:</b> init.cc:187</div></div>
+<div class="ttc" id="structPLAYER__t_html"><div class="ttname"><a href="structPLAYER__t.html">PLAYER_t</a></div><div class="ttdoc">Struttura contenente i dati del giocatore. </div><div class="ttdef"><b>Definition:</b> data_struct.h:59</div></div>
+<div class="ttc" id="structAUDIO__t_html"><div class="ttname"><a href="structAUDIO__t.html">AUDIO_t</a></div><div class="ttdoc">Struttura contenente i dati dell&#39;audio. </div><div class="ttdef"><b>Definition:</b> data_struct.h:91</div></div>
+<div class="ttc" id="init_8h_html_af3cc6a733c5a5ec33060db1b8fd219e8"><div class="ttname"><a href="init_8h.html#af3cc6a733c5a5ec33060db1b8fd219e8">init_pinky</a></div><div class="ttdeci">void init_pinky(FANTASMA_t &amp;p, int livello)</div><div class="ttdoc">Inizializzazione di Pinky. </div><div class="ttdef"><b>Definition:</b> init.cc:168</div></div>
+<div class="ttc" id="structBITMAP__t_html"><div class="ttname"><a href="structBITMAP__t.html">BITMAP_t</a></div><div class="ttdoc">Struttura contenente le bitmap utilizzate. </div><div class="ttdef"><b>Definition:</b> data_struct.h:106</div></div>
+<div class="ttc" id="init_8h_html_aa16ea7d536a9001ee02399117fc677c6"><div class="ttname"><a href="init_8h.html#aa16ea7d536a9001ee02399117fc677c6">dest_bitmap</a></div><div class="ttdeci">void dest_bitmap(BITMAP_t &amp;b)</div><div class="ttdoc">Funzione che dealloca le immagini caricate. </div><div class="ttdef"><b>Definition:</b> init.cc:234</div></div>
+<div class="ttc" id="structFANTASMA__t_html"><div class="ttname"><a href="structFANTASMA__t.html">FANTASMA_t</a></div><div class="ttdoc">Struttura contenente i dati del singolo fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:76</div></div>
+<div class="ttc" id="init_8h_html_aff3fe1979016a30ee36b803c349e62da"><div class="ttname"><a href="init_8h.html#aff3fe1979016a30ee36b803c349e62da">init_bitmap</a></div><div class="ttdeci">void init_bitmap(BITMAP_t &amp;b)</div><div class="ttdoc">Caricamento delle immagini. </div><div class="ttdef"><b>Definition:</b> init.cc:71</div></div>
+<div class="ttc" id="init_8h_html_a7a34723cc311f540decf32490d3e6dcf"><div class="ttname"><a href="init_8h.html#a7a34723cc311f540decf32490d3e6dcf">init_mappa</a></div><div class="ttdeci">void init_mappa(MAPPA_t &amp;m)</div><div class="ttdoc">Inizializzazione della mappa. </div><div class="ttdef"><b>Definition:</b> init.cc:110</div></div>
+<div class="ttc" id="structFONT__t_html"><div class="ttname"><a href="structFONT__t.html">FONT_t</a></div><div class="ttdoc">Struttura contenente i font del gioco. </div><div class="ttdef"><b>Definition:</b> data_struct.h:119</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>

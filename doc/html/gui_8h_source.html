@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.4"/>
-<title>Pac-man:  File sorgente gui.h</title>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>Pac-Man:  File sorgente gui.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="pacman_header.jpg"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Pac-man
+   <div id="projectname">Pac-Man
    </div>
   </td>
  </tr>
@@ -30,7 +31,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Generato da Doxygen 1.8.4 -->
+<!-- Generato da Doxygen 1.8.6 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 </script>
@@ -91,34 +92,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef STAMPA_H_</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define STAMPA_H_</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a06b138e2a837ddb0d10dc38deb83485e" title="La funzione gestisce l&#39;animazione del menu in base al tasto premuto Parametri: menu, indica quale campo si sta selezionando Parametri: tasto, array contenente lo stato dei tasti premuti o rilasciati Parametri: stato_gioco, stato del gioco. ">anima_menu</a>(<span class="keywordtype">int</span> &amp;, <span class="keywordtype">bool</span> [],<a class="code" href="data__struct_8h.html#a2b4fca65b06655936250de8523872c89" title="Stato del gioco, serve per il loop della funzione main per eseguire diverse operazioni a seconda dell...">STATO_GIOCO</a> &amp;);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a92afb82cda0774250bff5c33a94203f9" title="Stampa il menu inziale. ">draw_screen_menu</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> menu, <span class="keyword">const</span> <a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#ac909a1c5f452b4d5957792d9ba875f2a" title="Stampa la pausa. ">draw_pause</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a60c70a7e98039e03f0dd26c4010cc196" title="Stampa la mappa. ">draw_path</a>(<span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a67480dc636230e283edfe7718ba699b9" title="Stampa pacman. ">draw_pacman</a>(<a class="code" href="structPLAYER__t.html" title="Struttura contenente i dati del giocatore. ">PLAYER_t</a>&amp;);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a9cb68876b52fda2415c2db9800c0167d" title="Stampa il Countdown iniziale. ">draw_countdown</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a0ea023b848a109a7634efb16b1612ee2" title="Stampa il fantasma quando è in fuga. ">draw_fant_fuga</a>(<span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;b, <a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a>&amp; pg);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#aa9b800b4d56bfb2b416f4a2df5cb2c6d" title="Stampa il fantasma. ">draw_fantasma</a>(<a class="code" href="structFANTASMA__t.html" title="Struttura contenente i dati del singolo fantasma. ">FANTASMA_t</a>&amp;);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a883a9d60d025f639536821163bcea1d5" title="Stampa gAME oVER. ">draw_gameover</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8cc.html#a48cc4745453c5986bf7a0e66c3d69bd7" title="Stampa gAME wIN. ">draw_win</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html" title="Struttura contenente i font del gioco. ">FONT_t</a> &amp;, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html" title="Struttura contenente le bitmap utilizzate. ">BITMAP_t</a> &amp;);;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STAMPA_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a92afb82cda0774250bff5c33a94203f9">draw_screen_menu</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> menu, <span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#ac909a1c5f452b4d5957792d9ba875f2a">draw_pause</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a60c70a7e98039e03f0dd26c4010cc196">draw_path</a>(<span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <span class="keyword">const</span> <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;m);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a67480dc636230e283edfe7718ba699b9">draw_pacman</a>(<a class="code" href="structPLAYER__t.html">PLAYER_t</a>&amp;pg);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a9cb68876b52fda2415c2db9800c0167d">draw_countdown</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <span class="keyword">const</span> <a class="code" href="structMAPPA__t.html">MAPPA_t</a> &amp;m);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a5cccf6648641872f9fadf2cf74897b7d">draw_fant_fuga</a>(<span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a>&amp; f, <span class="keywordtype">int</span> fine_fuga);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#aa41796a01045c20787c9f9e3c4a6055e">draw_fant_mangiato</a>(<span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <a class="code" href="structFANTASMA__t.html">FANTASMA_t</a>&amp; f);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a8a8cf3546f0b7cfb17d295ecaab62ebe">draw_fantasma</a>(<a class="code" href="structFANTASMA__t.html">FANTASMA_t</a>&amp; f);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#afd1f29080e2bae773cbecdf6d3d323c9">draw_frutta</a>(ALLEGRO_TIMER *t, <a class="code" href="structBITMAP__t.html">BITMAP_t</a> b, <span class="keywordtype">int</span> liv, <a class="code" href="structPLAYER__t.html">PLAYER_t</a> &amp;pg, <a class="code" href="structAUDIO__t.html">AUDIO_t</a> &amp;a);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a6d8252d963a670367657f89996e07d9d">draw_gameover</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <span class="keywordtype">bool</span> nuovo_record, <span class="keywordtype">int</span> punteggio);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a0534db11adec5bb7032ca5c8246cc0dc">draw_win</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b, <span class="keywordtype">bool</span> nuovo_record);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#af6748c7e38a8d8198b3ce40025001cf9">draw_controls</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keyword">const</span> <a class="code" href="structBITMAP__t.html">BITMAP_t</a> &amp;b);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gui_8h.html#a8ec2dd4fec87f07220a47e69c19501b4">draw_high_score</a>(<span class="keyword">const</span> <a class="code" href="structFONT__t.html">FONT_t</a> &amp;f, <span class="keywordtype">int</span> record);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STAMPA_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="gui_8h_html_aa41796a01045c20787c9f9e3c4a6055e"><div class="ttname"><a href="gui_8h.html#aa41796a01045c20787c9f9e3c4a6055e">draw_fant_mangiato</a></div><div class="ttdeci">void draw_fant_mangiato(const BITMAP_t &amp;b, FANTASMA_t &amp;f)</div><div class="ttdoc">Stampa il fantasma quando e&#39; stato mangiato. </div><div class="ttdef"><b>Definition:</b> gui.cc:385</div></div>
+<div class="ttc" id="gui_8h_html_afd1f29080e2bae773cbecdf6d3d323c9"><div class="ttname"><a href="gui_8h.html#afd1f29080e2bae773cbecdf6d3d323c9">draw_frutta</a></div><div class="ttdeci">void draw_frutta(ALLEGRO_TIMER *t, BITMAP_t b, int liv, PLAYER_t &amp;pg, AUDIO_t &amp;a)</div><div class="ttdoc">Stampa la frutta. </div><div class="ttdef"><b>Definition:</b> gui.cc:409</div></div>
+<div class="ttc" id="gui_8h_html_a0534db11adec5bb7032ca5c8246cc0dc"><div class="ttname"><a href="gui_8h.html#a0534db11adec5bb7032ca5c8246cc0dc">draw_win</a></div><div class="ttdeci">void draw_win(const FONT_t &amp;f, const BITMAP_t &amp;b, bool nuovo_record)</div><div class="ttdoc">Stampa gAME wIN. </div><div class="ttdef"><b>Definition:</b> gui.cc:469</div></div>
+<div class="ttc" id="gui_8h_html_a60c70a7e98039e03f0dd26c4010cc196"><div class="ttname"><a href="gui_8h.html#a60c70a7e98039e03f0dd26c4010cc196">draw_path</a></div><div class="ttdeci">void draw_path(const BITMAP_t &amp;b, const MAPPA_t &amp;m)</div><div class="ttdoc">Stampa la mappa la stampa della mappa prevede anche un effetto neon grazie a due variabili statiche c...</div><div class="ttdef"><b>Definition:</b> gui.cc:109</div></div>
+<div class="ttc" id="gui_8h_html_a6d8252d963a670367657f89996e07d9d"><div class="ttname"><a href="gui_8h.html#a6d8252d963a670367657f89996e07d9d">draw_gameover</a></div><div class="ttdeci">void draw_gameover(const FONT_t &amp;f, const BITMAP_t &amp;b, bool nuovo_record, int punteggio)</div><div class="ttdoc">Stampa gAME oVER. </div><div class="ttdef"><b>Definition:</b> gui.cc:458</div></div>
+<div class="ttc" id="structMAPPA__t_html"><div class="ttname"><a href="structMAPPA__t.html">MAPPA_t</a></div><div class="ttdoc">Struttura della mappa di gioco che verrà caricata da file nella funzione load_map. </div><div class="ttdef"><b>Definition:</b> data_struct.h:43</div></div>
+<div class="ttc" id="gui_8h_html_a8a8cf3546f0b7cfb17d295ecaab62ebe"><div class="ttname"><a href="gui_8h.html#a8a8cf3546f0b7cfb17d295ecaab62ebe">draw_fantasma</a></div><div class="ttdeci">void draw_fantasma(FANTASMA_t &amp;f)</div><div class="ttdoc">Stampa il fantasma. </div><div class="ttdef"><b>Definition:</b> gui.cc:396</div></div>
+<div class="ttc" id="gui_8h_html_a67480dc636230e283edfe7718ba699b9"><div class="ttname"><a href="gui_8h.html#a67480dc636230e283edfe7718ba699b9">draw_pacman</a></div><div class="ttdeci">void draw_pacman(PLAYER_t &amp;pg)</div><div class="ttdoc">Stampa pacman. </div><div class="ttdef"><b>Definition:</b> gui.cc:353</div></div>
+<div class="ttc" id="gui_8h_html_a9cb68876b52fda2415c2db9800c0167d"><div class="ttname"><a href="gui_8h.html#a9cb68876b52fda2415c2db9800c0167d">draw_countdown</a></div><div class="ttdeci">void draw_countdown(const FONT_t &amp;f, const BITMAP_t &amp;b, const MAPPA_t &amp;m)</div><div class="ttdoc">Stampa il Countdown iniziale partendo da 3 fino a 1. </div><div class="ttdef"><b>Definition:</b> gui.cc:87</div></div>
+<div class="ttc" id="gui_8h_html_ac909a1c5f452b4d5957792d9ba875f2a"><div class="ttname"><a href="gui_8h.html#ac909a1c5f452b4d5957792d9ba875f2a">draw_pause</a></div><div class="ttdeci">void draw_pause(const FONT_t &amp;f)</div><div class="ttdoc">Stampa la pausa. </div><div class="ttdef"><b>Definition:</b> gui.cc:81</div></div>
+<div class="ttc" id="structPLAYER__t_html"><div class="ttname"><a href="structPLAYER__t.html">PLAYER_t</a></div><div class="ttdoc">Struttura contenente i dati del giocatore. </div><div class="ttdef"><b>Definition:</b> data_struct.h:59</div></div>
+<div class="ttc" id="structAUDIO__t_html"><div class="ttname"><a href="structAUDIO__t.html">AUDIO_t</a></div><div class="ttdoc">Struttura contenente i dati dell&#39;audio. </div><div class="ttdef"><b>Definition:</b> data_struct.h:91</div></div>
+<div class="ttc" id="structBITMAP__t_html"><div class="ttname"><a href="structBITMAP__t.html">BITMAP_t</a></div><div class="ttdoc">Struttura contenente le bitmap utilizzate. </div><div class="ttdef"><b>Definition:</b> data_struct.h:106</div></div>
+<div class="ttc" id="gui_8h_html_af6748c7e38a8d8198b3ce40025001cf9"><div class="ttname"><a href="gui_8h.html#af6748c7e38a8d8198b3ce40025001cf9">draw_controls</a></div><div class="ttdeci">void draw_controls(const FONT_t &amp;f, const BITMAP_t &amp;b)</div><div class="ttdoc">Stampa i controlli del gioco. </div><div class="ttdef"><b>Definition:</b> gui.cc:479</div></div>
+<div class="ttc" id="gui_8h_html_a8ec2dd4fec87f07220a47e69c19501b4"><div class="ttname"><a href="gui_8h.html#a8ec2dd4fec87f07220a47e69c19501b4">draw_high_score</a></div><div class="ttdeci">void draw_high_score(const FONT_t &amp;f, int record)</div><div class="ttdoc">Stampa il record. </div><div class="ttdef"><b>Definition:</b> gui.cc:509</div></div>
+<div class="ttc" id="structFANTASMA__t_html"><div class="ttname"><a href="structFANTASMA__t.html">FANTASMA_t</a></div><div class="ttdoc">Struttura contenente i dati del singolo fantasma. </div><div class="ttdef"><b>Definition:</b> data_struct.h:76</div></div>
+<div class="ttc" id="structFONT__t_html"><div class="ttname"><a href="structFONT__t.html">FONT_t</a></div><div class="ttdoc">Struttura contenente i font del gioco. </div><div class="ttdef"><b>Definition:</b> data_struct.h:119</div></div>
+<div class="ttc" id="gui_8h_html_a92afb82cda0774250bff5c33a94203f9"><div class="ttname"><a href="gui_8h.html#a92afb82cda0774250bff5c33a94203f9">draw_screen_menu</a></div><div class="ttdeci">void draw_screen_menu(const int menu, const FONT_t &amp;f, const BITMAP_t &amp;b)</div><div class="ttdoc">Stampa il menu inziale utilizza le immagini e i font caricate in memoria, e si occupa dell&#39;effetto di...</div><div class="ttdef"><b>Definition:</b> gui.cc:31</div></div>
+<div class="ttc" id="gui_8h_html_a5cccf6648641872f9fadf2cf74897b7d"><div class="ttname"><a href="gui_8h.html#a5cccf6648641872f9fadf2cf74897b7d">draw_fant_fuga</a></div><div class="ttdeci">void draw_fant_fuga(const BITMAP_t &amp;b, FANTASMA_t &amp;f, int fine_fuga)</div><div class="ttdoc">Stampa il fantasma quando e&#39; in fuga. </div><div class="ttdef"><b>Definition:</b> gui.cc:372</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generato Gio 2 Ott 2014 22:28:42 per Pac-man da &#160;<a href="http://www.doxygen.org/index.html">
+Generato Mar 14 Ott 2014 18:28:45 per Pac-Man da &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.4
+</a> 1.8.6
 </small></address>
 </body>
 </html>
