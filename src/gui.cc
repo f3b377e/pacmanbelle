@@ -408,8 +408,25 @@ void draw_fantasma(FANTASMA_t& f)
 
 void draw_frutta(ALLEGRO_TIMER *t, BITMAP_t b, int liv, PLAYER_t &pg, AUDIO_t &a){
     static bool mangiata = false;
+
+
+
     if(al_get_timer_count(t) >= 30 && al_get_timer_count(t) <= 42){
-        if(pg.x == (13 * BLOCKSIZE + OFFSETX) && pg.y == (17 * BLOCKSIZE + OFFSETY) && !mangiata){
+
+        float dist = 3;
+        float px = pg.x + dist;
+        float py = pg.y + dist;
+        float ph = pg.y + BLOCKSIZE -dist;
+        float pw = pg.x + BLOCKSIZE -dist;
+        float frx = (13 * BLOCKSIZE + OFFSETX) + dist;
+        float fry = (17 * BLOCKSIZE + OFFSETY) + dist;
+        float frh = al_get_bitmap_height(b.frutta) -dist;
+        float frw = al_get_bitmap_width(b.frutta)/8 -dist;
+
+
+        if (((frx>=px && frx<=pw) || (frw>=px && frw<=pw))
+            && ( (fry>=py && fry<=ph) || (frh>=py && frh<=ph) )
+            && !mangiata){
             al_play_sample(a.pacman_eatfruit,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
             if((pg.punteggio <= 10000 && pg.punteggio + 100*liv > 10000) ||
                (pg.punteggio <= 20000 && pg.punteggio + 100*liv  > 20000) ||
@@ -438,13 +455,14 @@ void draw_frutta(ALLEGRO_TIMER *t, BITMAP_t b, int liv, PLAYER_t &pg, AUDIO_t &a
         mangiata = false;
 }
 
-void draw_gameover(const FONT_t &f, const BITMAP_t &b, bool nuovo_record)
+void draw_gameover(const FONT_t &f, const BITMAP_t &b, bool nuovo_record, int punteggio)
 {
     al_clear_to_color(al_map_rgb(0,0,0));
     al_draw_text(f.h1, al_map_rgb(255,15,15), SCREENWIDTH / 2, SCREENHEIGHT *50/100, ALLEGRO_ALIGN_CENTER, "**** g a m e  o v e r ****");
     al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)+200, ALLEGRO_ALIGN_CENTER, "Press Enter");
     if(nuovo_record)
         al_draw_text(f.h5, al_map_rgb(255,255,255), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)-200, ALLEGRO_ALIGN_CENTER, "Nuovo Record");
+    al_draw_textf(f.h5, al_map_rgb(255,15,15), SCREENWIDTH / 2, (SCREENHEIGHT *50/100)+100, ALLEGRO_ALIGN_CENTER, "Punteggio: %d", punteggio);
     al_flip_display();
 }
 

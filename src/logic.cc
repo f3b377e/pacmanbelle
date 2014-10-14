@@ -64,7 +64,20 @@ void anima_menu(int &menu, bool tasto[],STATO_GIOCO &stato_gioco, PLAYER_t &pg, 
     }
 }
 
-/** Funzione di Collisione oggetti ritorna vero se pacman collide con l'oggetto */
+/** Funzione di Collisione oggetti ritorna vero se pacman collide con l'oggetto.
+ * si occupa di tutte le casistiche possibili, controlla quindi se collide dall'alto
+ * dal basso o dai lati e ritorna true appena si verifica una di queste condizioni.
+ * @param direzione: direzione attuale dell'oggetto che deve essere controllato.
+ * @param sx: valore della x del primo oggetto
+ * @param sy: valore della y del primo oggetto
+ * @param sw: larghezza dell'immagine dell'oggetto
+ * @param sh: altezza dell'immagine dell'oggetto
+ * @param dx: valore della x dell'oggetto di destinazione con il quale si vuole fare il controllo di collisione.
+ * @param dy: valore della y dell'oggetto di destinazione
+ * @param dw: larghezza dell'immagine dell'oggetto di destinazione
+ * @param dh: altezza dell'immagine dell'oggetto di destinazione
+ * @return vero se i due oggetti collidono, falso altrimenti
+ */
 static bool collision (const DIREZ &direzione, const float sx, const float sy,
                 const float sw, const float sh, const float dx,
                 const float dy, const float dw, const float dh)
@@ -92,6 +105,14 @@ static bool collision (const DIREZ &direzione, const float sx, const float sy,
     return false;
 }
 
+/** Si occupa di verificare le caselle attorno alla posizione dell'oggetto in base alla direzione scelta
+ * garantisce inoltre che non ci siano segmentation fault.
+ * @param m: variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T
+ * @param direzione: direzione attuale dell'oggetto che deve essere controllato.
+ * @param posx: valore x sulla matrice dell'oggetto preso in considerazione
+ * @param posy: valore y sulla matrice dell'oggetto preso in considerazione
+ * @return true se, data la direzione, la cella della matrice dopo l'attuale posizione non è un muro ed è percorribile.
+ */
 static bool controllo_percorso(const MAPPA_t &m, const DIREZ &direzione, int posx, int posy)
 {
     switch (direzione){
@@ -344,6 +365,7 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
             al_play_sample(audio.pallet_eaten2,1.0,0.0, 1, ALLEGRO_PLAYMODE_ONCE , 0);
             p_eaten = false;
         }
+
     }
 
     if(b.stato != FUGA && p.stato != FUGA && i.stato != FUGA && c.stato != FUGA)
@@ -399,7 +421,15 @@ void pac_mangia(MAPPA_t &m, PLAYER_t &pg, AUDIO_t &audio, FANTASMA_t &b, FANTASM
     }
 
 }
-
+/** Funzione che inserisce in testa alla lista
+ * attraverso la gestione dei puntatori degli elementi in lista e la creazione di un nuovo elemento di tipo ::ELEM_T
+ * si inserisce in lista la casella della matrice che dovrà poi essere estratta in seguito dalla ::bfs attraverso la funzione ::estrai
+ * @param testa: elemento iniziale della lista
+ * @param coda: elemento finale della lista
+ * @param x: x della matrice da inserire in lista
+ * @param y: y della matrice da inserire in lista
+ * @return void
+ */
 static void inserisci(lista &testa, lista &coda, int x, int y){
     ELEM_t *temp = new ELEM_t;
     temp->x = x;
@@ -414,7 +444,11 @@ static void inserisci(lista &testa, lista &coda, int x, int y){
     testa = temp;
 }
 
-/** estrae in coda alla lista, la lista serve per la bfs */
+/** Estrae in coda alla lista.
+ * @param testa: elemento iniziale della lista
+ * @param coda: elemento finale della lista
+ * @return oggetto di tipo ::ELEM_T con due informazioni principali: la x e la y che indicano la casella della matrice
+ */
 static ELEM_t estrai(lista &testa, lista &coda){
 
     ELEM_t temp;
@@ -436,6 +470,27 @@ static ELEM_t estrai(lista &testa, lista &coda){
     return temp;
 }
 
+/** Dati un punto di partenza e uno di arrivo sulla matrice, la bfs calcola la strada più breve possibile per arrivare al punto di arrivo.
+ *
+ * Utilizza una lista e una matrice di supporto.
+ *
+ * Tutti gli elementi della matrice di supporto sono inizialmente inizializzati a infinito tranne quelli
+ * che contengo percorsi inaccessibili come pezzi di muro.
+ * Parte dalla posizione di pacman e inserisce in lista tutti gli elementi che hanno valore infinito (-1),
+ * poi estrae di volta in volta gli elementi dalla lista ed assegna, all'elemento della matrice di supporto, il valore dell'elemento +1.
+ *
+ * Si ottiene così una matrice finale contenente in ogni elemento della matrice la distanza dell'elemento stesso da pacman.
+ * Per ottenere la direzione per la strada più breve si deve scegliere l'elemento con valore minore tra quelli adiacenti.
+ *
+ * Richiama le funzioni ::inserisci ed ::estreai per la gestione della lista.
+ * @param m: variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T
+ * @param f: variabile contenente le informazioni del fantasma
+ * @param fx: posizione x del fantasma di partenza nella matrice
+ * @param fy: posizione y del fantasma di partenza nella matrice
+ * @param pgx: posizione x di pacman nella matrice
+ * @param pgx: posizione y di pacman nella matrice
+ * @return la direzione che deve prendere il fantasma per arrivare a pacman con la strada più corta possibile.
+ */
 static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx, int pgy)
 {
     DIREZ dir;
@@ -550,7 +605,17 @@ static DIREZ bfs(const MAPPA_t &m, const FANTASMA_t &f, int fx, int fy, int pgx,
     return dir;
 }
 
-//Questa funzione fa in modo che la bfs venga eseguita in prossimità di un incrocio
+/** Controlla se è neccessario fare o meno la bfs.
+ * La funzione controlla la direzione del fantasma preso in considerazione e guarda se ha altre strade
+ * percorribili oltre a quella predefinita, gurdando se le caselle attorno al fantasma sono percorribili o meno
+ *
+ * In definitiva ogni qual volta che il fantasma si trova in un'incrocio la funzione ritorna true
+ *
+ * Richiama la funzione ::controllo_percorso
+ * @param m: variabile contenente le informazioni riguardanti la mappa di gioco di tipo MAPPA_T
+ * @param f: variabile contenente le informazioni del fantasma
+ * @return vero se deve essere eseguita la funzione di bfs, falso altrimenti
+ */
 static bool do_bfs(const MAPPA_t &m, FANTASMA_t &f)
 {
     int fx = (f.x - OFFSETX) / BLOCKSIZE; //coordinata x della casella nella quale risiede il fantasma
@@ -605,7 +670,13 @@ void ondula(const MAPPA_t &m, FANTASMA_t &f)
         break;
     }
 }
-
+/** Funzione che si occupa dell'allineamento dell'immagine del fantasma alla matrice.
+ * gestisce in oltre al variare della velocità dei fanstami che l'immagine del fantasma si allineato alla matrice.
+ * @param f: variabile contenente le informazioni del fantasma
+ * @param check_x: serve per controllare se la x del fantasma si trova in perfetta corrispondenza
+ * con la x della casella in cui risiede ed ha il valore della x della matrice in cui si trova il fantasma
+ * @param check_y: ha valore della y della matrice in cui si trova il fantasma
+ */
 static void direziona_fantasma(FANTASMA_t &f, int check_x, int check_y){
     switch (f.dir){
         case FERMO:

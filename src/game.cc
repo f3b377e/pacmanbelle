@@ -466,7 +466,7 @@ int main(int argc, char *argv[]){
                         al_flip_display();
                         nuovo_record = true;
                    }
-                    draw_gameover(font,bitmap,nuovo_record);
+                    draw_gameover(font,bitmap,nuovo_record, pacman.punteggio);
                 break;
                 }
 
